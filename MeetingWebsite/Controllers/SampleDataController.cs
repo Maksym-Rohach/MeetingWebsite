@@ -24,6 +24,7 @@ namespace MeetingWebsite.Controllers
                 DateFormatted = DateTime.Now.AddDays(index + startDateIndex).ToString("d"),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
+
             });
         }
 
