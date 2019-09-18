@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.DAL.Entities
 {
+
     public class City
     {
         [Key]
