@@ -1,10 +1,19 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component,Suspense} from 'react';
+
+
+const AdminNavBar = React.lazy(() => import('./AdminNavBar'));
+const AppSidebar = React.lazy(() => import('./AdminSideBar'));
 
 class AdminLayout extends Component {
     state = {  }
     render() { 
         return ( 
-            <div>Admin</div>
+              <>
+        <div className="wrapper">
+          <AdminNavBar/>
+          <AppSidebar/>
+          </div>
+      </>
          );
     }
 }
