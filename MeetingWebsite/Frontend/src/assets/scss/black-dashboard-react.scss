@@ -18,6 +18,8 @@
 
  // Core
 
+@import '~font-awesome/css/font-awesome.min.css';
+
 @import "black-dashboard-react/custom/functions";
 @import "black-dashboard-react/bootstrap/functions";
 
@@ -90,7 +92,7 @@
 
 // light mode
 
-@import "black-dashboard-react/custom/white-content.scss";
+//@import "black-dashboard-react/custom/white-content.scss";
 
 // Cards
 
