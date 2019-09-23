@@ -57,6 +57,16 @@
 *::after {
   box-sizing: border-box; }
 
+.my-gradient{
+  background: #0098f0 !important ;
+  background: -webkit-linear-gradient(0deg, #0098f0 0%, #00f2c3 100%)!important;
+  background: -o-linear-gradient(0deg, #0098f0 0%, #00f2c3 100%)!important;
+  background: -moz-linear-gradient(0deg, #0098f0 0%, #00f2c3 100%)!important;
+  background: linear-gradient(0deg, #0098f0 0%, #00f2c3 100%)!important; 
+}
+
+
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -8686,7 +8696,7 @@ fieldset[disabled]
   -ms-transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out; }
   .form-control:focus {
-    border-color: #e14eca;
+    border-color: #00f2c3;
     background-color: transparent;
     box-shadow: none; }
     .form-control:focus + .input-group-append .input-group-text,
