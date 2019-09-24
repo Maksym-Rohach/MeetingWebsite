@@ -1,34 +1,49 @@
 import React, {Suspense} from 'react';
+import { Nav } from "reactstrap";
+import { NavLink, Link } from "react-router-dom";
+
 // nodejs library to set properties for components
-import {
-    AppSidebar,
-    AppSidebarFooter,
-    AppSidebarForm,
-    AppSidebarHeader,
-    AppSidebarMinimizer,
-    AppSidebarNav2 as AppSidebarNav,
-  } from '@coreui/react';
+// import {
+//     AppSidebar,
+//     AppSidebarFooter,
+//     AppSidebarForm,
+//     AppSidebarHeader,
+//     AppSidebarMinimizer,
+//     AppSidebarNav2 as AppSidebarNav,
+//   } from '@coreui/react';
 
-import navigation from '../../navs/AdminNavs/_adminNavs';
-// routes config
-import * as router from 'react-router-dom';
+// import navigation from '../../navs/AdminNavs/_adminNavs';
+// // routes config
+// import * as router from 'react-router-dom';
 
-// reactstrap components
+// // reactstrap components
 
-var ps;
+// var ps;
 
 class Sidebar extends React.Component {
+  
+linkOnClick = () => {
+  document.documentElement.classList.remove("nav-open");
+};
+
   render() {
     return (
-        <AppSidebar fixed display="lg">
-        <AppSidebarHeader />
-        <AppSidebarForm />
-        <Suspense>
-        <AppSidebarNav navConfig={navigation} {...this.props} router={router}/>
-        </Suspense>
-        <AppSidebarFooter />
-        <AppSidebarMinimizer />
-      </AppSidebar>
+      <div className="sidebar">
+      <div className="sidebar-wrapper" ref="sidebar">
+      <Nav>
+        Hello1
+        </Nav>
+        <Nav>
+        Hello2
+        </Nav>
+        <Link>
+        Link1
+        </Link>
+        <Link>
+        Link2
+        </Link>
+        </div>
+        </div>
     );
   }
 }
