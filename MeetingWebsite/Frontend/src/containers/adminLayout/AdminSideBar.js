@@ -21,7 +21,7 @@ import { NavLink, Link } from "react-router-dom";
 // var ps;
 
 class Sidebar extends React.Component {
-  
+
 linkOnClick = () => {
   document.documentElement.classList.remove("nav-open");
 };
@@ -29,19 +29,7 @@ linkOnClick = () => {
   render() {
     return (
       <div className="sidebar">
-      <div className="sidebar-wrapper" ref="sidebar">
-      <Nav>
-        Hello1
-        </Nav>
-        <Nav>
-        Hello2
-        </Nav>
-        <Link>
-        Link1
-        </Link>
-        <Link>
-        Link2
-        </Link>
+      <div className="sidebar-wrapper" ref="sidebar">     
         </div>
         </div>
     );
