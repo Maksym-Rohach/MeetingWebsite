@@ -3,6 +3,9 @@ import React, { Component,Suspense} from 'react';
 
 const AdminNavBar = React.lazy(() => import('./AdminNavBar'));
 const AppSidebar = React.lazy(() => import('./AdminSideBar'));
+const AdminTable = React.lazy(() => import('./AdminTable'));
+const AdminGrafik = React.lazy(() => import('./AdminGrafik'));
+
 
 class AdminLayout extends Component {
     state = {  }
@@ -11,7 +14,9 @@ class AdminLayout extends Component {
               <>
         <div className="wrapper">
           <AdminNavBar/>
-          <AppSidebar/>
+          {/* <AppSidebar/> */}
+          <AdminTable/>
+        <AdminGrafik/> 
           </div>
       </>
          );
