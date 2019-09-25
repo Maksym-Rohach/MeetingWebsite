@@ -1,6 +1,7 @@
 import UserProfile from "views/UserProfile.jsx";
 import Login from "../../components/pages/login";
 
+
 var routes = [
   {
     path: "/admin",
