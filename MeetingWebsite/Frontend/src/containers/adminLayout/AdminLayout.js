@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "./AdminNavBar";
 import AdminSideBar from "./AdminSideBar";
-import AdminTable from "./AdminTable";
 
 import routes from "../../routes/AdminRoutes/AdminRoutes";
 

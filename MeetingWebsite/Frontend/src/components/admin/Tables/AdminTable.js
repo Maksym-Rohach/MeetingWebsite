@@ -39,7 +39,7 @@ class Tables extends React.Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">Адмін таблиця</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table className="tablesorter" responsive>
@@ -50,7 +50,6 @@ class Tables extends React.Component {
                         <th>Дата реєстрації</th>
                         <th>Роль</th>
                         <th>Статус</th>
-                        <th className="text-center">Salary</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -58,43 +57,43 @@ class Tables extends React.Component {
                         <td>Помідорка</td>
                         <td>27/10/18</td>
                         <td>Користувач</td>
-                        <td></td>
+                        <td>Активний</td>
                       </tr>
                       <tr>
                         <td>Minerva Hooper</td>
                         <td>Curaçao</td>
                         <td>Sinaai-Waas</td>
-                        <td className="text-center">$23,789</td>
+                        <td>Активний</td>
                       </tr>
                       <tr>
                         <td>Sage Rodriguez</td>
                         <td>Netherlands</td>
                         <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
+                        <td>Активний</td>                     
+                       </tr>
                       <tr>
                         <td>Philip Chaney</td>
                         <td>Korea, South</td>
                         <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
+                        <td>Активний</td>                 
+                        </tr>
                       <tr>
                         <td>Doris Greene</td>
                         <td>Malawi</td>
                         <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
+                        <td>Активний</td> 
+                        </tr>
                       <tr>
                         <td>Mason Porter</td>
                         <td>Chile</td>
                         <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
+                        <td>Активний</td>
                       </tr>
                       <tr>
                         <td>Jon Porter</td>
                         <td>Portugal</td>
                         <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
+                        <td>Активний</td>
                       </tr>
                     </tbody>
                   </Table>
