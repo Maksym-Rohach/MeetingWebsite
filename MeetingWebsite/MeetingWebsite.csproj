@@ -21,6 +21,18 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Account\Controllers\" />
+    <Folder Include="Areas\Account\ViewModels\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\ViewModels\" />
+    <Folder Include="Areas\User\Controllers\" />
+    <Folder Include="Areas\User\ViewModels\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Uploaded\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
