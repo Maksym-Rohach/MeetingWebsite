@@ -1,27 +1,50 @@
-export default {
+﻿export default {
   items: [
     {
-      name: 'Login',
-      url: '/login',
+      name: 'Меню',
+      url: '/admin',
       icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
     },
     {
       title: true,
-      name: 'Theme',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+      name: 'Данні',
+      wrapper: {
+        element: '',
+        attributes: {}
       },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Colors',
+      name: 'Користувачi',
       url: '/login',
-      icon: 'icon-drop',
+      icon: 'icon-user icons',
+    },
+    {
+      name: 'Користувачi',
+      url: '/login',
+      icon: 'icon-user icons',
+    },
+    {
+      name: 'Користувачi',
+      url: '/login',
+      icon: 'icon-user icons',
+    },
+    {
+      title: true,
+      name: 'Діаграми',
+      wrapper: {
+        element: '',
+        attributes: {},
+      },
+    },
+    {
+      name: 'Реєстрації Клієнтів',
+      url: '/login',
+      icon: 'fa fa-registered',
+    },
+    {
+      name: 'Реєстрації Клієнтів',
+      url: '/login',
+      icon: 'fa fa-registered'
     }
   ],
 };
