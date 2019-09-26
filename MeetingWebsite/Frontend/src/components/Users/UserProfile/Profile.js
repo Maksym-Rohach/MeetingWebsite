@@ -45,7 +45,37 @@ class UserProfile extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Form>
-                    <Row>
+                  <Row>
+                      <Col className="pr-md-1" md="5">
+                        <FormGroup>
+                          <label>Місце роботи</label>
+                          <Input
+                            placeholder="(Необов'язково)"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="px-md-1" md="3">
+                        <FormGroup>
+                          <label>Нікнейм</label>
+                          <Input
+                            defaultValue=""
+                            placeholder="(Ваше ім'я або вигаданий нікнейм)"
+                            type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-md-1" md="4">
+                        <FormGroup>
+                          <label htmlFor="exampleInputEmail1">
+                            Ел. пошта
+                          </label>
+                          <Input placeholder="mike@email.com" type="email" />
+                        </FormGroup>
+                      </Col>
+                      
+                    </Row>
+                    {/* <Row>
                       <Col className="pr-md-1" md="5">
                         <FormGroup>
                           <label>Company (disabled)</label>
@@ -74,25 +104,26 @@ class UserProfile extends React.Component {
                           </label>
                           <Input placeholder="mike@email.com" type="email" />
                         </FormGroup>
-                      </Col>
-                    </Row>
+                      </Col> 
+                      
+                    </Row> */}
                     <Row>
                       <Col className="pr-md-1" md="6">
                         <FormGroup>
-                          <label>First Name</label>
+                          <label>Ім'я</label>
                           <Input
-                            defaultValue="ewtrewwertewrtrewtrewweret"
-                            placeholder="Company"
+                            defaultValue=""
+                            placeholder=""
                             type="text"
                           />
                         </FormGroup>
                       </Col>
                       <Col className="pl-md-1" md="6">
                         <FormGroup>
-                          <label>Lastewtrewtewrtwert Name</label>
+                          <label>Прізвище</label>
                           <Input
-                            defaultValue="Andrew"
-                            placeholder="Last Name"
+                            defaultValue=""
+                            placeholder=""
                             type="text"
                           />
                         </FormGroup>
@@ -101,17 +132,17 @@ class UserProfile extends React.Component {
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label>Address</label>
+                          <label>Адреса</label>
                           <Input
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            placeholder="Home Address"
+                            defaultValue=""
+                            placeholder="(Необов'язково)вул. Центральна"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="pr-md-1" md="4">
+                      {/* <Col className="pr-md-1" md="4">
                         <FormGroup>
                           <label>City</label>
                           <Input
@@ -120,8 +151,8 @@ class UserProfile extends React.Component {
                             type="text"
                           />
                         </FormGroup>
-                      </Col>
-                      <Col className="px-md-1" md="4">
+                      </Col> */}
+                      {/* <Col className="px-md-1" md="4">
                         <FormGroup>
                           <label>Country</label>
                           <Input
@@ -130,23 +161,22 @@ class UserProfile extends React.Component {
                             type="text"
                           />
                         </FormGroup>
-                      </Col>
-                      <Col className="pl-md-1" md="4">
+                      </Col> */}
+                      <Col className="pr-md-1" md="4">
                         <FormGroup>
-                          <label>Postal Code</label>
-                          <Input placeholder="ZIP Code" type="number" />
+                          <label>Вік</label>
+                          <Input placeholder="Age" type="number" />
                         </FormGroup>
                       </Col>
                     </Row>
                     <Row>
                       <Col md="8">
                         <FormGroup>
-                          <label>About Me</label>
+                          <label>Про мене</label>
                           <Input
                             cols="80"
-                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
-                            placeholder="Here can be your description"
+                            defaultValue=""
+                            placeholder="Тут може бути ваший опис."
                             rows="4"
                             type="textarea"
                           />
@@ -157,7 +187,7 @@ class UserProfile extends React.Component {
                 </CardBody>
                 <CardFooter>
                   <Button className="btn-fill" color="primary" type="submit">
-                    Save
+                    Зберегти
                   </Button>
                 </CardFooter>
               </Card>
@@ -177,14 +207,12 @@ class UserProfile extends React.Component {
                         className="avatar"
                         src={require("assets/img/emilyz.jpg")}
                       />
-                      <h5 className="title">Mike Andrew</h5>
+                      <h5 className="title">!!!!!!!!!!!!!!</h5>
                     </a>
-                    <p className="description">Ceo/Co-Founder</p>
+                    <p className="description">!!!!!!!!!!!!!!!!</p>
                   </div>
                   <div className="card-description">
-                    Do not be scared of the truth because we need to restart the
-                    human foundation in truth And I love you like Kanye loves
-                    Kanye I love Rick Owens’ bed design but the back is...
+                        Descr...
                   </div>
                 </CardBody>
                 <CardFooter>
@@ -198,6 +226,7 @@ class UserProfile extends React.Component {
                     <Button className="btn-icon btn-round" color="google">
                       <i className="fab fa-google-plus" />
                     </Button>
+                    
                   </div>
                 </CardFooter>
               </Card>
