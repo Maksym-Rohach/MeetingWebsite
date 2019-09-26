@@ -68,13 +68,5 @@ var routes = [
     component: MuteTable,
     layout: "/admin"
   },
-  {
-    path: "/buttons",
-    name: "Логін",
-    rtlName: "الرموز",
-    icon: "tim-icons icon-atom",
-    component: User,
-    layout: "/admin"
-  }
 ];
 export default routes;
