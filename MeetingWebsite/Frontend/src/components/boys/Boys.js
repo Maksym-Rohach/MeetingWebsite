@@ -13,12 +13,14 @@ class Boys extends Component {
   render() {
     return (
       <React.Fragment>
+         {/* <h2 className="text-center">Знайомства з хлопцями в Україні</h2> */}
+         <h2 style={{textAlign: "center"}}>Знайомства з хлопцями в Україні</h2>
       <div className="app flex-row align-items-center">
        <Container>
-         <h2>Знайомства з хлопцями в Україні</h2>
+        
         <Card>
               <CardHeader>
-                <strong>Пошук</strong> 
+                <h3 style={{color:"#73818f"}}> <strong>Пошук</strong> </h3>
               </CardHeader>
               <CardBody>
                 <Form action="" method="post" className="form-horizontal">
@@ -102,7 +104,7 @@ class Boys extends Component {
                         </InputGroupButtonDropdown>
                       </InputGroup>
                     </Col>
-                    <Button type="submit" size="sm" color="success"><i className="fa fa-dot-circle-o"></i> Пошук</Button>     
+                    <Button type="submit" size="sm" color="success" className="ml-3"><i className="fa fa-dot-circle-o" ></i> Пошук</Button>     
                   </FormGroup>
                 </Form>
               </CardBody>
