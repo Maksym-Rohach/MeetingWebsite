@@ -1,5 +1,6 @@
 import UserProfile from "views/UserProfile.jsx";
 import Login from "../../components/pages/login";
+import User from "../../components/admin/Users";
 
 var routes = [
   {
@@ -16,6 +17,14 @@ var routes = [
     rtlName: "الرموز",
     icon: "tim-icons icon-atom",
     component: Login,
+    layout: "/admin"
+  },
+  {
+    path: "/buttons",
+    name: "Логін",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-atom",
+    component: User,
     layout: "/admin"
   }
 ];
