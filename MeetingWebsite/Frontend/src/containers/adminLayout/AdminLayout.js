@@ -95,8 +95,7 @@ class AdminLayout extends React.Component {
             routes={routes}
             bgColor={this.state.backgroundColor}
             logo={{
-              outterLink: "https://www.creative-tim.com/",
-              text: "Creative Tim",
+              text: "sfsdf",
               imgSrc: logo
             }}
             toggleSidebar={this.toggleSidebar}

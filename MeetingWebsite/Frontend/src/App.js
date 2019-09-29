@@ -18,7 +18,7 @@ const UserLayout = React.lazy(() => import('./containers/userLayout'));
 
 
 // Pages
-const AdminUsers = React.lazy(() => import('./components/admin/Users'));
+
 const Login = React.lazy(() => import('./components/pages/login'));
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
                     <Route path="/login" name="Login" render={props => <Login {...props} />} />
                     <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
                     <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
-                    <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                     
+                   
                 </Switch>
                 </React.Suspense>
       </Router>

@@ -1,22 +1,22 @@
 import UserProfile from "../../components/Users/UserProfile/UserProfile";
 import Login from "../../components/pages/login";
-
+import Chat from "../../containers/chat/ChatContainer";
 var routes = [
   {
-    path: "/admin",
-    name: "Таблиця",
+    path: "/profile",
+    name: "Profile",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: UserProfile,
-    layout: "/admin"
+    layout: "/user"
   },
   {
-    path: "/login",
-    name: "Логін",
+    path: "/chat2",
+    name: "Tom",
     rtlName: "الرموز",
     icon: "tim-icons icon-atom",
-    component: Login,
-    layout: "/admin"
+    component: Chat,
+    layout: "/user"
   }
 ];
 export default routes;

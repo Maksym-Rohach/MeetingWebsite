@@ -12535,3 +12535,22 @@ textarea.form-control {
   .card-plain:not(.card-subcategories).card-body {
     padding-left: 0;
     padding-right: 0; }
+
+
+
+.ChatHeader{
+
+
+
+
+}
+.ChatHeaderLabels{
+display: inline-block;
+line-height: 60%;
+font-size: 10px;}
+
+.ChatButtons{
+
+    display:inline-block;
+    float: right;
+}
