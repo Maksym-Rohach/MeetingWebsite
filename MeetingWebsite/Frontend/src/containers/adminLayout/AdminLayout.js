@@ -4,7 +4,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "./AdminNavBar";
 import AdminSideBar from "./AdminSideBar";
 
-
 import routes from "../../routes/AdminRoutes/AdminRoutes";
 
 import logo from "assets/img/react-logo.png";
@@ -113,6 +112,7 @@ class AdminLayout extends React.Component {
             />
             <Switch>{this.getRoutes(routes)}</Switch>
           </div>
+          {/* <AdminTable/> */}
         </div>
       </>
     );
