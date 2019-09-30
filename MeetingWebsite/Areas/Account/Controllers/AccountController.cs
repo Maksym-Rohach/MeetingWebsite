@@ -81,5 +81,12 @@ namespace MeetingWebsite.Areas.Account.Controllers
                    refToken = _tokenService.CreateRefreshToken(user)
                });
         }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
+        {
+
+            return Ok();
+        }
     }
 }
