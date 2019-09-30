@@ -1,48 +1,48 @@
-export default {
+п»їexport default {
   items: [
     {
-      name: 'Меню',
+      name: 'РњРµРЅСЋ',
       url: '/admin',
       icon: 'icon-speedometer',
     },
     {
       title: true,
-      name: 'Данні',
+      name: 'Р”Р°РЅРЅС–',
       wrapper: {
         element: '',
         attributes: {}
       },
     },
     {
-      name: 'Користувачi',
+      name: 'РљРѕСЂРёСЃС‚СѓРІР°С‡i',
       url: '/login',
       icon: 'icon-user icons',
     },
     {
-      name: 'Користувачi',
+      name: 'РљРѕСЂРёСЃС‚СѓРІР°С‡i',
       url: '/login',
       icon: 'icon-user icons',
     },
     {
-      name: 'Користувачi',
+      name: 'РљРѕСЂРёСЃС‚СѓРІР°С‡i',
       url: '/login',
       icon: 'icon-user icons',
     },
     {
       title: true,
-      name: 'Діаграми',
+      name: 'Р”С–Р°РіСЂР°РјРё',
       wrapper: {
         element: '',
         attributes: {},
       },
     },
     {
-      name: 'Реєстрації Клієнтів',
+      name: 'Р РµС”СЃС‚СЂР°С†С–С— РљР»С–С”РЅС‚С–РІ',
       url: '/login',
       icon: 'fa fa-registered',
     },
     {
-      name: 'Реєстрації Клієнтів',
+      name: 'Р РµС”СЃС‚СЂР°С†С–С— РљР»С–С”РЅС‚С–РІ',
       url: '/login',
       icon: 'fa fa-registered'
     }
