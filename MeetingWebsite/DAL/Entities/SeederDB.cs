@@ -42,7 +42,7 @@ namespace MeetingWebsite.DAL.Entities
                 var manager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EFDbContext>();
-                var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
+                //var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
                 SeederDB.SeedRoles(manager, managerRole);
                
             }
