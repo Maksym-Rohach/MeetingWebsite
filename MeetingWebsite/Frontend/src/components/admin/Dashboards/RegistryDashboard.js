@@ -59,7 +59,7 @@ class Dashboard extends React.Component {
                       <CardTitle tag="h2">Графік</CardTitle>
                     </Col>
                     <Col sm="6">
-                      <ButtonGroup
+                      {/* <ButtonGroup
                         className="btn-group-toggle float-right"
                         data-toggle="buttons"
                       >
@@ -130,7 +130,7 @@ class Dashboard extends React.Component {
                             <i className="tim-icons icon-tap-02" />
                           </span>
                         </Button>
-                      </ButtonGroup>
+                      </ButtonGroup> */}
                     </Col>
                   </Row>
                 </CardHeader>
