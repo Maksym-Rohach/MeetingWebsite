@@ -23,6 +23,8 @@ namespace MeetingWebsite.DAL.Entities
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Zodiac> Zodiac { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<RefreshToken> RefreshToken { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)

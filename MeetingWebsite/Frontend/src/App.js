@@ -12,7 +12,7 @@ const loading = () => <div className="animated fadeIn pt-3 text-center">Loading.
 
 
 // Containers
-const AdminLayout = React.lazy(() => import('./containers/adminLayout'));
+const AdminLayout = React.lazy(() => import('./containers/adminLayout/AdminLayout'));
 const UserLayout = React.lazy(() => import('./containers/userLayout'));
 
 

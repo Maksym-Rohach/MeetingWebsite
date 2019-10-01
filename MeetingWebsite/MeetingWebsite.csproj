@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,15 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Account\Controllers\" />
-    <Folder Include="Areas\Account\ViewModels\" />
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\ViewModels\" />
+    <Folder Include="Areas\Default\" />
     <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\ViewModels\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Uploaded\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
