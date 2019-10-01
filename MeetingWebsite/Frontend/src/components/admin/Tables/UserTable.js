@@ -48,7 +48,7 @@ class Tables extends React.Component {
                         <th>Нікнейм</th>
                         {/* <th>Країна</th> */}
                         <th>Дата реєстрації</th>
-                        <th>Роль</th>
+                        <th>Місто</th>
                         <th>Статус</th>
                       </tr>
                     </thead>
@@ -56,7 +56,7 @@ class Tables extends React.Component {
                       <tr>
                         <td>Помідорка</td>
                         <td>27/10/18</td>
-                        <td>Користувач</td>
+                        <td>Рівне</td>
                         <td>Активний</td>
                       </tr>
                       <tr>

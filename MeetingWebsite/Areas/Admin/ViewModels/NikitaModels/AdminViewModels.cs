@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.Areas.Account.ViewModels
 {
-    public class UserTable
+    public class UserTableModel
     {
         public string Nickname { get; set; }
         public DateTime Registrdate { get; set; }
@@ -13,7 +13,7 @@ namespace MeetingWebsite.Areas.Account.ViewModels
         public string Status { get; set; }
     }
 
-    public class AdminTable
+    public class AdminTableModel
     {
 
     }
