@@ -56,8 +56,8 @@ class Register extends Component {
                         </InputGroupAddon>
 
                         <DatePicker
-          onChange={this.onChange}
           value={this.state.date}
+          onChange={this.onChange}
         />
 
                         {/* <Input type="date" placeholder="Дата народження" autoComplete="on" /> */}
