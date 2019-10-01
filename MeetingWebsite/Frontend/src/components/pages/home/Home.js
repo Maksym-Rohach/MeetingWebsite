@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardHeader, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row } from 'reactstrap';
+import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row } from 'reactstrap';
 // import img1 from 'http://pngimg.com/uploads/alien/alien_PNG27.png';
 const items = [
 {
@@ -18,7 +18,6 @@ const items = [
   altText: 'Slide 3',
   caption: 'Slide 3',
 },
-
 ];
 
 
@@ -27,7 +26,7 @@ class Home extends Component {
 constructor(props)
 {
   super(props);
-  this.state = {activeIndex: 0};
+  this.state = {activeIndex: 0 };
   this.next = this.next.bind(this);
   this.previous = this.previous.bind(this);
   this.goToIndex = this.goToIndex.bind(this);
@@ -41,10 +40,11 @@ onExited(){
   this.animathing = false;
 }
 next(){
-  if(this.animathing)return;
-  const nextIndex = this.state.activeIndex === items.length -1 ? 0 :this.state.activeIndex + 1;
-  this.setState({activeIndex: nextIndex});
+  if(this.animathing) return;
+  const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
+  this.setState({ activeIndex: nextIndex });
 }
+
 previous(){
   if (this.animathing) return;
   const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
@@ -55,16 +55,18 @@ goToIndex(newIndex) {
   this.setState({ activeIndex: newIndex });
 }
 
-    render() {
+render() {
 const {activeIndex} = this.state;
-const slides = items.map((item)=> {
-return (
-  <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-  <img className="d-block w-100" src={item.src} alt={item.altText} />
-</CarouselItem>
-);
-});
-const slides2 = items.map((item) => {
+
+// const slides = items.map((item)=> {
+// return (
+//   <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
+//   <img className="d-block w-100" src={item.src} alt={item.altText} />
+// </CarouselItem>
+// );
+// });
+
+const slides = items.map((item) => {
   return (
     <CarouselItem
       onExiting={this.onExiting}
@@ -82,18 +84,38 @@ const slides2 = items.map((item) => {
               <Container>
                   <Row >
                       <Col >
- 
-     
 {/* <Form>
 <h1> Сайт знайомств </h1>  
 <p className ="text">Привіт світ </p>
 </Form> */}
-<Carousel activeIndex = {activeIndex} next = {this.next} previous= {this.previous} ride= "carousel">
+
+<Carousel 
+ //className="Carousel-fixed-top blur"
+          interval={false}
+          ride={true}
+          activeIndex={activeIndex}
+          next={this.next}
+          previous={this.previous}
+          onClickHandler={this.goToIndex}
+          ride="carousel">
+          
+          <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+          {slides}
+          <CarouselControl direction="prev" directionText="Попередній" onClickHandler={this.previous} />
+          <CarouselControl direction="next" directionText="Наступний" onClickHandler={this.next} />
+        </Carousel>
+
+
+{/* <Carousel  activeIndex = {activeIndex} next = {this.next} previous = {this.previous}>
+  <CarouselIndicators items = {items} activeIndex = {activeIndex} onClickHandler = {this.goToIndex}/>
 {slides}
-</Carousel>
+  <CarouselControl direction = "prev" directionText = "Попередній" onClickHadler = {this.previous}/>
+  <CarouselControl direction = "next" directionText = "Наступний" onClickHadler = {this.next}/>
+</Carousel> */}
 
      </Col>
      </Row>
+
      </Container>
      </div>
       );
