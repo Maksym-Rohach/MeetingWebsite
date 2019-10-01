@@ -78,7 +78,7 @@ namespace MeetingWebsite.Services
                 }
             }          
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MeetingWebsite"));
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MeetingWebsite jklhkljhkl fgfkjgj"));
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             var jwt = new JwtSecurityToken(
                 signingCredentials: signingCredentials,
