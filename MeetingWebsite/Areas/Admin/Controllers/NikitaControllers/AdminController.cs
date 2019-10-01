@@ -20,7 +20,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             _context = context;
         }
 
-       [HttpGet("users")]
+        [HttpPost("users")]
         public IEnumerable<DbUser> GetUserTable()
         {
            var models = _context.Users.Select(a => a).ToList();
