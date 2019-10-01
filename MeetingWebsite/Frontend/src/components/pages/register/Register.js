@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,FormGroup,Label } from 'reactstrap';
+import DatePicker from 'react-date-picker';
+
+
+
+ 
+
 
 class Register extends Component {
+  state = {
+    date: new Date(),
+  }
+  onChange = date => this.setState({ date })
+  onClick = date => this.setState({ date })
+
+
   render() {
     return (
       <div className="app flex-row align-items-center">
@@ -13,16 +26,18 @@ class Register extends Component {
                 <Card className="p-4">
                   <CardBody>
                     <Form>
-                      <h1>Register</h1>
-                      <p className="text-muted">Sign Up</p>
+                      <h1>Реєстрація</h1>
+                      <p className="text-muted">Введіть дані</p>
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="fa fa-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Username" autoComplete="on" />
+                        <Input type="text" placeholder="Нікнейм" autoComplete="on" />
                       </InputGroup>
+
+
 
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
@@ -30,7 +45,7 @@ class Register extends Component {
                             <i className="fa fa-envelope"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Email" autoComplete="on" />
+                        <Input type="text" placeholder="Електронна адреса" autoComplete="on" />
                       </InputGroup>
 
                       <InputGroup className="mb-4">
@@ -39,34 +54,32 @@ class Register extends Component {
                             <i className="fas fa-birthday-cake"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="DateOfBirth" autoComplete="on" />
+
+                        <DatePicker
+          onChange={this.onChange}
+          value={this.state.date}
+        />
+
+                        {/* <Input type="date" placeholder="Дата народження" autoComplete="on" /> */}
                       </InputGroup>
 
                       <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
-                      <i className="ml-4 fas fa-venus-mars"></i>
+                       <i className="ml-4 mt-3 fas fa-venus-mars"></i>
+                        <p className="text-muted ml-3 mt-3">Стать</p>
 
 
 
-
-
-
-<p className="text-muted ml-3">Gender</p>
-
-
-
-<FormGroup check inline>
-<p className="text-muted form-check-label ml-1" check htmlFor="inline-radio1">Male</p>
-<Input className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
-</FormGroup>
-<FormGroup check inline>
-<p className="text-muted form-check-label ml-1" check htmlFor="inline-radio2">Female</p>
-<Input className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
-</FormGroup>
-
-</InputGroupAddon> 
-
-                        </InputGroup>
+                          <FormGroup check inline>
+                          <p className="text-muted form-check-label ml-1" check htmlFor="inline-radio1">Чол</p>
+                          <Input className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
+                          </FormGroup>
+                          <FormGroup check inline>
+                          <p className="text-muted form-check-label ml-1" check htmlFor="inline-radio2">Жін</p>
+                          <Input className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
+                          </FormGroup>
+                          </InputGroupAddon> 
+                          </InputGroup>
 {/* 
                     <FormGroup row>
                     <Col md="3">
@@ -136,7 +149,7 @@ class Register extends Component {
                             <i className="fa fa-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Password" autoComplete="on" />
+                        <Input type="password" placeholder="Пароль" autoComplete="on" />
                       </InputGroup>
 
                       <InputGroup className="mb-4">
@@ -145,12 +158,12 @@ class Register extends Component {
                             <i className="fa fa-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Repit password" autoComplete="on" />
+                        <Input type="password" placeholder="Повторіть пароль" autoComplete="on" />
                       </InputGroup>
 
                       <Row>
                         <Col xs="6">
-                          <Button color="success" className="px-4">Register</Button>
+                          <Button color="success" className="px-4">Зареєструватись</Button>
                         </Col>
                        
                       </Row>
@@ -166,5 +179,7 @@ class Register extends Component {
     );
   }
 }
+
+
 
 export default Register;
