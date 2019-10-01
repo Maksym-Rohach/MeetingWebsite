@@ -86,7 +86,38 @@ namespace MeetingWebsite.Areas.Account.Controllers
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
 
-            return Ok();
+
+            if (!ModelState.IsValid)
+            {
+                var errors = CustomValidator.GetErrorsByModel(ModelState);
+                return BadRequest(errors);
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            if (user == null)
+            {
+                return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+            }
+
+            var result = _signInManager
+                .PasswordSignInAsync(user, model.Password, false, false).Result;
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            return Ok(
+                 new
+                 {
+                     token = _tokenService.CreateToken(user),
+                     refToken = _tokenService.CreateRefreshToken(user)
+                 }
+                );
+
+
         }
     }
 }
