@@ -2,9 +2,14 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 
+import { loginReducer} from "../components/pages/login/reducer";
+import { refreshReducer } from '../components/refreshToken/reducer';
+import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
+
 export default function configureStore (history, initialState) {
     const reducers = {
-
+      login: loginReducer,
+      refreshToken: refreshReducer
     };
 
     const middleware = [
