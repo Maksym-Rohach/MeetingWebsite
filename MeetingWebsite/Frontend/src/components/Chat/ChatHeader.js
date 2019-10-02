@@ -27,12 +27,12 @@ class ChatHeader extends React.Component {
       <>
         <div className="ChatHeader">
             <div className="ChatHeaderLabels">
-            <label>asdadasd</label>
+            <label>Artem</label>
             <br></br>
-            <label>asdasdlkasnsadasd</label>
+            <label>Last seen today at 15:04</label>
             </div>
             <div className="ChatButtons">
-
+                  Buttons
 
             </div>
 

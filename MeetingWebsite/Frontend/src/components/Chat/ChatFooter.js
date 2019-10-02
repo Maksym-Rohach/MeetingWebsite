@@ -15,26 +15,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import ChatHeader from '../../components/Chat/ChatHeader'
-import ChatFooter from '../../components/Chat/ChatFooter'
-import ChatMessages from '../../components/Chat/ChatMessages'
-class ChatLayout extends React.Component {
+import React, { Component } from 'react';
+import {Button} from 'reactstrap'
+import { Badge, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+
+class ChatFooter extends React.Component {
   render() {
 
     
     return (
       <>
-      <div className=" content">
-        <div className=" ChatLayout">
-            <ChatHeader></ChatHeader>
-            <ChatMessages></ChatMessages>
-            <ChatFooter></ChatFooter>
-        </div>
+        <div className="ChatFooter">
+        <Button size="sm" className="btn-facebook btn-brand icon mr-1 mb-1">P</Button>
+            <input placeholder="Send" className="SendMessage"></input>
+            
+        <Button size="sm" className="btn-facebook btn-brand icon mr-1 mb-1">Send</Button>
+        
+        <Button size="sm" className="btn-facebook btn-brand icon mr-1 mb-1">S</Button>
         </div>
       </>
     );
   }
 }
-
-export default ChatLayout;
+{/* <i className="cui-magnifying-glass icons font-2xl d-block mt-4"></i> */}
+export default ChatFooter;
