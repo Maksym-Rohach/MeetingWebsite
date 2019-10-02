@@ -72,7 +72,6 @@ namespace MeetingWebsite.DAL.Entities
                 context.SaveChanges();
                 result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
             };
-               
             
         }
 
