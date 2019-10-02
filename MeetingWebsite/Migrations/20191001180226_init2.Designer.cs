@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20190917173635_add-Profiles")]
-    partial class addProfiles
+    [Migration("20191001180226_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -144,6 +144,19 @@ namespace MeetingWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Gender");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblRefreshTokens");
                 });
 
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserProfile", b =>
@@ -282,6 +295,14 @@ namespace MeetingWebsite.Migrations
                     b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
