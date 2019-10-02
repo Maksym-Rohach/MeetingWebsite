@@ -1,10 +1,10 @@
 import UserProfile from "views/UserProfile.jsx";
 import Login from "../../components/pages/login";
-import AdminTable from "../../components/admin/Tables/AdminTable"
-import UserTable from "../../components/admin/Tables/UserTable"
-import VipTable from "../../components/admin/Tables/VipTable"
-import BanTable from "../../components/admin/Tables/BanTable"
-import MuteTable from "../../components/admin/Tables/MuteTable"
+import AdminTable from "../../components/admin/Tables/AdminTable/AdminTable"
+import UserTable from "../../components/admin/Tables/UserTable/UserTable"
+import VipTable from "../../components/admin/Tables/VipTable/VipTable"
+import BanTable from "../../components/admin/Tables/BanTable/BanTable"
+import MuteTable from "../../components/admin/Tables/MuteTable/MuteTable"
 import ActivityDashboard from "../../components/admin/Schedule/ActivitySchedule"
 import RegistryDashboard from "../../components/admin/Schedule/RegistrySchedule"
 
