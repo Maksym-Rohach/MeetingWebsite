@@ -10,7 +10,7 @@ import * as loginActions from './reducer';
 import get from "lodash.get";
 
 //import EclipseWidget from '../../eclipse';
-class Login extends Component {
+class Girls extends Component {
   state = {
     email: '',
     password: '',
@@ -21,38 +21,11 @@ class Login extends Component {
     visible: false,
     errorsServer: {}
   }
-  passwordVisible = (e)=>{
-    this.setState({
-      visible: !this.state.visible,
-    });
-  }
+  
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  
 
-    return { isLoading: nextProps.loading, errorsServer: nextProps.errors };
-}
-
-  setStateByErrors = (name, value) => {
-    if (!!this.state.errors[name]) {
-      let errors = Object.assign({}, this.state.errors);
-      delete errors[name];
-      this.setState(
-        {
-          [name]: value,
-          errors
-        }
-      )
-    }
-    else {
-      this.setState(
-        { [name]: value })
-    }
-  }
-
-  handleChange = (e) => {
-    this.setStateByErrors(e.target.name, e.target.value);
-
-  }
+  
   onSubmitForm = (e) => {
     e.preventDefault();
     const { email, password, errorsServer } = this.state;   
@@ -93,24 +66,21 @@ class Login extends Component {
   }
 }
 
-Login.propTypes =
-  {
-    login: PropTypes.func.isRequired
-  }
+
 
 function mapStateToProps(state) {
   return {
-    loading: get(state, 'login.post.loading'),
-    failed: get(state, 'login.post.failed'),
-    success: get(state, 'login.post.success'),
-    errors: get(state, 'login.post.errors')
+  //  loading: get(state, 'login.post.loading'),
+  //  failed: get(state, 'login.post.failed'),
+   // success: get(state, 'login.post.success'),
+   // errors: get(state, 'login.post.errors')
   }
 }
 
 const mapDispatch = {
-  login: (model, history) => {
-      return loginActions.login(model, history);
-  }
+  //login: (model, history) => {
+  //    return loginActions.login(model, history);
+  //}
 }
 
-export default connect(mapStateToProps, mapDispatch)(Login);
+export default connect(mapStateToProps, mapDispatch)(Girls);
