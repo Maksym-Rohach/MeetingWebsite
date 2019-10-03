@@ -7,5 +7,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaController
 {
     public class AdminController
     {
+
+
     }
 }
