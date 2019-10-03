@@ -23,9 +23,9 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("users")]
         public ActionResult<UserTableModels> GetUserTable()
         {
-            var models = _context.UserProfile.AsQueryable().Select(a => a).ToList();
+            var models = _context.UserProfile.AsQueryable();
             UserTableModels utms = new UserTableModels();
-            var UsersModel = utms.Users;
+            utms.Users = new List<UserTableModel>();
             foreach (var item in models)
             {
                 UserTableModel urm = new UserTableModel();
@@ -35,9 +35,9 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 urm.City = city;
                 urm.Status = "Не забанений";
-                UsersModel.Add(urm);
+                utms.Users.Add(urm);
            }
-           return Ok(UsersModel);
+           return Ok(utms.Users);
         }
         [HttpPost("admins")]
         public IEnumerable<AdminProfile> GetAdminTable()
