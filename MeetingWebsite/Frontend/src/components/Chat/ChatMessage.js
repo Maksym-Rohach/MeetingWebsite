@@ -18,36 +18,24 @@
 import React, { Component } from 'react';
 import {Button} from 'reactstrap'
 import { Badge, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import Message from './ChatMessage'
-class ChatMessages extends React.Component {
+
+class ChatMessage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      messages: [{Text:"sadfhsdsafhfhdfshfdsahklhfdlhdsajkjh",isOwn:true},{Text:"no",isOwn:false},{Text:"own",isOwn:true},{Text:"no",isOwn:false}]
-    };
+    this.state={
+        isOwn:props.isOwn,
+        Text:props.Text
+    }
   }
   render() {
 
-    const messagesList=this.state.messages;
-      const messages=messagesList.map((item)=>{
-          return(
-            <Message Text={item.Text} isOwn={item.isOwn}></Message>
-
-          )
-
-
-      }
-      
-      
-      );
+    
     return (
       <>
-        <ul className="ChatMessages">
-            {messages}
-        </ul>
+      <li className= {this.state.isOwn?'OwnChatMessage':'IncomeChatMessage'}><span>{this.state.Text}</span></li>
       </>
     );
   }
 }
 {/* <i className="cui-magnifying-glass icons font-2xl d-block mt-4"></i> */}
-export default ChatMessages;
+export default ChatMessage;

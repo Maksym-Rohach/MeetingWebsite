@@ -12587,12 +12587,12 @@ padding-right:20px;
 
 }
 
-li.OwnMessage{
+li.OwnChatMessage{
 background: blue;
 
 
 }
-.ChatMessages li.OwnMessage{
+.ChatMessages li.OwnChatMessage{
   right: 0px;
   text-decoration: none;
   background: none;
@@ -12600,22 +12600,24 @@ background: blue;
   list-style-type: none;
   }
 
-  .ChatMessages li.OwnMessage span{
+  .ChatMessages li.OwnChatMessage span{
     background: blue;
     border-radius: 2px;
     padding-left: 8px;
     padding-right: 8px;
     
   }
-.ChatMessages  li.IncomeMessage{
+.ChatMessages  li.IncomeChatMessage{
   background: none;
 
 }
 .ChatLayout{
 border: 2px solid blue;
-position: fixed;
-    width: 95%;
+position: relative;
+    width: 100%;
     height: 80%;
 
 
+}
+.content{width:100%;
 }

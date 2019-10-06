@@ -89,7 +89,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
         {
 
             return Ok();
-        }
+          
 
         [HttpPost("refresh/{refreshToken}")]
         public IActionResult RefreshToken([FromRoute]string refreshToken)
