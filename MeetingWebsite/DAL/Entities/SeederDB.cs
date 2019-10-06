@@ -37,9 +37,9 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            if (userManager.FindByEmailAsync("nikita@gmail.com").Result == null)
+            if (userManager.FindByEmailAsync("maks@gmail.com").Result == null)
             {
-                string email = "nikita@gmail.com";
+                string email = "maks@gmail.com";
                 string roleName = "User";
 
                 //var user = new DbUser
@@ -53,10 +53,10 @@ namespace MeetingWebsite.DAL.Entities
 
                 var userProfile = new UserProfile
                 {
-                    NickName = "Никита",
+                    NickName = "Макс",
                     DateOfBirth = DateTime.Now,
                     GenderId = 1,
-                    CityId = 39,
+                    CityId = 22,
                     ZodiacId = 2,
                     Image = "",
                     User = new DbUser
