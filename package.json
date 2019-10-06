@@ -1,0 +1,27 @@
+{
+  "name": "MeetingWebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "glob": "^7.1.4",
+    "rimraf": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node your-script.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maks777Maks/MeetingWebsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maks777Maks/MeetingWebsite/issues"
+  },
+  "homepage": "https://github.com/Maks777Maks/MeetingWebsite#readme"
+}
