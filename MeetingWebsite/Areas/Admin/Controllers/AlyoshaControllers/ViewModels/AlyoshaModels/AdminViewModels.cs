@@ -29,6 +29,13 @@ using Microsoft.AspNetCore.Mvc;
     {
         public string Nickname { get; set; }
         public string Status { get; set; }
-
+        public string Id { get; set; }
     }
+    public class AdminTableModels
+    {
+        public List<AdminTableModel> Admins { get; set; }
+    }
+
+
+
 }
