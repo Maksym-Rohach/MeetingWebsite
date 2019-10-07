@@ -100,8 +100,10 @@ class Login extends Component {
                       <p className="text-muted">Увійдіть до свого облікового запису</p>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
-                        <InputGroupText>@</InputGroupText>
-                        </InputGroupAddon>
+                        <InputGroupText>
+                        <i className="fas fa-at"></i>
+                        </InputGroupText>
+                        </InputGroupAddon>                     
                         <Input type="email" placeholder="Електронна пошта" autoComplete="on"
                         className={classnames("form-control", { "is-invalid": !!errors.email })}
                         id="email"
@@ -128,11 +130,11 @@ class Login extends Component {
                           <div className="invalid-feedback">
                             {errors.password}
                           </div> : ''}
-                          <InputGroupAddon addonType="append">
-                          <Button onClick={this.passwordVisible}>
+                          {/* <InputGroupAddon addonType="append"> */}
+                          {/* <Button onClick={this.passwordVisible}>
                             <i className={classnames( visible? 'fa fa-eye':'fa fa-eye-slash')}></i>
-                          </Button>
-                        </InputGroupAddon>
+                          </Button> */}
+                        {/* </InputGroupAddon> */}
                       </InputGroup>
                       <Row>
                         <Col xs="6">
