@@ -96,15 +96,77 @@ namespace MeetingWebsite.Areas.Account.Controllers
             }
 
             var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
-            if (user == null)
+            if (user != null)
             {
-                return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+                return BadRequest(new { invalid = "Електронна адреса вже використовується" });
+
+             
             }
 
-            var result = _signInManager
-                .PasswordSignInAsync(user, model.Password, false, false).Result;
+
+            var newuser = new UserProfile()
+            {
+
+                NickName = model.NickName,
+                DateOfBirth =Convert.ToDateTime(model.DateOfBirth),
+                
+
+            };
+
+            var user1 = new Gender()
+            {
+                Type = model.Gender,
+
+            };
+
+
+            var user2 = new DbUser()
+            {
+                UserName = model.Email,
+                Email = model.Email,
+               // UserProfile = newuser
+            };
+
+
+            var roleName = "User";
+
+            var result = _userManager.CreateAsync(user, model.Password).Result;
+            result = _userManager.AddToRoleAsync(user, roleName).Result;
+
+          
+
+
 
             if (!result.Succeeded)
+            {
+                var errors = CustomValidator.GetErrorsByIdentityResult(result);
+                return BadRequest(errors);
+            }
+
+
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+
+
+
+            return Ok(
+               new
+               {
+                   token = _tokenService.CreateToken(user),
+                   refToken = _tokenService.CreateRefreshToken(user)
+               });
+
+
+            //создать юзера  
+
+
+
+
+            var result2 = _signInManager
+                .PasswordSignInAsync(user, model.Password, false, false).Result;
+
+            if (!result2.Succeeded)
             {
                 return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
             }
