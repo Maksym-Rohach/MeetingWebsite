@@ -47,7 +47,7 @@ namespace MeetingWebsite.DAL.Entities
                     NickName = "Дмитро",
                     DateOfBirth = DateTime.Now,
                     GenderId = 1,
-                    CityId = 39,
+                    CityId = 19,
                     ZodiacId = 2,
                     Image = "",
                     User = new DbUser
@@ -64,6 +64,30 @@ namespace MeetingWebsite.DAL.Entities
                 result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
             };
 
+            if (userManager.FindByEmailAsync("kunderenko2@gmail.com").Result == null)
+            {
+                string email = "kunderenko2@gmail.com";
+                string roleName = "Admin";
+
+                var adminProfile = new AdminProfile
+                {
+                    Name = "Альоша",
+                   // DateOfBirth = DateTime.Now,
+
+                    User = new DbUser
+                    {
+                        Email = email,
+                        UserName = email,
+                        PhoneNumber = "+38(099)456-43-34"
+                    }
+                };
+
+                var result = userManager.CreateAsync(adminProfile.User, "Qwerty1-").Result;
+                context.AdminProfiles.Add(adminProfile);
+                context.SaveChanges();
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
+            };
+
             if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
             {
                 string email = "yana@gmail.com";
@@ -74,7 +98,7 @@ namespace MeetingWebsite.DAL.Entities
                     NickName = "Яна",
                     DateOfBirth = DateTime.Now,
                     GenderId = 2,
-                    CityId = 40,
+                    CityId = 20,
                     ZodiacId = 5,
                     Image = "",
                     User = new DbUser
@@ -101,7 +125,7 @@ namespace MeetingWebsite.DAL.Entities
                     NickName = "Маша",
                     DateOfBirth = DateTime.Now,
                     GenderId = 2,
-                    CityId = 41,
+                    CityId = 18,
                     ZodiacId = 7,
                     Image = "",
                     User = new DbUser
