@@ -25,4 +25,12 @@ namespace MeetingWebsite.Areas.Account.ViewModels
         public string Status { get; set; }
 
     }
+
+    public class UserTableFilters
+    {
+        public string Date { get; set; }
+        public string NickName { get; set; }
+        public int CurrentPage { get; set; }
+    }
+    
 }

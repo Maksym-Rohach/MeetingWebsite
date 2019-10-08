@@ -21,7 +21,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("users")]
-        public ActionResult<UserTableModels> GetUserTable()
+        public ActionResult GetUserTable([FromBody] UserTableFilters filter)
         {
             var models = _context.UserProfile.AsQueryable();
             UserTableModels utms = new UserTableModels();
