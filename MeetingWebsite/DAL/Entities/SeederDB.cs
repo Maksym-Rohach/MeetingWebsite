@@ -42,9 +42,18 @@ namespace MeetingWebsite.DAL.Entities
                 string email = "dima@gmail.com";
                 string roleName = "User";          
 
+                var user = new DbUser
+                {
+                    Email = email,
+                    UserName = email,
+                    PhoneNumber = "+11(111)111-11-11"
+                };
+
+                var result1 = userManager.CreateAsync(user, "Qwerty1-").Result;
+
                 var userProfile = new UserProfile
                 {
-                    NickName = "Дмитро",
+                    NickName = "Дима",
                     DateOfBirth = DateTime.Now,
                     GenderId = 1,
                     CityId = 19,

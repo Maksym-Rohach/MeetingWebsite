@@ -19,7 +19,7 @@ using System.Text;
 namespace MeetingWebsite
 {
     public class Startup
-    {
+    {  
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,7 +33,6 @@ namespace MeetingWebsite
 
             services.AddCors();
             
-
             services.AddDbContext<EFDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
