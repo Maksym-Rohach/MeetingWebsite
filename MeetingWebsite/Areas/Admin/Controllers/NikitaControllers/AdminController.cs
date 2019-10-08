@@ -28,14 +28,14 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             utms.Users = new List<UserTableModel>();
             foreach (var item in models)
             {
-                UserTableModel urm = new UserTableModel();
-                urm.Id = item.Id;
-                urm.Nickname = item.NickName;
-                urm.Registrdate = item.DateOfBirth;
+                UserTableModel utm = new UserTableModel();
+                utm.Id = item.Id;
+                utm.Nickname = item.NickName;
+                utm.Registrdate = item.DateOfBirth;
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
-                urm.City = city;
-                urm.Status = "Не забанений";
-                utms.Users.Add(urm);
+                utm.City = city;
+                utm.Status = "Не забанений";
+                utms.Users.Add(utm);
            }
            return Ok(utms.Users);
         }

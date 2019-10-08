@@ -55,7 +55,6 @@ export const usertableReducer = (state = initialState, action) => {
           return newState;
       }
   }
-
   return newState;
 }
 
@@ -66,10 +65,8 @@ export const mapingtable = (model) => {
           .then((response) => {
               dispatch(loginActions.success());
               loginByJWT(response.data, dispatch);
-              //const pushUrl = ;Доробити і все пофіксить
               console.log("----PushUrl----", pushUrl);
               history.push(pushUrl);
-
           }, err=> { throw err; })
           .catch(err=> {
             dispatch(loginActions.failed(err.response));
