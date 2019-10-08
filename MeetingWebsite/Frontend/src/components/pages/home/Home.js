@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
+// import './css/bootstrap.css';
+// import './css/slidefolio.css';
+// import './font-awesome/css';
+// import './font-awesome/fonts';
 
 // import img1 from 'http://pngimg.com/uploads/alien/alien_PNG27.png';
 const items = [
