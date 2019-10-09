@@ -81,7 +81,7 @@ class UserProfile extends React.Component {
                         <FormGroup>
                           <label>First Name</label>
                           <Input
-                            defaultValue="Mike"
+                            defaultValue="ewtrewwertewrtrewtrewweret"
                             placeholder="Company"
                             type="text"
                           />
@@ -89,7 +89,7 @@ class UserProfile extends React.Component {
                       </Col>
                       <Col className="pl-md-1" md="6">
                         <FormGroup>
-                          <label>Last Name</label>
+                          <label>Lastewtrewtewrtwert Name</label>
                           <Input
                             defaultValue="Andrew"
                             placeholder="Last Name"

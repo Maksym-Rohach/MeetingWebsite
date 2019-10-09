@@ -15,7 +15,7 @@ namespace MeetingWebsite.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -142,6 +142,19 @@ namespace MeetingWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Gender");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblRefreshTokens");
                 });
 
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserProfile", b =>
@@ -280,6 +293,14 @@ namespace MeetingWebsite.Migrations
                     b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
