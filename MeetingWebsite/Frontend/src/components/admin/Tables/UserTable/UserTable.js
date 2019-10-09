@@ -65,9 +65,8 @@ class Tables extends React.Component {
     return (
       <>
       {isListLoading && <EclipseWidget />}
-       <div className="app flex-row align-items-center">
-         <Container>
-          <Row className="justify-content-center pt-5 mt-5">
+      <div className="content">
+          <Row>
             <Col md="12">
               <Card>
                 <CardHeader>
@@ -107,7 +106,7 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                           <td> <Button>{item.status}</Button></td>
+                           <td><Button color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button></td>
                           </tr>
                           )
                         })
@@ -118,7 +117,6 @@ class Tables extends React.Component {
               </Card>
             </Col>
           </Row>
-          </Container>
         </div>
       </>
     );

@@ -31,7 +31,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 UserTableModel utm = new UserTableModel();
                 utm.Id = item.Id;
                 utm.Nickname = item.NickName;
-                utm.Registrdate = item.DateOfBirth;
+                utm.Registrdate = item.DateOfBirth.ToString("mmmm-dd-yyyy");
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 utm.City = city;
                 utm.Status = "Не забанений";
@@ -39,19 +39,31 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
            }
            return Ok(utms.Users);
         }
-        [HttpPost("admins")]
-        public IEnumerable<AdminProfile> GetAdminTable()
+        [HttpPost("ban-list")]
+        public ActionResult GetBanTable([FromBody] UserTableFilters filter)//доробити контролер
         {
-            var models = _context.AdminProfiles.Select(a => a).ToList();
-            
-            return models;
+            var models = _context.UserProfile.AsQueryable();
+            UserTableModels utms = new UserTableModels();
+            utms.Users = new List<UserTableModel>();
+            foreach (var item in models)
+            {
+                UserTableModel utm = new UserTableModel();
+                utm.Id = item.Id;
+                utm.Nickname = item.NickName;
+                utm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
+                utm.City = "Покусав собаку!";
+                utm.Status = "Забанений";
+                utms.Users.Add(utm);
+            }
+            return Ok(utms.Users);
         }
-        [HttpPost("schedule-attendance")]
-        public IEnumerable<DbUser> GetSctivitySchedule()
+        [HttpPost("users")]
+        public ActionResult GetRegistrationShedule()
         {
-            var models = _context.Users.Select(a => a);
+            var models = _context.UserProfile.AsQueryable();
+            int JUN = models.Select(a => a).Where(a => a.DateOfBirth.Month == 0).Count();//зробити через норм цикл!!!
+            return Ok();
+        }
 
-            return models;
-        }
     }
 }
