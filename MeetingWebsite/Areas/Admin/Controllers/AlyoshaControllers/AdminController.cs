@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
-    [ApiController]
+   
     public class AdminController : ControllerBase
     {
         private readonly EFDbContext _context;
@@ -20,21 +21,23 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             _context = context;
         }
 
-        [HttpPost("Admins")]
-        public ActionResult<AdminTableModels> GetUserTable()
+        [HttpGet("admins")]
+        //public ActionResult<AdminTableModels> GetUserTable()
+        public ActionResult GetAminTable()
+
         {
-            var models = _context.UserProfile.AsQueryable();
+            var models = _context.AdminProfiles.AsQueryable();
             AdminTableModels atms = new AdminTableModels();
             atms.Admins = new List<AdminTableModel>();
             foreach (var item in models)
             {
                 AdminTableModel atm = new AdminTableModel();
                 atm.Id = item.Id;
-                atm.Nickname = item.NickName;
+                atm.Nickname = item.Name;
                 //urm.Registrdate = item.DateOfBirth;
                 //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 //urm.City = city;
-                atm.Status = "Активный";
+               // atm.Status = "Активный";
                 atms.Admins.Add(atm);
             }
             return Ok(atms.Admins);
