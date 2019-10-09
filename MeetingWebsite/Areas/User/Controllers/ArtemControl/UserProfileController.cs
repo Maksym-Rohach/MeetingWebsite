@@ -20,11 +20,15 @@ namespace MeetingWebsite.Controllers.ArtemControl
         {
             _context = context;
         }
-        [HttpGet("[action]")]
+        [HttpPost("getprofile")]
 
         public UserProfileModel GetUserProfile(string email)
         {
             var tmp = _context.UserProfile.Where(a => a.User.Email == email).SingleOrDefault();
+            //if (tmp == null)
+            //{
+            //    return new UserProfileModel { Description = _context.UserProfile.Count().ToString() };
+            //}
             var birthDate = tmp.DateOfBirth;
             int age = DateTime.Now.Year - birthDate.Year;
             UserProfileModel user = new UserProfileModel() { 
@@ -38,6 +42,7 @@ namespace MeetingWebsite.Controllers.ArtemControl
                 
             return user;
         }
+        [HttpPost("setprofile")]
 
         public void SetUserProfile(string Id, UserProfileModel model)
         {

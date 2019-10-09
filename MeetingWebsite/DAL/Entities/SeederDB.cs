@@ -49,7 +49,7 @@ namespace MeetingWebsite.DAL.Entities
                 //    PhoneNumber = "+11(111)111-11-11"
                 //};
 
-                //var result = userManager.CreateAsync(user, "Qwerty1-").Result;
+                //var result1 = userManager.CreateAsync(user, "Qwerty1-").Result;
 
                 var userProfile = new UserProfile
                 {
@@ -149,11 +149,11 @@ namespace MeetingWebsite.DAL.Entities
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EFDbContext>();
                 //var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
-                SeederDB.SeedRoles(manager, managerRole);
-                SeederDB.SeedProfiles(manager, context);
                 SeederDB.SeedGenders(manager, context);
                 SeederDB.SeedCities(manager, context);
                 SeederDB.SeedZodiacs(manager, context);
+                SeederDB.SeedRoles(manager, managerRole);
+                SeederDB.SeedProfiles(manager, context);
             }
         }
     }
