@@ -37,9 +37,9 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            if (userManager.FindByEmailAsync("dima@gmail.com").Result == null)
+            if (userManager.FindByEmailAsync("olex@gmail.com").Result == null)
             {
-                string email = "dima@gmail.com";
+                string email = "olex@gmail.com";
                 string roleName = "User";          
 
                 var user = new DbUser
@@ -53,8 +53,8 @@ namespace MeetingWebsite.DAL.Entities
 
                 var userProfile = new UserProfile
                 {
-                    NickName = "Дима",
-                    DateOfBirth = DateTime.Now,
+                    NickName = "Льоша",
+                    DateOfBirth = DateTime.Parse("11-10-2019"),
                     GenderId = 1,
                     CityId = 19,
                     ZodiacId = 2,
@@ -73,34 +73,20 @@ namespace MeetingWebsite.DAL.Entities
                 result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
             };
 
-            if (userManager.FindByEmailAsync("kunderenko2@gmail.com").Result == null)
-            {
-                string email = "kunderenko2@gmail.com";
-                string roleName = "Admin";
-
-                var adminProfile = new AdminProfile
-                {
-                    Name = "Альоша",
-                   // DateOfBirth = DateTime.Now,
-
-                    User = new DbUser
-                    {
-                        Email = email,
-                        UserName = email,
-                        PhoneNumber = "+38(099)456-43-34"
-                    }
-                };
-
-                var result = userManager.CreateAsync(adminProfile.User, "Qwerty1-").Result;
-                context.AdminProfiles.Add(adminProfile);
-                context.SaveChanges();
-                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
-            };
+           
 
             if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
             {
                 string email = "yana@gmail.com";
                 string roleName = "User";
+                var user = new DbUser
+                {
+                    Email = email,
+                    UserName = email,
+                    PhoneNumber = "+11(111)111-11-11"
+                };
+
+                var result1 = userManager.CreateAsync(user, "Qwerty1-").Result;
 
                 var userProfile = new UserProfile
                 {
@@ -128,6 +114,15 @@ namespace MeetingWebsite.DAL.Entities
             {
                 string email = "masha@gmail.com";
                 string roleName = "User";
+
+                var user = new DbUser
+                {
+                    Email = email,
+                    UserName = email,
+                    PhoneNumber = "+11(111)111-11-11"
+                };
+
+                var result1 = userManager.CreateAsync(user, "Qwerty1-").Result;
 
                 var userProfile = new UserProfile
                 {

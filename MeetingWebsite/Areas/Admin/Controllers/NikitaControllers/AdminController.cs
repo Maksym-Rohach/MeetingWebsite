@@ -31,7 +31,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 UserTableModel utm = new UserTableModel();
                 utm.Id = item.Id;
                 utm.Nickname = item.NickName;
-                utm.Registrdate = item.DateOfBirth.ToString("mmmm-dd-yyyy");
+                utm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 utm.City = city;
                 utm.Status = "Не забанений";
@@ -57,12 +57,17 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             }
             return Ok(utms.Users);
         }
-        [HttpPost("register")]
+
+        [HttpPost("shedule-register")]
         public ActionResult GetRegistrationShedule()
         {
             var models = _context.UserProfile.AsQueryable();
-            int JUN = models.Select(a => a).Where(a => a.DateOfBirth.Month == 9).Count();//доробити через цикл for замість числа- і 
-            return Ok();
+            List<int> monthes = new List<int>();
+            for (int i = 0; i < 12; i++)
+            {
+                monthes.Add(models.Select(a => a).Where(a => a.DateOfBirth.Month == i).Count());
+            }
+            return Ok(monthes);
         }
 
     }
