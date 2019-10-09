@@ -14,7 +14,8 @@ import {
   Table,
   Row,
   Col,
-  Container
+  Container,
+  Button
 } from "reactstrap";
 
 const optionsMonth = [
@@ -106,7 +107,7 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                            <td>{item.status}</td>
+                           <td> <Button>{item.status}</Button></td>
                           </tr>
                           )
                         })
