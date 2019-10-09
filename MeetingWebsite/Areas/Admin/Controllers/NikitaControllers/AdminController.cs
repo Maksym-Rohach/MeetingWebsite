@@ -57,11 +57,11 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             }
             return Ok(utms.Users);
         }
-        [HttpPost("users")]
+        [HttpPost("register")]
         public ActionResult GetRegistrationShedule()
         {
             var models = _context.UserProfile.AsQueryable();
-            int JUN = models.Select(a => a).Where(a => a.DateOfBirth.Month == 0).Count();//зробити через норм цикл!!!
+            int JUN = models.Select(a => a).Where(a => a.DateOfBirth.Month == 9).Count();//доробити через цикл for замість числа- і 
             return Ok();
         }
 
