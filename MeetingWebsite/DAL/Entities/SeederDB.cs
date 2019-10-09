@@ -149,11 +149,12 @@ namespace MeetingWebsite.DAL.Entities
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EFDbContext>();
                 //var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
-                SeederDB.SeedRoles(manager, managerRole);
-                SeederDB.SeedProfiles(manager, context);
+
                 SeederDB.SeedGenders(manager, context);
                 SeederDB.SeedCities(manager, context);
                 SeederDB.SeedZodiacs(manager, context);
+                SeederDB.SeedRoles(manager, managerRole);
+                SeederDB.SeedProfiles(manager, context);
             }
         }
     }

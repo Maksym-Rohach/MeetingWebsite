@@ -26,8 +26,6 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\Default\" />
-    <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Areas\User\ViewModels\" />
     <Folder Include="Uploaded\" />
   </ItemGroup>
 

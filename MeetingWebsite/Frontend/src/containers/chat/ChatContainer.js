@@ -15,7 +15,21 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+// import '../../assets/css/ChatFooterStyle'
+// import '../../assets/css/ChatHeaderStyles'
+// import '../../assets/css/ChatLayoutStyle'
+// import '../../assets/css/ChatMessageStyle'
+import React from 'react';
+import {Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Col,
+  Input,
+  FormGroup,
+  Label,
+  Row
+} from 'reactstrap';
 import ChatHeader from '../../components/Chat/ChatHeader'
 import ChatFooter from '../../components/Chat/ChatFooter'
 import ChatMessages from '../../components/Chat/ChatMessages'
@@ -26,10 +40,20 @@ class ChatLayout extends React.Component {
     return (
       <>
       <div className=" content">
-        <div className=" ChatLayout">
-            <ChatHeader></ChatHeader>
-            <ChatMessages></ChatMessages>
-            <ChatFooter></ChatFooter>
+        <div className="ChatLayout">
+          <Card>
+              <CardHeader>
+                <ChatHeader></ChatHeader>
+              </CardHeader>
+              <CardBody>
+               
+              <ChatMessages></ChatMessages>
+              </CardBody>
+              <CardFooter>
+              <ChatFooter></ChatFooter>
+              </CardFooter>
+            </Card>
+            
         </div>
         </div>
       </>

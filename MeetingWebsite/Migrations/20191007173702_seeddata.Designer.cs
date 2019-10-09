@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20190917154823_init")]
-    partial class init
+    [Migration("20191007173702_seeddata")]
+    partial class seeddata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,30 @@ namespace MeetingWebsite.Migrations
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.AdminProfile", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdminProfiles");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("City");
+                });
 
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.DbRole", b =>
                 {
@@ -109,6 +133,77 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.Gender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Gender");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblRefreshTokens");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserProfile", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<int>("CityId");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(256);
+
+                    b.Property<int>("GenderId");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("NickName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("ZodiacId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("ZodiacId");
+
+                    b.ToTable("UserProfile");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.Zodiac", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Zodiac");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -182,6 +277,14 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.AdminProfile", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.DbUserRole", b =>
                 {
                     b.HasOne("MeetingWebsite.DAL.Entities.DbRole", "Role")
@@ -192,6 +295,37 @@ namespace MeetingWebsite.Migrations
                     b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserProfile", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MeetingWebsite.DAL.Entities.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MeetingWebsite.DAL.Entities.Zodiac", "Zodiac")
+                        .WithMany()
+                        .HasForeignKey("ZodiacId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

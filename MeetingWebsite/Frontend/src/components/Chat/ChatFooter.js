@@ -18,11 +18,8 @@
 import React, { Component } from 'react';
 import {Button} from 'reactstrap'
 import { Badge, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-
 class ChatFooter extends React.Component {
   render() {
-
-    
     return (
       <>
         <div className="ChatFooter">

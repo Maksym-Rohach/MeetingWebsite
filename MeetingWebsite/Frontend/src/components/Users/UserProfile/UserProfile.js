@@ -33,6 +33,14 @@ import {
 } from "reactstrap";
 
 class UserProfile extends React.Component {
+
+  AgeValidation(event){
+    
+    event.target.value = (parseInt(event.target.value)<18)?event.target.min:((parseInt(event.target.value)>parseInt(event.target.max))?(event.target.max):event.target.value)
+
+  }
+
+
   render() {
     return (
       <>
@@ -108,28 +116,6 @@ class UserProfile extends React.Component {
                       
                     </Row> */}
                     <Row>
-                      <Col className="pr-md-1" md="6">
-                        <FormGroup>
-                          <label>Ім'я</label>
-                          <Input
-                            defaultValue=""
-                            placeholder=""
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-md-1" md="6">
-                        <FormGroup>
-                          <label>Прізвище</label>
-                          <Input
-                            defaultValue=""
-                            placeholder=""
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
                       <Col md="12">
                         <FormGroup>
                           <label>Адреса</label>
@@ -165,7 +151,7 @@ class UserProfile extends React.Component {
                       <Col className="pr-md-1" md="4">
                         <FormGroup>
                           <label>Вік</label>
-                          <Input placeholder="Age" type="number" />
+                          <Input placeholder="Age" type="number" min="18" max="60" onBlur={this.AgeValidation.bind(this)}/>
                         </FormGroup>
                       </Col>
                     </Row>

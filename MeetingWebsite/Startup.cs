@@ -97,7 +97,7 @@ namespace MeetingWebsite
             app.UseSpaStaticFiles();
             app.UseSession();
 
-           // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+            SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
             app.UseMvc(routes =>
             {
