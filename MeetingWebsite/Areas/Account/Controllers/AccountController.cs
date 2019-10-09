@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MeetingWebsite.Helpers;
 using MeetingWebsite.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeetingWebsite.Areas.Account.Controllers
 {
@@ -22,7 +23,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
         private readonly UserManager<DbUser> _userManager;
         private readonly SignInManager<DbUser> _signInManager;
         private readonly IConfiguration _configuration;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
         //private readonly IFileService _fileService;
         private readonly IJWTTokenService _tokenService;
 
@@ -31,14 +32,15 @@ namespace MeetingWebsite.Areas.Account.Controllers
            SignInManager<DbUser> signInManager,
            IConfiguration configuration,
            //IFileService fileService,
-           IJWTTokenService tokenService,
-           IEmailSender emailSender)
+           IJWTTokenService tokenService)
+          // IEmailSender emailSender)
+          
         {
             _userManager = userManager;
             _context = context;
             _signInManager = signInManager;
             _configuration = configuration;
-            _emailSender = emailSender;
+            //_emailSender = emailSender;
             //_fileService = fileService;
             _tokenService = tokenService;
         }
@@ -58,7 +60,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
             }
 
-            var result = _signInManager
+            var result =  _signInManager
                 .PasswordSignInAsync(user, model.Password, false, false).Result;
 
             if (!result.Succeeded)
@@ -87,6 +89,31 @@ namespace MeetingWebsite.Areas.Account.Controllers
         {
 
             return Ok();
+        }
+
+        [HttpPost("refresh/{refreshToken}")]
+        public IActionResult RefreshToken([FromRoute]string refreshToken)
+        {
+
+            var _refreshToken = _context.RefreshToken
+                .Include(u => u.User)
+                .SingleOrDefault(m => m.Token == refreshToken);
+
+            if (_refreshToken == null)
+            {
+                return NotFound("Refresh token not found");
+            }
+
+            _refreshToken.Token = Guid.NewGuid().ToString();
+            _context.RefreshToken.Update(_refreshToken);
+            _context.SaveChanges();
+
+            return Ok(
+            new
+            {
+                token = _tokenService.CreateToken(_refreshToken.User),
+                refToken = _refreshToken.Token
+            });
         }
     }
 }

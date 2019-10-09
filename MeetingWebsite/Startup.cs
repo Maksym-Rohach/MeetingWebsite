@@ -1,4 +1,5 @@
 using MeetingWebsite.DAL.Entities;
+using MeetingWebsite.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +19,7 @@ using System.Text;
 namespace MeetingWebsite
 {
     public class Startup
-    {
+    {  
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,17 +33,18 @@ namespace MeetingWebsite
 
             services.AddCors();
             
-
             services.AddDbContext<EFDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MeetingWebsite"));
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MeetingWebsite jklhkljhkl fgfkjgj"));
 
             services.AddIdentity<DbUser, DbRole>()
                 .AddEntityFrameworkStores<EFDbContext>()
                  .AddDefaultTokenProviders();
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.AddScoped<IFileService, FileService>();
+
+            services.AddScoped<IJWTTokenService, JWTTokenService>();
 
             services.AddAuthentication(options =>
             {
