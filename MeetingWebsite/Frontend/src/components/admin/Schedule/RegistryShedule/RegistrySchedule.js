@@ -11,7 +11,9 @@ import {
   CardBody,
   CardTitle,
   Row,
-  Col
+  Col,
+  ButtonGroup,
+  Button
 } from "reactstrap";
 
 let chart1_2_options = {
@@ -115,9 +117,19 @@ let chartExample1 = {
 
 class Dashboard extends React.Component {
 
-    state = {
-      bigChartData: chartExample1.data1
+  constructor(props) {
+    super(props);
+    this.state = {
+      bigChartData: "data1"
     };
+  }
+
+  setBgChartData = name => {
+    this.setState({
+      bigChartData: name
+    });
+  };
+
   render() {
     return (
       <>
@@ -131,12 +143,42 @@ class Dashboard extends React.Component {
                       <h5 className="card-category">Реєстрація</h5>
                       <CardTitle tag="h2">Графік</CardTitle>
                     </Col>
+                    <Col sm="6">
+                      <ButtonGroup
+                        className="btn-group-toggle float-right"
+                        data-toggle="buttons"
+                      >
+                        <Button
+                          tag="label"
+                          className={classNames("btn-simple", {
+                            active: this.state.bigChartData === "data1"
+                          })}
+                          color="info"
+                          id="0"
+                          size="sm"
+                          onClick={() => this.setBgChartData("data1")}
+                        >
+                          <input
+                            defaultChecked
+                            className="d-none"
+                            name="options"
+                            type="radio"
+                          />
+                          <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                            Accounts
+                          </span>
+                          <span className="d-block d-sm-none">
+                            <i className="tim-icons icon-single-02" />
+                          </span>
+                        </Button>
+                        </ButtonGroup>
+                        </Col>
                   </Row>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={chartExample1[this.state.bigChartData]}//доробити!!!
+                      data={chartExample1[this.state.bigChartData]}
                       options={chartExample1.options}
                     />
                   </div>

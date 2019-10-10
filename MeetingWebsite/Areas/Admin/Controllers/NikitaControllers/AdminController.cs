@@ -59,7 +59,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("shedule-register")]
-        public ActionResult GetRegistrationShedule()
+        public ActionResult GetRegistrationShedule([FromBody] RegistrySheduleFilters filter)
         {
             var models = _context.UserProfile.AsQueryable();
             List<int> monthes = new List<int>();

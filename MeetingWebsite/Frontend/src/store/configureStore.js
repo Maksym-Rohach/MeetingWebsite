@@ -7,13 +7,15 @@ import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
 import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
+import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 
 export default function configureStore (history, initialState) {
     const reducers = {
       login: loginReducer,
       refreshToken: refreshReducer,
       userTable: userTableReducer,
-      banTable:banTableReducer
+      banTable:banTableReducer,
+      registrySheduleReducer
     };
 
     const middleware = [

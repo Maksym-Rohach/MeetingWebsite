@@ -32,5 +32,9 @@ namespace MeetingWebsite.Areas.Account.ViewModels
         public string NickName { get; set; }
         public int CurrentPage { get; set; }
     }
-    
+    public class RegistrySheduleFilters
+    {
+        public string Year { get; set; }
+    }
+
 }
