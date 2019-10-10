@@ -52,7 +52,7 @@ export const getListActions = {
     }
   }
 
-export const RegistrySheduleReducer = (state = initialState, action) => { 
+export const registrySheduleReducer = (state = initialState, action) => { 
   let newState = state;
 
   switch (action.type) {

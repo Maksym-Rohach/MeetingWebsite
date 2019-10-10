@@ -14,8 +14,8 @@ export default function configureStore (history, initialState) {
       login: loginReducer,
       refreshToken: refreshReducer,
       userTable: userTableReducer,
-      banTable:banTableReducer,
-      registrySheduleReducer
+      banTable: banTableReducer,
+      registryShedule: registrySheduleReducer
     };
 
     const middleware = [

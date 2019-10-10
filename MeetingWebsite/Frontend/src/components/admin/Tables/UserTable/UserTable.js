@@ -44,17 +44,15 @@ class Tables extends React.Component {
   }
 
   filterSearchData = () => {
-    const { tmp_month, tmp_year } = this.state;
+    const { tmp_year } = this.state;
     let year = tmp_year.value;
-    let month = tmp_month.value;
-    this.props.getUsersData({ year, month });
+    this.props.getUsersData({ year});
   }
 
   componentDidMount = () => {
-    const { tmp_month, tmp_year } = this.state;
+    const { tmp_year } = this.state;
     let year = tmp_year.value;
-    let month = tmp_month.value;
-    this.props.getUsersData({ year, month });
+    this.props.getUsersData({ year });
   }
 
   render() {

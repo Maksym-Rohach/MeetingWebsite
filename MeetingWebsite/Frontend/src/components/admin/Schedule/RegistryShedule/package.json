@@ -1,6 +1,6 @@
 {
-    "name": "RegistryShedule",
+    "name": "RegistrySchedule",
     "version": "0.0.0",
     "private": true,
-    "main": "./RegistryShedule.js"
+    "main": "./RegistrySchedule.js"
   }

@@ -3,7 +3,9 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-
+import * as getListActions from './reducer';
+import EclipseWidget from '../../../eclipse';
+import Select from 'react-select';
 // reactstrap components
 import {
   Card,
@@ -115,6 +117,11 @@ let chartExample1 = {
   options: chart1_2_options
 }
 
+const optionsYear = [
+  { value: '2019', label: '2019р' },
+  { value: '2020', label: '2020р' },
+];
+
 class Dashboard extends React.Component {
 
   constructor(props) {
@@ -123,6 +130,10 @@ class Dashboard extends React.Component {
       bigChartData: "data1"
     };
   }
+  state = {
+    isLoading: true,
+    tmp_year: { value: '2019', label: '2019р' },   
+  }
 
   setBgChartData = name => {
     this.setState({
@@ -130,9 +141,32 @@ class Dashboard extends React.Component {
     });
   };
 
+  handleChange = (name, selectValue) => {
+    this.setState({ [name]: selectValue }, this.filterSearchData);
+  }
+
+  filterSearchData = () => {
+    const { tmp_year } = this.state;
+    let year = tmp_year.value;
+    this.props.getRegistryData({ year });
+  }
+
+  componentDidMount = () => {
+    const { tmp_year } = this.state;
+    let year = tmp_year.value;
+    this.props.getRegistryData({ year });
+  }
+
+
   render() {
+    const { tmp_year} = this.state;
+    const { listUsers, isListLoading } = this.props;
+    console.log("---state--------------------------------", this.state);
+    console.log("---props--------------------------------", this.props);
+
     return (
       <>
+        {isListLoading && <EclipseWidget />}
         <div className="content">
           <Row>
             <Col xs="12">
@@ -142,6 +176,12 @@ class Dashboard extends React.Component {
                     <Col className="text-left" sm="6">
                       <h5 className="card-category">Реєстрація</h5>
                       <CardTitle tag="h2">Графік</CardTitle>
+                    </Col>
+                    <Col className="col-md-2">
+                      <Select
+                        value={tmp_year}
+                        onChange={(e) => this.handleChange("tmp_year", e)}
+                        options={optionsYear} />
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
