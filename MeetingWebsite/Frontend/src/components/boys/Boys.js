@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
 //import { Link } from 'react-router-dom';
 import { Row,Fade,CardHeader,FormGroup,InputGroupButtonDropdown,
   DropdownToggle,DropdownMenu,CardFooter,DropdownItem,Button, 
@@ -6,10 +7,34 @@ import { Row,Fade,CardHeader,FormGroup,InputGroupButtonDropdown,
 
 class Boys extends Component {
     state = {
+        isLoading: true,
+        tmp_zodiac: {value: '', label: ''},
+        tmp_city: {value:'', label: ''},
+        tmp_age: {value:'', label: ''},        
         collapse: true,
         fadeIn: true,
         timeout: 300
       };
+
+      handleChange = (name, selectValue) => {
+        this.setState({ [name]: selectValue }, this.filterSearchData);
+      }
+
+      // filterSearchData = () => {
+      //   const { tmp_month, tmp_year } = this.state;
+      //   let year = tmp_year.value;
+      //   let month = tmp_month.value;
+      //   this.props.getUsersData({ year, month });
+      // }
+
+      filterSearchBoys = () => {
+        const {tmp_zodiac, tmp_city, tmp_age} = this.state;
+        let zodiac = tmp_zodiac.value;
+        let city = tmp_city.value;
+        let age = tmp_age.value;
+        this.props.getBoysData({zodiac, city, age});
+      }
+      
   render() {
     return (
       <React.Fragment>
