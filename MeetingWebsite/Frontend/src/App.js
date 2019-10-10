@@ -6,22 +6,16 @@ import "assets/demo/demo.css";
 import "assets/css/nucleo-icons.css";
 import 'font-awesome/css/font-awesome.min.css';
 
-
-
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
-
 
 // Containers
 const AdminLayout = React.lazy(() => import('./containers/adminLayout/AdminLayout'));
 const UserLayout = React.lazy(() => import('./containers/userLayout'));
 
-
-
 // Pages
 const AdminUsers = React.lazy(() => import('./components/admin/Users'));
 const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/home'));
-
 
 class App extends Component {
 
