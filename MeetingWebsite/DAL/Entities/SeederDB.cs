@@ -155,6 +155,7 @@ namespace MeetingWebsite.DAL.Entities
                 SeederDB.SeedGenders(manager, context);
                 SeederDB.SeedCities(manager, context);
                 SeederDB.SeedZodiacs(manager, context);
+                
             }
         }
     }
