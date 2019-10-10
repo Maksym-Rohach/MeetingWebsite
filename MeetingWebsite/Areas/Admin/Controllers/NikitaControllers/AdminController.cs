@@ -42,20 +42,20 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("ban-list")]
         public ActionResult GetBanTable([FromBody] UserTableFilters filter)//доробити контролер
         {
-            var models = _context.UserProfile.AsQueryable();
-            UserTableModels utms = new UserTableModels();
-            utms.Users = new List<UserTableModel>();
+            var models = _context.UserAccessLocks.AsQueryable();
+            BanTableModels btms = new BanTableModels();
+            btms.Bans = new List<BanTableModel>();
             foreach (var item in models)
             {
-                UserTableModel utm = new UserTableModel();
-                utm.Id = item.Id;
-                utm.Nickname = item.NickName;
-                utm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
-                utm.City = "Покусав собаку!";
-                utm.Status = "Забанений";
-                utms.Users.Add(utm);
+                BanTableModel btm = new BanTableModel();
+                btm.Id = item.Id;
+                btm.Nickname = _context.UserProfile.FirstOrDefault(a => a.Id == item.Id).NickName;
+                btm.Bandate = item.LockDate.ToString("dd.MM.yyyy");
+                btm.Description = item.Reason;
+                btm.Status = "Забанений";
+                btms.Bans.Add(btm);
             }
-            return Ok(utms.Users);
+            return Ok(btms.Bans);
         }
 
         [HttpPost("shedule-register")]

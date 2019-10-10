@@ -2,9 +2,9 @@ import update from '../../../../helpers/update';
 import RegistrySheduleService from './RegistrySheduleService';
 
 
-export const MAPING_POST_STARTED = "MAPING_POST_STARTED";
-export const MAPING_POST_SUCCESS = "MAPING_POST_SUCCESS";
-export const MAPING_POST_FAILED = "MAPING_POST_FAILED";
+export const REGISTER_SHEDULE_STARTED = "REGISTER_SHEDULE_STARTED";
+export const REGISTER_SHEDULE_SUCCESS = "REGISTER_SHEDULE_SUCCESS";
+export const REGISTER_SHEDULE_FAILED = "REGISTER_SHEDULE_FAILED";
 
 
 const initialState = {
@@ -17,14 +17,16 @@ const initialState = {
 }
 
 export const getRegistryData = (model) => {
+    console.log("+++++++++++Response");
     return (dispatch) => {
         dispatch(getListActions.started());
-        RegistrySheduleService.registryShedule(model)
+            RegistrySheduleService.registryShedule(model)
             .then((response) => {
                 console.log("+++++++++++Response", response);
                 dispatch(getListActions.success(response.data));               
             }, err=> { throw err; })
             .catch(err=> {
+                console.log("+++++++++++catch");
               dispatch(getListActions.failed(err.response));
             });
     }
@@ -33,20 +35,20 @@ export const getRegistryData = (model) => {
 export const getListActions = {
     started: () => {
         return {
-            type: MAPING_POST_STARTED
+            type: REGISTER_SHEDULE_STARTED
         }
     },  
     success: (data) => {
         console.log("+++++++++++Data", data);
         return {
-            type: MAPING_POST_SUCCESS,
+            type: REGISTER_SHEDULE_SUCCESS,
             payload: data
         }
     },  
     failed: (response) => {
         console.log("failed: (response)", response);
         return {           
-            type: MAPING_POST_FAILED,
+            type: REGISTER_SHEDULE_FAILED,
             //errors: response.data
         }
     }
@@ -57,22 +59,22 @@ export const registrySheduleReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
-      case MAPING_POST_STARTED: {
+      case REGISTER_SHEDULE_STARTED: {
           newState = update.set(state, 'list.loading', true);
           newState = update.set(newState, 'list.success', false);
           newState = update.set(newState, 'list.failed', false);
           break;
       }
-      case MAPING_POST_SUCCESS: {
+      case REGISTER_SHEDULE_SUCCESS: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
           newState = update.set(newState, 'list.data', action.payload);
-          console.log("MAPING_POST_SUCCESS)", action.payload);
+          console.log("REGISTER_SHEDULE_SUCCESS)", action.payload);
 
           break;
       }
-      case MAPING_POST_FAILED: {
+      case REGISTER_SHEDULE_FAILED: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.success', false);
           newState = update.set(newState, 'list.failed', true);

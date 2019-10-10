@@ -35,9 +35,96 @@ namespace MeetingWebsite.DAL.Entities
             }
         }
 
-        public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
-        {         
+        public static void GetRandomUserProfile(int num, UserManager<DbUser> userManager, EFDbContext context)
+        {
+            Random rnd = new Random();
+            UserProfile up = new UserProfile();
+            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс" };
+            string email = "helloworld"+num+"@gmail.com";
+            DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
+            int genderid = num % 2 == 0 ? 1 : 2;
+            int cityid = 20;
+            int zodiacid = 5;
+            string avatar = "";
+            string roleName = "User";
 
+            DbUser user = new DbUser() { Email = email, UserName = email, PhoneNumber = "+22(222)222-22-22" };
+
+            up.Avatar = avatar;
+            up.CityId = cityid;
+            up.DateOfBirth = DateOfBirth;
+            up.DateOfRegister = DateOfBirth;
+            up.GenderId = genderid;//18
+            up.NickName = nicknames[rnd.Next(0, 19)]+num;
+            up.ZodiacId = zodiacid;
+            up.User = user;
+
+            var result = userManager.CreateAsync(up.User, "Qwerty1-").Result;
+            context.UserProfile.Add(up);
+            context.SaveChanges();
+            result = userManager.AddToRoleAsync(up.User, roleName).Result;
+        }
+
+        public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                GetRandomUserProfile(i, userManager, context);
+            }
+
+            if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
+            {
+                string email = "yana@gmail.com";
+                string roleName = "User";
+
+                var userProfile = new UserProfile
+                {
+                    NickName = "Яна",
+                    DateOfBirth = DateTime.Now,
+                    GenderId = 2,
+                    CityId = 20,
+                    ZodiacId = 5,
+                    Avatar = "",
+                    User = new DbUser
+                    {
+                        Email = email,
+                        UserName = email,
+                        PhoneNumber = "+22(222)222-22-22"
+                    }
+                };
+
+                var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
+                context.UserProfile.Add(userProfile);
+                context.SaveChanges();
+                result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
+            };
+
+            if (userManager.FindByEmailAsync("masha@gmail.com").Result == null)
+            {
+                string email = "masha@gmail.com";
+                string roleName = "User";
+
+                var userProfile = new UserProfile
+                {
+                    NickName = "Маша",
+                    DateOfBirth = DateTime.Now,
+                    GenderId = 2,
+                    CityId = 18,
+                    ZodiacId = 7,
+                    Avatar = "",
+                    User = new DbUser
+                    {
+                        Email = email,
+                        UserName = email,
+                        PhoneNumber = "+33(333)333-33-33"
+                    }
+                };
+
+                var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
+                context.UserProfile.Add(userProfile);
+                context.SaveChanges();
+                result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
+            };
         }
 
         public static void SeedZodiacs(UserManager<DbUser> userManager, EFDbContext context)

@@ -6,6 +6,8 @@ import { Line, Bar } from "react-chartjs-2";
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
+import { connect } from 'react-redux';
+import get from "lodash.get";
 // reactstrap components
 import {
   Card,
@@ -68,71 +70,22 @@ let chart1_2_options = {
   }
 };
 
-let chartExample1 = {
-  data1: canvas => {
-    let ctx = canvas.getContext("2d");
 
-    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-
-    return {
-      labels: [
-        "JAN",
-        "FEB",
-        "MAR",
-        "APR",
-        "MAY",
-        "JUN",
-        "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
-      ],
-      datasets: [
-        {
-          label: "My First dataset",
-          fill: true,
-          backgroundColor: gradientStroke,
-          borderColor: "#1f8ef1",
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          pointBackgroundColor: "#1f8ef1",
-          pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#1f8ef1",
-          pointBorderWidth: 20,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 15,
-          pointRadius: 4,
-          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100]
-        }
-      ]
-    };
-  },
-  options: chart1_2_options
-}
 
 const optionsYear = [
   { value: '2019', label: '2019р' },
   { value: '2020', label: '2020р' },
 ];
 
-class Dashboard extends React.Component {
+class RegistrySchedule extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1"
+      bigChartData: "data1",
+      isLoading: true,
+      tmp_year: { value: '2019', label: '2019р' },   
     };
-  }
-  state = {
-    isLoading: true,
-    tmp_year: { value: '2019', label: '2019р' },   
   }
 
   setBgChartData = name => {
@@ -159,8 +112,56 @@ class Dashboard extends React.Component {
 
 
   render() {
+    let chartExample1 = {
+      data1: canvas => {
+        let ctx = canvas.getContext("2d");
+    
+        let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+    
+        gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+        gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+        gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+    
+        return {
+          labels: [
+            "JAN",
+            "FEB",
+            "MAR",
+            "APR",
+            "MAY",
+            "JUN",
+            "JUL",
+            "AUG",
+            "SEP",
+            "OCT",
+            "NOV",
+            "DEC"
+          ],
+          datasets: [
+            {
+              label: "My First dataset",
+              fill: true,
+              backgroundColor: gradientStroke,
+              borderColor: "#1f8ef1",
+              borderWidth: 2,
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: "#1f8ef1",
+              pointBorderColor: "rgba(255,255,255,0)",
+              pointHoverBackgroundColor: "#1f8ef1",
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+              data:this.props.listData
+            }
+          ]
+        };
+      },
+      options: chart1_2_options
+    }
     const { tmp_year} = this.state;
-    const { listUsers, isListLoading } = this.props;
+    const { listData, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
 
@@ -205,7 +206,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Accounts
+                            Реєстрації
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
@@ -232,4 +233,21 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+  console.log("State=======", state);
+  return {
+    listData: get(state, "registryShedule.list.data"),
+    isListLoading: get(state, "registryShedule.list.loading"),  
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getRegistryData: filter => {
+      dispatch(getListActions.getRegistryData(filter));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrySchedule);
+

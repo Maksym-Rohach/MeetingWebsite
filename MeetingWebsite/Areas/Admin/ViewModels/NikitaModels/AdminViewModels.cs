@@ -19,12 +19,22 @@ namespace MeetingWebsite.Areas.Account.ViewModels
     {
         public List<UserTableModel> Users { get; set; }
     }
-    public class AdminTableModel
-    {
-        public string Nickname { get; set; }
-        public string Status { get; set; }
 
+    public class BanTableModel
+    {
+        public string Id { get; set; }
+        public string Nickname { get; set; }
+        public string Bandate { get; set; }
+        public string Description { get; set; }
+        public string Status { get; set; }
     }
+
+    public class BanTableModels
+    {
+        public List<BanTableModel> Bans { get; set; }
+    }
+
+
 
     public class UserTableFilters
     {

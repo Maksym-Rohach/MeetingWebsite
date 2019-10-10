@@ -104,8 +104,8 @@ class Tables extends React.Component {
                           return (<tr key={item.id}>
                             {/* <th scope="row">{counter++}</th> */}
                             <td>{item.nickname}</td>
-                            <td>{item.registrdate}</td>
-                            <td>{item.city}</td>
+                            <td>{item.bandate}</td>
+                            <td>{item.description}</td>
                            <td><Button color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button></td>
                           </tr>
                           )
