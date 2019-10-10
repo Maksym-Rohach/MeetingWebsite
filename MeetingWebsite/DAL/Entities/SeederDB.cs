@@ -36,44 +36,17 @@ namespace MeetingWebsite.DAL.Entities
         }
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
-        {
-            if (userManager.FindByEmailAsync("olex@gmail.com").Result == null)
+        {         
+
+            if (userManager.FindByEmailAsync("kunderenko2@gmail.com").Result == null)
             {
-                string email = "olex@gmail.com";
-                string roleName = "User";          
+                string email = "kunderenko2@gmail.com";
+                string roleName = "Admin";
 
-                var user = new DbUser
+                var adminProfile = new AdminProfile
                 {
-                    Email = email,
-                    UserName = email,
-                    PhoneNumber = "+11(111)111-11-11"
-                };
-
-                var result1 = userManager.CreateAsync(user, "Qwerty1-").Result;
-
-                var userProfile = new UserProfile
-                {
-                    NickName = "Льоша",
-                    DateOfBirth = DateTime.Parse("11-10-2019"),
-                    GenderId = 1,
-                    CityId = 19,
-                    ZodiacId = 2,
-                    Image = "",
-                    User = new DbUser
-                    {
-                        Email = email,
-                        UserName = email,
-                        PhoneNumber = "+11(111)111-11-11"
-                    }
-                };
-
-                var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
-                context.UserProfile.Add(userProfile);
-                context.SaveChanges();
-                result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
-            };
-
-           
+                    Name = "Альоша",
+                   // DateOfBirth = DateTime.Now,
 
             if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
             {
@@ -95,7 +68,7 @@ namespace MeetingWebsite.DAL.Entities
                     GenderId = 2,
                     CityId = 20,
                     ZodiacId = 5,
-                    Image = "",
+                    Avatar = "",                   
                     User = new DbUser
                     {
                         Email = email,
@@ -131,7 +104,7 @@ namespace MeetingWebsite.DAL.Entities
                     GenderId = 2,
                     CityId = 18,
                     ZodiacId = 7,
-                    Image = "",
+                    Avatar = "",
                     User = new DbUser
                     {
                         Email = email,
@@ -221,11 +194,11 @@ namespace MeetingWebsite.DAL.Entities
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EFDbContext>();
                 //var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
-                SeederDB.SeedRoles(manager, managerRole);
-                SeederDB.SeedProfiles(manager, context);
+                SeederDB.SeedRoles(manager, managerRole);                
                 SeederDB.SeedGenders(manager, context);
                 SeederDB.SeedCities(manager, context);
                 SeederDB.SeedZodiacs(manager, context);
+                SeederDB.SeedProfiles(manager, context);
             }
         }
     }
