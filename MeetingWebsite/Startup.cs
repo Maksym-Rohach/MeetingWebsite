@@ -32,7 +32,6 @@ namespace MeetingWebsite
         {
 
             services.AddCors();
-            
 
             services.AddDbContext<EFDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

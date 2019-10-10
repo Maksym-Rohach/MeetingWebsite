@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
+import { CarouselControl, Collapse, CarouselIndicators, Nav, NavLink, NavItem, NavbarToggler, CarouselCaption, CarouselItem, NavbarBrand, Col, Container, Carousel, Row, Navbar } from 'reactstrap';
 
 // import img1 from 'http://pngimg.com/uploads/alien/alien_PNG27.png';
 const items = [
@@ -25,6 +25,8 @@ class Home extends Component {
 
 constructor(props)
 {
+
+
   super(props);
   this.state = {activeIndex: 0 };
   this.next = this.next.bind(this);
@@ -32,6 +34,13 @@ constructor(props)
   this.goToIndex = this.goToIndex.bind(this);
   this.onExiting = this.onExiting.bind(this);
   this.onExited = this.onExited.bind(this);
+
+  // this.toggle = this.toggle.bind(this);
+  // this.toggleNavbar = this.toggleNavbar.bind(this);
+  // this.state = {
+  //   isOpen: false,
+  //   collapse: true,
+  // };
 }
 
 onExiting(){
@@ -59,6 +68,17 @@ goToIndex(newIndex) {
   this.setState({ activeIndex: newIndex });
 }
 
+// toggle(){
+//   this.setState({
+//     isOpen: !this.state.isOpen,
+//   });
+// }
+// toggleNavbar(){
+//   this.setState({
+//     collapsed: !this.state.collapsed,
+//   });
+// }
+
 render() {
 const {activeIndex} = this.state;
 
@@ -71,6 +91,7 @@ const {activeIndex} = this.state;
 // });
 
 const slides = items.map((item) => {
+  
   return (
     <CarouselItem
       onExiting={this.onExiting}
@@ -86,10 +107,9 @@ const slides = items.map((item) => {
 });
 
       return (
+
 <React.Fragment>
-        
-
-
+      
 
   <div id="top" className="header">
     <div className="vert-text">
@@ -111,7 +131,23 @@ const slides = items.map((item) => {
         </button>
      
   <Navbar >
-    <div className="collapse navbar-collapse" id="mobilemenu">
+<NavbarBrand href = "/"> Сайт знайомств </NavbarBrand>
+<NavbarToggler aria-controls = "basic-navbar-nav"/>
+<Collapse id = "basic-navbar-nav">
+  <Nav  className = "mr-auto" >
+    
+  <NavLink href = "/"> <i className="fa fa-home"></i> Головна</NavLink>
+    
+    <NavLink href = "/"> <i className="fa fa-info"></i> Про нас</NavLink>
+    
+<NavLink href = "/"> <i className="fa fa-laptop"></i> Services</NavLink>
+    
+<NavLink href = "/"> <i className="fa fa-camera"></i> Портфоліо</NavLink>
+    <NavLink href = "/"> <i className="fa fa-envelope"></i> Contact</NavLink>
+    
+</Nav>
+</Collapse>
+    {/* <div className="collapse navbar-collapse" id="mobilemenu">
   
       <ul className="nav navbar-nav navbar-right text-center">
         <li><a href="# " ><i className="fa fa-home"></i> Home</a></li>
@@ -120,7 +156,7 @@ const slides = items.map((item) => {
         <li><a href="# " ><i className="fa fa-camera"></i> Portfolio</a></li>
         <li><a href="# " ><i className="fa fa-envelope"></i> Contact</a></li>
       </ul>
-    </div>
+    </div> */}
 
     </Navbar>
     </div>
@@ -148,22 +184,22 @@ const slides = items.map((item) => {
           </div>
           <div className="row">
             <div className="col-md-4 text-center">
-              <div className="service-item">
-                <i className="service-icon fa fa-camera-retro fa-3x"></i>
+              <div >
+                <i className="fa fa-camera-retro fa-3x"></i>
                 <h3>Portrait</h3>
                 <p>Ad has dicat ridens consetetur, eos eu option persius. Mollis cotidieque conclusionemque per id, ne nam alienum liberavisse. </p>
               </div>
             </div>
             <div className="col-md-4 text-center">
               <div className="service-item">
-        <i className="service-icon fa fa-camera fa-3x"></i>
+        <i className="fa fa-camera fa-3x"></i>
                 <h3>Black & white</h3>
                 <p>In mea similique vulputate, ea cum amet malorum dissentiunt. Qui deleniti aliquando cu, ullum soluta his an, id inani salutatus sit.</p>
               </div>
             </div>
             <div className="col-md-4 text-center">
-              <div className="service-item">
-                <i className="service-icon fa fa-globe fa-3x"></i>
+              <div >
+                <i className=" fa fa-globe fa-3x"></i>
                 <h3>Web Design</h3>
                 <p>Ad has dicat ridens consetetur, eos eu option persius. Mollis cotidieque conclusionemque per id, ne nam alienum liberavisse.</p>
               </div>
@@ -176,12 +212,7 @@ const slides = items.map((item) => {
       <div className="row push50">
             <div className="col-md-4 col-md-offset-4 text-center">
               <h2>Our Work</h2>
-        <h3>
-        <span className="filter label label-default" data-filter="all">ALL</span>
-    <span className="filter label label-default" data-filter="bw">B&amp;W</span>
-    <span className="filter label label-default" data-filter="nature">Nature</span>
-    <span className="filter label label-default" data-filter="portraits">Portraits</span>
-    </h3>
+       
               <hr/>
             </div>
           </div>
@@ -376,51 +407,8 @@ const slides = items.map((item) => {
         </div>
       </div>
         </div>
-       <div id="contact">
-        <div className="container">
-          <div className="row">
-      <div className="col-md-4 col-md-offset-4 text-center">
-              <h2>Contact Us</h2>
-        <hr/>
-            </div>
-            <div className="col-md-5 col-md-offset-3">
-              <form action="contact" id="contact-form" className="form-horizontal">
-        <fieldset>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="name">Your Name</label>
-                    <div className="col-sm-8">
-                      <input type="text"  placeholder="Your Name" className="form-control" name="name" id="name"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="email">Email Address</label>
-                    <div className="col-sm-8">
-                      <input type="text" placeholder="Enter Your Email Address" className="form-control" name="email" id="email"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="subject">Subject</label>
-                    <div className="col-sm-8">
-                      <input type="text" placeholder="Subject" className="form-control" name="subject" id="subject"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="message">Your Message</label>
-                    <div className="col-sm-8">
-                      <textarea placeholder="Please Type Your Message" className="form-control" name="message" id="message" rows="3"></textarea>
-                    </div>
-                  </div>
-                  <div className="col-sm-offset-4 col-sm-8">
-                    <button type="submit" className="btn btn-success">Submit</button>
-                    <button type="reset" className="btn btn-primary">Cancel</button>
-                  </div>
-              </fieldset>
-              </form>
-          
-            </div>
-          </div>
-        </div>
-      </div>
+      
+         
        <footer>
         <div className="container">
           <div className="row">
