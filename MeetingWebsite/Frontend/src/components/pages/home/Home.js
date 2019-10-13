@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row } from 'reactstrap';
+import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
+// import './css/bootstrap.css';
+// import './css/slidefolio.css';
+// import './font-awesome/css';
+// import './font-awesome/fonts';
+
 // import img1 from 'http://pngimg.com/uploads/alien/alien_PNG27.png';
 const items = [
 {
@@ -90,54 +95,40 @@ const slides = items.map((item) => {
 
 
 
-        <div id="top" className="header">
-        <div className="vert-text">
-      <img className="img-rounded" alt="Company Logo" src="./img/logo.jpg"/>
-          <h2><em>Company Name</em></h2>
-       <ul className="list-inline">
-                <li className="fa fa-facebook fa-3x"></li>
-                <li className="fa fa-twitter fa-3x"></li>
-                <li className="fa fa-google-plus fa-3x"></li>
-                <li className="fa fa-linkedin fa-3x"></li>
-                <li className="fa fa-pinterest fa-3x"></li>
-        </ul>	
-        <br />
-        <a href="#about" className="btn btn-top">Learn More</a>
-        </div>
-      </div>
-  
-{/* <Navbar>
+  <div id="top" className="header">
+    <div className="vert-text">
+      <br />
+      
 
-
-
-
-</Navbar> */}
-
-  
-      <div id="nav">
-
-
-       <nav className="navbar navbar-new" role="navigation">
-     <div className="container">
-    <div className="navbar-header">
-      <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#mobilemenu">
-        <span className="sr-only">Toggle navigation</span>
-        <span className="mr-2"></span>
-        <span className="mr-2"></span>
-        <span className="mr-2"></span>
-      </button>
-    <a href="#" className="navbar-brand">Slidefolio</a>
     </div>
+  </div>
+  
+  <div id="nav">
+    <nav className="navbar navbar-new" role="navigation">
+     <div className="container">
+      <div className="navbar-header">
+        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#mobilemenu">
+          <span className="sr-only">Toggle navigation</span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+        </button>
+     
+  <Navbar >
     <div className="collapse navbar-collapse" id="mobilemenu">
   
-      <ul className="mr-auto">
-        <li><a href="#top"><i className="fa fa-home"></i>&nbsp;Home</a></li>
-          <li><a href="#about"><i className="fa fa-info"></i>&nbsp;About</a></li>
-          <li><a href="#services"><i className="fa fa-laptop"></i>&nbsp;Services</a></li>
-          <li><a href="#portfolio"><i className="fa fa-camera"></i>&nbsp;Portfolio</a></li>
-          <li><a href="#contact"><i className="fa fa-envelope"></i>&nbsp;Contact</a></li>
+      <ul className="nav navbar-nav navbar-right text-center">
+        <li><a href="# " ><i className="fa fa-home"></i> Home</a></li>
+        <li><a href="# " ><i className="fa fa-info"></i> About</a></li>
+        <li><a href="# " ><i className="fa fa-laptop"></i> Services</a></li>
+        <li><a href="# " ><i className="fa fa-camera"></i> Portfolio</a></li>
+        <li><a href="# " ><i className="fa fa-envelope"></i> Contact</a></li>
       </ul>
     </div>
+
+    </Navbar>
+    </div>
+    
     </div>
   </nav>
   </div>	
