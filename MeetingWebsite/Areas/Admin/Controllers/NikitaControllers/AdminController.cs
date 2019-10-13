@@ -23,7 +23,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("users")]
         public ActionResult GetUserTable([FromBody] UserTableFilters filter)
         {
-            var models = _context.UserProfile.AsQueryable();
+            var models = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
             UserTableModels utms = new UserTableModels();
             utms.Users = new List<UserTableModel>();
             foreach (var item in models)
@@ -40,9 +40,9 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
            return Ok(utms.Users);
         }
         [HttpPost("ban-list")]
-        public ActionResult GetBanTable([FromBody] UserTableFilters filter)//доробити контролер
+        public ActionResult GetBanTable([FromBody] UserTableFilters filter)
         {
-            var models = _context.UserAccessLocks.AsQueryable();
+            var models = _context.UserAccessLocks.Select(a=>a).Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month).AsQueryable();
             BanTableModels btms = new BanTableModels();
             btms.Bans = new List<BanTableModel>();
             foreach (var item in models)
@@ -65,7 +65,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             List<int> monthes = new List<int>();
             for (int i = 0; i < 12; i++)
             {
-                monthes.Add(models.Select(a => a).Where(a => a.DateOfBirth.Month == i).Count());
+                monthes.Add(models.Select(a => a).Where(a => a.DateOfBirth.Month == i&& a.DateOfBirth.Year==filter.Year).Count());
             }
             return Ok(monthes);
         }

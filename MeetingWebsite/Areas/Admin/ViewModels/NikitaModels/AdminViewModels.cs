@@ -38,13 +38,14 @@ namespace MeetingWebsite.Areas.Account.ViewModels
 
     public class UserTableFilters
     {
-        public string Date { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
         public string NickName { get; set; }
         public int CurrentPage { get; set; }
     }
     public class RegistrySheduleFilters
     {
-        public string Year { get; set; }
+        public int Year { get; set; }
     }
 
 }

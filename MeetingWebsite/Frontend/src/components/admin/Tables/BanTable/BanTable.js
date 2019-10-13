@@ -20,15 +20,25 @@ import {
 
 const optionsMonth = [
   
-  { value: '01', label: 'Січень' },
-  { value: '04', label: 'Квітень' },
+  { value: '1', label: 'Січень' },
+  { value: '2', label: 'Лютень' },
+  { value: '3', label: 'Березень' },
+  { value: '4', label: 'Квітень' },
+  { value: '5', label: 'Травень' },
+  { value: '6', label: 'Червень' },
+  { value: '7', label: 'Липень' },
+  { value: '8', label: 'Серпень' },
+  { value: '9', label: 'Вересень' },
+  { value: '10', label: 'Жовтень' },
+  { value: '11', label: 'Листопад' },
+  { value: '12', label: 'Грудень' }
 ];
 
 const optionsYear = [
+  { value: '2018', label: '2018р' },
   { value: '2019', label: '2019р' },
   { value: '2020', label: '2020р' },
 ];
-
 
 
 class Tables extends React.Component {

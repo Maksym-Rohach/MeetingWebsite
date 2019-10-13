@@ -71,8 +71,8 @@ let chart1_2_options = {
 };
 
 
-
 const optionsYear = [
+  { value: '2018', label: '2018р' },
   { value: '2019', label: '2019р' },
   { value: '2020', label: '2020р' },
 ];
