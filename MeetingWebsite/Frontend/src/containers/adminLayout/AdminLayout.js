@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "./AdminNavBar";
 import AdminSideBar from "./AdminSideBar";
+import { Container, Row } from 'reactstrap';
 
 import routes from "../../routes/AdminRoutes/AdminRoutes";
 
@@ -87,7 +88,7 @@ class AdminLayout extends React.Component {
   };
   render() {
     return (
-      <>
+      <>      
         <div className="wrapper">
           <AdminSideBar
             {...this.props}

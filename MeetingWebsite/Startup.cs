@@ -19,7 +19,7 @@ using System.Text;
 namespace MeetingWebsite
 {
     public class Startup
-    {
+    {  
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -96,7 +96,7 @@ namespace MeetingWebsite
             app.UseSpaStaticFiles();
             app.UseSession();
 
-           // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+          //  SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
             app.UseMvc(routes =>
             {

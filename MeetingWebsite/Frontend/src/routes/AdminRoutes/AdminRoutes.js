@@ -6,7 +6,8 @@ import VipTable from "../../components/admin/Tables/VipTable/VipTable"
 import BanTable from "../../components/admin/Tables/BanTable/BanTable"
 import MuteTable from "../../components/admin/Tables/MuteTable/MuteTable"
 import ActivityDashboard from "../../components/admin/Schedule/ActivitySchedule"
-import RegistryDashboard from "../../components/admin/Schedule/RegistrySchedule"
+import RegistryDashboard from "../../components/admin/Schedule/RegistryShedule/RegistrySchedule"
+import Complaints from "../../components/admin/Complaints/Complaints"
 
 
 var routes = [
@@ -68,5 +69,13 @@ var routes = [
     component: MuteTable,
     layout: "/admin"
   },
+  {
+    path: "/complaints",
+    name: "Скарги",
+    rtlName: "الرموز",
+    icon: "tim-icons icon-key-25",
+    component: Complaints,
+    layout: "/admin"
+  }
 ];
 export default routes;
