@@ -23,6 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191013212219_argon.cs" />
+    <Compile Remove="Migrations\20191013212219_argon.Designer.cs" />
+    <Compile Remove="Migrations\20191014122511_nz.cs" />
+    <Compile Remove="Migrations\20191014122511_nz.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\ViewModels\" />

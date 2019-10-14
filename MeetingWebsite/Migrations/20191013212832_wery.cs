@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MeetingWebsite.Migrations
 {
-    public partial class GoodDB : Migration
+    public partial class wery : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -260,7 +260,8 @@ namespace MeetingWebsite.Migrations
                     Description = table.Column<string>(maxLength: 256, nullable: true),
                     CityId = table.Column<int>(nullable: false),
                     GenderId = table.Column<int>(nullable: false),
-                    ZodiacId = table.Column<int>(nullable: false)
+                    ZodiacId = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

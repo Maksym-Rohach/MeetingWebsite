@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.Areas.Default.Home.ViewModels
 {
-  
-
-        public class HomeViewModels
+       public class HomeViewModels
         {
-            public int ZodiacId { get; set; }
-            public int Age { get; set; }
-            public string Status { get; set; }
             public int CityId { get; set; }
             public int CurrentPage { get; set; }
-            public int GenderId { get; set; }
         }
 
         public class GetHomeUserModel
@@ -26,12 +20,11 @@ namespace MeetingWebsite.Areas.Default.Home.ViewModels
             public string City { get; set; }
             public string Status { get; set; }
         }
-
-        public class GetListHomeUserModel
+        public class GetListHomeModel
         {
-            public List<GetHomeUserModel> GetListBoys { get; set; }
+            public List<GetHomeUserModel> GetHomeUserModel { get; set; }
             public int TotalCount { get; set; }
             public int CurrentPage { get; set; }
         }
-    }
+}
 

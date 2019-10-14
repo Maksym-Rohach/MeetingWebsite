@@ -17,78 +17,49 @@ using MeetingWebsite.Areas.Default.Home.ViewModels;
 namespace MeetingWebsite.Areas.Default.Home.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
-
-    public class HomeController : ControllerBase
+    [Route("api/admin/[controller]")]
+    public class TemplateController : ControllerBase
     {
         private readonly EFDbContext _context;
         private readonly UserManager<DbUser> _userManager;
         private readonly SignInManager<DbUser> _signInManager;
-        private readonly IConfiguration _configuration;
-        //private readonly IFileService _fileService;       
+        private object filter;
 
-        public HomeController(EFDbContext context,
-           UserManager<DbUser> userManager,
-           SignInManager<DbUser> signInManager,
-           IConfiguration configuration
-        //IFileService fileService,      
-        )
+        public TemplateController(EFDbContext context,
+         UserManager<DbUser> userManager,
+         SignInManager<DbUser> signInManager)
 
         {
             _userManager = userManager;
             _context = context;
             _signInManager = signInManager;
-            _configuration = configuration;
-            //_fileService = fileService;
         }
-        [HttpPost("home_user")]
-        public async Task<IActionResult> Users([FromBody]HomeViewModels filter)//model
+
+        [HttpPost("random")]
+        public IActionResult Index()
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = CustomValidator.GetErrorsByModel(ModelState);
-                return BadRequest(errors);
-            }
 
-            var GenderId = _context.Gender.Where(x => x.Type == "Man").SingleOrDefault();
-
-            GetListHomeUserModel result = new GetListHomeUserModel();
-            result.CurrentPage = filter.CurrentPage;
+            GetListHomeModel result = new GetListHomeModel();
             var query = _context.UserProfile.AsQueryable();
 
-            if (filter.CityId > 0)
-            {
-                query = query.Where(x => x.CityId == filter.CityId);
-            }
+            List <GetHomeUserModel> users = new List<GetHomeUserModel>();
 
-            if (filter.ZodiacId > 0)
-            {
-                query = query.Where(x => x.ZodiacId == filter.ZodiacId);
-            }
-
-            List<GetHomeUserModel> users = new List<GetHomeUserModel>();
             result.TotalCount = query.Count();
+
             users = query
-                    .Include(c => c.City)
-                    .OrderBy(u => u.Id)
-                    .Skip((filter.CurrentPage - 1) * 10)
-                    .Take(10)
-                    .Select(u => new GetHomeUserModel
-                    {
-
+                .OrderBy(u => Guid.NewGuid())
+                .Select(u => new GetHomeUserModel
+                {
+                       Avatar = u.Avatar,
+                       Name = u.NickName,
                         City = u.City.Name,
-                        Status = "Status",
-                        Age = 18,
-                        Name = u.NickName,
-                        Avatar = u.Avatar
+                        Status = "Status"
+                })
+                .ToList();
 
-                    })
-                        .ToList();
-
-            //result.GetListBoys = boys;
+            result.GetHomeUserModel = users;
 
             return Ok(result);
         }
-
     }
 }
