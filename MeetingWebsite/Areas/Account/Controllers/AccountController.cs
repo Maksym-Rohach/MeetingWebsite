@@ -60,7 +60,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
             }
 
-            var result = _signInManager
+            var result =  _signInManager
                 .PasswordSignInAsync(user, model.Password, false, false).Result;
 
             if (!result.Succeeded)
