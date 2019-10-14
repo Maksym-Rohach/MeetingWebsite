@@ -8,6 +8,9 @@ import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
 import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
+import {registerReducer} from '../components/pages/register/reducer';
+
+
 
 export default function configureStore (history, initialState) {
     const reducers = {

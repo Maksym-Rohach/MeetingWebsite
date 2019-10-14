@@ -51,13 +51,13 @@ class Register extends Component {
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="fas fa-birthday-cake"></i>
+                            <i className="fas fa-birthday-cake mr-3"></i>
                           </InputGroupText>
                         </InputGroupAddon>
 
                         <DatePicker
-          onChange={this.onChange}
           value={this.state.date}
+          onChange={this.onChange}
         />
 
                         {/* <Input type="date" placeholder="Дата народження" autoComplete="on" /> */}
