@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20191010140554_Good DB")]
-    partial class GoodDB
+    [Migration("20191010153509_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

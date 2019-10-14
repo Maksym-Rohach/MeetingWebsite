@@ -34,6 +34,7 @@ class Tables extends React.Component {
     const { listAdmins, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
+    let counter = 1;
     return (
       <>
        <div className="content">
@@ -52,17 +53,18 @@ class Tables extends React.Component {
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
+                      <th>#</th>
                       <th>Нікнейм</th>
-                      <th>ID</th>
+                      {/* <th>ID</th> */}
                       </tr>
                     </thead>
                     <tbody className="align-items-center">
                     {
                         listAdmins.map(item => {
                           return (<tr key={item.id}>
-                            
+                            <td>{counter++}</td>
                             <td>{item.name}</td>
-                            <td>{item.id}</td>
+                            {/* <td>{item.id}</td> */}
                           </tr>
                           )
                         })

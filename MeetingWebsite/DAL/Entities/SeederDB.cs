@@ -60,7 +60,30 @@ namespace MeetingWebsite.DAL.Entities
                 context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
                 result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
-            };
+            };    // Адмін-юзер
+            if (userManager.FindByEmailAsync("kaida.nikita@gmail.com").Result == null)
+            {
+                string email = "kaida.nikita@gmail.com";
+                string roleName = "Admin";
+
+                var adminProfile = new AdminProfile
+                {
+                    Name = "Нікіта",
+                    // DateOfBirth = DateTime.Now,
+
+                    User = new DbUser
+                    {
+                        Email = email,
+                        UserName = email,
+                        PhoneNumber = "+38(099)888-77-66"
+                    }
+                };
+
+                var result = userManager.CreateAsync(adminProfile.User, "Qwerty1+").Result;
+                context.AdminProfiles.Add(adminProfile);
+                context.SaveChanges();
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
+            };   // Адмін-юзер
 
             if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
             {
