@@ -7,6 +7,7 @@ namespace MeetingWebsite.Areas.User.ViewModels.ArtemModels
 {
     public class GetUserProfileModel
     {
+        public string Id { get; set; }
         public string Email { get; set; }
     }
 }

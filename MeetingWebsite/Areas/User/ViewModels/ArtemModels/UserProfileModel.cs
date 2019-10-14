@@ -7,6 +7,7 @@ namespace MeetingWebsite.Areas.User.ViewModels
 {
     public class UserProfileModel
     {
+        public string Id { get; set; }
         public string NickName { get; set; }
         public string Description { get; set; }
         public int Age { get; set; }

@@ -23,7 +23,7 @@ namespace MeetingWebsite.Controllers.ArtemControl
         }
         
         [HttpPost("getprofile")]
-        public IActionResult GetUserProfile(GetUserProfileModel model)
+        public IActionResult GetUserProfile([FromBody]GetUserProfileModel model)
         {
             var tmp = _context.UserProfile.Where(a => a.User.Email == model.Email).SingleOrDefault();
             //if (tmp == null)
@@ -37,23 +37,23 @@ namespace MeetingWebsite.Controllers.ArtemControl
                 {
                     NickName = tmp.NickName,
                     Age = (birthDate > DateTime.Now.AddYears(-age)) ? age-- : age,
-                    City = tmp.City.Name,
-                    Gender = tmp.Gender.Type,
-                    Zodiac = tmp.Zodiac.Name,
+                    City = _context.City.Where(a=>a.Id == tmp.CityId).SingleOrDefault().Name,
+                    Gender = _context.Gender.Where(a => a.Id == tmp.GenderId).SingleOrDefault().Type,
+                    Zodiac = _context.Zodiac.Where(a => a.Id == tmp.ZodiacId).SingleOrDefault().Name,
                     Description = tmp.Description
                 }
                 );
         }
         [HttpPost("setprofile")]
 
-        public void SetUserProfile(string Id, UserProfileModel model)
+        public void SetUserProfile([FromBody]UserProfileModel model)
         {
-            var tmp = _context.UserProfile.Where(a => a.User.Id == Id).SingleOrDefault();
+            var tmp = _context.UserProfile.Where(a => a.User.Id == model.Id).SingleOrDefault();
             tmp.NickName = model.NickName;
-            tmp.City = _context.City.Where(a=> a.Name == model.City).SingleOrDefault();
-            tmp.Gender = _context.Gender.Where(a => a.Type == model.Gender).SingleOrDefault();
-            tmp.Zodiac = _context.Zodiac.Where(a => a.Name == model.Zodiac).SingleOrDefault();
+            tmp.CityId = _context.City.Where(a=> a.Name == model.City).SingleOrDefault().Id;
+            tmp.GenderId = _context.Gender.Where(a => a.Type == model.Gender).SingleOrDefault().Id;
             tmp.Description = model.Description;
+            _context.SaveChanges();
         }
 
     }
