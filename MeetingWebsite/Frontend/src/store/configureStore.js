@@ -5,11 +5,15 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { loginReducer} from "../components/pages/login/reducer";
 import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
+import {registerReducer} from '../components/pages/register/reducer';
+
+
 
 export default function configureStore (history, initialState) {
     const reducers = {
       login: loginReducer,
-      refreshToken: refreshReducer
+      refreshToken: refreshReducer,
+      register:registerReducer
     };
 
     const middleware = [

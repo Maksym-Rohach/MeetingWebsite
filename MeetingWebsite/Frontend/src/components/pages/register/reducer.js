@@ -1,10 +1,10 @@
 import update from '../../../helpers/update';
-import LoginService from './LoginService';
 import isEmpty from 'lodash/isEmpty';
 import setAuthorizationToken from '../../../utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 import redirectStatusCode from '../../../services/redirectStatusCode';
 import history from '../../../utils/history';
+import RegisterService from './RegisterService'
 
 export const REGISTER_POST_STARTED = "REGISTER_POST_STARTED";
 export const REGISTER_POST_SUCESS = "REGISTER_POST_SUCESS";
@@ -47,7 +47,7 @@ export const registerReducer = (state = initialState, action) => {
               user: action.user
           };
       }
-      case REGISTER_POST_SUCCESS: {
+      case REGISTER_POST_SUCESS: {
           newState = update.set(state, 'post.loading', false);
           newState = update.set(newState, 'post.failed', false);
           newState = update.set(newState, 'post.errors', {});
@@ -72,7 +72,7 @@ export const registerReducer = (state = initialState, action) => {
 export const register = (model) => {
   return (dispatch) => {
       dispatch(registerActions.started());
-      REGISTERService.register(model)
+      RegisterService.register(model)
           .then((response) => {
               dispatch(registerActions.success());
               loginByJWT(response.data, dispatch);
@@ -128,7 +128,7 @@ export const registerActions = {
 
   success: () => {
       return {
-          type: REGISTER_POST_SUCCESS
+          type: REGISTER_POST_SUCESS
       }
   },
 

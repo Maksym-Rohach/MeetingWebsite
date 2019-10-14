@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using MeetingWebsite.Helpers;
 using MeetingWebsite.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace MeetingWebsite.Areas.Account.Controllers
 {
@@ -106,12 +107,12 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             var newuser = new UserProfile()
             {
-
+                //DateOfRegister = DateTime.Now,
                 NickName = model.NickName,
-                DateOfBirth =Convert.ToDateTime(model.DateOfBirth),
-                
+                //DateOfBirth =Convert.ToDateTime(model.DateOfBirth),
+                DateOfBirth = DateTime.ParseExact(model.DateOfBirth, "dd.MM.yyyy", CultureInfo.InvariantCulture),
 
-            };
+        };
 
             var user1 = new Gender()
             {
@@ -122,6 +123,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             var user2 = new DbUser()
             {
+
                 UserName = model.Email,
                 Email = model.Email,
                // UserProfile = newuser

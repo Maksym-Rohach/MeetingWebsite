@@ -51,7 +51,7 @@ class Register extends Component {
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="fas fa-birthday-cake"></i>
+                            <i className="fas fa-birthday-cake mr-3"></i>
                           </InputGroupText>
                         </InputGroupAddon>
 
