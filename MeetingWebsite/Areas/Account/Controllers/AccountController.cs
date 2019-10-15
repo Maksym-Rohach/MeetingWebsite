@@ -104,30 +104,144 @@ namespace MeetingWebsite.Areas.Account.Controllers
              
             }
 
+            var str = "";
+
+
+
+            DateTime model_date = DateTime.Parse(model.DateOfBirth);
+            if (model_date.Month>=2 && model_date.Day >=21)         //дописать по числам
+            {   str = "Овен";
+            }
+            else if (model_date.Month <= 3 && model_date.Day <= 20)         
+            {
+                str = "Овен";
+            }
+           else if (model_date.Month >= 3 && model_date.Day >= 21)         
+            {
+                str = "Телець";
+            }
+            else if (model_date.Month <= 4 && model_date.Day <= 21)
+            {
+                str = "Телець";
+            }
+            else if (model_date.Month >= 4 && model_date.Day >= 22)         
+            {
+                str = "Близнята";
+            }
+            else if (model_date.Month <= 5 && model_date.Day <= 21)
+            {
+                str = "Близнята";
+            }
+            else if (model_date.Month >= 5 && model_date.Day >= 22)
+            {
+                str = "Рак";
+            }
+            else if (model_date.Month <= 6 && model_date.Day <= 22)
+            {
+                str = "Рак";
+            }
+            else if (model_date.Month >= 6 && model_date.Day >= 23)
+            {
+                str = "Лев";
+            }
+            else if (model_date.Month <= 7 && model_date.Day <= 23)
+            {
+                str = "Лев";
+            }
+            else if (model_date.Month >= 7 && model_date.Day >= 24)
+            {
+                str = "Діва";
+            }
+            else if (model_date.Month <= 8 && model_date.Day <= 22)
+            {
+                str = "Діва";
+            }
+            else if (model_date.Month >= 8 && model_date.Day >= 23)
+            {
+                str = "Терези";
+            }
+            else if (model_date.Month <= 9 && model_date.Day <= 23)
+            {
+                str = "Терези";
+            }
+            else if (model_date.Month >= 9 && model_date.Day >= 24)
+            {
+                str = "Скорпіон";
+            }
+            else if (model_date.Month <= 10 && model_date.Day <= 22)
+            {
+                str = "Скорпіон";
+            }
+            else if (model_date.Month >= 10 && model_date.Day >= 23)
+            {
+                str = "Стрілець";
+            }
+            else if (model_date.Month <= 11 && model_date.Day <= 21)
+            {
+                str = "Стрілець";
+            }
+            else if (model_date.Month >= 11 && model_date.Day >= 22)
+            {
+                str = "Козоріг";
+            }
+            else if (model_date.Month <= 0 && model_date.Day <= 20)
+            {
+                str = "Козоріг";
+            }
+            else if (model_date.Month >= 0 && model_date.Day >= 21)
+            {
+                str = "Водолій";
+            }
+            else if (model_date.Month <= 1 && model_date.Day <= 20)
+            {
+                str = "Водолій";
+            }
+            else if (model_date.Month >= 1 && model_date.Day >= 21)
+            {
+                str = "Риби";
+            }
+            else if (model_date.Month <= 2 && model_date.Day <= 20)
+            {
+                str = "Риби";
+            }
+
+
+
+
+
+
+
+            var zodiacid = _context.Zodiac.FirstOrDefault(z => z.Name == str);
+
 
             var newuser = new UserProfile()
             {
-                //DateOfRegister = DateTime.Now,
+                DateOfRegister = DateTime.Now,
                 NickName = model.NickName,
                 //DateOfBirth =Convert.ToDateTime(model.DateOfBirth),
                 DateOfBirth = DateTime.ParseExact(model.DateOfBirth, "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                //User=new DbUser(),
+                //ZodiacId=zodiacid,
+                //CityId=
 
-        };
+            };
 
-            var user1 = new Gender()
+            var gender = new Gender()
             {
                 Type = model.Gender,
 
             };
 
 
-            var user2 = new DbUser()
+             user = new DbUser()
             {
 
                 UserName = model.Email,
                 Email = model.Email,
-               // UserProfile = newuser
+                //User = model.User,
             };
+
+
 
 
             var roleName = "User";
