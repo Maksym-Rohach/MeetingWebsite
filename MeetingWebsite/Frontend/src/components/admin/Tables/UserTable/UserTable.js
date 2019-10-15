@@ -77,9 +77,15 @@ class Tables extends React.Component {
     this.props.getUsersData({ year,month,nickname});
   }
 
-  Ban=(user)=>
+  Click(e)
   {
-    
+    e.preventDefault();
+    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    this.props.getUsersData({tmp_year,tmp_month,tmp_NickName})
+  }
+  PostFilters = (e) => {
+    console.log("EEEEEEEE",e);
+    this.setState({tmp_NickName:e})
   }
 
   render() {
@@ -113,7 +119,13 @@ class Tables extends React.Component {
                     </Col>
                     <Col className="col-md-2">
                       <Input
+                        onChange={(e) => this.PostFilters(`${e.target.value}`)}
                         placeholder="Нік"/>
+                    </Col>
+                    <Col className="col-md-2">
+                       <Button onClick={(e)=>this.Click(e)} color='info'>
+                        Відправити фільтри
+                      </Button>
                     </Col>
                   </Row>                 
                 </CardHeader>
