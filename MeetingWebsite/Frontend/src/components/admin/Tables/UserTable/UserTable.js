@@ -77,7 +77,7 @@ class Tables extends React.Component {
     this.props.getUsersData({ year,month,nickname});
   }
 
-  Click(e)
+  Click(e)//проблема тут або на бекенді!!!
   {
     e.preventDefault();
     const { tmp_year,tmp_month,tmp_NickName } = this.state;
