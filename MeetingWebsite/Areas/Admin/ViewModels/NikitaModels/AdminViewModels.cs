@@ -10,7 +10,7 @@ namespace MeetingWebsite.Areas.Account.ViewModels
     {
         public string Id { get; set; }
         public string Nickname { get; set; }
-        public DateTime Registrdate { get; set; }
+        public string Registrdate { get; set; }
         public string City { get; set; }
         public string Status { get; set; }
     }
@@ -19,18 +19,33 @@ namespace MeetingWebsite.Areas.Account.ViewModels
     {
         public List<UserTableModel> Users { get; set; }
     }
-    public class AdminTableModel
-    {
-        public string Nickname { get; set; }
-        public string Status { get; set; }
 
+    public class BanTableModel
+    {
+        public string Id { get; set; }
+        public string Nickname { get; set; }
+        public string Bandate { get; set; }
+        public string Description { get; set; }
+        public string Status { get; set; }
     }
+
+    public class BanTableModels
+    {
+        public List<BanTableModel> Bans { get; set; }
+    }
+
+
 
     public class UserTableFilters
     {
-        public string Date { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
         public string NickName { get; set; }
         public int CurrentPage { get; set; }
     }
-    
+    public class RegistrySheduleFilters
+    {
+        public int Year { get; set; }
+    }
+
 }
