@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿
+  
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
@@ -35,40 +37,18 @@ namespace MeetingWebsite.DAL.Entities
             }
         }
 
-        public static void GetRandomUserProfile(int num, UserManager<DbUser> userManager, EFDbContext context)
+        public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            Random rnd = new Random();
-            UserProfile up = new UserProfile();
-            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс" };
-            string email = "helloworld"+num+"@gmail.com";
-            DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
-            int genderid = num % 2 == 0 ? 1 : 2;
-            int cityid = 20;
-            int zodiacid = 5;
-            string avatar = "";
-            string roleName = "User";
 
-            DbUser user = new DbUser() { Email = email, UserName = email, PhoneNumber = "+22(222)222-22-22" };
-
-            up.Avatar = avatar;
-            up.CityId = cityid;
-            up.DateOfBirth = DateOfBirth;
-            up.DateOfRegister = DateOfBirth;
-            up.GenderId = genderid;
-            up.NickName = nicknames[rnd.Next(0, 19)]+num;//18
-            up.ZodiacId = zodiacid;
-            up.User = user;
-
-            var result = userManager.CreateAsync(up.User, "Qwerty1-").Result;
-            context.UserProfile.Add(up);
-            context.SaveChanges();
-            result = userManager.AddToRoleAsync(up.User, roleName).Result;
-        }
+            if (userManager.FindByEmailAsync("kunderenko2@gmail.com").Result == null)
+            {
+                string email = "kunderenko2@gmail.com";
+                string roleName = "Admin";
 
                 var adminProfile = new AdminProfile
                 {
                     Name = "Альоша",
-                   // DateOfBirth = DateTime.Now,
+                    // DateOfBirth = DateTime.Now,
 
                     User = new DbUser
                     {
@@ -82,7 +62,8 @@ namespace MeetingWebsite.DAL.Entities
                 context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
                 result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
-            };    // Адмін-юзер
+            };   
+            // Адмін-юзер
             if (userManager.FindByEmailAsync("kaida.nikita@gmail.com").Result == null)
             {
                 string email = "kaida.nikita@gmail.com";
@@ -193,7 +174,7 @@ namespace MeetingWebsite.DAL.Entities
 
             var count = context.City.Count();
 
-            if(count==0)
+            if (count == 0)
             {
                 foreach (var item in cities)
                 {
@@ -202,21 +183,21 @@ namespace MeetingWebsite.DAL.Entities
                         Name = item
                     });
                     context.SaveChanges();
-                }             
-            }           
+                }
+            }
         }
 
         public static void SeedGenders(UserManager<DbUser> userManager, EFDbContext context)
         {
             var count = context.Gender.Count();
-            if(count==0)
+            if (count == 0)
             {
                 var gender1 = new Gender()
-                {                 
+                {
                     Type = "Man"
                 };
                 var gender2 = new Gender()
-                {                
+                {
                     Type = "Woman"
                 };
                 context.Gender.AddRange(new List<Gender>
@@ -236,7 +217,7 @@ namespace MeetingWebsite.DAL.Entities
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EFDbContext>();
                 //var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
-                SeederDB.SeedRoles(manager, managerRole);                
+                SeederDB.SeedRoles(manager, managerRole);
                 SeederDB.SeedGenders(manager, context);
                 SeederDB.SeedCities(manager, context);
                 SeederDB.SeedZodiacs(manager, context);
