@@ -77,10 +77,11 @@ class Tables extends React.Component {
     this.props.getUsersData({ year,month,nickname});
   }
 
-  Click(e)//проблема тут або на бекенді!!!
+  Click(e)//проблема тут!!!
   {
     e.preventDefault();
     const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    console.log("CLICK__________________________________",tmp_year,tmp_month,tmp_NickName);
     this.props.getUsersData({tmp_year,tmp_month,tmp_NickName})
   }
   PostFilters = (e) => {
