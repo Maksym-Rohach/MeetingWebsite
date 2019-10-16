@@ -1,35 +1,38 @@
-﻿import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import * as Counter from './Counter';
-import * as WeatherForecasts from './WeatherForecasts';
 
-export default function configureStore(history, initialState) {
-  const reducers = {
-    counter: Counter.reducer,
-    weatherForecasts: WeatherForecasts.reducer
-  };
+import { loginReducer} from "../components/pages/login/reducer";
+import { refreshReducer } from '../components/refreshToken/reducer';
+import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
+import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
 
-  const middleware = [
-    thunk,
-    routerMiddleware(history)
-  ];
+export default function configureStore (history, initialState) {
+    const reducers = {
+      login: loginReducer,
+      refreshToken: refreshReducer,
+      userTable: userTableReducer
+    };
 
-  // In development, use the browser's Redux dev tools extension if installed
-  const enhancers = [];
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  if (isDevelopment && typeof window !== 'undefined' && window.devToolsExtension) {
-    enhancers.push(window.devToolsExtension());
+    const middleware = [
+      thunk,
+      routerMiddleware(history)
+    ];
+
+    const enhancers = [];
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    if (isDevelopment && typeof window !== 'undefined' && window.devToolsExtension) {
+      enhancers.push(window.devToolsExtension());
+    }
+
+    const rootReducer = combineReducers({
+      ...reducers,
+      routing: routerReducer
+    });
+
+    return createStore(
+      rootReducer,
+      initialState,
+      compose(applyMiddleware(...middleware), ...enhancers)
+    );
   }
-
-  const rootReducer = combineReducers({
-    ...reducers,
-    routing: routerReducer
-  });
-
-  return createStore(
-    rootReducer,
-    initialState,
-    compose(applyMiddleware(...middleware), ...enhancers)
-  );
-}
