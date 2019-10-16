@@ -33,7 +33,7 @@ class Tables extends React.Component {
   render() {
     return (
       <>
-       <div className="content">
+      <div className="content">
           <Row>
             <Col md="12">
               <Card>
@@ -45,7 +45,6 @@ class Tables extends React.Component {
                     <thead className="text-primary">
                       <tr>
                         <th>Нікнейм</th>
-                        {/* <th>Країна</th> */}
                         <th>Дата реєстрації</th>
                         <th>Місто</th>
                         <th>Статус</th>
