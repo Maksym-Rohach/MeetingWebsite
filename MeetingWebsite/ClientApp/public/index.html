@@ -1,16 +1,37 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!--
+/*!
+
+=========================================================
+* Black Dashboard React v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard-react
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+-->
+<!DOCTYPE html>
+<html lang="en" class="perfect-scrollbar-off">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    <base href="%PUBLIC_URL%/" />
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="icon" sizes="76x76" type="image/png" href="%PUBLIC_URL%/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/apple-icon.png">
+    <base href="%PUBLIC_URL%/" />
+    <script src="https://kit.fontawesome.com/279e8c03ce.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -20,7 +41,68 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <title>MeetingWebsite</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-scrolltofixed-min.js"></script>
+    <script src="js/jquery.vegas.js"></script>
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/bootstrap.js"></script>
+    
+  <!-- Slideshow Background  -->
+    <script>
+  $.vegas('slideshow', {
+    delay:5000,
+    backgrounds:[
+       { src:'./img/nature1.jpg', fade:2000 },
+     { src:'./img/bw1.jpg', fade:2000 },
+      { src:'./img/portrait1.jpg', fade:2000 },
+     { src:'./img/portrait5.jpg', fade:2000 },
+      { src:'./img/portrait2.jpg', fade:2000 },
+      { src:'./img/portrait3.jpg', fade:2000 },
+     { src:'./img/portrait4.jpg', fade:2000 },
+       { src:'./img/forest.jpg', fade:2000 }	   
+    ]
+  })('overlay', {
+  src:'./img/overlay.png'
+  });
+  
+    </script>
+      <script>
+      $(function(){
+      $('#Grid').mixitup();
+        });
+      </script>
+      <script>
+        $(function() {
+          $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+              || location.hostname == this.hostname) {
+  
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html,body').animate({
+                  scrollTop: target.offset().top
+                }, 1000);
+                return false;
+              }
+            }
+          });
+        });
+      </script>
+  
+  <script type="text/javascript">
+  $(document).ready(function() {
+          $('#nav').scrollToFixed();
+    });
+      </script>
+
   </head>
   <body>
     <noscript>
@@ -37,5 +119,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    
   </body>
 </html>

@@ -30,7 +30,7 @@ class App extends Component {
                     <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
                     <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
                     <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />
-                    <Route path="/home" name="Home" render={props => <Home {...props} />} />
+                    <Route path="/" name="Home" render={props => <Home {...props} />} />
                 </Switch>
                 </React.Suspense>
       </Router>
