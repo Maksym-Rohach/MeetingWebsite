@@ -26,19 +26,21 @@ import {
   Table,
   Row,
   Col,
-  Container
+  Container,
+  Button
 } from "reactstrap";
 
 class Tables extends React.Component {
   render() {
     return (
       <>
-       <div className="content">
-          <Row>
+       <div className="app flex-row align-items-center">
+         <Container>
+          <Row className="justify-content-center pt-5 mt-5">
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Мут таблиця</CardTitle>
+                  <CardTitle tag="h4">Таблиця користувачів</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table className="tablesorter" responsive>
@@ -46,60 +48,61 @@ class Tables extends React.Component {
                       <tr>
                         <th>Нікнейм</th>
                         {/* <th>Країна</th> */}
-                        <th>Дата реєстрації</th>
-                        <th>Місто</th>
-                        <th>Статус</th>
+                        <th>Дата скарги</th>
+                        <th>Скарга</th>
+                        <th>Відповіді</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Помідорка</td>
                         <td>27/10/18</td>
-                        <td>Користувач</td>
-                        <td>Активний</td>
+                        <td>Мене покусала собака</td>
+                        <td><Button>Відповісти</Button></td>
                       </tr>
                       <tr>
                         <td>Minerva Hooper</td>
                         <td>Curaçao</td>
                         <td>Sinaai-Waas</td>
-                        <td>Активний</td>
+                        <td><Button>Відповісти</Button></td>
                       </tr>
                       <tr>
                         <td>Sage Rodriguez</td>
                         <td>Netherlands</td>
                         <td>Baileux</td>
-                        <td>Активний</td>                     
+                        <td><Button>Відповісти</Button></td>
                        </tr>
                       <tr>
                         <td>Philip Chaney</td>
                         <td>Korea, South</td>
                         <td>Overland Park</td>
-                        <td>Активний</td>                 
+                        <td><Button>Відповісти</Button></td>
                         </tr>
                       <tr>
                         <td>Doris Greene</td>
                         <td>Malawi</td>
                         <td>Feldkirchen in Kärnten</td>
-                        <td>Активний</td> 
+                        <td><Button>Відповісти</Button></td>
                         </tr>
                       <tr>
                         <td>Mason Porter</td>
                         <td>Chile</td>
                         <td>Gloucester</td>
-                        <td>Активний</td>
+                        <td><Button>Відповісти</Button></td>
                       </tr>
                       <tr>
                         <td>Jon Porter</td>
                         <td>Portugal</td>
                         <td>Gloucester</td>
-                        <td>Активний</td>
+                        <td><Button>Відповісти</Button></td>
                       </tr>
                     </tbody>
                   </Table>
                 </CardBody>
               </Card>
             </Col>
-          </Row>         
+          </Row>
+          </Container>
         </div>
       </>
     );

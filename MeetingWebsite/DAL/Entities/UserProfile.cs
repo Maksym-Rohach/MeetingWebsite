@@ -18,10 +18,16 @@ namespace MeetingWebsite.DAL.Entities
         [Required]
         public DateTime DateOfBirth { get; set; }
 
+        [Required]
+        public DateTime DateOfRegister { get; set; }
+       
+        public string Avatar { get; set; }
+
+        [StringLength(128)]
+        public string Status { get; set; }
+
         [StringLength(256)]
         public string Description { get; set; }
-
-        public string Image { get; set; }
 
         [ForeignKey("City")]
         [Required]
@@ -39,6 +45,8 @@ namespace MeetingWebsite.DAL.Entities
         public virtual Gender Gender { get; set; }
         public virtual City City { get; set; }
         public virtual DbUser User { get; set; }
+
+        public virtual ICollection<Messages> Messages { get; set; }
 
     }
 }

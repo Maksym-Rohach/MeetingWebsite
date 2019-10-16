@@ -63,7 +63,7 @@ namespace MeetingWebsite.Services
             {
                 string name = result_client.NickName;
                    
-                string image = result_client.Image;
+                string image = result_client.Avatar;
                 if (image == null)
                     image = _configuration.GetValue<string>("DefaultImage");
                 claims = new List<Claim>()

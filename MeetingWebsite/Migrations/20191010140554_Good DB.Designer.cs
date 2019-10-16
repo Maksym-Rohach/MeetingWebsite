@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20191007173702_seeddata")]
-    partial class seeddata
+    [Migration("20191010140554_Good DB")]
+    partial class GoodDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -146,6 +146,31 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("Gender");
                 });
 
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.Messages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate");
+
+                    b.Property<DateTime?>("DateRecipientRead");
+
+                    b.Property<string>("RecipientId");
+
+                    b.Property<string>("SenderId");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("tblMessages");
+                });
+
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
                 {
                     b.Property<string>("Id");
@@ -159,24 +184,43 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("tblRefreshTokens");
                 });
 
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserAccessLock", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<DateTime>("LockDate");
+
+                    b.Property<string>("Reason")
+                        .HasMaxLength(1000);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAccessLocks");
+                });
+
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserProfile", b =>
                 {
                     b.Property<string>("Id");
 
+                    b.Property<string>("Avatar");
+
                     b.Property<int>("CityId");
 
                     b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<DateTime>("DateOfRegister");
 
                     b.Property<string>("Description")
                         .HasMaxLength(256);
 
                     b.Property<int>("GenderId");
 
-                    b.Property<string>("Image");
-
                     b.Property<string>("NickName")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Status")
+                        .HasMaxLength(128);
 
                     b.Property<int>("ZodiacId");
 
@@ -189,6 +233,15 @@ namespace MeetingWebsite.Migrations
                     b.HasIndex("ZodiacId");
 
                     b.ToTable("UserProfile");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserRecipient", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblUserRecipients");
                 });
 
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.Zodiac", b =>
@@ -298,7 +351,26 @@ namespace MeetingWebsite.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.Messages", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.UserRecipient", "UserRecipient")
+                        .WithMany("Messages")
+                        .HasForeignKey("RecipientId");
+
+                    b.HasOne("MeetingWebsite.DAL.Entities.UserProfile", "UserSender")
+                        .WithMany("Messages")
+                        .HasForeignKey("SenderId");
+                });
+
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserAccessLock", b =>
                 {
                     b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
                         .WithMany()
@@ -326,6 +398,14 @@ namespace MeetingWebsite.Migrations
                     b.HasOne("MeetingWebsite.DAL.Entities.Zodiac", "Zodiac")
                         .WithMany()
                         .HasForeignKey("ZodiacId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MeetingWebsite.DAL.Entities.UserRecipient", b =>
+                {
+                    b.HasOne("MeetingWebsite.DAL.Entities.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

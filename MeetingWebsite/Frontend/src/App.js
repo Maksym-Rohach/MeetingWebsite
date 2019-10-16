@@ -6,20 +6,16 @@ import "assets/demo/demo.css";
 import "assets/css/nucleo-icons.css";
 import 'font-awesome/css/font-awesome.min.css';
 
-
-
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
-
 
 // Containers
 const AdminLayout = React.lazy(() => import('./containers/adminLayout/AdminLayout'));
 const UserLayout = React.lazy(() => import('./containers/userLayout'));
 
-
-
 // Pages
 
 const Login = React.lazy(() => import('./components/pages/login'));
+const Home = React.lazy(() => import('./components/pages/home'));
 
 class App extends Component {
 
@@ -31,7 +27,8 @@ class App extends Component {
                     <Route path="/login" name="Login" render={props => <Login {...props} />} />
                     <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
                     <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
-                   
+                    <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />
+                    <Route path="/home" name="Home" render={props => <Home {...props} />} />
                 </Switch>
                 </React.Suspense>
       </Router>
