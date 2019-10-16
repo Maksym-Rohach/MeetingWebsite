@@ -7,7 +7,6 @@ namespace MeetingWebsite.Areas.Default.Yana.ViewModels
 {
     public class BoysViewModels
     {
-        //public string Zodiac { get; set; }
         public int ZodiacId { get; set; }
         public int Age { get; set; }
         public string Status { get; set; }  
@@ -17,12 +16,24 @@ namespace MeetingWebsite.Areas.Default.Yana.ViewModels
     }
 
     public class GetBoysModel
-    {
-        //photo
+    {        
+        public string Avatar { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string City { get; set; }
         public string Status { get; set; }
+    }
+
+    public class GetZodiac
+    {
+        public int ZodiacID { get; set; }
+        public string ZodiacName { get; set; }
+    }
+
+    public class GetCity
+    {
+        public int CityID { get; set; }
+        public string CityName { get; set; }
     }
 
     public class GetListBoysModel
@@ -30,5 +41,7 @@ namespace MeetingWebsite.Areas.Default.Yana.ViewModels
         public List<GetBoysModel> GetListBoys { get; set; }
         public int TotalCount { get; set; }
         public int CurrentPage { get; set; }
+        public List<GetZodiac> GetZodiacs { get; set; }
+        public List<GetCity> GetCities { get; set; }
     }
 }

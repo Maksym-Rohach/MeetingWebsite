@@ -65,9 +65,12 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
             {
                 query = query.Where(x => x.ZodiacId == filter.ZodiacId);
             }
-                
-                //if for Status
-                //if for Age
+
+
+
+            var today = DateTime.Today;
+
+            var a = (today.Year * 100 + today.Month) * 100 + today.Day;        
 
 
             List<GetBoysModel> boys = new List<GetBoysModel>();
@@ -81,12 +84,11 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
                     .Take(10)
                     .Select(u => new GetBoysModel
                     {
-
                         City = u.City.Name,
                         Status = "Status",
-                        Age = 18,
-                        Name = u.NickName                           
-
+                        Age =(a-(u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day)/10000,
+                        Name = u.NickName,
+                        Avatar = u.Avatar
                     })
                         .ToList();
 

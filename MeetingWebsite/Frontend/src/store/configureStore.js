@@ -6,12 +6,14 @@ import { loginReducer} from "../components/pages/login/reducer";
 import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
+import { boysReducer} from "../components/boys/reducer";
 
 export default function configureStore (history, initialState) {
     const reducers = {
       login: loginReducer,
       refreshToken: refreshReducer,
-      userTable: userTableReducer
+      userTable: userTableReducer,
+      boys: boysReducer,
     };
 
     const middleware = [

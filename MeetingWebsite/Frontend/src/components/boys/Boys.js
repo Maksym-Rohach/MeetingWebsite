@@ -4,29 +4,29 @@ import Select from 'react-select';
 import { Row,Fade,CardHeader,FormGroup,InputGroupButtonDropdown,
   DropdownToggle,DropdownMenu,CardFooter,DropdownItem,Button, 
   Card, CardBody, Col, Container, Form, Input, InputGroup} from 'reactstrap';
+  import get from "lodash.get";
+  
 
+  // const optionsCity = [
+  //   {value: "", label: ""},
+
+  // ];
+ 
 class Boys extends Component {
     state = {
         isLoading: true,
         tmp_zodiac: {value: '', label: ''},
         tmp_city: {value:'', label: ''},
-        tmp_age: {value:'', label: ''},        
+        tmp_age: {value:'', label: ''},   
         collapse: true,
         fadeIn: true,
         timeout: 300
       };
 
       handleChange = (name, selectValue) => {
-        this.setState({ [name]: selectValue }, this.filterSearchData);
+        this.setState({ [name]: selectValue }, this.filterSearchBoys);
       }
-
-      // filterSearchData = () => {
-      //   const { tmp_month, tmp_year } = this.state;
-      //   let year = tmp_year.value;
-      //   let month = tmp_month.value;
-      //   this.props.getUsersData({ year, month });
-      // }
-
+      
       filterSearchBoys = () => {
         const {tmp_zodiac, tmp_city, tmp_age} = this.state;
         let zodiac = tmp_zodiac.value;
@@ -36,9 +36,23 @@ class Boys extends Component {
       }
       
   render() {
+    const {tmp_city, tmp_zodiac, tmp_age} = this.state;
+    const {listCities, listZodiacs} = this.props;
+    let option=[];
+    let counter = 0;    
+    for (let i = 18; i<=75; i++)
+    {
+      option[counter++] = 
+      {
+        value: {i},
+        label: {i}
+       
+    }
+      // option[counter++].value = "{i}";
+      // option[counter++].label = "{i}";
+    }
     return (
-      <React.Fragment>
-         {/* <h2 className="text-center">Знайомства з хлопцями в Україні</h2> */}
+      <React.Fragment>      
          <h2 style={{textAlign: "center"}}>Знайомства з хлопцями в Україні</h2>
       <div className="app flex-row align-items-center">
        <Container>
@@ -49,85 +63,26 @@ class Boys extends Component {
               </CardHeader>
               <CardBody>
                 <Form action="" method="post" className="form-horizontal">
-                  <FormGroup row>
-                    <Col xs = "3">
-                      <InputGroup>
-                        <Input type="email" id="input2-group3" name="input2-group3" placeholder="Шукаю хлопця" />
-                        <InputGroupButtonDropdown addonType="append"
-                                                  isOpen={this.state.second}
-                                                  toggle={() => { this.setState({ second: !this.state.second }); }}>
-                          <DropdownToggle caret color="success">
-                            Dropdown
-                          </DropdownToggle>
-                          <DropdownMenu className={this.state.second ? 'show' : ''}>
-                            <DropdownItem>Action</DropdownItem>
-                            <DropdownItem>Another Action</DropdownItem>
-                            <DropdownItem>Something else here</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Separated link</DropdownItem>
-                          </DropdownMenu>
-                        </InputGroupButtonDropdown>
-                      </InputGroup>
+                  <FormGroup row>              
+                    <Col xs = "4">
+                    <Select
+                        value={tmp_city}
+                        onChange={(e) => this.handleChange("tmp_city", e)}
+                        options={listCities} />
+                    </Col>
+               
+                    <Col xs = "4">
+                    <Select
+                        value={tmp_zodiac}
+                        onChange={(e) => this.handleChange("tmp_zodiac", e)}
+                        options={listZodiacs} />
                     </Col>
                   
-                    <Col xs = "3">
-                      <InputGroup>
-                        <Input type="email" id="input2-group3" name="input2-group3" placeholder="Львів, Україна" />
-                        <InputGroupButtonDropdown addonType="append"
-                                                  isOpen={this.state.second}
-                                                  toggle={() => { this.setState({ second: !this.state.second }); }}>
-                          <DropdownToggle caret color="success">
-                            Dropdown
-                          </DropdownToggle>
-                          <DropdownMenu className={this.state.second ? 'show' : ''}>
-                            <DropdownItem>Action</DropdownItem>
-                            <DropdownItem>Another Action</DropdownItem>
-                            <DropdownItem>Something else here</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Separated link</DropdownItem>
-                          </DropdownMenu>
-                        </InputGroupButtonDropdown>
-                      </InputGroup>
-                    </Col>
-                 
-                    <Col xs = "3">
-                      <InputGroup>
-                        <Input type="email" id="input2-group3" name="input2-group3" placeholder="18" />
-                        <InputGroupButtonDropdown addonType="append"
-                                                  isOpen={this.state.second}
-                                                  toggle={() => { this.setState({ second: !this.state.second }); }}>
-                          <DropdownToggle caret color="success">
-                            Dropdown
-                          </DropdownToggle>
-                          <DropdownMenu className={this.state.second ? 'show' : ''}>
-                            <DropdownItem>Action</DropdownItem>
-                            <DropdownItem>Another Action</DropdownItem>
-                            <DropdownItem>Something else here</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Separated link</DropdownItem>
-                          </DropdownMenu>
-                        </InputGroupButtonDropdown>
-                      </InputGroup>
-                    </Col>
-                  
-                    <Col xs = "3">
-                      <InputGroup>
-                        <Input type="email" id="input2-group3" name="input2-group3" placeholder="Козерог" />
-                        <InputGroupButtonDropdown addonType="append"
-                                                  isOpen={this.state.second}
-                                                  toggle={() => { this.setState({ second: !this.state.second }); }}>
-                          <DropdownToggle caret color="success">
-                            Dropdown
-                          </DropdownToggle>
-                          <DropdownMenu className={this.state.second ? 'show' : ''}>
-                            <DropdownItem>Action</DropdownItem>
-                            <DropdownItem>Another Action</DropdownItem>
-                            <DropdownItem>Something else here</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Separated link</DropdownItem>
-                          </DropdownMenu>
-                        </InputGroupButtonDropdown>
-                      </InputGroup>
+                    <Col xs = "4">
+                      <Select
+                        value={tmp_age}
+                        onChange={(e) => this.handleChange("tmp_age", e)}
+                        options={option} />
                     </Col>
                     <Button type="submit" size="sm" color="success" className="ml-3"><i className="fa fa-dot-circle-o" ></i> Пошук</Button>     
                   </FormGroup>
@@ -168,6 +123,16 @@ class Boys extends Component {
       </React.Fragment>
     );
   }
+}
+
+const mapStateToProps = state => {
+  console.log("State=======", state);
+  return {
+    listUsers: get(state, "boys.list.data"),
+    listCities: get(state,"boys.list.getCities"),
+    listZodiacs: get(state, "boys.list.getZodiacs"),
+    isListLoading: get(state, "boys.list.loading"),  
+  };
 }
 
 export default Boys;
