@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardFooter, CardGroup,
-         Col, Container, Form, Input, InputGroup,
+import { Button, Card, CardBody,CardHeader, CardFooter, CardGroup,
+         Col, Container,Label, Form,FormGroup, Input, InputGroup,
          InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import * as loginActions from './reducer';
 import get from "lodash.get";
+import './Girls.css';
 
 //import EclipseWidget from '../../eclipse';
 class Girls extends Component {
@@ -59,7 +60,29 @@ class Girls extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
-         <div>ffedfd</div>
+         <div>
+         <Card>
+              <CardHeader>
+                <strong>Inline</strong> Form
+              </CardHeader>
+              <CardBody>
+                <Form action="" method="post" inline>
+                  <FormGroup className="pr-1">
+                    <Label htmlFor="exampleInputName2" className="pr-1">Name</Label>
+                    <Input type="text" id="exampleInputName2" placeholder="Jane Doe" required />
+                  </FormGroup>
+                  <FormGroup className="pr-1">
+                    <Label htmlFor="exampleInputEmail2" className="pr-1">Email</Label>
+                    <Input type="email" id="exampleInputEmail2" placeholder="jane.doe@example.com" required />
+                  </FormGroup>
+                </Form>
+              </CardBody>
+              <CardFooter>
+                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
+                <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Reset</Button>
+              </CardFooter>
+            </Card>
+         </div>
         </Container>
       </div>
     );
