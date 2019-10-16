@@ -5,8 +5,12 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.Areas.User.ViewModels.RostyslavModels
 {
-    public class ChatMessageList
+    public class MessageFilter
     {
-        public List<ChatMessage> Messages { get; set; }
+        public int From { get; set; }
+        public int Count { get; set; }
+        public Chat chat { get; set; }
+        
+
     }
 }

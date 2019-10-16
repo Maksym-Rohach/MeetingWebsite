@@ -64,6 +64,7 @@ namespace MeetingWebsite
                     // set ClockSkew is zero
                     ClockSkew = TimeSpan.Zero
                 };
+                
             });
 
             // In production, the React files will be served from this directory
