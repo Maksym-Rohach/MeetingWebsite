@@ -37,7 +37,7 @@ namespace MeetingWebsite.Areas.Default.Home.Controllers
             List<GetHomeUserModel> users = new List<GetHomeUserModel>();
             var count = _context.UserProfile.Count();
 
-            var D = (DateTime.Now.Year * 100 + DateTime.Now.Month) * 100 + DateTime.Now.Day;
+            var D = (DateTime.Now.Year*100 + DateTime.Now.Month)*100 + DateTime.Now.Day;
 
             users = _context.UserProfile
                 .AsQueryable()
@@ -47,9 +47,9 @@ namespace MeetingWebsite.Areas.Default.Home.Controllers
                     Name = u.NickName,
                     City = u.City.Name,
                     Zodiac = u.Zodiac.Name,
-                    Age = (D - (u.DateOfBirth.Year*100 + u.DateOfBirth.Month)*100+u.DateOfBirth.Day)/10000
+                    Age = (D - (u.DateOfBirth.Year*100 + u.DateOfBirth.Month)*100 + u.DateOfBirth.Day)/10000
                 })
-                .OrderBy(u => Guid.NewGuid())
+                .OrderBy(u => Guid.NewGuid()).Take(7)
                 .ToList();
             result.GetHomeUserModel = users;
 
