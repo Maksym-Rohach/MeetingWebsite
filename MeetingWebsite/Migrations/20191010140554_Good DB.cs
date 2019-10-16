@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MeetingWebsite.Migrations
 {
-    public partial class init6 : Migration
+    public partial class GoodDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -229,14 +229,35 @@ namespace MeetingWebsite.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserAccessLocks",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    LockDate = table.Column<DateTime>(nullable: false),
+                    Reason = table.Column<string>(maxLength: 1000, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserAccessLocks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserAccessLocks_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserProfile",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     NickName = table.Column<string>(maxLength: 50, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
+                    DateOfRegister = table.Column<DateTime>(nullable: false),
+                    Avatar = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(maxLength: 128, nullable: true),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
-                    Image = table.Column<string>(nullable: true),
                     CityId = table.Column<int>(nullable: false),
                     GenderId = table.Column<int>(nullable: false),
                     ZodiacId = table.Column<int>(nullable: false)
@@ -268,6 +289,52 @@ namespace MeetingWebsite.Migrations
                         principalTable: "Zodiac",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblUserRecipients",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblUserRecipients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tblUserRecipients_UserProfile_Id",
+                        column: x => x.Id,
+                        principalTable: "UserProfile",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblMessages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Text = table.Column<string>(nullable: true),
+                    DateCreate = table.Column<DateTime>(nullable: false),
+                    DateRecipientRead = table.Column<DateTime>(nullable: true),
+                    SenderId = table.Column<string>(nullable: true),
+                    RecipientId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblMessages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_tblMessages_tblUserRecipients_RecipientId",
+                        column: x => x.RecipientId,
+                        principalTable: "tblUserRecipients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_tblMessages_UserProfile_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "UserProfile",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -310,6 +377,16 @@ namespace MeetingWebsite.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tblMessages_RecipientId",
+                table: "tblMessages",
+                column: "RecipientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tblMessages_SenderId",
+                table: "tblMessages",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserProfile_CityId",
                 table: "UserProfile",
                 column: "CityId");
@@ -346,13 +423,22 @@ namespace MeetingWebsite.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "tblMessages");
+
+            migrationBuilder.DropTable(
                 name: "tblRefreshTokens");
 
             migrationBuilder.DropTable(
-                name: "UserProfile");
+                name: "UserAccessLocks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "tblUserRecipients");
+
+            migrationBuilder.DropTable(
+                name: "UserProfile");
 
             migrationBuilder.DropTable(
                 name: "City");
