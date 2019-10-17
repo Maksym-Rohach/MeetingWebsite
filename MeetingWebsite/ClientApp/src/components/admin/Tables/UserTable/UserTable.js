@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
+import Modal from '../../../Notifications/Modals/Modals';
 // reactstrap components
 import {
   Card,
@@ -15,7 +16,11 @@ import {
   Row,
   Col,
   Container,
-  Button
+  Button,
+  Input,
+  Pagination, 
+  PaginationItem,
+  PaginationLink
 } from "reactstrap";
 
 const optionsMonth = [
@@ -46,30 +51,46 @@ class Tables extends React.Component {
 
   state = {
     isLoading: true,
+    tmp_NickName: '',
     tmp_month: { value: '1', label: 'Січень' },
     tmp_year: { value: '2019', label: '2019р' },   
   }
 
   handleChange = (name, selectValue) => {
-    this.setState({ [name]: selectValue }, this.filterSearchData);
+    this.setState({ [name]: selectValue },this.filterSearchData);
   }
 
+
   filterSearchData = () => {
-    const { tmp_year,tmp_month } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
-    this.props.getUsersData({ year,month});
+    let nickname = tmp_NickName;
+    this.props.getUsersData({ year,month,nickname});
   }
 
   componentDidMount = () => {
-    const { tmp_year,tmp_month } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
-    this.props.getUsersData({ year,month});
+    let nickname = tmp_NickName;
+    this.props.getUsersData({ year,month,nickname});
+  }
+
+  Click(e)//проблема тут!!!
+  {
+    e.preventDefault();
+    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    console.log("CLICK__________________________________",tmp_year,tmp_month,tmp_NickName);
+    this.props.getUsersData({tmp_year,tmp_month,tmp_NickName})
+  }
+  PostFilters = (e) => {
+    console.log("EEEEEEEE",e);
+    this.setState({tmp_NickName:e})
   }
 
   render() {
-    const { tmp_year, tmp_month } = this.state;
+    const { tmp_year, tmp_month, tmp_NickName } = this.state;
     const { listUsers, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
@@ -97,6 +118,16 @@ class Tables extends React.Component {
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
                     </Col>
+                    <Col className="col-md-2">
+                      <Input
+                        onChange={(e) => this.PostFilters(`${e.target.value}`)}
+                        placeholder="Нік"/>
+                    </Col>
+                    <Col className="col-md-2">
+                       <Button onClick={(e)=>this.Click(e)} color='info'>
+                        Відправити фільтри
+                      </Button>
+                    </Col>
                   </Row>                 
                 </CardHeader>
                 <CardBody>
@@ -117,13 +148,33 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                           <td><Button color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button></td>
+                            <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td>
                           </tr>
                           )
                         })
                       }
                     </tbody>
                   </Table>
+                  <Pagination>
+                  <PaginationItem>
+                    <PaginationLink previous tag="button"></PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active>
+                    <PaginationLink tag="button">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink tag="button">2</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink tag="button">3</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink tag="button">4</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink next tag="button"></PaginationLink>
+                  </PaginationItem>
+                </Pagination>
                 </CardBody>
               </Card>
             </Col>

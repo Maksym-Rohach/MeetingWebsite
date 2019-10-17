@@ -43,7 +43,7 @@ namespace MeetingWebsite.DAL.Entities
             string email = "helloworld"+context.UserProfile.Count()+"@gmail.com";
             DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
             int genderid = num % 2 == 0 ? 1 : 2;
-            int cityid = 20;
+            int cityid = rnd.Next(1,21);
             int zodiacid = 5;
             string avatar = "";
             string roleName = "User";
