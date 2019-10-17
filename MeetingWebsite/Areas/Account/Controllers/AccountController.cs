@@ -34,8 +34,8 @@ namespace MeetingWebsite.Areas.Account.Controllers
            IConfiguration configuration,
            //IFileService fileService,
            IJWTTokenService tokenService)
-          // IEmailSender emailSender)
-          
+        // IEmailSender emailSender)
+
         {
             _userManager = userManager;
             _context = context;
@@ -56,12 +56,12 @@ namespace MeetingWebsite.Areas.Account.Controllers
             }
 
             var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
             }
 
-            var result =  _signInManager
+            var result = _signInManager
                 .PasswordSignInAsync(user, model.Password, false, false).Result;
 
             if (!result.Succeeded)
@@ -88,8 +88,6 @@ namespace MeetingWebsite.Areas.Account.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
-
-
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
@@ -100,120 +98,73 @@ namespace MeetingWebsite.Areas.Account.Controllers
             if (user != null)
             {
                 return BadRequest(new { invalid = "Електронна адреса вже використовується" });
-
-             
             }
 
             var str = "";
 
-
-
-            DateTime model_date = DateTime.Parse(model.DateOfBirth);
-            if (model_date.Month>=2 && model_date.Day >=21)         //дописать по числам
-            {   str = "Овен";
-            }
-            else if (model_date.Month <= 3 && model_date.Day <= 20)         
+            DateTime model_date = DateTime.ParseExact(model.DateOfBirth, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            if (model_date.Month == 3 && model_date.Day >= 21 || model_date.Month == 4 && model_date.Day <= 20)         //дописать по числам
             {
                 str = "Овен";
             }
-           else if (model_date.Month >= 3 && model_date.Day >= 21)         
+
+            else if (model_date.Month == 4 && model_date.Day >= 21 || model_date.Month == 5 && model_date.Day <= 21)         
             {
                 str = "Телець";
             }
-            else if (model_date.Month <= 4 && model_date.Day <= 21)
-            {
-                str = "Телець";
-            }
-            else if (model_date.Month >= 4 && model_date.Day >= 22)         
+              
+            else if (model_date.Month == 5 && model_date.Day >= 22 || model_date.Month == 6 && model_date.Day <= 21)         
             {
                 str = "Близнята";
             }
-            else if (model_date.Month <= 5 && model_date.Day <= 21)
-            {
-                str = "Близнята";
-            }
-            else if (model_date.Month >= 5 && model_date.Day >= 22)
+           
+            else if (model_date.Month == 6 && model_date.Day >= 22 || model_date.Month == 7 && model_date.Day <= 22)
             {
                 str = "Рак";
             }
-            else if (model_date.Month <= 6 && model_date.Day <= 22)
-            {
-                str = "Рак";
-            }
-            else if (model_date.Month >= 6 && model_date.Day >= 23)
+           
+            else if (model_date.Month == 7 && model_date.Day >= 23 || model_date.Month == 8 && model_date.Day <= 23)
             {
                 str = "Лев";
             }
-            else if (model_date.Month <= 7 && model_date.Day <= 23)
-            {
-                str = "Лев";
-            }
-            else if (model_date.Month >= 7 && model_date.Day >= 24)
+           
+            else if (model_date.Month == 8 && model_date.Day >= 24 || model_date.Month == 9 && model_date.Day <= 22)
             {
                 str = "Діва";
             }
-            else if (model_date.Month <= 8 && model_date.Day <= 22)
-            {
-                str = "Діва";
-            }
-            else if (model_date.Month >= 8 && model_date.Day >= 23)
+           
+            else if (model_date.Month == 9 && model_date.Day >= 23 || model_date.Month == 10 && model_date.Day <= 23)
             {
                 str = "Терези";
             }
-            else if (model_date.Month <= 9 && model_date.Day <= 23)
-            {
-                str = "Терези";
-            }
-            else if (model_date.Month >= 9 && model_date.Day >= 24)
+            
+            else if (model_date.Month == 10 && model_date.Day >= 24 || model_date.Month == 11 && model_date.Day <= 22)
             {
                 str = "Скорпіон";
             }
-            else if (model_date.Month <= 10 && model_date.Day <= 22)
-            {
-                str = "Скорпіон";
-            }
-            else if (model_date.Month >= 10 && model_date.Day >= 23)
+           
+            else if (model_date.Month == 11 && model_date.Day >= 23 || model_date.Month == 12 && model_date.Day <= 21)
             {
                 str = "Стрілець";
             }
-            else if (model_date.Month <= 11 && model_date.Day <= 21)
-            {
-                str = "Стрілець";
-            }
-            else if (model_date.Month >= 11 && model_date.Day >= 22)
+           
+            else if (model_date.Month == 12 && model_date.Day >= 22 || model_date.Month == 1 && model_date.Day <= 20)
             {
                 str = "Козоріг";
             }
-            else if (model_date.Month <= 0 && model_date.Day <= 20)
-            {
-                str = "Козоріг";
-            }
-            else if (model_date.Month >= 0 && model_date.Day >= 21)
+           
+            else if (model_date.Month == 1 && model_date.Day >= 21 || model_date.Month == 2 && model_date.Day <= 20)
             {
                 str = "Водолій";
             }
-            else if (model_date.Month <= 1 && model_date.Day <= 20)
-            {
-                str = "Водолій";
-            }
-            else if (model_date.Month >= 1 && model_date.Day >= 21)
+          
+            else if (model_date.Month == 2 && model_date.Day >= 21 || model_date.Month == 3 && model_date.Day <= 20)
             {
                 str = "Риби";
             }
-            else if (model_date.Month <= 2 && model_date.Day <= 20)
-            {
-                str = "Риби";
-            }
-
-
-
-
-
-
-
+ 
             var zodiacid = _context.Zodiac.FirstOrDefault(z => z.Name == str);
-
-
+            
             var newuser = new UserProfile()
             {
                 DateOfRegister = DateTime.Now,
@@ -223,35 +174,26 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 //User=new DbUser(),
                 //ZodiacId=zodiacid,
                 //CityId=
-
             };
 
             var gender = new Gender()
             {
                 Type = model.Gender,
-
             };
 
 
              user = new DbUser()
             {
-
                 UserName = model.Email,
                 Email = model.Email,
+                
                 //User = model.User,
             };
-
-
-
 
             var roleName = "User";
 
             var result = _userManager.CreateAsync(user, model.Password).Result;
             result = _userManager.AddToRoleAsync(user, roleName).Result;
-
-          
-
-
 
             if (!result.Succeeded)
             {
@@ -259,12 +201,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 return BadRequest(errors);
             }
 
-
-
             await _signInManager.SignInAsync(user, isPersistent: false);
-
-
-
 
             return Ok(
                new
@@ -273,11 +210,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                    refToken = _tokenService.CreateRefreshToken(user)
                });
 
-
             //создать юзера  
-
-
-
 
             var result2 = _signInManager
                 .PasswordSignInAsync(user, model.Password, false, false).Result;
@@ -296,8 +229,6 @@ namespace MeetingWebsite.Areas.Account.Controllers
                      refToken = _tokenService.CreateRefreshToken(user)
                  }
                 );
-
-
         }
 
         [HttpPost("refresh/{refreshToken}")]
