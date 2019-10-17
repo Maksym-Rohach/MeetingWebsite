@@ -1,14 +1,40 @@
-﻿import React from 'react';
-import { Route } from 'react-router';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import Counter from './components/Counter';
-import FetchData from './components/FetchData';
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import "assets/scss/black-dashboard-react.scss";
+import "assets/css/black-dashboard-react.css";
+import "assets/demo/demo.css";
+import "assets/css/nucleo-icons.css";
+import 'font-awesome/css/font-awesome.min.css';
 
-export default () => (
-  <Layout>
-    <Route exact path='/' component={Home} />
-    <Route path='/counter' component={Counter} />
-    <Route path='/fetchdata/:startDateIndex?' component={FetchData} />
-  </Layout>
-);
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+
+// Containers
+const AdminLayout = React.lazy(() => import('./containers/adminLayout/AdminLayout'));
+const UserLayout = React.lazy(() => import('./containers/userLayout'));
+
+// Pages
+const AdminUsers = React.lazy(() => import('./components/admin/Users'));
+const Login = React.lazy(() => import('./components/pages/login'));
+const Home = React.lazy(() => import('./components/pages/Home'));
+const Girls = React.lazy(() => import('./components/Girls'));
+class App extends Component {
+
+    render() {
+      return (
+        <Router>
+            <React.Suspense fallback={loading()}>
+                <Switch>
+                    <Route path="/login" name="Login" render={props => <Login {...props} />} />
+                    <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
+                    <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
+                    <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />
+                    <Route path="/girls" name="Girls" render={props => <Girls {...props} />} />
+                    <Route path="/" name="Home" render={props => <Home {...props} />} />                   
+                </Switch>
+                </React.Suspense>
+      </Router>
+    );
+  }
+}
+
+export default App;
