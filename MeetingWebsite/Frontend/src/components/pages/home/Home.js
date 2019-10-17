@@ -34,6 +34,8 @@ class Home extends Component {
 
 constructor(props)
 {
+
+
   super(props);
   this.state = {activeIndex: 0 };
   this.next = this.next.bind(this);
@@ -41,6 +43,13 @@ constructor(props)
   this.goToIndex = this.goToIndex.bind(this);
   this.onExiting = this.onExiting.bind(this);
   this.onExited = this.onExited.bind(this);
+
+  // this.toggle = this.toggle.bind(this);
+  // this.toggleNavbar = this.toggleNavbar.bind(this);
+  // this.state = {
+  //   isOpen: false,
+  //   collapse: true,
+  // };
 }
 
 onExiting(){
@@ -67,6 +76,17 @@ goToIndex(newIndex) {
   if (this.animating) return;
   this.setState({ activeIndex: newIndex });
 }
+
+// toggle(){
+//   this.setState({
+//     isOpen: !this.state.isOpen,
+//   });
+// }
+// toggleNavbar(){
+//   this.setState({
+//     collapsed: !this.state.collapsed,
+//   });
+// }
 
 render() {
 //const {activeIndex} = this.state;
