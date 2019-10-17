@@ -17,6 +17,7 @@ const AdminUsers = React.lazy(() => import('./components/admin/Users'));
 const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/Home'));
 
+
 class App extends Component {
 
     render() {

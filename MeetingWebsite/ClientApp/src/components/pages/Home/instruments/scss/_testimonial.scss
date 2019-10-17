@@ -1,0 +1,73 @@
+#testimonials h2 {
+	color: #000;
+	font-size: 26px;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	margin: 30px 0 70px;
+}
+#testimonials h2::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 4px;
+	border-radius: 1px;
+	background: #f8f9fa;
+	left: 0;
+	right: 0;
+	bottom: -20px;
+}
+#testimonials .carousel {
+	margin: 50px auto;
+	padding: 0 70px;
+}
+#testimonials.carousel .item {
+	color: #999;
+	overflow: hidden;
+    min-height: 120px;
+	font-size: 13px;
+}
+#testimonials.carousel .media img {
+	width: 80px;
+	height: 80px;
+	display: block;
+	border-radius: 50%;
+}
+#testimonials.carousel .testimonial {
+	padding: 0 15px 0 60px ;
+	position: relative;
+}
+#testimonials.carousel .testimonial::before {
+	content: '"';
+	color: #e2e2e2;
+	font-weight: bold;
+	font-size: 68px;
+	line-height: 54px;
+	position: absolute;
+	left: 15px;
+	top: 0;
+}
+#testimonials.carousel .overview b {
+	text-transform: uppercase;
+	
+}
+.carousel .carousel-indicators {
+	bottom: -90px;
+}
+.carousel-indicators li, .carousel-indicators li.active {
+	width: 18px;
+    height: 18px;
+	border-radius: 50%;
+	margin: 1px 3px;
+}
+.carousel-indicators li {	
+    background: #e2e2e2;
+    border: 4px solid #fff;
+}
+.carousel-indicators li.active {
+	color: #fff;
+    background: #f8f9fa;    
+    border: 5px double;    
+}

@@ -81,8 +81,11 @@ class Tables extends React.Component {
   {
     e.preventDefault();
     const { tmp_year,tmp_month,tmp_NickName } = this.state;
-    console.log("CLICK__________________________________",tmp_year,tmp_month,tmp_NickName);
-    this.props.getUsersData({tmp_year,tmp_month,tmp_NickName})
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    console.log("CLICK__________________________________",tmp_NickName);
+    this.props.getUsersData({year,month,nickname})
   }
   PostFilters = (e) => {
     console.log("EEEEEEEE",e);
