@@ -6,13 +6,13 @@ import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
 import { createBrowserHistory } from 'history';
-
-
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-export const history = createBrowserHistory({ basename: baseUrl });
 import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 import {registerReducer} from '../components/pages/register/reducer';
+
+const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+export const history = createBrowserHistory({ basename: baseUrl });
+
 
 
 
