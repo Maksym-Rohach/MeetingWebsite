@@ -1,11 +1,15 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { loginReducer} from "../components/pages/login/reducer";
 import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
+import { createBrowserHistory } from 'history';
+
+
+const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+export const history = createBrowserHistory({ basename: baseUrl });
 
 export default function configureStore (history, initialState) {
     const reducers = {
@@ -25,9 +29,11 @@ export default function configureStore (history, initialState) {
       enhancers.push(window.devToolsExtension());
     }
 
+  
+
     const rootReducer = combineReducers({
       ...reducers,
-      routing: routerReducer
+      router: connectRouter(history)
     });
 
     return createStore(
