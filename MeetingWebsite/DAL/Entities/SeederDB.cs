@@ -92,7 +92,6 @@ namespace MeetingWebsite.DAL.Entities
                         PhoneNumber = "+22(222)222-22-22"
                     }
                 };
-
                 var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
                 context.UserProfile.Add(userProfile);
                 context.SaveChanges();
