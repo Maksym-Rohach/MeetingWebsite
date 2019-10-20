@@ -44,64 +44,7 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <title>MeetingWebsite</title>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-scrolltofixed-min.js"></script>
-    <script src="js/jquery.vegas.js"></script>
-    <script src="js/jquery.mixitup.min.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/bootstrap.js"></script>
-    
-  <!-- Slideshow Background  -->
-    <script>
-  $.vegas('slideshow', {
-    delay:5000,
-    backgrounds:[
-       { src:'./img/nature1.jpg', fade:2000 },
-     { src:'./img/bw1.jpg', fade:2000 },
-      { src:'./img/portrait1.jpg', fade:2000 },
-     { src:'./img/portrait5.jpg', fade:2000 },
-      { src:'./img/portrait2.jpg', fade:2000 },
-      { src:'./img/portrait3.jpg', fade:2000 },
-     { src:'./img/portrait4.jpg', fade:2000 },
-       { src:'./img/forest.jpg', fade:2000 }	   
-    ]
-  })('overlay', {
-  src:'./img/overlay.png'
-  });
-  
-    </script>
-      <script>
-      $(function(){
-      $('#Grid').mixitup();
-        });
-      </script>
-      <script>
-        $(function() {
-          $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-              || location.hostname == this.hostname) {
-  
-              var target = $(this.hash);
-              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-              if (target.length) {
-                $('html,body').animate({
-                  scrollTop: target.offset().top
-                }, 1000);
-                return false;
-              }
-            }
-          });
-        });
-      </script>
-  
-  <script type="text/javascript">
-  $(document).ready(function() {
-          $('#nav').scrollToFixed();
-    });
-      </script>
+    <title>MeetingWebsite</title>    
 
   </head>
   <body>
