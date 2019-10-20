@@ -5,7 +5,9 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
-import Modal from '../../../Notifications/Modals/Modals';
+
+//import Modal from '../../../Notifications/Modals/Modals';
+
 // reactstrap components
 import {
   Card,
@@ -20,7 +22,8 @@ import {
   Input,
   Pagination, 
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  Modal, ModalBody, ModalFooter, ModalHeader
 } from "reactstrap";
 
 const optionsMonth = [
@@ -44,6 +47,76 @@ const optionsYear = [
   { value: '2019', label: '2019р' },
   { value: '2020', label: '2020р' },
 ];
+
+class Modals extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      danger: false,
+      temp_id:"",
+      temp_description:""
+    };
+
+    this.toggle = this.toggle.bind(this);
+    this.toggleDanger = this.toggleDanger.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
+
+  SetBan=(id)=>
+  {
+     this.setState({temp_id:id})
+  }
+
+  Ban=()=>
+  {
+    const { temp_id,temp_description} = this.state;
+    let id=temp_id;
+    let description=temp_description;
+    console.log("BAN__________________________________",id,description);
+  //  this.props.BanUser({id,description});
+  }
+
+  PostFilters = (e) => {
+    console.log("BAN222__________________________________",e);
+    this.setState({temp_description:e})
+  }
+
+  toggleDanger() {
+    this.setState({
+      danger: !this.state.danger,
+    });
+  }
+
+  render() {
+    return (
+      <div className="animated fadeIn">
+        <Row>
+          <Col>
+                <Button color="danger" onClick={this.toggleDanger} className="mr-1">Забанить</Button>
+                <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                       className={'modal-danger ' + this.props.className}>
+                  <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
+                  <ModalBody>
+                    <Input onChange={(e) => this.PostFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" onClick={this.Ban()}>Забанить</Button>{' '}
+                    <Button color="info" onClick={this.toggleDanger}>Відміна</Button>
+                  </ModalFooter>
+                </Modal>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+}
 
 
 
@@ -151,7 +224,7 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                            <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td>
+                            <td><Modals /*Click={Modals.SetBan(item.id)}*/ color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modals></td>
                           </tr>
                           )
                         })

@@ -21,15 +21,30 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("users")]
-        public ActionResult GetUserTable([FromBody] UserTableFilters filter)
+        public ActionResult GetUserTable([FromBody] UserTableFilters filter)//полуробоче перевірити!!!!
         {
-            var models = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
+            int count_users = 1,count_pages = 1,minus=0;
+
+            if (filter.CurrentPage==1)
+            {
+                minus = count_users;
+            }
+            var models = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).Skip(filter.CurrentPage * count_users - minus).Take(count_users).AsQueryable();
             if (filter.NickName!="")
             {
                 models = models.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
             }
             UserTableModels utms = new UserTableModels();
             utms.Users = new List<UserTableModel>();
+            if (filter.CurrentPage==1)
+            {
+              count_pages = (int)Math.Ceiling((double)models.Count()/10);
+            }
+
+           // List<UserTableModels> user_list = new List<UserTableModels>();
+
+           
+
             foreach (var item in models)
             {
                 UserTableModel utm = new UserTableModel();
@@ -60,6 +75,27 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 btms.Bans.Add(btm);
             }
             return Ok(btms.Bans);
+        }
+        [HttpPost("banuser")]
+        public ActionResult BanUser([FromBody] BanUserModel filter)
+        {
+            UserAccessLock ual = new UserAccessLock();
+            ual.Id = filter.Id;
+            ual.Reason = filter.Description;
+            ual.LockDate = DateTime.Now;
+            UserProfile user = _context.UserProfile.FirstOrDefault(a => a.Id == filter.Id);
+            ual.User = user.User;
+            _context.UserProfile.Remove(user);
+            _context.UserAccessLocks.Add(ual);
+            _context.SaveChanges();
+            return Ok(ual);
+        }
+
+        [HttpPost("shedule-register")]
+        public ActionResult Paginator([FromBody] UserTableFilters filter)
+        {
+
+            return Ok();
         }
 
         [HttpPost("shedule-register")]

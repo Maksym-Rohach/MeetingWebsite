@@ -34,9 +34,13 @@ namespace MeetingWebsite.Areas.Account.ViewModels
         public List<BanTableModel> Bans { get; set; }
     }
 
+    public class BanUserModel
+    {
+        public string Id { get; set; }
+        public string Description { get; set; }
+    }
 
-
-    public class UserTableFilters
+        public class UserTableFilters
     {
         public int Year { get; set; }
         public int Month { get; set; }
