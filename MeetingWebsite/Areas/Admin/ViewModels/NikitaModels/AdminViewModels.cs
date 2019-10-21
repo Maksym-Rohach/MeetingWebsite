@@ -18,6 +18,8 @@ namespace MeetingWebsite.Areas.Account.ViewModels
     public class UserTableModels
     {
         public List<UserTableModel> Users { get; set; }
+        public int TotalCount { get; set; }
+
     }
 
     public class BanTableModel

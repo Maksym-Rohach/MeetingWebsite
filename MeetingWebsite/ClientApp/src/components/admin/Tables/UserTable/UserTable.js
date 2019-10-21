@@ -48,30 +48,39 @@ const optionsYear = [
   { value: '2020', label: '2020р' },
 ];
 
-class Modals extends React.Component {
+
+class Tables extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      danger: false,
-      temp_id:"",
-      temp_description:""
+    isLoading: true,
+    tmp_NickName: '',
+    tmp_month: { value: '1', label: 'Січень' },
+    tmp_year: { value: '2020', label: '2020р' }, 
+    modal: false,
+    danger: false,
+    temp_id:"",
+    temp_description:"",
+    temp_currentpage: 1 
     };
-
     this.toggle = this.toggle.bind(this);
-    this.toggleDanger = this.toggleDanger.bind(this);
+    this.toggleDanger = this.toggleDanger.bind(this);  
   }
-
+//Modal
   toggle() {
     this.setState({
       modal: !this.state.modal,
     });
   }
 
-  SetBan=(id)=>
+  SetBan=(e,id)=>
   {
-     this.setState({temp_id:id})
+    e.preventDefault();
+    // this.setState({
+    //   danger: !this.state.danger,
+    // });
+     this.setState({temp_id:id},this.toggleDanger)
   }
 
   Ban=()=>
@@ -79,8 +88,8 @@ class Modals extends React.Component {
     const { temp_id,temp_description} = this.state;
     let id=temp_id;
     let description=temp_description;
-    console.log("BAN__________________________________",id,description);
-  //  this.props.BanUser({id,description});
+    console.log("BAN228__________________________________",id,description);
+    this.props.BanUser({id,description});
   }
 
   PostFilters = (e) => {
@@ -94,72 +103,42 @@ class Modals extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col>
-                <Button color="danger" onClick={this.toggleDanger} className="mr-1">Забанить</Button>
-                <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
-                       className={'modal-danger ' + this.props.className}>
-                  <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
-                  <ModalBody>
-                    <Input onChange={(e) => this.PostFilters(`${e.target.value}`)} placeholder="Причина"></Input>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button color="danger" onClick={this.Ban()}>Забанить</Button>{' '}
-                    <Button color="info" onClick={this.toggleDanger}>Відміна</Button>
-                  </ModalFooter>
-                </Modal>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
-}
-
-
-
-class Tables extends React.Component {
-
-  state = {
-    isLoading: true,
-    tmp_NickName: '',
-    tmp_month: { value: '1', label: 'Січень' },
-    tmp_year: { value: '2019', label: '2019р' },   
-  }
-
+//Table
   handleChange = (name, selectValue) => {
     this.setState({ [name]: selectValue },this.filterSearchData);
   }
 
 
   filterSearchData = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
   componentDidMount = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
-  Click(e)//проблема тут!!!
+  Click(e)
   {
     e.preventDefault();
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
     console.log("CLICK__________________________________",tmp_NickName);
-    this.props.getUsersData({year,month,nickname})
+    this.props.getUsersData({year,month,nickname,currentPage})
   }
+
   PostFilters = (e) => {
     console.log("EEEEEEEE",e);
     this.setState({tmp_NickName:e})
@@ -224,8 +203,27 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                            <td><Modals /*Click={Modals.SetBan(item.id)}*/ color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modals></td>
-                          </tr>
+                            <td>
+                            <div className="animated fadeIn">
+                            <Row>
+                            <Col>
+                            <Button onClick={(e) => this.SetBan(e,item.id)} color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+                            <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                             className={'modal-danger ' + this.props.className}>
+                            <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
+                            <ModalBody>
+                            <Input onChange={(e) => this.PostFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                            </ModalBody>
+                            <ModalFooter>
+                            <Button color="danger" onClick={this.Ban()}>Забанить</Button>{' '}
+                            <Button color="info" onClick={this.toggleDanger}>Відміна</Button>
+                           </ModalFooter>
+                         </Modal>
+                      </Col>
+                     </Row>
+                    </div>   
+                        </td>
+                        </tr>
                           )
                         })
                       }
@@ -273,6 +271,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUsersData: filter => {
       dispatch(getListActions.getUsersData(filter));
+    },
+    BanUser: filter => {
+      dispatch(getListActions.BanUser(filter));
     }
   }
 }
