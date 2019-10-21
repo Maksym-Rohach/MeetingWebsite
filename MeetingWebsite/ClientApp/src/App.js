@@ -18,6 +18,7 @@ const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/Home'));
 const Boys = React.lazy(() => import('./components/boys'));
 
+
 class App extends Component {
 
     render() {

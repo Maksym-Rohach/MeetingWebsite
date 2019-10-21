@@ -40,10 +40,10 @@ namespace MeetingWebsite.DAL.Entities
             Random rnd = new Random();
             UserProfile up = new UserProfile();
             List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс" };
-            string email = "helloworld"+num+"@gmail.com";
+            string email = "helloworld"+context.UserProfile.Count()+"@gmail.com";
             DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
             int genderid = num % 2 == 0 ? 1 : 2;
-            int cityid = 20;
+            int cityid = rnd.Next(1,21);
             int zodiacid = 5;
             string avatar = "";
             string roleName = "User";
@@ -92,7 +92,6 @@ namespace MeetingWebsite.DAL.Entities
                         PhoneNumber = "+22(222)222-22-22"
                     }
                 };
-
                 var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
                 context.UserProfile.Add(userProfile);
                 context.SaveChanges();
