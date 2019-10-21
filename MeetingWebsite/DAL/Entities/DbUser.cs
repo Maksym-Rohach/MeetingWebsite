@@ -9,6 +9,8 @@ namespace MeetingWebsite.DAL.Entities
     public class DbUser : IdentityUser<string>
     {
         public ICollection<DbUserRole> UserRoles { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
+        public virtual UserAccessLock UserAccessLock { get; set; }
 
     }
 }
