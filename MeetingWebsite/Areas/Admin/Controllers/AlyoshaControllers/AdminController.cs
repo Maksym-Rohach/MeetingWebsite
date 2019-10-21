@@ -21,7 +21,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             _context = context;
         }
 
-        [HttpGet("admins")]
+        [HttpPost("admins")]
         //public ActionResult<AdminTableModels> GetUserTable()
         public ActionResult GetAminTable()
 

@@ -16,7 +16,7 @@ cursor:pointer;
 	border-radius: 10px;
 	background: #000;
 	background: rgba(0,0,0,0.7);
-	background: url(../../../../assets/img/loading.gif) no-repeat center center; /* Loading Gif by http://preloaders.net/ */
+	background: url(../img/loading.gif) no-repeat center center; /* Loading Gif by http://preloaders.net/ */
 	height: 32px;
 	left: 20px;
 	position: fixed;
@@ -26,14 +26,12 @@ cursor:pointer;
 }
 
 .vegas-overlay {
-  /* background: transparent url(../../../../assets/img/anime3.png); */
-  /* background: transparent url(overlays/01.png);  */
-  background: transparent;
+	background: transparent url(overlays/01.png);
 	opacity: 0.5;
 	z-index: -1;
 }
 
-.vegas-background { 
+.vegas-background {
     max-width: none !important; /* counteracts global img modification by twitter bootstrap library */
 	z-index: -2;
 }
@@ -232,7 +230,7 @@ border-radius:0px !important;
 label.valid {
 		  width: 24px;
 		  height: 24px;
-		  background: url(../../../../assets/img/valid.png) center center no-repeat;
+		  background: url(../img/valid.png) center center no-repeat;
 		  display: inline-block;
 		  text-indent: -9999px;
 		}
