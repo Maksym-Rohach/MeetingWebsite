@@ -74,6 +74,21 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
 
 
             List<GetBoysModel> boys = new List<GetBoysModel>();
+            List<GetZodiac> GetZodiacs = new List<GetZodiac>();
+            List<GetCity> GetCities = new List<GetCity>();
+
+            var city = _context.City.AsQueryable().ToList();
+            var zodiac = _context.Zodiac.AsQueryable().ToList();
+
+            foreach (var item in city)
+            {
+                GetCities.Add(new GetCity {CityID=item.Id,CityName=item.Name });
+            }
+
+            foreach(var item in zodiac)
+            {
+                GetZodiacs.Add(new GetZodiac { ZodiacID = item.Id, ZodiacName = item.Name });
+            }
 
             result.TotalCount = query.Count();
 
@@ -86,13 +101,17 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
                     {
                         City = u.City.Name,
                         Status = "Status",
-                        Age =(a-(u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day)/10000,
+                        Age = (a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000,
                         Name = u.NickName,
                         Avatar = u.Avatar
+                       
+                        
                     })
                         .ToList();
 
                 result.GetListBoys = boys;
+            result.GetCities = GetCities;
+            result.GetZodiacs = GetZodiacs;
 
                 return Ok(result);
             }
