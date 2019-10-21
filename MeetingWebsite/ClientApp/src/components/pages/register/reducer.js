@@ -178,3 +178,4 @@ export const logoutByJWT = (dispatch) => {
   setAuthorizationToken(false);
   dispatch(registerActions.setCurrentUser({}));
 }
+

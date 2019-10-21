@@ -6,16 +6,24 @@ import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
 import { createBrowserHistory } from 'history';
-
+import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
+import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
+import {registerReducer} from '../components/pages/register/reducer';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createBrowserHistory({ basename: baseUrl });
+
+
+
 
 export default function configureStore (history, initialState) {
     const reducers = {
       login: loginReducer,
       refreshToken: refreshReducer,
-      userTable: userTableReducer
+      userTable: userTableReducer,
+      banTable: banTableReducer,
+      registryShedule: registrySheduleReducer,
+      register: registerReducer
     };
 
     const middleware = [

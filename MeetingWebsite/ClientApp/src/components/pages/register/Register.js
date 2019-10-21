@@ -200,7 +200,9 @@ class Register extends Component {
                         <InputGroupAddon addonType="prepend">
                          
                             <i className="fas fa-venus-mars"></i>
+
                         <p className="text-muted ml-3">Gender</p>
+
                         <FormGroup check inline>
                         <Label className="form-check-label ml-1" check htmlFor="inline-radio1">Male</Label>
                         <Input className="form-check-input ml-1" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
@@ -209,6 +211,7 @@ class Register extends Component {
                         <Label className="form-check-label ml-1" check htmlFor="inline-radio2">Female</Label>
                         <Input className="form-check-input ml-1" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
                       </FormGroup>
+
                         </InputGroupAddon> 
                       </InputGroup> */}
 
