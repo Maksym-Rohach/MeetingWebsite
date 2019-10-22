@@ -1,0 +1,68 @@
+//colors
+$color_bunker_50_approx: rgba(18, 18, 18, 0.5);
+$color_bunker_90_approx: rgba(18, 18, 18, 0.9);
+
+//urls
+$url_0: url(../img/1.jpg)fixed;
+
+.masthead {
+	min-height: 30rem;
+	position: relative;
+	display: table;
+	width: 100%;
+	height: auto;
+	padding-top: 8rem;
+	padding-bottom: 8rem;
+	background: linear-gradient(90deg, $color_bunker_50_approx 0, $color_bunker_90_approx 100%), $url_0;
+
+	background-repeat: no-repeat;
+	background-size: cover;
+	h1 {
+		font-size: 4rem;
+		margin: 0;
+		padding: 0;
+	}
+}
+@media(min-width: 992px) {
+	.masthead {
+		height: 100vh;
+		h1 {
+			font-size: 5.5rem;
+		}
+	}
+    .masthead .arrow fas{
+       padding-top: 8rem !important;
+        
+    }
+}
+
+.masthead-1 {
+	min-height: 30rem;
+	position: relative;
+	display: table;
+	width: 100%;
+	height: auto;
+	padding-top: 6rem;
+	padding-bottom: 3rem;
+	background: linear-gradient(90deg, $color_bunker_50_approx 0, $color_bunker_90_approx 100%), $url_0;
+
+	background-repeat: no-repeat;
+	background-size: cover;
+	h1 {
+		font-size: 4rem;
+		margin: 0;
+		padding: 0;
+	}
+}
+@media(min-width: 992px) {
+	.masthead-1 {
+		height: 50vh;
+		h1 {
+			font-size: 5.5rem;
+		}
+	}
+    .masthead-1 .arrow fas{
+       padding-top: 8rem !important;
+        
+    }
+}

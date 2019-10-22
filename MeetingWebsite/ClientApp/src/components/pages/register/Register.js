@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,FormGroup,Label } from 'reactstrap';
-import DatePicker from 'react-datepicker';
+import DatePicker from 'react-date-picker';
 import Select from 'react-select';
 
 

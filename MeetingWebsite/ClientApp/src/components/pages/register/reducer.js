@@ -5,7 +5,8 @@ import jwt from 'jsonwebtoken';
 import redirectStatusCode from '../../../services/redirectStatusCode';
 import history from '../../../utils/history';
 import RegisterService from './RegisterService';
-
+// import loginByJWT from '.Login./loginByJWT'
+// import logoutByJWT from '.Login/logoutnByJWT'
 
 
 export const REGISTER_POST_STARTED = "REGISTER_POST_STARTED";

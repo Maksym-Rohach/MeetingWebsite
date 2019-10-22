@@ -1,0 +1,160 @@
+//colors
+$color_zorba_approx: #a99c92;
+$color_celeste_approx: #ccc;
+$black: #000;
+$color_pumpkin_approx: #fff;
+
+//urls
+
+$url_2: url(../images/0302-steak.png);
+
+
+	//colors
+$color_bunker_50_approx: rgba(18, 18, 18, 0.5);
+$color_bunker_90_approx: rgba(18, 18, 18, 0.9);
+
+//urls
+$url_0: url(../img/food-1932466_1920.jpg)fixed;
+
+#slws-menus {
+	min-height: 30rem;
+	position: relative;
+	display: table;
+	width: 100%;
+	height: auto;
+	padding-top: 8rem;
+	padding-bottom: 8rem;
+	background: linear-gradient(90deg, $color_bunker_50_approx 0, $color_bunker_90_approx 100%), $url_0;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	.slws-heading {
+		.heading {
+			position: relative;
+			padding-top: 30px !important;
+			&:before {
+				height: 64px;
+				width: 64px;
+				position: absolute;
+				content: "";
+				
+				top: 0;
+				left: 50%;
+				margin-top: -50px;
+				margin-left: -32px;
+			}
+		}
+		.heading::before {
+			height: 64px;
+			width: 64px;
+			position: absolute;
+			content: "";
+	
+			top: 0;
+			left: 50%;
+			margin-top: -50px;
+			margin-left: -32px;
+		}
+		.sub-heading {
+			color: $color_zorba_approx;
+		}
+	}
+	.slws-food-menu {
+		float: left;
+		width: 100%;
+		margin-bottom: 30px;
+		h2 {
+			margin-bottom: 50px;
+			font-style: italic;
+			position: relative;
+			&.slws-drinks {
+				padding-left: 50px;
+				&:before {
+				
+					content: "";
+					position: absolute;
+					top: -20px;
+					left: 0;
+					width: 64px;
+					height: 64px;
+				}
+			}
+			&.slws-dishes {
+				padding-left: 80px;
+				&:before {
+				
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 64px;
+					height: 45px;
+				}
+			}
+		}
+		ul {
+			padding: 0;
+			margin: 0;
+			li {
+				padding: 0 0 20px 0;
+				margin: 0 0 20px 0;
+				border-bottom: 1px dotted $color_celeste_approx;
+				display: block;
+				float: left;
+				width: 100%;
+				.slws-food-desc {
+					clear: both;
+					float: left;
+					width: 80%;
+					> figure {
+						width: 20%;
+						float: left;
+						position: relative;
+						margin-right: 4%;
+						img {
+							max-width: 100%;
+							//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+							border-radius: 4px;
+							margin-bottom: 0;
+						}
+					}
+					> div {
+						width: 75%;
+						float: left;
+						position: relative;
+						font-size: 14px;
+						line-height: 1.5;
+						p {
+							margin: 0;
+						}
+						h3 {
+							margin: 0 0 10px 0;
+							padding: 0;
+							font-size: 20px;
+							
+						}
+					}
+				}
+				.slws-food-pricing {
+					float: right;
+					width: 20%;
+					text-align: right;
+					font-size: 20px;
+					color: $color_pumpkin_approx;
+				}
+			}
+		}
+	}
+}
+@media screen and(max-width: 768px) {
+	#slws-menus {
+		padding: 5em 0;
+		.slws-food-menu {
+			margin-bottom: 30px;
+			float: left;
+			width: 100%;
+			clear: none !important;
+		}
+	}
+}
