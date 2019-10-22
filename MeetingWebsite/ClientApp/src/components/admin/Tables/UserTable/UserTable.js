@@ -80,7 +80,8 @@ class Tables extends React.Component {
     // this.setState({
     //   danger: !this.state.danger,
     // });
-     this.setState({temp_id:id},this.toggleDanger)
+     this.setState({temp_id:id});
+     this.toggleDanger();
   }
 
   Ban=()=>
@@ -89,10 +90,12 @@ class Tables extends React.Component {
     let id=temp_id;
     let description=temp_description;
     console.log("BAN228__________________________________",id,description);
+    console.log("Ban====================");
     this.props.BanUser({id,description});
   }
 
   PostFilters = (e) => {
+    e.preventDefault();
     console.log("BAN222__________________________________",e);
     this.setState({temp_description:e})
   }
@@ -124,6 +127,7 @@ class Tables extends React.Component {
     let month = tmp_month.value;
     let nickname = tmp_NickName;
     let currentPage = temp_currentpage;
+    console.log("COMPONENTDIDMOUNT");
     this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
@@ -205,10 +209,10 @@ class Tables extends React.Component {
                             <td>{item.city}</td>
                             <td>
                             <div className="animated fadeIn">
-                            <Row>
-                            <Col>
-                            <Button onClick={(e) => this.SetBan(e,item.id)} color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
-                            <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                            <Button 
+                          //  onClick={(e) => this.SetBan(e,item.id)}
+                           color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+                             {/* <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
                              className={'modal-danger ' + this.props.className}>
                             <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
                             <ModalBody>
@@ -218,9 +222,7 @@ class Tables extends React.Component {
                             <Button color="danger" onClick={this.Ban()}>Забанить</Button>{' '}
                             <Button color="info" onClick={this.toggleDanger}>Відміна</Button>
                            </ModalFooter>
-                         </Modal>
-                      </Col>
-                     </Row>
+                         </Modal> */}
                     </div>   
                         </td>
                         </tr>
@@ -228,7 +230,8 @@ class Tables extends React.Component {
                         })
                       }
                     </tbody>
-                  </Table>
+                  </Table>    
+                           
                   <Pagination>
                   <PaginationItem>
                     <PaginationLink previous tag="button"></PaginationLink>
