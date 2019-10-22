@@ -19,10 +19,11 @@ class Boys extends Component {
         isLoading: true,
         tmp_zodiac: {value: 'q', label: 'zodiac'},
         tmp_city: {value:'w', label: 'city'},
-        tmp_age: {value:'', label: ''},   
+        tmp_age: {value:'1', label: '1'},   
         collapse: true,
         fadeIn: true,
-        timeout: 300
+        timeout: 300,
+        currentPage: 1,
       };
 
       handleChange = (name, selectValue) => {
@@ -30,24 +31,25 @@ class Boys extends Component {
       }
       
       filterSearchBoys = () => {
-        const {tmp_zodiac, tmp_city, tmp_age} = this.state;
+        const {tmp_zodiac, tmp_city, tmp_age, currentPage} = this.state;
         let zodiac = tmp_zodiac.value;
         let city = tmp_city.value;
         let age = tmp_age.value;
-        this.props.getBoysData({zodiac, city, age});
+        this.props.getBoysData({zodiac, city, age, currentPage});
       }
 
       componentDidMount = () => {
-        const { tmp_city, tmp_zodiac,tmp_age } = this.state;
+        const { tmp_city, tmp_zodiac,tmp_age, currentPage } = this.state;
         let zodiac = tmp_zodiac.value;
         let city = tmp_city.value;
         let age = tmp_age.value;
-        this.props.getBoysData({zodiac, city, age });
+        this.props.getBoysData({zodiac, city, age, currentPage });
       }
       
   render() {
     const {tmp_city, tmp_zodiac, tmp_age} = this.state;
     const {listCities, listZodiacs} = this.props;
+    console.log("this props ==================",this.props);
     let option=[];
     let counter = 0;    
     for (let i = 18; i<90; i++)
