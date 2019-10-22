@@ -1,0 +1,21 @@
+//colors
+$color_bunker_40_approx: rgba(18, 18, 18, 0.4);
+$color_bunker_30_approx: rgba(18, 18, 18, 0.6);
+
+//urls
+$url_0: url(../img/shish-kebab-417994_1920.jpg)fixed;
+$url_1: url(../img/food-712665_1920.jpg)fixed;
+.callout {
+	padding: 15rem 0;
+	background: linear-gradient(90deg, $color_bunker_40_approx 35%, $color_bunker_30_approx 100%), $url_0;
+
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.callout-1 {
+	padding: 15rem 0;
+	background: linear-gradient(90deg, $color_bunker_40_approx 35%, $color_bunker_30_approx 100%), $url_1;
+
+	background-repeat: no-repeat;
+	background-size: cover;
+}

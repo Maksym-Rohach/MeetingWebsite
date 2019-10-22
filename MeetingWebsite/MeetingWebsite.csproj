@@ -23,10 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191013212219_argon.cs" />
-    <Compile Remove="Migrations\20191013212219_argon.Designer.cs" />
-    <Compile Remove="Migrations\20191014122511_nz.cs" />
-    <Compile Remove="Migrations\20191014122511_nz.Designer.cs" />
+    <Compile Remove="Migrations\20191014171731_n.cs" />
+    <Compile Remove="Migrations\20191014171731_n.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
