@@ -2,9 +2,9 @@ import update from '../../../../helpers/update';
 import BanTableService from './BanTableService';
 
 
-export const MAPING_POST_STARTED = "MAPING_POST_STARTED";
-export const MAPING_POST_SUCCESS = "MAPING_POST_SUCCESS";
-export const MAPING_POST_FAILED = "MAPING_POST_FAILED";
+export const BAN_POST_STARTED = "BAN_POST_STARTED";
+export const BAN_POST_SUCCESS = "BAN_POST_SUCCESS";
+export const BAN_POST_FAILED = "BAN_POST_FAILED";
 
 
 const initialState = {
@@ -33,20 +33,20 @@ export const getBansData = (model) => {
 export const getListActions = {
     started: () => {
         return {
-            type: MAPING_POST_STARTED
+            type: BAN_POST_STARTED
         }
     },  
     success: (data) => {
         console.log("+++++++++++Data", data);
         return {
-            type: MAPING_POST_SUCCESS,
+            type: BAN_POST_SUCCESS,
             payload: data
         }
     },  
     failed: (response) => {
         console.log("failed: (response)", response);
         return {           
-            type: MAPING_POST_FAILED,
+            type: BAN_POST_FAILED,
             //errors: response.data
         }
     }
@@ -57,22 +57,22 @@ export const banTableReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
-      case MAPING_POST_STARTED: {
+      case BAN_POST_STARTED: {
           newState = update.set(state, 'list.loading', true);
           newState = update.set(newState, 'list.success', false);
           newState = update.set(newState, 'list.failed', false);
           break;
       }
-      case MAPING_POST_SUCCESS: {
+      case BAN_POST_SUCCESS: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
           newState = update.set(newState, 'list.data', action.payload);
-          console.log("MAPING_POST_SUCCESS)", action.payload);
+          console.log("BAN_POST_SUCCESS)", action.payload);
 
           break;
       }
-      case MAPING_POST_FAILED: {
+      case BAN_POST_FAILED: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.success', false);
           newState = update.set(newState, 'list.failed', true);

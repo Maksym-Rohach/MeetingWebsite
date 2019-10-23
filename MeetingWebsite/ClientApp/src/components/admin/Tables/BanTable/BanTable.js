@@ -41,7 +41,7 @@ const optionsYear = [
 ];
 
 
-class Tables extends React.Component {
+class BanTable extends React.Component {
 
   state = {
     isLoading: true,
@@ -69,7 +69,7 @@ class Tables extends React.Component {
 
   render() {
     const { tmp_year, tmp_month } = this.state;
-    const { listUsers, isListLoading } = this.props;
+    const { listBans, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
     return (
@@ -110,7 +110,7 @@ class Tables extends React.Component {
                     </thead>
                     <tbody className="align-items-center">
                     {
-                        listUsers.map(item => {
+                        listBans.map(item => {
                           return (<tr key={item.id}>
                             {/* <th scope="row">{counter++}</th> */}
                             <td>{item.nickname}</td>
@@ -136,8 +136,8 @@ class Tables extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listUsers: get(state, "userTable.list.data"),
-    isListLoading: get(state, "userTable.list.loading"),  
+    listBans: get(state, "banTable.list.data"),
+    isListLoading: get(state, "banTable.list.loading"),  
   };
 }
 
@@ -149,5 +149,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+export default connect(mapStateToProps, mapDispatchToProps)(BanTable);
 

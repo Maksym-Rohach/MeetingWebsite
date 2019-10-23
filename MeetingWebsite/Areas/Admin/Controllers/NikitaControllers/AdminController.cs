@@ -60,7 +60,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 userTableModel.Status = "Не забанений";
                 userTableModels.Users.Add(userTableModel);
            }
-            userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable().Count();
+           userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable().Count();
            return Ok(userTableModels);
         }
         [HttpPost("ban-list")]
