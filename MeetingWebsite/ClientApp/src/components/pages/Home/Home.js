@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
+import { Nav, NavItem, NavLink, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
 import './instruments/scss/palette.scss';
 import logo from './instruments/img/logo.jpg';
 const items = [
@@ -87,11 +87,27 @@ render() {
 
       return (
         <React.Fragment>
-          <nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
+
+
+          <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top">
+            <NavItem>
+              <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3">GIRLS</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> BOYS</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> LOGIN</NavLink>
+            </NavItem>
+          </Nav>
+
+
+          {/* <nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
             <div className="container ">
-              {/* <div className="justify-content-left"> */}
                 <a className="navbar-brand" href=""><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </a> 
-              {/* </div>               */}
               <div className="justify-content-center">         
               <ul className="list-inline my-auto">
                 <li className="list-inline-item">
@@ -112,13 +128,7 @@ render() {
               </ul>
               </div> 
               </div>
-              {/* <a className="menu-toggle nav-link my-auto text-white" href="#">
-                <i className="fas fa-bars"></i>
-              </a>
-              <i id='toggle-search' className='icon-eye'></i>
-              <input style={{display: 'none'}} id='searchBar' name='search' type='search' placeholder='Search&hellip;' /> */}
-            
-          </nav>
+          </nav> */}
 
           <nav id="sidebar-wrapper">
             <ul className="sidebar-nav">
