@@ -20,6 +20,8 @@ import React from "react";
 // reactstrap components
 import {
   Card,
+  Badge,
+  Button,
   CardHeader,
   CardBody,
   CardTitle,
@@ -31,6 +33,7 @@ import {
 
 class Tables extends React.Component {
   render() {
+    let counter = 1;
     return (
       <>
        <div className="app flex-row align-items-center">
@@ -45,56 +48,47 @@ class Tables extends React.Component {
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
+                      <th>#</th>
                         <th>Нікнейм</th>
                         {/* <th>Країна</th> */}
-                        <th>Дата реєстрації</th>
+                        <th>Діє до</th>
                         <th>Місто</th>
                         <th>Статус</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <td>{counter++}</td>
                         <td>Помідорка</td>
-                        <td>27/10/18</td>
-                        <td>Користувач</td>
-                        <td>Активний</td>
+                        <td>31.12.19</td>
+                        <td>Rivne</td>
+                        
+                        <td><Badge color="success">Активний</Badge></td>
+                        
+                        {/* <td>Активний</td> */}
                       </tr>
                       <tr>
+                        <td>{counter++}</td>
                         <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td>Активний</td>
+                        <td>31.12.19</td>
+                        <td>Kiyiv</td>
+                        <td><Badge color="success">Активний</Badge></td>
                       </tr>
                       <tr>
+                        <td>{counter++}</td>
                         <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td>Активний</td>                     
+                        <td>31.12.19</td>
+                        <td>Lviv</td>
+                        <td><Badge color="success">Активний</Badge></td> 
                        </tr>
                       <tr>
+                        <td>{counter++}</td>
                         <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td>Активний</td>                 
+                        <td>31.12.19</td>
+                        <td>Odessa</td>
+                        <td><Badge color="success">Активний</Badge></td>
                         </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td>Активний</td> 
-                        </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td>Активний</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td>Активний</td>
-                      </tr>
+                   
                     </tbody>
                   </Table>
                 </CardBody>
