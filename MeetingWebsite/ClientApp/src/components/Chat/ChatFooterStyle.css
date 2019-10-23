@@ -1,0 +1,19 @@
+
+.ChatFooter{
+    bottom:20px;
+    position: fixed;
+    width:100%;
+    
+    
+    }
+    
+    .SendMessage
+    {
+    background:rgb(30, 30, 39);
+    border-radius: 5px;
+    border-color: rgb(43, 30, 46);
+    box-shadow: none;
+    text-decoration: none;
+    width: 20%;
+    color:white;
+    }

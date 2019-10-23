@@ -49,6 +49,9 @@ namespace MeetingWebsite.Areas.Account.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
+            return Ok();
+
+
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
