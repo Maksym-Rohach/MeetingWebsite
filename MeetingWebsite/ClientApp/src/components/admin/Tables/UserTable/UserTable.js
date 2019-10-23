@@ -60,8 +60,8 @@ class Tables extends React.Component {
     tmp_year: { value: '2020', label: '2020р' }, 
     modal: false,
     danger: false,
-    temp_id:"",
-    temp_description:"",
+    temp_id:'',
+    temp_description:'',
     temp_currentpage: 1 
     };
     this.toggle = this.toggle.bind(this);
@@ -80,6 +80,7 @@ class Tables extends React.Component {
     // this.setState({
     //   danger: !this.state.danger,
     // });
+    console.log("SETBAN__________________________________",id);
      this.setState({temp_id:id});
      this.toggleDanger();
   }
@@ -94,8 +95,8 @@ class Tables extends React.Component {
     this.props.BanUser({id,description});
   }
 
-  PostFilters = (e) => {
-    e.preventDefault();
+  PostBanFilters = (e) => {
+    //e.preventDefault();
     console.log("BAN222__________________________________",e);
     this.setState({temp_description:e})
   }
@@ -210,8 +211,19 @@ class Tables extends React.Component {
                             <td>
                             <div className="animated fadeIn">
                             <Button 
-                          //  onClick={(e) => this.SetBan(e,item.id)}
+                            onClick={(e) => this.SetBan(e,item.id)}
                            color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+                           <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                              className={'modal-danger ' + this.props.className}>
+                              <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
+                              <ModalBody>
+                              <Input onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
+                                <Button color="secondary">Ні</Button>
+                              </ModalFooter>
+                            </Modal>
                              {/* <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
                              className={'modal-danger ' + this.props.className}>
                             <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>

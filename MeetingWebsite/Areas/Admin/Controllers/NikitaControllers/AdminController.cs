@@ -45,6 +45,12 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
 
             foreach (var item in users)
             {
+                var temp = _context.UserAccessLocks.Select(a => a).Where(a => item.Id == a.Id).AsQueryable();
+                if (temp.Count()!=0)//проверка чи є бан
+                {
+                    continue;
+                }
+
                 UserTableModel userTableModel = new UserTableModel();
                 userTableModel.Id = item.Id;
                 userTableModel.Nickname = item.NickName;
@@ -78,6 +84,10 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("banuser")]
         public ActionResult BanUser([FromBody] BanUserModel filter)
         {
+            if (filter.Id==null)
+            {
+                return Ok();
+            }
             UserAccessLock userAccessLock = new UserAccessLock();
             userAccessLock.Id = filter.Id;
             userAccessLock.Reason = filter.Description;

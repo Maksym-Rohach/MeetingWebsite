@@ -33,14 +33,14 @@ export const getUsersData = (model) => {
 export const BanUser = (model) => {
     return (dispatch) => {
         dispatch(getListActions.started());
-            UserTableService.banUser(model)
-            .then((response) => {
-                console.log("+++++++++++Response", response);
-                dispatch(getListActions.success(response.data));               
-            }, err=> { throw err; })
-            .catch(err=> {
-              dispatch(getListActions.failed(err.response));
-            });
+            UserTableService.banUser(model);//теба вернути назад список юзеров
+            // .then((response) => {
+            //     console.log("+++++++++++Response", response);
+            //     dispatch(getListActions.success(response.data));               
+            // }, err=> { throw err; })
+            // .catch(err=> {
+            //   dispatch(getListActions.failed(err.response));
+            //});
     }
 }
 
