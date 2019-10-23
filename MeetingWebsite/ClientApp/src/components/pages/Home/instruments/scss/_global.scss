@@ -1,0 +1,310 @@
+
+@font-face {
+	font-family: 'NothingYouCouldDo';
+	src:url('../fonts/NothingYouCouldDo.ttf?srf3rx') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+    background: $black;
+    overflow-x: hidden;
+}
+
+body {
+  @include body-font;
+}
+
+// Custom Button Size
+.btn-xl {
+  padding: 1.25rem 2.5rem;
+}
+
+// Content Section
+.content-section {
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}
+
+.content-section-heading {
+  h2 {
+    font-size: 3rem;
+  }
+  h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+}
+.section-title{
+	font-size: 30px;
+	font-weight: 400;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 2px;
+}
+.section-item-title{
+	font-size: 20px;
+	font-weight: 400;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+.section-item-detail{
+	font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 50px;
+    color: #999;
+    letter-spacing: .39px;
+}
+.underline{
+	height: 2px;
+	width: 50px;
+	margin: 0px auto 60px;
+}
+
+/*prelooader */
+/* line 3, ../scss/modules/_components.scss */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  /* change if the mask should have another color then white */
+  z-index: 9999;
+  /* makes sure it stays on top */
+}
+
+/* line 14, ../scss/modules/_components.scss */
+#loader {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  background-image: url(../../../../../assets/img/loading.gif);
+  /* path to your loading animation */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: -100px 0 0 -100px;
+  /* is width and height divided by two */
+}
+// Typography
+h1,
+h2 {
+  font-family: 'NothingYouCouldDo';  
+}
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+a{
+    color:#f8f9fa !important;
+}
+a:hover{
+  text-decoration:none;
+}
+.text-faded {
+  color: fade-out($white, 0.3);
+}
+
+/* Map */
+
+.map {
+  height: 30rem;
+}
+
+@media(max-width: 992px) {
+  .map {
+    height: 75%;
+  }
+}
+
+.map iframe {
+  pointer-events: none;
+}
+
+#toggle-search {
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+     color: #ffffff;
+}
+
+#toggle-search:hover {
+  color: #efefef;
+}
+span {
+  font-weight: 100;
+  margin-left: 0;
+}
+
+@media screen and (min-width: 320px) {
+  span {
+    margin-left: 10px;
+  }
+}
+
+#searchBar {
+  background-color: #2f2f2f;
+  border: none;
+  color: rgba(239, 239, 239, 0.5);
+  font-size: 12pt;
+  font-weight: 100;
+  margin-right: 10px;
+  padding: .25em .75em;
+  float: right;
+  max-width: 130px;
+  text-align: right;
+  border-radius: 28px;
+}
+
+#toggle-search {
+  float: right;
+}
+
+
+// Scroll to top button
+.scroll-to-top {
+  position: fixed;
+  left: 15px;
+  bottom: 15px;
+
+  display: none;
+
+  width: 50px;
+  height: 50px;
+
+  text-align: center;
+
+  color: white;
+  background: fade-out($gray-800, .5);
+
+  line-height: 45px;
+  &:focus,
+  &:hover {
+    color: white;
+  }
+  &:hover {
+    background: $gray-800;
+  }
+  i {
+    font-weight: 800;
+  }
+}
+ .nav-bg>li>a.active,.nav-bg>li a.active:focus,.nav-bg>li a:hover{
+	 color:none !important;
+	 border:1px solid #EB586F !important;
+	 border-radius:0;
+	 }
+ .nav-tabs .nav-item.show .nav-link,.nav-tabs .nav-link.active{
+    color: #c1c1c1;
+    background-color: transparent;
+    border-color: #dee2e6 #dee2e6 #fff;
+	 }
+ .nav-tabs{
+	 border-bottom:none;
+ }
+ .nav-tabs .nav-link{
+	 border-top-right-radius:0px;
+	 border-top-left-radius:0px;
+	 }
+
+.tab-content{
+	padding:15px;
+	border:1px solid #ddd;
+	}
+.panel-group .panel{
+	background:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	margin-bottom:10px;
+	border:0;
+	border-radius:0;
+	}
+.panel-group .panel-heading{
+	padding:15px;
+	background:#EB586F;
+	}
+.panel-group .panel-title{
+	font-size:16px;
+	color:#fff;
+	font-weight:700;
+	}
+.panel-group .panel-heading+.panel-collapse>.list-group,.panel-group .panel-heading+.panel-collapse>.panel-body{
+	border-top:none;
+	}
+.panel-group .panel-heading>a:after{
+	float:right;
+	}
+.panel-group .panel-heading .panel-title.collapsed:after{
+	float:right;
+	}
+.panel-group .panel-heading>a:after{
+	display:inline-block;
+	vertical-align:middle;
+	font-family:"FontAwesome";
+	font-size:16px;
+	content:"\f0d8";
+	margin-top:-2px;
+	margin-left:10px;
+	-webkit-transform:rotate(0);
+	-moz-transform:rotate(0);
+	-ms-transform:rotate(0);
+	-o-transform:rotate(0);
+	transform:rotate(0);
+	-webkit-transition:all 0.3s;
+	-o-transition:all 0.3s;
+	transition:all 0.3s;
+	}
+.panel-group .panel-heading .panel-title.collapsed:after{
+	-webkit-transform:rotate(180deg);
+	-moz-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	transform:rotate(180deg);
+	}
+.panel-group .panel-body{
+	padding:15px;
+	border:1px solid #ddd;
+	}
+.panel-group.tabbed .panel-heading{
+	background:transparent;
+	padding:15px;
+	border:1px solid #ccc;
+	}
+.panel-group.tabbed a{
+	color:#444;
+}
+.panel-group.tabbed .panel-heading>a:after{
+	float:right;
+	}
+.panel-group.tabbed .panel-heading .panel-title.collapsed:after{
+	float:right;
+	}
+
+//colors
+$color_bunker_50_approx: rgba(18, 18, 18, 0.5);
+$color_bunker_90_approx: rgba(18, 18, 18, 0.9);
+
+//urls
+$url_0: url(../img/kitchen-1310290_1280.jpg);
+
+ .bg-about {
+	min-height: 30rem;
+	position: relative;
+	display: table;
+	width: 100%;
+	height: auto;
+	padding-top: 8rem;
+	padding-bottom: 8rem;
+	background: linear-gradient(90deg, $color_bunker_50_approx 0, $color_bunker_90_approx 100%), $url_0 fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
