@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
-import './style.scss';
 import logo from'../../../assets/img/logo.jpg';
 //import portrait1 from'./img/portrait1-sm.jpg';
 import portrait2 from'../../../assets/img/portrait2.jpg';
