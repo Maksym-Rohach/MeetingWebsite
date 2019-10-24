@@ -49,7 +49,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
-            return Ok();
+           
 
 
             if (!ModelState.IsValid)
@@ -202,24 +202,24 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return Ok(
-               new
-               {
-                   token = _tokenService.CreateToken(user),
-                   refToken = _tokenService.CreateRefreshToken(user)
-               });
+            //return Ok(
+            //   new
+            //   {
+            //       token = _tokenService.CreateToken(user),
+            //       refToken = _tokenService.CreateRefreshToken(user)
+            //   });
 
             //создать юзера  
 
             var result2 = _signInManager
                 .PasswordSignInAsync(user, model.Password, false, false).Result;
 
-            if (!result2.Succeeded)
-            {
-                return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
-            }
+            //if (!result2.Succeeded)
+            //{
+            //    return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+            //}
 
-            await _signInManager.SignInAsync(user, isPersistent: false);
+            //await _signInManager.SignInAsync(user, isPersistent: false);
 
             return Ok(
                  new
