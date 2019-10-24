@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, NavItem, NavLink, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
+import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
 import './instruments/scss/palette.scss';
 import logo from './instruments/img/logo.jpg';
 const items = [
@@ -104,7 +104,6 @@ render() {
             </NavItem>
           </Nav>
 
-
           {/* <nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
             <div className="container ">
                 <a className="navbar-brand" href=""><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </a> 
@@ -130,31 +129,6 @@ render() {
               </div>
           </nav> */}
 
-          <nav id="sidebar-wrapper">
-            <ul className="sidebar-nav">
-              <li className="sidebar-brand mt-3">
-                <a className="js-scroll-trigger" href="index.html">PALETTE</a>
-              </li>
-              <li className="sidebar-nav-item">
-                <a className="js-scroll-trigger" href="index.html">Home</a>
-              </li>
-              <li className="sidebar-nav-item">
-                <a className="js-scroll-trigger" href="about.html">About</a>
-              </li>
-              <li className="sidebar-nav-item">
-                <a className="js-scroll-trigger" href="chef.html">Chef</a>
-              </li>
-              <li className="sidebar-nav-item">
-                <a className="js-scroll-trigger" href="menu.html">Menu</a>
-              </li>
-              <li className="sidebar-nav-item">
-                <a className="js-scroll-trigger" href="testimonials.html">Testimonials</a>
-              </li>
-              <li className="sidebar-nav-item">
-                <a className="js-scroll-trigger" href="reservation.html">Reserve</a>
-              </li>
-            </ul>
-          </nav>
 
           <header id="masthead" className="masthead d-flex pb-5 ">
             <div className="container text-center text-white my-auto">
@@ -287,6 +261,46 @@ render() {
                 </div>
               </div>
             </div>
+                {/* <Row className="container text-white  mt-5 mb-5 ">
+            <Col xs="12" sm="6" md="4">
+              <Card className="border-primary">
+                <CardBody>
+                  Місце для вашої реклами
+                </CardBody>
+              </Card>
+            </Col>
+            <Col xs="12" sm="6" md="4">
+              <Card className="border-primary">
+                <CardBody>
+                  Місце для вашої реклами
+                </CardBody>
+              </Card>
+            </Col>       <Col xs="12" sm="6" md="4">
+              <Card className="border-primary">
+                <CardBody>
+                  Місце для вашої реклами
+                </CardBody>
+              </Card>
+            </Col>       <Col xs="12" sm="6" md="4">
+              <Card className="border-primary">
+                <CardBody>
+                  Місце для вашої реклами
+                </CardBody>
+              </Card>
+            </Col>       <Col xs="12" sm="6" md="4">
+              <Card className="border-primary">
+                <CardBody>
+                  Місце для вашої реклами
+                </CardBody>
+              </Card>
+            </Col>       <Col xs="12" sm="6" md="4">
+              <Card className="border-primary">
+                <CardBody>
+                  Місце для вашої реклами
+                </CardBody>
+              </Card>
+            </Col>
+          </Row> */}
           </section>
 
 
@@ -439,15 +453,14 @@ render() {
                     <div className="container text-center text-white ">
                       <h2 className="mx-auto mb-5 font-italic display-4">Event Reservations
                             </h2>
-                      <a className="btn btn-dark js-scroll-trigger" href="reservation.html">Reserve Now!</a>
+                      <a className="btn btn-dark js-scroll-trigger" href="#">Reserve Now!</a>
                     </div>
                   </section>
                 </div>
               </div>
             </div>
           </section>
-
-
+{/* 
           <section id="reservation" className="description_content mt-3">
             <div className="text-content container">
               <div className="inner contact animated fadeInUp  delay-1s">
@@ -503,7 +516,7 @@ render() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
             
                 
@@ -523,10 +536,6 @@ export default Home;
 //                <Container>
 //                    <Row >
 //                        <Col xs="12" xl="12" >
-//  <Form>
-//  <h1> Сайт знайомств </h1>  
-//  <p className ="text">Привіт світ </p>
-//  </Form> 
 //  <Carousel  
 // {    className="Carousel-fixed-top blur"
 //   interval={false}
