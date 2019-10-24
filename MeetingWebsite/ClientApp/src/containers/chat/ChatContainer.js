@@ -30,9 +30,8 @@ import {Card,
   Label,
   Row
 } from 'reactstrap';
-import ChatHeader from '../../components/Chat/ChatHeader'
-import ChatFooter from '../../components/Chat/ChatFooter'
-import ChatMessages from '../../components/Chat/ChatMessages'
+
+import MessageList from '../../components/Chat/MessageList'
 class ChatLayout extends React.Component {
   render() {
 
@@ -41,18 +40,7 @@ class ChatLayout extends React.Component {
       <>
       <div className=" content">
         <div className="ChatLayout">
-          <Card>
-              <CardHeader>
-                <ChatHeader></ChatHeader>
-              </CardHeader>
-              <CardBody>
-               
-              <ChatMessages></ChatMessages>
-              </CardBody>
-              <CardFooter>
-              <ChatFooter></ChatFooter>
-              </CardFooter>
-            </Card>
+        <MessageList />
             
         </div>
         </div>
