@@ -28,6 +28,8 @@ namespace MeetingWebsite.DAL.Entities
         public virtual DbSet<VipUsers> VipUsers { get; set; }
 
 
+        public virtual DbSet<Messages> Messages { get; set; }
+        public virtual DbSet<UserRecipient> UserRecipient { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
