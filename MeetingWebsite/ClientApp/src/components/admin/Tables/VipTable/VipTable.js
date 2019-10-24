@@ -63,7 +63,7 @@ class Tables extends React.Component {
                         <td>31.12.19</td>
                         <td>Rivne</td>
                         
-                        <td><Badge color="success">Активний</Badge></td>
+                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
                         
                         {/* <td>Активний</td> */}
                       </tr>
@@ -72,21 +72,21 @@ class Tables extends React.Component {
                         <td>Minerva Hooper</td>
                         <td>31.12.19</td>
                         <td>Kiyiv</td>
-                        <td><Badge color="success">Активний</Badge></td>
+                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
                       </tr>
                       <tr>
                         <td>{counter++}</td>
                         <td>Sage Rodriguez</td>
                         <td>31.12.19</td>
                         <td>Lviv</td>
-                        <td><Badge color="success">Активний</Badge></td> 
+                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
                        </tr>
                       <tr>
                         <td>{counter++}</td>
                         <td>Philip Chaney</td>
                         <td>31.12.19</td>
                         <td>Odessa</td>
-                        <td><Badge color="success">Активний</Badge></td>
+                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
                         </tr>
                    
                     </tbody>
