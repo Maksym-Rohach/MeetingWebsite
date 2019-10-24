@@ -9,13 +9,12 @@ export const BOYS_FAILED = "BOYS_FAILED";
 
 const initialState = {
     list: {
-        data: [],
+        getListBoys: [],
         getZodiacs: [],
         getCities: [],
         currentPage: 1,
-        totalCount: 0
-       
-    },  
+        totalCount: 0       
+    },
     loading: false,
     success: false,
     failed: false 
@@ -59,7 +58,7 @@ export const getListActions = {
 
 export const boysReducer = (state = initialState, action) => { 
   let newState = state;
-
+ 
   switch (action.type) {
 
       case BOYS_STARTED: {
@@ -69,13 +68,14 @@ export const boysReducer = (state = initialState, action) => {
           break;
       }
       case BOYS_SUCCESS: {
+        console.log("BOYS_SUCCESS)", action.payload);
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload.data);
+          newState = update.set(newState, 'list.data', action.payload.getListBoys);
           newState = update.set(newState, 'list.getCities', action.payload.cities);
           newState = update.set(newState, 'list.getZodiacs', action.payload.zodiacs);
-          console.log("BOYS_SUCCESS)", action.payload);
+          
 
           break;
       }
