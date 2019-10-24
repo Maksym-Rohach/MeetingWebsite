@@ -23,7 +23,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("users")]
         public ActionResult GetUserTable([FromBody] UserTableFilters filter)//полуробоче перевірити!!!!
         {
-            int count_users = 5,count_pages = 1,minus=0;
+            int count_users = 5,minus=0;
 
             if (filter.CurrentPage==1)
             {
@@ -38,10 +38,6 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             UserTableModels userTableModels = new UserTableModels();
             userTableModels.Users = new List<UserTableModel>();
 
-            //if (filter.CurrentPage==1)
-            //{
-            //  count_pages = (int)Math.Ceiling((double)models.Count()/ count_users);
-            //}
             userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable().Count();
             foreach (var item in users)
             {
@@ -66,9 +62,24 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("ban-list")]
         public ActionResult GetBanTable([FromBody] UserTableFilters filter)
         {
-            var bans = _context.UserAccessLocks.Select(a=>a).Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month).AsQueryable();
+            int count_users = 5,minus = 0;
+
+            if (filter.CurrentPage == 1)
+            {
+                minus = count_users;
+            }
+
+            var bans = _context.UserAccessLocks.Select(a=>a).Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month).Skip(filter.CurrentPage * count_users - minus).Take(count_users).AsQueryable();
+
+            if (filter.NickName != "")
+            {
+                bans = bans.Select(a => a).Where(a => _context.UserProfile.FirstOrDefault(b => b.Id == a.Id).NickName.Contains(filter.NickName));
+            }
+
             BanTableModels banTableModels = new BanTableModels();
             banTableModels.Bans = new List<BanTableModel>();
+            banTableModels.TotalCount = _context.UserAccessLocks.Select(a => a).Where(a => a.LockDate.Year == filter.Year && a.LockDate.Month == filter.Month).AsQueryable().Count();
+
             foreach (var item in bans)
             {
                 BanTableModel banTableModel = new BanTableModel();
@@ -79,8 +90,9 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 banTableModel.Status = "Забанений";
                 banTableModels.Bans.Add(banTableModel);
             }
-            return Ok(banTableModels.Bans);
+            return Ok(banTableModels);
         }
+
         [HttpPost("banuser")]
         public ActionResult BanUser([FromBody] BanUserModel filter)
         {
@@ -97,12 +109,13 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             return Ok(userAccessLock);
         }
 
-        //[HttpPost("shedule-register")]
-        //public ActionResult Paginator([FromBody] UserTableFilters filter)
-        //{
-
-        //    return Ok();
-        //}
+        [HttpPost("unbanuser")]
+        public ActionResult UnBanUser([FromBody] UnBanUserModel filter)
+        {
+            var temp = _context.UserAccessLocks.Remove(_context.UserAccessLocks.Select(a => a).FirstOrDefault(a => a.Id == filter.Id));
+            _context.SaveChanges();
+            return Ok();
+        }
 
         [HttpPost("shedule-register")]
         public ActionResult GetRegistrationShedule([FromBody] RegistrySheduleFilters filter)

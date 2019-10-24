@@ -231,17 +231,6 @@ class UserTable extends React.Component {
                                 <Button color="secondary">Ні</Button>
                               </ModalFooter>
                             </Modal>
-                             {/* <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
-                             className={'modal-danger ' + this.props.className}>
-                            <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
-                            <ModalBody>
-                            <Input onChange={(e) => this.PostFilters(`${e.target.value}`)} placeholder="Причина"></Input>
-                            </ModalBody>
-                            <ModalFooter>
-                            <Button color="danger" onClick={this.Ban()}>Забанить</Button>{' '}
-                            <Button color="info" onClick={this.toggleDanger}>Відміна</Button>
-                           </ModalFooter>
-                         </Modal> */}
                     </div>   
                         </td>
                         </tr>

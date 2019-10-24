@@ -18,8 +18,23 @@ const initialState = {
 
 export const getBansData = (model) => {
     return (dispatch) => {
+        console.log("+++++++++++model++++++++++", model);
         dispatch(getListActions.started());
             BanTableService.banTable(model)
+            .then((response) => {
+                
+                dispatch(getListActions.success(response.data));               
+            }, err=> { throw err; })
+            .catch(err=> {
+              dispatch(getListActions.failed(err.response));
+            });
+    }
+}
+
+export const unBanUser = (model) => {
+    return (dispatch) => {
+        dispatch(getListActions.started());
+        BanTableService.unbanUser(model)//треба вернути назад список юзеров
             .then((response) => {
                 console.log("+++++++++++Response", response);
                 dispatch(getListActions.success(response.data));               
@@ -67,7 +82,7 @@ export const banTableReducer = (state = initialState, action) => {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload);
+          newState = update.set(newState, 'list.data', action.payload.bans);
           console.log("BAN_POST_SUCCESS)", action.payload);
 
           break;
