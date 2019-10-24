@@ -23,7 +23,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("users")]
         public ActionResult GetUserTable([FromBody] UserTableFilters filter)//полуробоче перевірити!!!!
         {
-            int count_users = 2,count_pages = 1,minus=0;
+            int count_users = 5,count_pages = 1,minus=0;
 
             if (filter.CurrentPage==1)
             {
@@ -42,12 +42,13 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             //{
             //  count_pages = (int)Math.Ceiling((double)models.Count()/ count_users);
             //}
-
+            userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable().Count();
             foreach (var item in users)
             {
                 var temp = _context.UserAccessLocks.Select(a => a).Where(a => item.Id == a.Id).AsQueryable();
                 if (temp.Count()!=0)//проверка чи є бан
                 {
+                    userTableModels.TotalCount--;
                     continue;
                 }
 
@@ -60,7 +61,6 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 userTableModel.Status = "Не забанений";
                 userTableModels.Users.Add(userTableModel);
            }
-           userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable().Count();
            return Ok(userTableModels);
         }
         [HttpPost("ban-list")]
