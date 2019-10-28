@@ -62,7 +62,8 @@ class UserTable extends React.Component {
     danger: false,
     temp_id:'',
     temp_description:'',
-    temp_currentpage: 1 
+    temp_currentpage: 1,
+    totalCount:0
     };
     this.toggle = this.toggle.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);  
@@ -77,12 +78,21 @@ class UserTable extends React.Component {
   SetBan=(e,id)=>
   {
     e.preventDefault();
-    // this.setState({
-    //   danger: !this.state.danger,
-    // });
     console.log("SETBAN__________________________________",id);
      this.setState({temp_id:id});
      this.toggleDanger();
+  }
+
+  onClickPage(pageNumber) {
+    const { typeOfSort, sortByAscending } = this.props;
+
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
+    this.setState({ currentPage: pageNumber });
+    this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
   }
 
   Ban=()=>
@@ -240,7 +250,7 @@ class UserTable extends React.Component {
                     </tbody>
                   </Table>    
 
-                    <Paginator>
+                    <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
                    </Paginator>       
   
                 </CardBody>
@@ -257,6 +267,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listUsers: get(state, "userTable.list.data"),
+    totalCount: get(state, "userTable.list.totalCount"),
     isListLoading: get(state, "userTable.list.loading"),  
   };
 }

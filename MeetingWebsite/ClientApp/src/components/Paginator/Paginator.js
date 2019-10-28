@@ -17,9 +17,24 @@ import {
 } from "reactstrap";
 
 class Paginator extends React.Component {
-  render() {
-    return (
+    constructor(props) {
+        super(props);
+        this.state = {
 
+        };
+    }
+
+
+    onPageChanged(e){
+        this.props.callBackParams(e);
+      }
+
+  render()    
+  {
+    const {currentPage}=this.props;
+    let pagesCount=Math.ceil(this.props.totalCount);
+    console.log("TOTAL COUNT",this.props);
+    return (
             <Pagination>
                   <PaginationItem>
                     <PaginationLink previous tag="button"></PaginationLink>
