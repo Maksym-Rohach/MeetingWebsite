@@ -148,9 +148,9 @@ render() {
 
           <header id="masthead" className="masthead d-flex pb-5 ">
             <div className="container text-center text-white my-auto">
-              <h1 className="mb-1 text-white display-4 animated fadeInUp  delay-1s ">PALETTE</h1>
+              <h1 className="mb-1 text-white display-4 animated fadeInUp  delay-1s ">LOVE IS...</h1>
               <h3 className="mb-5">
-                <p className="mb-5 wow fadeInUp  ">A Free Bootstrap 4 Restaurant Theme by Sleak Web Store</p>
+                <p className="mb-5 wow fadeInUp  ">Найкращий сайт знайомств в Україні</p>
               </h3>
               <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a>
             </div>

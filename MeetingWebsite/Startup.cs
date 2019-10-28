@@ -1,8 +1,10 @@
 using MeetingWebsite.DAL.Entities;
+using MeetingWebsite.Helpers;
 using MeetingWebsite.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -11,6 +13,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -64,6 +67,7 @@ namespace MeetingWebsite
                     // set ClockSkew is zero
                     ClockSkew = TimeSpan.Zero
                 };
+                
             });
 
             // In production, the React files will be served from this directory
@@ -96,7 +100,19 @@ namespace MeetingWebsite
             app.UseSpaStaticFiles();
             app.UseSession();
 
-          //  SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+            //  SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+
+            #region InitStaticFiles AdminImages
+            string pathUser = InitStaticFiles
+                .CreateFolderServer(env, this.Configuration,
+                    new string[] { "ImagesPath", "ImagesPathUsers" });
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(pathUser),
+                RequestPath = new PathString("/" + Configuration.GetValue<string>("UserUrlImages"))
+            });
+            #endregion;
 
             app.UseMvc(routes =>
             {
