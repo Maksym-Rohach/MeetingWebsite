@@ -69,11 +69,18 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 minus = count_users;
             }
 
-            var bans = _context.UserAccessLocks.Select(a=>a).Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month).Skip(filter.CurrentPage * count_users - minus).Take(count_users).AsQueryable();
+            var bans = _context.UserAccessLocks
+                .Select(a=>a)
+                .Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month)
+                .Skip(filter.CurrentPage * count_users - minus)
+                .Take(count_users)
+                .AsQueryable();
 
             if (filter.NickName != "")
             {
-                bans = bans.Select(a => a).Where(a => _context.UserProfile.FirstOrDefault(b => b.Id == a.Id).NickName.Contains(filter.NickName));
+                bans = bans
+                    .Select(a => a)
+                    .Where(a => _context.UserProfile.FirstOrDefault(b => b.Id == a.Id).NickName.Contains(filter.NickName));
             }
 
             BanTableModels banTableModels = new BanTableModels();

@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
-
+import Paginator from '../../../Paginator';
 //import Modal from '../../../Notifications/Modals/Modals';
 
 // reactstrap components
@@ -239,27 +239,10 @@ class UserTable extends React.Component {
                       }
                     </tbody>
                   </Table>    
-                           
-                  <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next tag="button"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+
+                    <Paginator>
+                   </Paginator>       
+  
                 </CardBody>
               </Card>
             </Col>
