@@ -84,9 +84,10 @@ class UserTable extends React.Component {
   }
 
   onClickPage(pageNumber) {
-    const { typeOfSort, sortByAscending } = this.props;
-
+   // const { typeOfSort, sortByAscending } = this.props;
+    console.log("STATEEEEEEEEEEEEEEEEEEE__________________________________",this);
     const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;

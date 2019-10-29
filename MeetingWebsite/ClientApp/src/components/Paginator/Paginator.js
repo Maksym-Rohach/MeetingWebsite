@@ -32,16 +32,37 @@ class Paginator extends React.Component {
   render()    
   {
     const {currentPage}=this.props;
-    let pagesCount=Math.ceil(this.props.totalCount);
+    console.log("totalCount COUNT",Math.ceil(this.props.totalCount/10));
+    let pagesCount=Math.ceil(this.props.totalCount/10);
+    let pages=[];
+    let first=currentPage-1;
+    for(let i=first;i<pagesCount;i++)
+    {
+         (i==3)?pages.push(-1):pages.push(i+1);
+    }
+
     console.log("TOTAL COUNT",this.props);
+    console.log("TOTAL COUNT",pages);
     return (
             <Pagination>
                   <PaginationItem>
                     <PaginationLink previous tag="button"></PaginationLink>
                   </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
+
+                  {pages.map(p => {
+              return p === -1 ? (
+                <PaginationItem disabled key={p}>
+                  <PaginationLink tag="button">...</PaginationLink>
+                </PaginationItem>
+              ) : (
+                <PaginationItem active={p === this.props.currentPage} key={p}>
+                  <PaginationLink tag="button" onClick={()=>this.onPageChanged(p)}>
+                    {p}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            })}
+
                   <PaginationItem>
                     <PaginationLink next tag="button"></PaginationLink>
                   </PaginationItem>
