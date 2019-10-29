@@ -1,6 +1,0 @@
-{
-    "name": "AdminTable",
-    "version": "0.0.0",
-    "private": true,
-    "main": "./AdminTable.js"
-  }

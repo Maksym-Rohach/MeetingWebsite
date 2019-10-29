@@ -9,6 +9,7 @@ import { createBrowserHistory } from 'history';
 import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 import {registerReducer} from '../components/pages/register/reducer';
+import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createBrowserHistory({ basename: baseUrl });
@@ -23,8 +24,7 @@ export default function configureStore (history, initialState) {
       userTable: userTableReducer,
       banTable: banTableReducer,
       registryShedule: registrySheduleReducer,
-      register: registerReducer
-     
+      register: registerReducer,
       adminTable: adminTableReducer
     };
 
