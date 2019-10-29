@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
-// import './css/bootstrap.css';
-// import './css/slidefolio.css';
-// import './font-awesome/css';
-// import './font-awesome/fonts';
-
-// import img1 from 'http://pngimg.com/uploads/alien/alien_PNG27.png';
+import './instruments/scss/palette.scss';
+import logo from './instruments/img/logo.jpg';
 const items = [
 {
   src: 'http://pngimg.com/uploads/alien/alien_PNG27.png',
@@ -64,7 +60,7 @@ goToIndex(newIndex) {
 }
 
 render() {
-const {activeIndex} = this.state;
+//const {activeIndex} = this.state;
 
 // const slides = items.map((item)=> {
 // return (
@@ -90,367 +86,438 @@ const slides = items.map((item) => {
 });
 
       return (
-<React.Fragment>
-        
+        <React.Fragment>
+          <nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
+            <div className="container ">
+              {/* <div className="justify-content-left"> */}
+                <a className="navbar-brand" href=""><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </a> 
+              {/* </div>               */}
+              <div className="justify-content-center">         
+              <ul className="list-inline my-auto">
+                <li className="list-inline-item">
+                  <a className="social-link rounded-circle text-white mr-3" href="#">
+                    GIRLS
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="social-link rounded-circle text-white mr-3" href="#">
+                    BOYS
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="social-link rounded-circle text-white" href="#">
+                    LOGIN
+                  </a>
+                </li>
+              </ul>
+              </div> 
+              </div>
+              {/* <a className="menu-toggle nav-link my-auto text-white" href="#">
+                <i className="fas fa-bars"></i>
+              </a>
+              <i id='toggle-search' className='icon-eye'></i>
+              <input style={{display: 'none'}} id='searchBar' name='search' type='search' placeholder='Search&hellip;' /> */}
+            
+          </nav>
 
+          <nav id="sidebar-wrapper">
+            <ul className="sidebar-nav">
+              <li className="sidebar-brand mt-3">
+                <a className="js-scroll-trigger" href="index.html">PALETTE</a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a className="js-scroll-trigger" href="index.html">Home</a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a className="js-scroll-trigger" href="about.html">About</a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a className="js-scroll-trigger" href="chef.html">Chef</a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a className="js-scroll-trigger" href="menu.html">Menu</a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a className="js-scroll-trigger" href="testimonials.html">Testimonials</a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a className="js-scroll-trigger" href="reservation.html">Reserve</a>
+              </li>
+            </ul>
+          </nav>
 
-
-  <div id="top" className="header">
-    <div className="vert-text">
-      <br />
-      
-
-    </div>
-  </div>
-  
-  <div id="nav">
-    <nav className="navbar navbar-new" role="navigation">
-     <div className="container">
-      <div className="navbar-header">
-        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#mobilemenu">
-          <span className="sr-only">Toggle navigation</span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-        </button>
-     
-  <Navbar >
-    <div className="collapse navbar-collapse" id="mobilemenu">
-  
-      <ul className="nav navbar-nav navbar-right text-center">
-        <li><a href="# " ><i className="fa fa-home"></i> Home</a></li>
-        <li><a href="# " ><i className="fa fa-info"></i> About</a></li>
-        <li><a href="# " ><i className="fa fa-laptop"></i> Services</a></li>
-        <li><a href="# " ><i className="fa fa-camera"></i> Portfolio</a></li>
-        <li><a href="# " ><i className="fa fa-envelope"></i> Contact</a></li>
-      </ul>
-    </div>
-
-    </Navbar>
-    </div>
-    
-    </div>
-  </nav>
-  </div>	
-      <div id="about" className="about_us">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 col-md-offset-2 text-center">
-              <h2>About Us</h2>
-              <p className="lead">Lorem ipsum dolor sit amet, ei essent delenit sit, adipisci salutatus has eu. Quis tamquam cu nam. Sed esse deleniti et, ex rebum quaestio his. Audiam deseruisse sed cu, vix ex possim causae omittantur.</p>
+          <header id="masthead" className="masthead d-flex pb-5 ">
+            <div className="container text-center text-white my-auto">
+              <h1 className="mb-1 text-white display-4 animated fadeInUp  delay-1s ">LOVE IS...</h1>
+              <h3 className="mb-5">
+                <p className="mb-5 wow fadeInUp  ">Найкращий сайт знайомств в Україні</p>
+              </h3>
+              <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a>
             </div>
-          </div>
-      </div>
-      </div>
-      <div id="services" className="services">
-        <div className="container">
-          <div className="row">
-                <div className="col-md-4 col-md-offset-4 text-center">
-              <h2>Our Services</h2>
-              <hr/>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-4 text-center">
-              <div className="service-item">
-                <i className="service-icon fa fa-camera-retro fa-3x"></i>
-                <h3>Portrait</h3>
-                <p>Ad has dicat ridens consetetur, eos eu option persius. Mollis cotidieque conclusionemque per id, ne nam alienum liberavisse. </p>
+            <div className="overlay"></div>
+          </header>
+
+          <section className="content-section text-white    bg-primary" id="about">
+            <div className="container">
+              <div className="row p-3">
+
+                <div className="row align-items-center ">
+                  <div className="col-8 col-md-4 animated fadeInUp  delay-1s">
+                    <img alt="image" className="img-fluid" src="./img/bread-4077812_1920.jpg" />
+                  </div>
+
+                  <div className="col-4 col-md-2 animated fadeInUp  delay-1s">
+                    <div className="row">
+                      <div className="col-12">
+                        <img alt="image" className="img-fluid" src="./img/4.jpg" />
+                      </div>
+                    </div>
+
+                    <div className="row mt-4">
+                      <div className="col-12">
+                        <img alt="image" className="img-fluid" src="./img/3.jpg" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className=" col-md-6 col-lg-5 ml-auto pt-5 pt-md-0 animated fadeInUp  delay-1s">
+
+                    <h1><img alt="image" className="img-fluid" src="./img/pallete.svg" /> </h1>
+                    <p className="mt-3">Aenean vitae dolor luctus, aliquet odio vitae, rhoncus enim. In hac habitasse platea dictumst. Integer non viverra ipsum. Pellentesque accumsan orci in molestie finibus. </p>
+                    <p className="mt-3">Aenean vitae dolor luctus, aliquet odio vitae, rhoncus enim. In hac habitasse platea dictumst. Integer non viverra ipsum. Pellentesque accumsan orci in molestie finibus. </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="col-md-4 text-center">
-              <div className="service-item">
-        <i className="service-icon fa fa-camera fa-3x"></i>
-                <h3>Black & white</h3>
-                <p>In mea similique vulputate, ea cum amet malorum dissentiunt. Qui deleniti aliquando cu, ullum soluta his an, id inani salutatus sit.</p>
+          </section>
+
+          <section className=" text-white content-section bg-about">
+            <div className="container">
+              <div className="row align-items-center">
+
+                <div className="col-12 col-lg-6 col-xl-5 ml-sm-auto pt-lg-0 animated fadeInUp  delay-1s">
+                  <h1 className="display-4 font-italic mb-2">We Offer</h1>
+
+                  <div className="row ">
+                    <div className="col-12 col-sm-6 col-xl-5">
+                      <h4 className="my-3 display-5 font-italic">Pasta's</h4>
+                      <p>Nam faucibus euismod velit, a accumsan metus. </p>
+                    </div>
+                    <div className="col-12 col-sm-6 col-xl-5 m-auto pt-3 pt-sm-0">
+                      <h4 className="my-3 display-5 font-italic">Fresh Breads</h4>
+                      <p> Morbi ipsum quam, aliquam vitae risus at, faucibus ultricies quam.</p>
+                    </div>
+                  </div>
+
+                  <div className="row pt-3">
+                    <div className="col-12 col-sm-6 col-xl-5">
+                      <h4 className="my-3 display-5 font-italic">Pizza</h4>
+                      <p>Nam faucibus euismod velit, a accumsan metus. </p>
+                    </div>
+                    <div className="col-12 col-sm-6 col-xl-5 m-auto pt-3 pt-sm-0">
+                      <h4 className="my-3 display-5 font-italic">Farm to Table </h4>
+                      <p> Morbi ipsum quam, aliquam vitae risus at, faucibus ultricies quam.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 col-md-8 col-lg-6 m-md-auto ml-lg-0 mr-lg-auto  mt-2 animated fadeInUp  delay-1s">
+                  <div id="featured-carousel" className="carousel slide carousel-fade" data-ride="carousel">
+
+                    <div className="carousel-inner">
+                      <div className="carousel-item active">
+                        <img className="d-block w-100" src="./img/spaghetti-863304_1280.jpg" alt="First slide" />
+                      </div>
+                      <div className="carousel-item">
+                        <img className="d-block w-100" src="./img/bread-4077812_1920.jpg" alt="Second slide" />
+                      </div>
+                      <div className="carousel-item">
+                        <img className="d-block w-100" src="./img/2.jpg" alt="Third slide" />
+                      </div>
+                      <div className="carousel-item">
+                        <img className="d-block w-100" src="./img/pasta-1181189_1920.jpg" alt="Third slide" />
+                      </div>
+                    </div>
+                    <a className="carousel-control-prev" href="#featured-carousel" role="button" data-slide="prev">
+                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span className="sr-only">Previous</span>
+                    </a>
+                    <a className="carousel-control-next" href="#featured-carousel" role="button" data-slide="next">
+                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span className="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="col-md-4 text-center">
-              <div className="service-item">
-                <i className="service-icon fa fa-globe fa-3x"></i>
-                <h3>Web Design</h3>
-                <p>Ad has dicat ridens consetetur, eos eu option persius. Mollis cotidieque conclusionemque per id, ne nam alienum liberavisse.</p>
+          </section>
+
+
+          <section className=" content-section bg-primary" id="chef">
+            <div className="container text-white  mt-5 mb-5">
+              <div className="row">
+                <div className="col-md-8 animated fadeInUp  delay-1s">
+                  <img className="img-fluid" src="./img/chef-1245676_1920.jpg" alt="" />
+                </div>
+                <div className="col-md-4 animated fadeInUp  delay-1s">
+                  <h2 className="my-3 display-4 font-italic"> Our Chef </h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et. </p>
+                  <h3 className="my-3 display-5 font-italic">Resume</h3>
+                  <nav>
+                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Culinary Studies</a>
+                      <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Work History</a>
+                      <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Bio</a>
+                    </div>
+                  </nav>
+                  <div className="tab-content" id="nav-tabContent">
+                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</div>
+                    <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</div>
+                    <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div id="portfolio" className="portfolio">
-      <div className="container">
-      <div className="row push50">
-            <div className="col-md-4 col-md-offset-4 text-center">
-              <h2>Our Work</h2>
-        <h3>
-        <span className="filter label label-default" data-filter="all">ALL</span>
-    <span className="filter label label-default" data-filter="bw">B&amp;W</span>
-    <span className="filter label label-default" data-filter="nature">Nature</span>
-    <span className="filter label label-default" data-filter="portraits">Portraits</span>
-    </h3>
-              <hr/>
-            </div>
-          </div>
-      
-      <div className="row">
-      
-      <div className="gallery">
-      
-            <ul id="Grid" className="gcontainer">
-              <li className="col-md-4 col-sm-4 col-xs-12 mix bw portraits" data-cat="graphics">
-                <a data-toggle="modal" data-target="#portrait1" className="mix-cover">
-                  <img className="horizontal" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="placeholder"/>
-                  <span className="overlay"><span className="valign"></span><span className="title">Portrait 1</span></span>
-                </a>                
-              </li>
-              <li className="col-md-4 col-sm-4 col-xs-12 mix portraits" data-cat="graphics">
-                  <a data-toggle="modal" data-target="#portrait2" className="mix-cover">
-                    <img className="horizontal" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="placeholder"/>
-                    <span className="overlay"><span className="valign"></span><span className="title">Portrait 2</span></span>
-                  </a>                
-              </li>
-          <li className="col-md-4 col-sm-4 col-xs-12 mix nature" data-cat="nature">
-                  <a data-toggle="modal" data-target="#nature1" className="mix-cover">
-                    <img className="horizontal" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="placeholder"/>
-                    <span className="overlay"><span className="valign"></span><span className="title">Nature 1</span></span>
-                  </a>
-              </li>
-              <li className="col-md-4 col-sm-4 col-xs-12 mix portraits" data-cat="portraits">
-                  <a data-toggle="modal" data-target="#portrait3" className="mix-cover">
-                    <img className="horizontal" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="placeholder"/>
-                    <span className="overlay"><span className="valign"></span><span className="title">Portrait 3</span></span>
-                  </a>
-              </li>
-          <li className="col-md-4 col-sm-4 col-xs-12 mix portraits" data-cat="portraits">
-                  <a data-toggle="modal" data-target="#portrait5" className="mix-cover">
-                    <img className="horizontal" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="placeholder"/>
-                     <span className="overlay"><span className="valign"></span><span className="title">Portrait 5</span></span>
-                  </a>
-              </li>
-          <li className="col-md-4 col-sm-4 col-xs-12 mix nature" data-cat="nature">
-                  <a data-toggle="modal" data-target="#nature" className="mix-cover">
-                    <img className="horizontal" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="placeholder"/>
-                    <span className="overlay"><span className="valign"></span><span className="title">Nature</span></span>
-                  </a>
-              </li>
-              <li className="col-md-4 col-sm-4 col-xs-12 mix portraits" data-cat="portrait">
-                  <a data-toggle="modal" data-target="#portrait4" className="mix-cover green">
-                    <img className="vertical" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="portrait 4"/>
-                    <span className="overlay"><span className="valign"></span><span className="title">Portrait 4</span></span>           
-                  </a>
-              </li>
-          <li className="col-md-4 col-sm-4 col-xs-12 mix bw nature all" data-cat="portrait">
-                  <a data-toggle="modal" data-target="#forest" className="mix-cover green">
-                    <img className="vertical" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="Forest"/>
-                     <span className="overlay"><span className="valign"></span><span className="title">Forest</span></span>                    
-                  </a>
-              </li>
-          <li className="col-md-4 col-sm-4 col-xs-12 mix bw nature all" data-cat="bw">
-                  <a data-toggle="modal" data-target="#bw1" className="mix-cover green">
-                    <img className="vertical" src="http://pngimg.com/uploads/alien/alien_PNG27.png" alt="Black and White"/>
-                     <span className="overlay"><span className="valign"></span><span className="title">Black &amp; White</span></span>                  
-                  </a>
-              </li>
-            </ul>   
-     <div className="modal fade" id="portrait1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Portrait 1</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="Portrait1" src="img/portrait1.jpg"/>
-        </div>
-      </div>
-    </div>
-      </div>
-  
-    <div className="modal fade" id="portrait2" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Portrait 2</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="Portrait1" src="img/portrait2.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="modal fade" id="portrait3" tabindex="-1" role="dialog" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Portrait 3</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="Portrait1" src="img/portrait3.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="modal fade" id="portrait4" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Portrait 4</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="Portrait1" src="img/portrait4.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="modal fade" id="portrait5" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Portrait 5</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="Portrait1" src="img/portrait5.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="modal fade" id="nature" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Nature</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="nature" src="img/nature.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="modal fade" id="nature1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Nature 1</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="nature" src="img/nature1.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>  
-  
-  <div className="modal fade" id="forest" tabindex="-1" role="dialog" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Forest</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="forest" src="img/forest.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="modal fade" id="bw1" tabindex="-1" role="dialog" aria-hidden="true">
-    <div className="modal-dialog">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 className="modal-title text-center">Black and White</h4>
-        </div>
-        <div className="modal-body">
-         <img className="thumbnail" alt="forest" src="img/bw1.jpg"/>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-    </div>	
-        </div>
-      </div>
-        </div>
-       <div id="contact">
-        <div className="container">
-          <div className="row">
-      <div className="col-md-4 col-md-offset-4 text-center">
-              <h2>Contact Us</h2>
-        <hr/>
-            </div>
-            <div className="col-md-5 col-md-offset-3">
-              <form action="contact" id="contact-form" className="form-horizontal">
-        <fieldset>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="name">Your Name</label>
-                    <div className="col-sm-8">
-                      <input type="text"  placeholder="Your Name" className="form-control" name="name" id="name"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="email">Email Address</label>
-                    <div className="col-sm-8">
-                      <input type="text" placeholder="Enter Your Email Address" className="form-control" name="email" id="email"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="subject">Subject</label>
-                    <div className="col-sm-8">
-                      <input type="text" placeholder="Subject" className="form-control" name="subject" id="subject"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-4 control-label" for="message">Your Message</label>
-                    <div className="col-sm-8">
-                      <textarea placeholder="Please Type Your Message" className="form-control" name="message" id="message" rows="3"></textarea>
-                    </div>
-                  </div>
-                  <div className="col-sm-offset-4 col-sm-8">
-                    <button type="submit" className="btn btn-success">Submit</button>
-                    <button type="reset" className="btn btn-primary">Cancel</button>
-                  </div>
-              </fieldset>
-              </form>
-          
-            </div>
-          </div>
-        </div>
-      </div>
-       <footer>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 col-md-offset-3 text-center">
-             <h2>Thank You</h2>
-             <em>Copyright &copy; Company 2013</em>
-            </div>
-          </div>
-        </div>
-      </footer>
-       
+          </section>
 
-      </React.Fragment>
-/* 
 
- 
-//           <div className="animated fadeIn">
-//               <Container>
-//                   <Row >
-//                       <Col xs="12" xl="12" >
-// <Form>
-// <h1> Сайт знайомств </h1>  
-// <p className ="text">Привіт світ </p>
-// </Form> 
-// <Carousel 
-//   className="Carousel-fixed-top blur"
+          <section className="content-section  bg-light text-black ">
+            <div className="container ">
+              <div className="row text-center slws-heading mb-3 animated fadeInUp  delay-1s">
+                <div className="col-md-8 offset-md-2 ">
+                  <h2 className="display-4 font-italic">Testimonials</h2>
+                  <p className="sub-heading ">Nam faucibus euismod velit, a accumsan metus. Morbi ipsum quam.</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s">
+
+                  <div id="testimonials" className="carousel slide " data-ride="carousel">
+
+                    <ol className="carousel-indicators ">
+                      <li data-target="#testimonials" data-slide-to="0" className="active"></li>
+                      <li data-target="#testimonials" data-slide-to="1"></li>
+                      <li data-target="#testimonials" data-slide-to="2"></li>
+                    </ol>
+
+                    <div className="carousel-inner ">
+                      <div className="item carousel-item active">
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <div className="media">
+                              <div className="media-left d-flex mr-3">
+                                <a href="#">
+                                  <img src="img/testimonial1.jpg" alt="" />
+                                </a>
+                              </div>
+                              <div className="media-body">
+                                <div className="testimonial">
+                                  <p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
+                                  <p className="overview "><b>Paula Wilson</b>, Media Analyst</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-sm-6">
+                            <div className="media">
+                              <div className="media-left d-flex mr-3">
+                                <a href="#">
+                                  <img src="img/testimonial2.jpg" alt="" />
+                                </a>
+                              </div>
+                              <div className="media-body">
+                                <div className="testimonial">
+                                  <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
+                                  <p className="overview"><b>Antonio Moreno</b>, Web Developer</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="item carousel-item">
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <div className="media">
+                              <div className="media-left d-flex mr-3">
+                                <a href="#">
+                                  <img src="img/testimonial3.jpg" alt="" />
+                                </a>
+                              </div>
+                              <div className="media-body">
+                                <div className="testimonial">
+                                  <p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
+                                  <p className="overview"><b>Michael Holz</b>, Seo Analyst</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-sm-6">
+                            <div className="media">
+                              <div className="media-left d-flex mr-3">
+                                <a href="#">
+                                  <img src="img/testimonial4.jpg" alt="" />
+                                </a>
+                              </div>
+                              <div className="media-body">
+                                <div className="testimonial">
+                                  <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
+                                  <p className="overview"><b>Mary Saveley</b>, Web Designer</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="item carousel-item">
+                        <div className="row">
+                          <div className="col-sm-6">
+                            <div className="media">
+                              <div className="media-left d-flex mr-3">
+                                <a href="#">
+                                  <img src="img/testimonial2.jpg" alt="" />
+                                </a>
+                              </div>
+                              <div className="media-body">
+                                <div className="testimonial">
+                                  <p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
+                                  <p className="overview"><b>Martin Sommer</b>, UX Analyst</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-sm-6">
+                            <div className="media">
+                              <div className="media-left d-flex mr-3">
+                                <a href="#">
+                                  <img src="img/testimonial4.jpg" alt="" />
+                                </a>
+                              </div>
+                              <div className="media-body">
+                                <div className="testimonial">
+                                  <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
+                                  <p className="overview"><b>John Williams</b>, Web Developer</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-primary text-white text-center" id="services">
+            <div className="container-fluid p-0">
+              <div className="row no-gutters">
+                <div className="col-md-6">
+
+                  <section className="callout">
+                    <div className="container text-center text-white animated fadeInUp  delay-1s">
+                      <h2 className="mx-auto mb-5 font-italic display-4">Need Catering?
+                                <em></em>
+                      </h2>
+                      <a className="btn btn-dark js-scroll-trigger " href="reservation.html">Reserve Now!</a>
+                    </div>
+                  </section>
+                </div>
+                <div className="col-md-6 animated fadeInUp  delay-1s">
+
+                  <section className="callout-1">
+                    <div className="container text-center text-white ">
+                      <h2 className="mx-auto mb-5 font-italic display-4">Event Reservations
+                            </h2>
+                      <a className="btn btn-dark js-scroll-trigger" href="reservation.html">Reserve Now!</a>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <section id="reservation" className="description_content mt-3">
+            <div className="text-content container">
+              <div className="inner contact animated fadeInUp  delay-1s">
+                <div className="contact-form">
+
+                  <form id="contact-us" method="post" action="php/reserve.php">
+                    <div className="container text-white">
+                      <div className="row">
+                        <div className="col-lg-3 col-md-3 mt-3">
+                          <h2>PALETTE </h2>
+                          <h3>Reservations</h3>
+                          <p>
+                            Nam faucibus euismod velit, a accumsan metus. Morbi ipsum quam, aliquam vitae risus at, faucibus ultricies quam..
+                                    </p>
+                        </div>
+                        <div className="col-lg-5 col-md-5 ">
+                          <div className="row">
+                            <div className="col-lg-6 col-md-6 col-sm-6">
+                              <input type="text" name="first_name" id="first_name" required="required" className="form" placeholder="First Name" />
+                              <input type="text" name="last_name" id="last_name" required="required" className="form" placeholder="Last Name" />
+                              <input type="text" name="state" id="state" required="required" className="form" placeholder="State" />
+                              <label type="text" className="sr-only">Date</label>
+                              <input type="text" name="datepicker" id="datepicker" required="required" className="form" placeholder="Reservation Date" />
+                            </div>
+
+                            <div className="col-lg-6 col-md-6 col-sm-6">
+                              <input type="text" name="phone" id="phone" required="required" className="form" placeholder="Phone" />
+                              <input type="text" name="guest" id="guest" required="required" className="form" placeholder="Guest Number" />
+                              <input type="email" name="email" id="email" required="required" className="form" placeholder="Email" />
+                              <input type="text" name="subject" id="subject" required="required" className="form" placeholder="Subject" />
+                            </div>
+
+                            <div className="col-md-6 ">
+                              <button type="submit" id="submit" name="submit" className="text-center btn btn-dark">Reserve</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-4 col-md-4 col-sm-4 col-12 text-white mt-3">
+                          <div className="">
+                            <h2>Hours</h2>
+                            <hr />
+                            <p>Monday to Friday: 7:30 AM - 11:30 AM</p>
+                            <p>Saturday & Sunday: 8:00 AM - 9:00 AM</p>
+                            <p>Monday to Friday: 12:00 PM - 5:00 PM</p>
+                            <p>Monday to Saturday: 6:00 PM - 1:00 AM</p>
+                            <p>Sunday to Monday: 5:30 PM - 12:00 AM</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="clear"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+                                
+                
+          <footer className="footer text-center p-4">
+            <div className="container">
+              <p className="text-muted small mb-0">Copyright &copy; <a href="https://sleakwebstore.com/">Sleak Web Store 2019 </a>| Designed By <a href="https://sleakdesign.com/"> Sleak Design INC</a></p>
+            </div>
+          </footer>         
+        </React.Fragment>
+    );
+  }
+}   
+export default Home;
+
+// {  
+//            <div className="animated fadeIn">
+//                <Container>
+//                    <Row >
+//                        <Col xs="12" xl="12" >
+//  <Form>
+//  <h1> Сайт знайомств </h1>  
+//  <p className ="text">Привіт світ </p>
+//  </Form> 
+//  <Carousel  
+// {    className="Carousel-fixed-top blur"
 //   interval={false}
 //   ride={true}
 //   activeIndex={activeIndex}

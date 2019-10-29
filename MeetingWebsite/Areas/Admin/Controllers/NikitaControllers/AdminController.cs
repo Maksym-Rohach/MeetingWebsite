@@ -24,6 +24,10 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         public ActionResult GetUserTable([FromBody] UserTableFilters filter)
         {
             var models = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
+            if (filter.NickName!="")
+            {
+                models = models.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
+            }
             UserTableModels utms = new UserTableModels();
             utms.Users = new List<UserTableModel>();
             foreach (var item in models)

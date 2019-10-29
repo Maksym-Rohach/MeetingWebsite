@@ -37,7 +37,7 @@ class Tables extends React.Component {
     let counter = 1;
     return (
       <>
-       <div className="content">
+      <div className="content">
           <Row>
             <Col md="12">
               <Card>

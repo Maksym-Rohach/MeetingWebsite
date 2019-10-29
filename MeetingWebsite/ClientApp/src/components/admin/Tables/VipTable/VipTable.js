@@ -36,9 +36,8 @@ class Tables extends React.Component {
     let counter = 1;
     return (
       <>
-       <div className="app flex-row align-items-center">
-         <Container>
-          <Row className="justify-content-center pt-5 mt-5">
+      <div className="content">
+          <Row>
             <Col md="12">
               <Card>
                 <CardHeader>
@@ -95,7 +94,6 @@ class Tables extends React.Component {
               </Card>
             </Col>
           </Row>
-          </Container>
         </div>
       </>
     );
