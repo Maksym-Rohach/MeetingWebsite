@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
-import './instruments/scss/palette.scss';
+import './instruments/css/palette.css';
 import logo from './instruments/img/logo.jpg';
 const items = [
 {
@@ -88,7 +88,6 @@ render() {
       return (
         <React.Fragment>
 
-
           <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top">
             <NavItem>
               <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </NavLink>
@@ -104,31 +103,6 @@ render() {
             </NavItem>
           </Nav>
 
-          {/* <nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
-            <div className="container ">
-                <a className="navbar-brand" href=""><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </a> 
-              <div className="justify-content-center">         
-              <ul className="list-inline my-auto">
-                <li className="list-inline-item">
-                  <a className="social-link rounded-circle text-white mr-3" href="#">
-                    GIRLS
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a className="social-link rounded-circle text-white mr-3" href="#">
-                    BOYS
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a className="social-link rounded-circle text-white" href="#">
-                    LOGIN
-                  </a>
-                </li>
-              </ul>
-              </div> 
-              </div>
-          </nav> */}
-
 
           <header id="masthead" className="masthead d-flex pb-5 ">
             <div className="container text-center text-white my-auto">
@@ -141,6 +115,9 @@ render() {
             <div className="overlay"></div>
           </header>
 
+
+
+          
           <section className="content-section text-white    bg-primary" id="about">
             <div className="container">
               <div className="row p-3">
@@ -175,13 +152,155 @@ render() {
             </div>
           </section>
 
+
+
           <section className=" text-white content-section bg-about">
-            <div className="container">
+            <div className="container" >
               <div className="row align-items-center">
+
+              <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
+                <Col xs="12" sm="4" md="3" >
+                  <Card className="border-primary">
+                    <CardBody>
+                      <div>
+                        <img alt ="photo" className ="img-fluid" src="https://lh3.googleusercontent.com/1M3sCaOjMM9ddzzsDW2P-rlxBMA9VV7hjan_KGxSdvtU6_gHvhICx7OjGHy2Kv8S0kZuTXqdhYDOr-J8nNZqCooei78ioKP9XLpf4GntSzwf_NC4gjKrXZlgc-0OQI2lxJgxaoAmpJLiUGRVMN3X-Uu_eP_fQ6jJ5K-kcZ3BKj9pM05u7YDhW8bcwWhRiOYBNkvzMFZ_fVqA3Gt0tggMvEZ-wT1rt7YrLYlz8MFStGI8Z75CDLKA-24xVhnKhSFxoIvZ-iIMr858-zTiCk5xNObY0NbK1yFJnh_ERiiJ_rAOTGxICjI_L7Rb0NpGZCl0bRS2BAoh87MChO59Cp9XGsrgde7u_GFnsA0ywni3LeJSHAOFxGyAlvscbaCVvr_IkU0BznZcdLGjoJlodd5AP5N8OG7ggZjzKZbrKaIQ4GfmG9A9ia8YMocYIz9WzNIs8bHDYyrZcAu7oeKqx2K7wJ49nZ1nt1xs98l4iUi89hqTXOhpKnN2Yn8UHAMnji1rB4Sxqwpd8VKbcI5KDVTt1UMp4E-dD2zRDNTIVcBVT4yM8s3ZSaXpdNmtAyP_foVttfB1QCc5eH3tshuXhhfAmufyDjFSlg_GXwphpiYSlXVzdkVKPo6wOl_f6aBwiz8By_yEHeyyrF9zgd9PmSgk_jckIEoPWZXOChY6vSWxjzpjD4xEk35Tc7c=w495-h880-no" />
+                     </div>
+                       Місце для вашої реклами
+                <div className="text-center">
+                  <a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                </div>
+                  </CardBody>
+              </Card>
+            </Col>
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>       
+            <Col xs="12" sm="4" md="3">
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/564x/00/97/1b/00971b1a4b0e1fd3b369cfc14b3f5a13.jpg" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>     
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                   <div><img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/564x/9b/c7/ef/9bc7efbff02137d6048946634162b4b8.jpg" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>     
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/74440160_509691536279591_223344415425429504_n.jpg?_nc_cat=108&_nc_oc=AQn06gXeZzF4m1JpXFKhf0g6RzTrwuVihYmzC98nhufF1jZFsdP84_V_f8lZcz7U0OI&_nc_ht=scontent.fdnk1-1.fna&oh=25f228cfc9ea4fe5edb97511d6ca6cd4&oe=5E52F3AB" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>    
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/originals/1f/dd/28/1fdd287d6cc483f3630ad56e283a32ae.jpg" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div>
+                  <img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/564x/00/97/1b/00971b1a4b0e1fd3b369cfc14b3f5a13.jpg" />
+                </div>
+                  Місце для вашої реклами
+                <div className="text-center">
+                  <a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                </div>
+                  </CardBody>
+              </Card>
+            </Col>
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>       
+            <Col xs="12" sm="4" md="3">
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/564x/00/97/1b/00971b1a4b0e1fd3b369cfc14b3f5a13.jpg" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>     
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                   <div><img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/564x/9b/c7/ef/9bc7efbff02137d6048946634162b4b8.jpg" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>     
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/74440160_509691536279591_223344415425429504_n.jpg?_nc_cat=108&_nc_oc=AQn06gXeZzF4m1JpXFKhf0g6RzTrwuVihYmzC98nhufF1jZFsdP84_V_f8lZcz7U0OI&_nc_ht=scontent.fdnk1-1.fna&oh=25f228cfc9ea4fe5edb97511d6ca6cd4&oe=5E52F3AB" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>    
+            <Col xs="12" sm="4" md="3" >
+              <Card className="border-primary">
+                <CardBody>
+                <div><img alt ="photo" className ="img-fluid" src="https://i.pinimg.com/originals/1f/dd/28/1fdd287d6cc483f3630ad56e283a32ae.jpg" />
+                  </div>
+                  Місце для вашої реклами
+                  <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+
+{/* 
 
                 <div className="col-12 col-lg-6 col-xl-5 ml-sm-auto pt-lg-0 animated fadeInUp  delay-1s">
                   <h1 className="display-4 font-italic mb-2">We Offer</h1>
-
                   <div className="row ">
                     <div className="col-12 col-sm-6 col-xl-5">
                       <h4 className="my-3 display-5 font-italic">Pasta's</h4>
@@ -230,13 +349,12 @@ render() {
                       <span className="sr-only">Next</span>
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </section>
 
-
-          <section className=" content-section bg-primary" id="chef">
+          {/* <section className=" content-section bg-primary" id="chef">
             <div className="container text-white  mt-5 mb-5">
               <div className="row">
                 <div className="col-md-8 animated fadeInUp  delay-1s">
@@ -261,47 +379,7 @@ render() {
                 </div>
               </div>
             </div>
-                {/* <Row className="container text-white  mt-5 mb-5 ">
-            <Col xs="12" sm="6" md="4">
-              <Card className="border-primary">
-                <CardBody>
-                  Місце для вашої реклами
-                </CardBody>
-              </Card>
-            </Col>
-            <Col xs="12" sm="6" md="4">
-              <Card className="border-primary">
-                <CardBody>
-                  Місце для вашої реклами
-                </CardBody>
-              </Card>
-            </Col>       <Col xs="12" sm="6" md="4">
-              <Card className="border-primary">
-                <CardBody>
-                  Місце для вашої реклами
-                </CardBody>
-              </Card>
-            </Col>       <Col xs="12" sm="6" md="4">
-              <Card className="border-primary">
-                <CardBody>
-                  Місце для вашої реклами
-                </CardBody>
-              </Card>
-            </Col>       <Col xs="12" sm="6" md="4">
-              <Card className="border-primary">
-                <CardBody>
-                  Місце для вашої реклами
-                </CardBody>
-              </Card>
-            </Col>       <Col xs="12" sm="6" md="4">
-              <Card className="border-primary">
-                <CardBody>
-                  Місце для вашої реклами
-                </CardBody>
-              </Card>
-            </Col>
-          </Row> */}
-          </section>
+          </section> */}
 
 
           <section className="content-section  bg-light text-black ">
@@ -440,10 +518,10 @@ render() {
 
                   <section className="callout">
                     <div className="container text-center text-white animated fadeInUp  delay-1s">
-                      <h2 className="mx-auto mb-5 font-italic display-4">Need Catering?
+                      <h2 className="mx-auto mb-5 font-italic display-4">Хлопця або чоловіка
                                 <em></em>
                       </h2>
-                      <a className="btn btn-dark js-scroll-trigger " href="reservation.html">Reserve Now!</a>
+                      <a className="btn btn-dark js-scroll-trigger " href="reservation.html">Знайти!</a>
                     </div>
                   </section>
                 </div>
@@ -451,76 +529,18 @@ render() {
 
                   <section className="callout-1">
                     <div className="container text-center text-white ">
-                      <h2 className="mx-auto mb-5 font-italic display-4">Event Reservations
+                      <h2 className="mx-auto mb-5 font-italic display-4">Дівчину або жінку
                             </h2>
-                      <a className="btn btn-dark js-scroll-trigger" href="#">Reserve Now!</a>
+                      <a className="btn btn-dark js-scroll-trigger" href="#">Знайти!</a>
                     </div>
                   </section>
                 </div>
               </div>
             </div>
           </section>
-{/* 
-          <section id="reservation" className="description_content mt-3">
-            <div className="text-content container">
-              <div className="inner contact animated fadeInUp  delay-1s">
-                <div className="contact-form">
 
-                  <form id="contact-us" method="post" action="php/reserve.php">
-                    <div className="container text-white">
-                      <div className="row">
-                        <div className="col-lg-3 col-md-3 mt-3">
-                          <h2>PALETTE </h2>
-                          <h3>Reservations</h3>
-                          <p>
-                            Nam faucibus euismod velit, a accumsan metus. Morbi ipsum quam, aliquam vitae risus at, faucibus ultricies quam..
-                                    </p>
-                        </div>
-                        <div className="col-lg-5 col-md-5 ">
-                          <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-6">
-                              <input type="text" name="first_name" id="first_name" required="required" className="form" placeholder="First Name" />
-                              <input type="text" name="last_name" id="last_name" required="required" className="form" placeholder="Last Name" />
-                              <input type="text" name="state" id="state" required="required" className="form" placeholder="State" />
-                              <label type="text" className="sr-only">Date</label>
-                              <input type="text" name="datepicker" id="datepicker" required="required" className="form" placeholder="Reservation Date" />
-                            </div>
 
-                            <div className="col-lg-6 col-md-6 col-sm-6">
-                              <input type="text" name="phone" id="phone" required="required" className="form" placeholder="Phone" />
-                              <input type="text" name="guest" id="guest" required="required" className="form" placeholder="Guest Number" />
-                              <input type="email" name="email" id="email" required="required" className="form" placeholder="Email" />
-                              <input type="text" name="subject" id="subject" required="required" className="form" placeholder="Subject" />
-                            </div>
-
-                            <div className="col-md-6 ">
-                              <button type="submit" id="submit" name="submit" className="text-center btn btn-dark">Reserve</button>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-4 col-md-4 col-sm-4 col-12 text-white mt-3">
-                          <div className="">
-                            <h2>Hours</h2>
-                            <hr />
-                            <p>Monday to Friday: 7:30 AM - 11:30 AM</p>
-                            <p>Saturday & Sunday: 8:00 AM - 9:00 AM</p>
-                            <p>Monday to Friday: 12:00 PM - 5:00 PM</p>
-                            <p>Monday to Saturday: 6:00 PM - 1:00 AM</p>
-                            <p>Sunday to Monday: 5:30 PM - 12:00 AM</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="clear"></div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </section> */}
-
-            
-                
-          <footer className="footer text-center p-4">
+       <footer className="footer text-center p-4">
             <div className="container">
               <p className="text-muted small mb-0">Copyright &copy; <a href="https://sleakwebstore.com/">Sleak Web Store 2019 </a>| Designed By <a href="https://sleakdesign.com/"> Sleak Design INC</a></p>
             </div>
