@@ -66,6 +66,7 @@ class UserTable extends React.Component {
     totalCount:0
     };
     this.toggle = this.toggle.bind(this);
+    this.onClickPage = this.onClickPage.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);  
   }
 //Modal
@@ -85,14 +86,14 @@ class UserTable extends React.Component {
 
   onClickPage(pageNumber) {
    // const { typeOfSort, sortByAscending } = this.props;
-    console.log("STATEEEEEEEEEEEEEEEEEEE__________________________________",this);
-    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+    const { tmp_year,tmp_month,tmp_NickName} = this.state;
 
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    let currentPage = temp_currentpage;
-    this.setState({ currentPage: pageNumber });
+    let currentPage = pageNumber;
+    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
     this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
   }
 

@@ -32,7 +32,7 @@ class Paginator extends React.Component {
   render()    
   {
     const {currentPage}=this.props;
-    console.log("totalCount COUNT",Math.ceil(this.props.totalCount/10));
+    //console.log("totalCount COUNT",Math.ceil(this.props.totalCount/10));
     let pagesCount=Math.ceil(this.props.totalCount/10);
     let pages=[];
     let first=currentPage-1;
@@ -40,9 +40,9 @@ class Paginator extends React.Component {
     {
          (i==3)?pages.push(-1):pages.push(i+1);
     }
-
-    console.log("TOTAL COUNT",this.props);
-    console.log("TOTAL COUNT",pages);
+    console.log("CURENT PAGE ON PAGINATOR!!!!!!!!!!!!!!",currentPage);
+    console.log("PROPS ON PAGINATOR",this.props);
+   // console.log("TOTAL COUNT",pages);
     return (
             <Pagination>
                   <PaginationItem>
