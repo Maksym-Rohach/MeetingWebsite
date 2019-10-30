@@ -25,6 +25,9 @@ namespace MeetingWebsite.DAL.Entities
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<RefreshToken> RefreshToken { get; set; }
         public virtual DbSet<UserAccessLock> UserAccessLocks { get; set; }
+        public virtual DbSet<VipUsers> VipUsers { get; set; }
+
+
         public virtual DbSet<Messages> Messages { get; set; }
         public virtual DbSet<UserRecipient> UserRecipient { get; set; }
 
