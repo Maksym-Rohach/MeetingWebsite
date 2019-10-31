@@ -22,7 +22,7 @@ caption: '... це виявити найкраще одне в одному',
   //caption: 'Пончик',
   caption: 'покласти часточку лимона в її чай.',
 },
-];
+]; 
 
 class Home extends Component {
 
@@ -89,6 +89,14 @@ const {activeIndex} = this.state;
        captionHeader={item.caption} />
      </CarouselItem>
    );
+ });
+
+
+      <CarouselCaption 
+      captionText={item.caption} 
+      captionHeader={item.caption} />
+   </CarouselItem>
+  );
  });
 
       return (
@@ -378,7 +386,8 @@ const {activeIndex} = this.state;
               <div className="row">
                 <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s">
 
-                  <div id="testimonials" className="carousel slide " data-ride="carousel">
+      </Container>
+      </div> 
 
                   <div className="animated fadeIn">
                       <Container>
