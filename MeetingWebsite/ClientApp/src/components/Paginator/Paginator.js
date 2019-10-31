@@ -38,7 +38,7 @@ class Paginator extends React.Component {
     let first=currentPage-1;
     for(let i=first;i<pagesCount;i++)
     {
-         (i==3)?pages.push(-1):pages.push(i+1);
+         if(i==first+3)pages.push(-1);else if(i!=0) pages.push(i);
     }
     console.log("CURENT PAGE ON PAGINATOR!!!!!!!!!!!!!!",currentPage);
     console.log("PROPS ON PAGINATOR",this.props);
