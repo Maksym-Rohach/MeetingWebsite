@@ -5,7 +5,9 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
-import Modal from '../../../Notifications/Modals/Modals';
+
+//import Modal from '../../../Notifications/Modals/Modals';
+
 // reactstrap components
 import {
   Card,
@@ -20,7 +22,8 @@ import {
   Input,
   Pagination, 
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  Modal, ModalBody, ModalFooter, ModalHeader
 } from "reactstrap";
 
 const optionsMonth = [
@@ -46,47 +49,108 @@ const optionsYear = [
 ];
 
 
+class UserTable extends React.Component {
 
-class Tables extends React.Component {
-
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     isLoading: true,
     tmp_NickName: '',
     tmp_month: { value: '1', label: 'Січень' },
-    tmp_year: { value: '2019', label: '2019р' },   
+    tmp_year: { value: '2020', label: '2020р' }, 
+    modal: false,
+    danger: false,
+    temp_id:'',
+    temp_description:'',
+    temp_currentpage: 1 
+    };
+    this.toggle = this.toggle.bind(this);
+    this.toggleDanger = this.toggleDanger.bind(this);  
+  }
+//Modal
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 
+  SetBan=(e,id)=>
+  {
+    e.preventDefault();
+    // this.setState({
+    //   danger: !this.state.danger,
+    // });
+    console.log("SETBAN__________________________________",id);
+     this.setState({temp_id:id});
+     this.toggleDanger();
+  }
+
+  Ban=()=>
+  {
+    const { temp_id,temp_description} = this.state;
+    let id=temp_id;
+    let description=temp_description;
+    // const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    // let year = tmp_year.value;
+    // let month = tmp_month.value;
+    // let nickname = tmp_NickName;
+    // let currentPage = temp_currentpage;
+    console.log("BAN228__________________________________",id,description);
+    console.log("Ban====================");
+    this.props.BanUser({id,description});
+    //this.props.getUsersData({ year,month,nickname,currentPage});
+
+  }
+
+  PostBanFilters = (e) => {
+    //e.preventDefault();
+    console.log("BAN222__________________________________",e);
+    this.setState({temp_description:e})
+  }
+
+  toggleDanger() {
+    this.setState({
+      danger: !this.state.danger,
+    });
+  }
+
+//Table
   handleChange = (name, selectValue) => {
     this.setState({ [name]: selectValue },this.filterSearchData);
   }
 
 
   filterSearchData = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
   componentDidMount = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    console.log("COMPONENTDIDMOUNT");
+    this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
-  Click(e)//проблема тут!!!
+  Click(e)
   {
     e.preventDefault();
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
     console.log("CLICK__________________________________",tmp_NickName);
-    this.props.getUsersData({year,month,nickname})
+    this.props.getUsersData({year,month,nickname,currentPage})
   }
+
   PostFilters = (e) => {
     console.log("EEEEEEEE",e);
     this.setState({tmp_NickName:e})
@@ -151,13 +215,31 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                            <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td>
-                          </tr>
+                            <td>
+                            <div className="animated fadeIn">
+                            <Button 
+                            onClick={(e) => this.SetBan(e,item.id)}
+                           color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+                           <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                              className={'modal-danger ' + this.props.className}>
+                              <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
+                              <ModalBody>
+                              <Input onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
+                                <Button color="secondary">Ні</Button>
+                              </ModalFooter>
+                            </Modal>
+                    </div>   
+                        </td>
+                        </tr>
                           )
                         })
                       }
                     </tbody>
-                  </Table>
+                  </Table>    
+                           
                   <Pagination>
                   <PaginationItem>
                     <PaginationLink previous tag="button"></PaginationLink>
@@ -200,9 +282,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUsersData: filter => {
       dispatch(getListActions.getUsersData(filter));
+    },
+    BanUser: filter => {
+      dispatch(getListActions.BanUser(filter));
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+export default connect(mapStateToProps, mapDispatchToProps)(UserTable);
 

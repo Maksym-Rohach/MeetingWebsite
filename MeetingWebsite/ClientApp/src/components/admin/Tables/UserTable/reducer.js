@@ -30,6 +30,20 @@ export const getUsersData = (model) => {
     }
 }
 
+export const BanUser = (model) => {
+    return (dispatch) => {
+        dispatch(getListActions.started());
+            UserTableService.banUser(model)//треба вернути назад список юзеров
+            .then((response) => {
+                console.log("+++++++++++Response", response);
+                dispatch(getListActions.success(response.data));               
+            }, err=> { throw err; })
+            .catch(err=> {
+              dispatch(getListActions.failed(err.response));
+            });
+    }
+}
+
 export const getListActions = {
     started: () => {
         return {
@@ -67,9 +81,8 @@ export const userTableReducer = (state = initialState, action) => {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload);
+          newState = update.set(newState, 'list.data', action.payload.users);
           console.log("MAPING_POST_SUCCESS)", action.payload);
-
           break;
       }
       case MAPING_POST_FAILED: {
