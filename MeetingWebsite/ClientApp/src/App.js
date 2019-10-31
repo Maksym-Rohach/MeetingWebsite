@@ -17,6 +17,7 @@ const AdminUsers = React.lazy(() => import('./components/admin/Users'));
 const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/Home'));
 const Boys = React.lazy(() => import('./components/boys'));
+const Register = React.lazy(() => import('./components/pages/register'));
 
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
             <React.Suspense fallback={loading()}>
                 <Switch>
                     <Route path="/login" name="Login" render={props => <Login {...props} />} />
+                    <Route path="/register" name="Register" render={props => <Register {...props} />} />
                     <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
                     <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
                     <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    

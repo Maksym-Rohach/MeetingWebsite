@@ -15,7 +15,7 @@ namespace MeetingWebsite.DAL.Entities
         public string Text { get; set; }
 
         public DateTime DateCreate { get; set; }
-        public DateTime ? DateRecipientRead { get; set; }
+        public DateTime? DateRecipientRead { get; set; }
 
         [ForeignKey("UserSender")]
         public string SenderId { get; set; }
@@ -24,6 +24,12 @@ namespace MeetingWebsite.DAL.Entities
         [ForeignKey("UserRecipient")]
         public string RecipientId { get; set; }
         public virtual UserRecipient UserRecipient { get; set; }
-
+        public bool IsValide() {
+            if ( this.RecipientId == null || this.SenderId == null || this.Text == null || this.Text.Count() == 0 || this.Text.Count() > 300 )
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
