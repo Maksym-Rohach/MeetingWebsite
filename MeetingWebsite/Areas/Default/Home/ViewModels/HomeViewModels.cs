@@ -10,13 +10,12 @@ namespace MeetingWebsite.Areas.Default.Home.ViewModels
     {
         public string City { get; set; }
         public string Zodiac { get; set; }
-       // public string Avatar { get; set; }
+        // public string Avatar { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
     }
     public class GetListHomeModel
     {
-    public List<GetHomeUserModel> GetHomeUserModel { get; set; }
-
+        public List<GetHomeUserModel> GetHomeUserModel { get; set; }
     }
 }

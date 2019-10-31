@@ -28,8 +28,8 @@ body {
 }
 
 .content-section {
-  padding-top: 12rem;
-  padding-bottom: 12rem;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
 }
 
 .content-section-heading h2 {
@@ -384,83 +384,6 @@ span {
 }
 
 /* Side Menu */
-.navbar.navbar-expand-lg {
-  background: #121212;
-}
-
-#sidebar-wrapper {
-  position: fixed;
-  z-index: 999;
-  right: 0;
-  width: 450px;
-  height: 100%;
-  -webkit-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s;
-  -webkit-transform: translateX(450px);
-  transform: translateX(450px);
-  background: #121212;
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-nav {
-  position: absolute;
-  top: 0;
-  width: 450px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.sidebar-nav li {
-  border-bottom: 1px solid #c1c1c1;
-}
-
-.sidebar-nav li.sidebar-nav-item a {
-  display: block;
-  text-decoration: none;
-  color: #ffffff;
-  padding: 15px;
-  padding-left: 30%;
-  font-family: 'NothingYouCouldDo';
-}
-
-.sidebar-nav li a:hover {
-  text-decoration: none;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-  text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-  font-size: 1.2rem;
-  background: rgba(52, 58, 64, 0.1);
-  height: 80px;
-  line-height: 50px;
-  padding-top: 30px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-  color: #ffffff;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-  color: #fff;
-  background: none;
-}
-
-#sidebar-wrapper.active {
-  right: 450px;
-  width: 450px;
-  -webkit-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s;
-}
-
 .callout {
   padding: 15rem 0;
   background: -webkit-gradient(linear, left top, right top, color-stop(35%, rgba(18, 18, 18, 0.4)), to(rgba(18, 18, 18, 0.6))), url(../img/shish-kebab-417994_1920.jpg) fixed;
@@ -893,3 +816,23 @@ a:hover, a:focus, a:active {
 .text-secondary {
   color: #ecb807 !important;
 }
+
+.homeConteiner {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-right: auto;
+  padding-left: auto;
+}
+@media (min-width: 576px) {
+  .homeContainer {
+    max-width: 540px; } }
+@media (min-width: 768px) {
+  .homeContainer {
+    max-width: 720px; } }
+@media (min-width: 992px) {
+  .homeContainer {
+    max-width: 960px; } }
+@media (min-width: 1200px) {
+  .homeContainer {
+    max-width: 1340px; } }
