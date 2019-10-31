@@ -1,103 +1,243 @@
-/*!
+// import React from "react";
+// import { connect } from 'react-redux';
+// import get from "lodash.get";
+// import { push } from 'react-router-redux';
+// import * as getListActions from './reducer';
+// import EclipseWidget from '../../../eclipse';
+// import Select from 'react-select';
+// import Modal from '../../../Notifications/Modals/Modals';
+// // reactstrap components
+// import {
+//   Card,
+//   CardHeader,
+//   CardBody,
+//   CardTitle,
+//   Table,
+//   Row,
+//   Col,
+//   Container,
+//   Button,
+//   Input,
+//   Pagination, 
+//   PaginationItem,
+//   PaginationLink
+// } from "reactstrap";
 
-=========================================================
-* Black Dashboard React v1.0.0
-=========================================================
+// const optionsMonth = [
+  
+//   { value: '1', label: 'Січень' },
+//   { value: '2', label: 'Лютень' },
+//   { value: '3', label: 'Березень' },
+//   { value: '4', label: 'Квітень' },
+//   { value: '5', label: 'Травень' },
+//   { value: '6', label: 'Червень' },
+//   { value: '7', label: 'Липень' },
+//   { value: '8', label: 'Серпень' },
+//   { value: '9', label: 'Вересень' },
+//   { value: '10', label: 'Жовтень' },
+//   { value: '11', label: 'Листопад' },
+//   { value: '12', label: 'Грудень' }
+// ];
 
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
+// const optionsYear = [
+//   { value: '2018', label: '2018р' },
+//   { value: '2019', label: '2019р' },
+//   { value: '2020', label: '2020р' },
+// ];
 
-* Coded by Creative Tim
 
-=========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// class Tables extends React.Component {
 
-*/
-import React from "react";
+//   state = {
+//     isLoading: true,
+//     tmp_NickName: '',
+//     tmp_month: { value: '1', label: 'Січень' },
+//     tmp_year: { value: '2019', label: '2019р' },   
+//   }
 
-// reactstrap components
-import {
-  Card,
-  Badge,
-  Button,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Table,
-  Row,
-  Col,
-  Container
-} from "reactstrap";
+//   handleChange = (name, selectValue) => {
+//     this.setState({ [name]: selectValue },this.filterSearchData);
+//   }
 
-class Tables extends React.Component {
-  render() {
-    let counter = 1;
-    return (
-      <>
-      <div className="content">
-          <Row>
-            <Col md="12">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">Vip таблиця</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Table className="tablesorter" responsive>
-                    <thead className="text-primary">
-                      <tr>
-                      <th>#</th>
-                        <th>Нікнейм</th>
-                        {/* <th>Країна</th> */}
-                        <th>Діє до</th>
-                        <th>Місто</th>
-                        <th>Статус</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{counter++}</td>
-                        <td>Помідорка</td>
-                        <td>31.12.19</td>
-                        <td>Rivne</td>
-                        
-                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
-                        
-                        {/* <td>Активний</td> */}
-                      </tr>
-                      <tr>
-                        <td>{counter++}</td>
-                        <td>Minerva Hooper</td>
-                        <td>31.12.19</td>
-                        <td>Kiyiv</td>
-                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
-                      </tr>
-                      <tr>
-                        <td>{counter++}</td>
-                        <td>Sage Rodriguez</td>
-                        <td>31.12.19</td>
-                        <td>Lviv</td>
-                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
-                       </tr>
-                      <tr>
-                        <td>{counter++}</td>
-                        <td>Philip Chaney</td>
-                        <td>31.12.19</td>
-                        <td>Odessa</td>
-                        <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
-                        </tr>
-                   
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </>
-    );
-  }
-}
 
-export default Tables;
+//   filterSearchData = () => {
+//     const { tmp_year,tmp_month,tmp_NickName } = this.state;
+//     let year = tmp_year.value;
+//     let month = tmp_month.value;
+//     let nickname = tmp_NickName;
+//     this.props.getUsersData({ year,month,nickname});
+//   }
+
+//   componentDidMount = () => {
+//     const { tmp_year,tmp_month,tmp_NickName } = this.state;
+//     let year = tmp_year.value;
+//     let month = tmp_month.value;
+//     let nickname = tmp_NickName;
+//     this.props.getUsersData({ year,month,nickname});
+//   }
+
+//   // Click(e)//проблема тут!!!
+//   // {
+//   //   e.preventDefault();
+//   //   const { tmp_year,tmp_month,tmp_NickName } = this.state;
+//   //   let year = tmp_year.value;
+//   //   let month = tmp_month.value;
+//   //   let nickname = tmp_NickName;
+//   //   console.log("CLICK__________________________________",tmp_NickName);
+//   //   this.props.getUsersData({year,month,nickname})
+//   // }
+//   PostFilters = (e) => {
+//     console.log("EEEEEEEE",e);
+//     this.setState({tmp_NickName:e})
+//   }
+
+//   render() {
+//     const { tmp_year, tmp_month, tmp_NickName } = this.state;
+//     const { listUsers, isListLoading } = this.props;
+//     console.log("---state--------------------------------", this.state);
+//     console.log("---props--------------------------------", this.props);
+//     return (
+//       <>
+//       {isListLoading && <EclipseWidget />}
+//       <div className="content">
+//           <Row>
+//             <Col md="12">
+//               <Card>
+//                 <CardHeader>
+//                   <Row>
+//                   <Col className="col-md-2">
+//                   <CardTitle tag="h4">Таблиця VIP користувачів</CardTitle>
+//                   </Col>
+//                   <Col className="col-md-2">
+//                       <Select
+//                         value={tmp_month}
+//                         onChange={(e) => this.handleChange("tmp_month", e)}
+//                         options={optionsMonth} />
+//                     </Col>
+//                     <Col className="col-md-2">
+//                       <Select
+//                         value={tmp_year}
+//                         onChange={(e) => this.handleChange("tmp_year", e)}
+//                         options={optionsYear} />
+//                     </Col>
+//                     <Col className="col-md-2">
+//                       <Input
+//                         onChange={(e) => this.PostFilters(`${e.target.value}`)}
+//                         placeholder="Нік"/>
+//                     </Col>
+//                     <Col className="col-md-2">
+//                        <Button onClick={(e)=>this.Click(e)} color='info'>
+//                         Відправити фільтри
+//                       </Button>
+//                     </Col>
+//                   </Row>                 
+//                 </CardHeader>
+//                 <CardBody>
+//                   <Table className="tablesorter" responsive>
+//                     <thead className="text-primary">
+//                       <tr>
+//                         <th>Нікнейм</th>
+//                         <th>Дата реєстрації</th>
+//                         <th>Місто</th>
+//                         <th>Статус</th>
+//                       </tr>
+//                     </thead>
+//                     <tbody className="align-items-center">
+//                     {
+//                         listUsers.map(item => {
+//                           return (<tr key={item.id}>
+//                             {/* <th scope="row">{counter++}</th> */}
+//                             <td>{item.nickname}</td>
+//                             {/* <td>{item.registrdate}</td>    Замінити на дату закінчення */}
+//                             <td>{item.city}</td>
+//                             <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+//                             {/* <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td> */}
+//                           </tr>
+//                           )
+//                         })
+//                       }
+//                     </tbody>
+//                   </Table>
+//                   <Pagination>
+//                   <PaginationItem>
+//                     <PaginationLink previous tag="button"></PaginationLink>
+//                   </PaginationItem>
+//                   <PaginationItem active>
+//                     <PaginationLink tag="button">1</PaginationLink>
+//                   </PaginationItem>
+//                   <PaginationItem>
+//                     <PaginationLink tag="button">2</PaginationLink>
+//                   </PaginationItem>
+//                   <PaginationItem>
+//                     <PaginationLink tag="button">3</PaginationLink>
+//                   </PaginationItem>
+//                   <PaginationItem>
+//                     <PaginationLink tag="button">4</PaginationLink>
+//                   </PaginationItem>
+//                   <PaginationItem>
+//                     <PaginationLink next tag="button"></PaginationLink>
+//                   </PaginationItem>
+//                 </Pagination>
+//                 </CardBody>
+//               </Card>
+//             </Col>
+//           </Row>
+//         </div>
+//       </>
+//     );
+//   }
+// }
+
+// const mapStateToProps = state => {
+//   console.log("State=======", state);
+//   return {
+//     listUsers: get(state, "userTable.list.data"),
+//     isListLoading: get(state, "userTable.list.loading"),  
+//   };
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getUsersData: filter => {
+//       dispatch(getListActions.getUsersData(filter));
+//     }
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+
+
+
+//                     {/* <tbody>
+//                       <tr>
+//                         <td>{counter++}</td>
+//                         <td>Помідорка</td>
+//                         <td>31.12.19</td>
+//                         <td>Rivne</td>
+//                         <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+//                      </tr>
+//                       <tr>
+//                         <td>{counter++}</td>
+//                         <td>Minerva Hooper</td>
+//                         <td>31.12.19</td>
+//                         <td>Kiyiv</td>
+//                         <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+//                       </tr>
+//                       <tr>
+//                         <td>{counter++}</td>
+//                         <td>Sage Rodriguez</td>
+//                         <td>31.12.19</td>
+//                         <td>Lviv</td>
+//                         <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+//                        </tr>
+//                       <tr>
+//                         <td>{counter++}</td>
+//                         <td>Philip Chaney</td>
+//                         <td>31.12.19</td>
+//                         <td>Odessa</td>
+//                         <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+//                         </tr>
+//                      </tbody> */}
+
+                  

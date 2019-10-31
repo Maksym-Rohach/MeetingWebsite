@@ -32,6 +32,13 @@ namespace MeetingWebsite.DAL.Entities
                 {
                     Name = roleName
                 }).Result;
+
+                roleName = "Vip";
+                result = roleManager.CreateAsync(new DbRole
+                {
+                    Name = roleName
+                }).Result;
+
             }
         }
 
@@ -115,7 +122,9 @@ namespace MeetingWebsite.DAL.Entities
                     }
                 };
 
-                var result = userManager.CreateAsync(adminProfile.User, "Qwerty1+").Result;
+                
+
+                    var result = userManager.CreateAsync(adminProfile.User, "Qwerty1+").Result;
                 context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
                 result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
