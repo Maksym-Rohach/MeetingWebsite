@@ -90,15 +90,6 @@ const {activeIndex} = this.state;
      </CarouselItem>
    );
  });
-
-
-      <CarouselCaption 
-      captionText={item.caption} 
-      captionHeader={item.caption} />
-   </CarouselItem>
-  );
- });
-
       return (
         <React.Fragment>
 
@@ -384,9 +375,8 @@ const {activeIndex} = this.state;
               </div>
 
               <div className="row">
-                <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s">
+                <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s"></div>
 
-      </Container>
       </div> 
 
                   <div className="animated fadeIn">
@@ -412,9 +402,8 @@ const {activeIndex} = this.state;
                       </Container>
                    </div> 
                   </div>
-                </div>
-              </div>
-            </div>
+    
+            
           </section>
 
           <section className="bg-primary text-white text-center" id="services">
