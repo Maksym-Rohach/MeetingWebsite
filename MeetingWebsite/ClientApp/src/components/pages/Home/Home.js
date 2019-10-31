@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar } from 'reactstrap';
+import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar, captionHeader, caption } from 'reactstrap';
 import './instruments/css/palette.css';
 import logo from './instruments/img/logo.jpg';
 const items = [
 {
-  src: 'http://pngimg.com/uploads/alien/alien_PNG27.png',
-  altText: 'Slide 1',
-  caption: 'Марсіанин',
+  //src: 'http://pngimg.com/uploads/alien/alien_PNG27.png',
+  //altText: 'Slide 1',
+  //caption: 'Марсіанин',
+caption: '... це насамперед відповідальність, а потім уже насолода',
 },
 {
-  src: 'https://i.pinimg.com/originals/d0/6a/e0/d06ae0849c47867d80afd8be7e0073a6.png',
-  altText: 'Slide 2',
-  caption: 'Віночок',
+  //src: 'https://i.pinimg.com/originals/d0/6a/e0/d06ae0849c47867d80afd8be7e0073a6.png',
+  //altText: 'Slide 2',
+  //caption: 'Віночок',
+caption: '... це виявити найкраще одне в одному',
 },
 {
-  src: 'https://bipbap.ru/wp-content/uploads/2018/01/579a4bc07d7bf15632b7e802.png',
-  altText: 'Slide 3',
-  caption: 'Пончик',
+  //src: 'https://bipbap.ru/wp-content/uploads/2018/01/579a4bc07d7bf15632b7e802.png',
+  //altText: 'Slide 3',
+  //caption: 'Пончик',
+  caption: 'покласти часточку лимона в її чай.',
 },
 ];
 
@@ -60,30 +63,33 @@ goToIndex(newIndex) {
 }
 
 render() {
-//const {activeIndex} = this.state;
+const {activeIndex} = this.state;
 
-// const slides = items.map((item)=> {
-// return (
-//   <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-//   <img className="d-block w-100" src={item.src} alt={item.altText} />
-// </CarouselItem>
-// );
-// });
+ const slides = items.map((item)=> {
+ return (
+   <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
+    <div className="d-block w-100"/>
+    <CarouselCaption
+     captionText = {item.caption} />   
+  </CarouselItem>
+  
+ );
+ });
 
-// const slides = items.map((item) => {
-//   return (
-//     <CarouselItem
-//       onExiting={this.onExiting}
-//       onExited={this.onExited}
-//       key={item.src}
-//     >
-//       <img className="d-block w-100" src={item.src} alt={item.altText} />
-//       <CarouselCaption 
-//       // captionText={item.caption} 
-//       captionHeader={item.caption} />
-//     </CarouselItem>
-//   );
-// });
+ const slides2 = items.map((item) => {
+   return (
+     <CarouselItem
+       onExiting={this.onExiting}
+       onExited={this.onExited}
+       key={item.src}
+     >
+       <img className="d-block w-100" src={item.src} alt={item.altText} />
+       <CarouselCaption 
+      // captionText={item.caption} 
+       captionHeader={item.caption} />
+     </CarouselItem>
+   );
+ });
 
       return (
         <React.Fragment>
@@ -93,13 +99,16 @@ render() {
               <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3">GIRLS</NavLink>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> BOYS</NavLink>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> LOGIN</NavLink>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Вхід</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Зареєструватись</NavLink>
             </NavItem>
           </Nav>
 
@@ -354,157 +363,45 @@ render() {
             </div>
           </section>
 
-          {/* <section className=" content-section bg-primary" id="chef">
-            <div className="container text-white  mt-5 mb-5">
-              <div className="row">
-                <div className="col-md-8 animated fadeInUp  delay-1s">
-                  <img className="img-fluid" src="./img/chef-1245676_1920.jpg" alt="" />
-                </div>
-                <div className="col-md-4 animated fadeInUp  delay-1s">
-                  <h2 className="my-3 display-4 font-italic"> Our Chef </h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et. </p>
-                  <h3 className="my-3 display-5 font-italic">Resume</h3>
-                  <nav>
-                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                      <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Culinary Studies</a>
-                      <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Work History</a>
-                      <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Bio</a>
-                    </div>
-                  </nav>
-                  <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</div>
-                    <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</div>
-                    <div className="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section> */}
-
 
           <section className="content-section  bg-light text-black ">
             <div className="container ">
               <div className="row text-center slws-heading mb-3 animated fadeInUp  delay-1s">
                 <div className="col-md-8 offset-md-2 ">
-                  <h2 className="display-4 font-italic">Testimonials</h2>
-                  <p className="sub-heading ">Nam faucibus euismod velit, a accumsan metus. Morbi ipsum quam.</p>
+                  <h2 className="display-4 font-italic">Love is?</h2>
+                  <p className="sub-heading "> Cайт знайомств, на якому мінімум інформації про користувача. </p>
+                  <p className="sub-heading ">Якщо ви перебуваєте в активному пошуку майбутнього обранця, користуйтеся послугами тільки нашого сайту))))</p>
+                  <h3 className="display-4 font-italic">Любов - це ... </h3>
                 </div>
               </div>
+
               <div className="row">
                 <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s">
 
                   <div id="testimonials" className="carousel slide " data-ride="carousel">
 
-                    <ol className="carousel-indicators ">
-                      <li data-target="#testimonials" data-slide-to="0" className="active"></li>
-                      <li data-target="#testimonials" data-slide-to="1"></li>
-                      <li data-target="#testimonials" data-slide-to="2"></li>
-                    </ol>
-
-                    <div className="carousel-inner ">
-                      <div className="item carousel-item active">
-                        <div className="row">
-                          <div className="col-sm-6">
-                            <div className="media">
-                              <div className="media-left d-flex mr-3">
-                                <a href="#">
-                                  <img src="img/testimonial1.jpg" alt="" />
-                                </a>
-                              </div>
-                              <div className="media-body">
-                                <div className="testimonial">
-                                  <p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
-                                  <p className="overview "><b>Paula Wilson</b>, Media Analyst</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-sm-6">
-                            <div className="media">
-                              <div className="media-left d-flex mr-3">
-                                <a href="#">
-                                  <img src="img/testimonial2.jpg" alt="" />
-                                </a>
-                              </div>
-                              <div className="media-body">
-                                <div className="testimonial">
-                                  <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
-                                  <p className="overview"><b>Antonio Moreno</b>, Web Developer</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="item carousel-item">
-                        <div className="row">
-                          <div className="col-sm-6">
-                            <div className="media">
-                              <div className="media-left d-flex mr-3">
-                                <a href="#">
-                                  <img src="img/testimonial3.jpg" alt="" />
-                                </a>
-                              </div>
-                              <div className="media-body">
-                                <div className="testimonial">
-                                  <p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
-                                  <p className="overview"><b>Michael Holz</b>, Seo Analyst</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-sm-6">
-                            <div className="media">
-                              <div className="media-left d-flex mr-3">
-                                <a href="#">
-                                  <img src="img/testimonial4.jpg" alt="" />
-                                </a>
-                              </div>
-                              <div className="media-body">
-                                <div className="testimonial">
-                                  <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
-                                  <p className="overview"><b>Mary Saveley</b>, Web Designer</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="item carousel-item">
-                        <div className="row">
-                          <div className="col-sm-6">
-                            <div className="media">
-                              <div className="media-left d-flex mr-3">
-                                <a href="#">
-                                  <img src="img/testimonial2.jpg" alt="" />
-                                </a>
-                              </div>
-                              <div className="media-body">
-                                <div className="testimonial">
-                                  <p>Lorem ipsum dolor sit amet, consec adipiscing elit. Nam eusem scelerisque tempor, varius quam luctus dui. Mauris magna metus nec.</p>
-                                  <p className="overview"><b>Martin Sommer</b>, UX Analyst</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-sm-6">
-                            <div className="media">
-                              <div className="media-left d-flex mr-3">
-                                <a href="#">
-                                  <img src="img/testimonial4.jpg" alt="" />
-                                </a>
-                              </div>
-                              <div className="media-body">
-                                <div className="testimonial">
-                                  <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget mi suscipit tincidunt. Utmtc tempus dictum. Pellentesque virra.</p>
-                                  <p className="overview"><b>John Williams</b>, Web Developer</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="animated fadeIn">
+                      <Container>
+                       <Row >
+                          <Col xs="12" xl="12" >
+                            <Carousel  
+                              // className="Carousel-fixed-top blur"
+                              // interval={false}
+                              //ride={true}
+                              activeIndex={activeIndex}
+                              next={this.next}
+                              previous={this.previous}
+                              // onClickHandler={this.goToIndex}
+                              ride="carousel">                      
+                                {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} /> */}
+                                  {slides}
+                                  {/* <CarouselControl direction="prev" directionText="Попередній" onClickHandler={this.previous} />
+                                  <CarouselControl direction="next" directionText="Наступний" onClickHandler={this.next} /> */}
+                            </Carousel>
+                          </Col>
+                        </Row>
+                      </Container>
+                   </div> 
                   </div>
                 </div>
               </div>
@@ -542,7 +439,8 @@ render() {
 
        <footer className="footer text-center p-4">
             <div className="container">
-              <p className="text-muted small mb-0">Copyright &copy; <a href="https://sleakwebstore.com/">Sleak Web Store 2019 </a>| Designed By <a href="https://sleakdesign.com/"> Sleak Design INC</a></p>
+              <p className="text-muted mb-2">Love is </p>
+              <p className="text-muted small mb-0">Corporation "JMDNLARR" </p>
             </div>
           </footer>         
         </React.Fragment>
@@ -550,35 +448,3 @@ render() {
   }
 }   
 export default Home;
-
-// {  
-//            <div className="animated fadeIn">
-//                <Container>
-//                    <Row >
-//                        <Col xs="12" xl="12" >
-//  <Carousel  
-// {    className="Carousel-fixed-top blur"
-//   interval={false}
-//   ride={true}
-//   activeIndex={activeIndex}
-//   next={this.next}
-//   previous={this.previous}
-//   onClickHandler={this.goToIndex}
-//   ride="carousel">
-          
-//     <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-//     {slides}
-//     <CarouselControl direction="prev" directionText="Попередній" onClickHandler={this.previous} />
-//     <CarouselControl direction="next" directionText="Наступний" onClickHandler={this.next} />
-
-// </Carousel>
-
-//      </Col>
-//      </Row>
-
-//      </Container>
-//      </div> 
-
-//       );
-//     }
-//    } }
