@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MeetingWebsite.Migrations
 {
-    public partial class migration5 : Migration
+    public partial class DBmirg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -248,24 +248,6 @@ namespace MeetingWebsite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VipUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    DateForValid = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VipUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_VipUsers_AspNetUsers_Id",
-                        column: x => x.Id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserProfile",
                 columns: table => new
                 {
@@ -320,6 +302,24 @@ namespace MeetingWebsite.Migrations
                     table.PrimaryKey("PK_tblUserRecipients", x => x.Id);
                     table.ForeignKey(
                         name: "FK_tblUserRecipients_UserProfile_Id",
+                        column: x => x.Id,
+                        principalTable: "UserProfile",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VipUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    DateForValid = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VipUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VipUsers_UserProfile_Id",
                         column: x => x.Id,
                         principalTable: "UserProfile",
                         principalColumn: "Id",

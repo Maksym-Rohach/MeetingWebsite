@@ -6,6 +6,7 @@ using MeetingWebsite.Areas.Admin.Controllers.AyoshaControllers;
 using MeetingWebsite.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
 {
@@ -43,29 +44,43 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             return Ok(atms.Admins);
         }
 
-        //[HttpPost("vips")] //UserTableFilters
-        //public ActionResult GetUserTable([FromBody] VipTableModel filter)
-        //{
-        //    var models = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
-        //    if (filter.NickName != "")
-        //    {
-        //        models = models.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
-        //    }
-        //    VipTableModels utms = new VipTableModels();
-        //    utms.Vips = new List<VipTableModels>();
-        //    foreach (var item in models)
-        //    {
-        //        VipTableModel utm = new VipTableModel();
-        //        utm.Id = item.Id;
-        //        utm.Nickname = item.NickName;
-        //        //utm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
-        //        string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
-        //        utm.City = city;
-        //        utm.Status = "Активний";
-        //        //utms.Users.Add(utm);
-        //    }
-        //    return Ok(utms.Vips);
-        //}
+        [HttpPost("vips")] //UserTableFilters
+        public ActionResult GetVipTable([FromBody] VipTableFilters filter)
+        {
+            // vtm - VipTableModel
+            // vtms - VipTableModels
+            //  var models = _context.VipUsers.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
+            // var query = _context.VipUsers.Select(a => a).Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month).AsQueryable();
+            var query = _context.VipUsers
+                .Include(x => x.User)
+                .AsQueryable();
+
+
+            query = query.Select(a => a)
+                .Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month);
+            if (!string.IsNullOrEmpty(filter.NickName))
+            {
+
+               // query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
+            }
+
+            VipTableModels vtms = new VipTableModels();
+            vtms.Vips = new List<VipTableModels>();
+            foreach (var item in query)
+            {
+                VipTableModel vtm = new VipTableModel();
+                vtm.Id = item.Id;
+                vtm.Nickname = item.User.NickName;
+                //vtm.DateForValid = item.DateForValid;
+                //vtm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
+
+                string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
+                vtm.City = city;
+                vtm.Status = "Активний";
+                //vtms.Users.Add(vtm);
+            }
+            return Ok(vtms.Vips);
+        }
 
 
 

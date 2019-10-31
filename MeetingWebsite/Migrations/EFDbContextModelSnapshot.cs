@@ -420,7 +420,7 @@ namespace MeetingWebsite.Migrations
 
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.VipUsers", b =>
                 {
-                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                    b.HasOne("MeetingWebsite.DAL.Entities.UserProfile", "User")
                         .WithMany()
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);

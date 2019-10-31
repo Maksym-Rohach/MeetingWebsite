@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(EFDbContext))]
-    [Migration("20191030183830_migration5")]
-    partial class migration5
+    [Migration("20191031184233_DB-mirg")]
+    partial class DBmirg
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -422,7 +422,7 @@ namespace MeetingWebsite.Migrations
 
             modelBuilder.Entity("MeetingWebsite.DAL.Entities.VipUsers", b =>
                 {
-                    b.HasOne("MeetingWebsite.DAL.Entities.DbUser", "User")
+                    b.HasOne("MeetingWebsite.DAL.Entities.UserProfile", "User")
                         .WithMany()
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);

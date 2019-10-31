@@ -26,6 +26,7 @@ namespace MeetingWebsite.Areas.Account.ViewModels
     {
         public string Id { get; set; }
         public string Nickname { get; set; }
+        public string Bandate { get; set; }
         public string Findate { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
