@@ -11,6 +11,7 @@ import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShed
 import {registerReducer} from '../components/pages/register/reducer';
 import { boysReducer } from '../components/boys/reducer';
 
+import { MessageListReducer} from "../components/Chat/MessageList/reduser";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createBrowserHistory({ basename: baseUrl });
 
@@ -24,8 +25,10 @@ export default function configureStore (history, initialState) {
       userTable: userTableReducer,
       banTable: banTableReducer,
       registryShedule: registrySheduleReducer,
-      register: registerReducer,
+     
       boys: boysReducer
+      register: registerReducer,
+      messageList: MessageListReducer
     };
 
     const middleware = [
