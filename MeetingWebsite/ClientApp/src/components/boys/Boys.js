@@ -7,6 +7,8 @@ import { Row,Fade,CardHeader,FormGroup,InputGroupButtonDropdown,
 import get from "lodash.get";
 import * as getListActions from './reducer';
 import { connect } from 'react-redux';
+import './style.scss';
+import '../pages/Home/instruments/scss/palette.scss';
   
 
   // const optionsCity = [
@@ -17,9 +19,9 @@ import { connect } from 'react-redux';
 class Boys extends Component {
     state = {
         isLoading: true,
-        tmp_zodiac: {value: 'q', label: 'zodiac'},
-        tmp_city: {value:'w', label: 'city'},
-        tmp_age: {value:'1', label: '1'},   
+        tmp_zodiac: {value: 'q', label: 'Zodiac'},
+        tmp_city: {value:'w', label: 'City'},
+        tmp_age: {value:'1', label: '18'},   
         collapse: true,
         fadeIn: true,
         timeout: 300,
@@ -63,14 +65,14 @@ class Boys extends Component {
       <React.Fragment>      
          <h2 style={{textAlign: "center"}}>Знайомства з хлопцями в Україні</h2>
       <div className="app flex-row align-items-center">
-       <Container>
-        
-        <Card>
-              <CardHeader>
-                <h3 style={{color:"#73818f"}}> <strong>Пошук</strong> </h3>
+       <Container className="fontyana">
+        <div >
+        <Card className="bgyana">
+              <CardHeader >
+                <h3 style={{color:"#c0c0c0", marginBottom:"5px"}}> <strong>Пошук</strong> </h3>
               </CardHeader>
-              <CardBody>
-                <Form action="" method="post" className="form-horizontal">
+              <CardBody style={{marginTop: "-10px"}} >
+                <Form  action="" method="post" className="form-horizontal">
                   <FormGroup row>              
                     <Col xs = "4">
                     <Select
@@ -92,11 +94,12 @@ class Boys extends Component {
                         onChange={(e) => this.handleChange("tmp_age", e)}
                         options={option} />
                     </Col>
-                    <Button type="submit" size="sm" color="success" className="ml-3"><i className="fa fa-dot-circle-o" ></i> Пошук</Button>     
+                    <Button type="submit" size="sm" color="success" className="ml-3 mt-3"><i className="fa fa-dot-circle-o"></i> Пошук</Button>     
                   </FormGroup>
                 </Form>
               </CardBody>
             </Card>
+            </div>
             </Container>
 
       </div>
