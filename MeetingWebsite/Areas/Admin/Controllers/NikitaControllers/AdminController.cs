@@ -21,7 +21,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("users")]
-        public ActionResult GetUserTable([FromBody] UserTableFilters filter)
+        public ActionResult GetUserTable([FromBody] UserTableFilters filter)//проблема з баном при скіпе
         {
             int count_users = 10,minus=0;
 
@@ -44,14 +44,14 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 var temp = _context.UserAccessLocks.Select(a => a).Where(a => item.Id == a.Id).AsQueryable();
                 if (temp.Count()!=0)//проверка чи є бан
                 {
-                    userTableModels.TotalCount--;
+                    userTableModels.TotalCount=userTableModels.TotalCount--;
                     continue;
                 }
 
                 UserTableModel userTableModel = new UserTableModel();
                 userTableModel.Id = item.Id;
                 userTableModel.Nickname = item.NickName;
-                userTableModel.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
+                userTableModel.Registrdate = item.DateOfRegister.ToString("dd.MM.yyyy");
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 userTableModel.City = city;
                 userTableModel.Status = "Не забанений";
@@ -131,7 +131,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             List<int> monthes = new List<int>();
             for (int i = 0; i < 12; i++)
             {
-                monthes.Add(data.Select(a => a).Where(a => a.DateOfBirth.Month == i&& a.DateOfBirth.Year==filter.Year).Count());
+                monthes.Add(data.Select(a => a).Where(a => a.DateOfRegister.Month == i&& a.DateOfRegister.Year==filter.Year).Count());
             }
             return Ok(monthes);
         }

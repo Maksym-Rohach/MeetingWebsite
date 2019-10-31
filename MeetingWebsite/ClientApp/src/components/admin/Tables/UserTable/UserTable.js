@@ -88,12 +88,11 @@ class UserTable extends React.Component {
    // const { typeOfSort, sortByAscending } = this.props;
     console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
     const { tmp_year,tmp_month,tmp_NickName} = this.state;
-
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
     let currentPage = pageNumber;
-    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
+    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber,totalCount:this.props.totalCount });
     this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
   }
 
@@ -138,6 +137,7 @@ class UserTable extends React.Component {
     let month = tmp_month.value;
     let nickname = tmp_NickName;
     let currentPage = temp_currentpage;
+    this.setState({totalCount:this.props.totalCount});
     this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
@@ -148,6 +148,7 @@ class UserTable extends React.Component {
     let nickname = tmp_NickName;
     let currentPage = temp_currentpage;
     console.log("COMPONENTDIDMOUNT");
+    this.setState({totalCount:this.props.totalCount});
     this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
@@ -159,13 +160,14 @@ class UserTable extends React.Component {
     let month = tmp_month.value;
     let nickname = tmp_NickName;
     let currentPage = temp_currentpage;
+    this.setState({totalCount:this.props.totalCount});
     console.log("CLICK__________________________________",tmp_NickName);
     this.props.getUsersData({year,month,nickname,currentPage})
   }
 
   PostFilters = (e) => {
     console.log("EEEEEEEE",e);
-    this.setState({tmp_NickName:e})
+    this.setState({tmp_NickName:e,totalCount:this.props.totalCount})
   }
 
   render() {
