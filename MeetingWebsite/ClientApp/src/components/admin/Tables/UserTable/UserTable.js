@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
-
+import Paginator from '../../../Paginator';
 //import Modal from '../../../Notifications/Modals/Modals';
 
 // reactstrap components
@@ -56,15 +56,17 @@ class UserTable extends React.Component {
     this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '1', label: 'Січень' },
-    tmp_year: { value: '2020', label: '2020р' }, 
+    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_year: { value: '2019', label: '2019р' }, 
     modal: false,
     danger: false,
     temp_id:'',
     temp_description:'',
-    temp_currentpage: 1 
+    temp_currentpage: 1,
+    totalCount:0
     };
     this.toggle = this.toggle.bind(this);
+    this.onClickPage = this.onClickPage.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);  
   }
 //Modal
@@ -77,12 +79,22 @@ class UserTable extends React.Component {
   SetBan=(e,id)=>
   {
     e.preventDefault();
-    // this.setState({
-    //   danger: !this.state.danger,
-    // });
     console.log("SETBAN__________________________________",id);
      this.setState({temp_id:id});
      this.toggleDanger();
+  }
+
+  onClickPage(pageNumber) {
+   // const { typeOfSort, sortByAscending } = this.props;
+    console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+    const { tmp_year,tmp_month,tmp_NickName} = this.state;
+
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    let currentPage = pageNumber;
+    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
+    this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
   }
 
   Ban=()=>
@@ -239,27 +251,10 @@ class UserTable extends React.Component {
                       }
                     </tbody>
                   </Table>    
-                           
-                  <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next tag="button"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+
+                    <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+                   </Paginator>       
+  
                 </CardBody>
               </Card>
             </Col>
@@ -274,6 +269,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listUsers: get(state, "userTable.list.data"),
+    totalCount: get(state, "userTable.list.totalCount"),
     isListLoading: get(state, "userTable.list.loading"),  
   };
 }

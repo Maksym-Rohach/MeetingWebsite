@@ -21,9 +21,9 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("users")]
-        public ActionResult GetUserTable([FromBody] UserTableFilters filter)//полуробоче перевірити!!!!
+        public ActionResult GetUserTable([FromBody] UserTableFilters filter)
         {
-            int count_users = 5,minus=0;
+            int count_users = 10,minus=0;
 
             if (filter.CurrentPage==1)
             {
@@ -69,11 +69,18 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 minus = count_users;
             }
 
-            var bans = _context.UserAccessLocks.Select(a=>a).Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month).Skip(filter.CurrentPage * count_users - minus).Take(count_users).AsQueryable();
+            var bans = _context.UserAccessLocks
+                .Select(a=>a)
+                .Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month)
+                .Skip(filter.CurrentPage * count_users - minus)
+                .Take(count_users)
+                .AsQueryable();
 
             if (filter.NickName != "")
             {
-                bans = bans.Select(a => a).Where(a => _context.UserProfile.FirstOrDefault(b => b.Id == a.Id).NickName.Contains(filter.NickName));
+                bans = bans
+                    .Select(a => a)
+                    .Where(a => _context.UserProfile.FirstOrDefault(b => b.Id == a.Id).NickName.Contains(filter.NickName));
             }
 
             BanTableModels banTableModels = new BanTableModels();
