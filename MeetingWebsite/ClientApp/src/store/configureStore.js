@@ -24,9 +24,8 @@ export default function configureStore (history, initialState) {
       refreshToken: refreshReducer,
       userTable: userTableReducer,
       banTable: banTableReducer,
-      registryShedule: registrySheduleReducer,
-     
-      boys: boysReducer
+      registryShedule: registrySheduleReducer,     
+      boys: boysReducer,
       register: registerReducer,
       messageList: MessageListReducer
     };
