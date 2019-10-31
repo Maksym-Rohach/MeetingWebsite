@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import "assets/scss/black-dashboard-react.scss";
 import "assets/css/black-dashboard-react.css";
 import "assets/demo/demo.css";
@@ -23,7 +23,7 @@ class App extends Component {
 
     render() {
       return (
-        <Router>
+        // <Router>
             <React.Suspense fallback={loading()}>
                 <Switch>
                     <Route path="/login" name="Login" render={props => <Login {...props} />} />
@@ -34,7 +34,7 @@ class App extends Component {
                     <Route path="/" name="Home" render={props => <Home {...props} />} />
                 </Switch>
                 </React.Suspense>
-      </Router>
+      // </Router>
     );
   }
 }
