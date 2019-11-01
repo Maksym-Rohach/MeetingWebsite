@@ -127,6 +127,7 @@ class UserTable extends React.Component {
 
 //Table
   handleChange = (name, selectValue) => {
+    this.setState({temp_currentpage:1})
     this.setState({ [name]: selectValue },this.filterSearchData);
   }
 
