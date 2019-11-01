@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar, captionHeader, caption } from 'reactstrap';
 import './instruments/css/palette.css';
 import logo from './instruments/img/logo.jpg';
+import { transform } from '@babel/core';
 const items = [
 {
   //src: 'http://pngimg.com/uploads/alien/alien_PNG27.png',
@@ -93,9 +94,10 @@ const {activeIndex} = this.state;
       return (
         <React.Fragment>
 
-          <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top">
+          <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top font-weight-bold text-uppercase">
+           <div className="collapse navbar-collapse ">
             <NavItem>
-              <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </NavLink>
+              <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 40, height: 40}}/> </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
@@ -103,13 +105,17 @@ const {activeIndex} = this.state;
             <NavItem>
               <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
             </NavItem>
+            </div>
+            <div className="collapse navbar-collapse justify-content-end" id="navigation">
             <NavItem>
               <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Вхід</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Зареєструватись</NavLink>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
             </NavItem>
+            </div>
           </Nav>
+    
 
 
           <header id="masthead" className="masthead d-flex pb-5 ">
@@ -437,8 +443,7 @@ const {activeIndex} = this.state;
 
        <footer className="footer text-center p-4">
             <div className="container">
-              <p className="text-muted mb-2">Love is </p>
-              <p className="text-muted small mb-0">Corporation "JMDNLARR" </p>
+              <p className="text-muted mb-0 text-light"> Made with <i className="fa fa-heart heart text-danger"></i> by Creative Tim  </p>
             </div>
           </footer>         
         </React.Fragment>
