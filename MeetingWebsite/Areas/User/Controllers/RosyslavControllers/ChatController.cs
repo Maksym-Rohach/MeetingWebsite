@@ -20,37 +20,49 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
         {
             _context = context;
         }
-
-
-        [HttpPost("gg")]
-        public ActionResult<List<Messages>> GG([FromBody]MessageFilter filter)
-        {
-            var y = _context.UserProfile.Where(x => x.Id == filter.chat.SenderId).FirstOrDefault();
-
-            return Ok(y.Messages);
-        }
+        
         [HttpPost("loadmessages")]
-        public ActionResult<List<ModelMessage>> GetMessageList([FromBody]MessageFilter  filter)
+        public ActionResult<ListMessages> GetMessageList([FromBody]MessageFilter  filter)
         {
+            if (User.Claims.ToList()[0] != null)
+            {
+                if (User.Claims.ToList()[0].Value.ToString() != filter.chat.SenderId||
+                    User.Claims.ToList()[0].Value.ToString() != filter.chat.RecipientId)
+                {
+                    return BadRequest();
+                }
+
+            }
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
                 return BadRequest(errors);
             }
-            var array = _context.Messages.Where(x => (x.SenderId == filter.chat.SenderId || x.SenderId == filter.chat.RecipientId) && (x.RecipientId == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId));
-            List<ModelMessage> models = new List<ModelMessage>();
+            var array = _context.Messages
+                .Where(x => (x.SenderId == filter.chat.SenderId || x.SenderId == filter.chat.RecipientId) 
+                   && (x.RecipientId == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId)).ToList();
+            ListMessages model = new ListMessages();
             foreach (var item in array)
             {
-                models.Add(new ModelMessage { SenderId = item.SenderId, DateCreate = item.DateCreate, RecipientId = item.RecipientId, Text = item.Text });
+                model.messages.Add(new ModelMessage { SenderId = item.SenderId, DateCreate = item.DateCreate, RecipientId = item.RecipientId, Text = item.Text });
             }
 
 
 
-            return Ok(models);
+            return Ok(model);
         }
         [HttpPost("sendmessage")]
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
         {
+            if (User.Claims.ToList()[0] != null)
+            {
+                if (User.Claims.ToList()[0].Value.ToString() != message.SenderId)
+                {
+                    return BadRequest();
+                }
+
+            }
+
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
@@ -61,7 +73,7 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             {
                 return BadRequest();
             }
-            var Sender = _context.UserProfile.Where(x => x.Id == mess.SenderId).FirstOrDefault();
+            var Sender = _context.UserProfile.FirstOrDefault(x => x.Id == mess.SenderId);
             if (Sender == null)
             {
                 return BadRequest();
@@ -72,12 +84,12 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             }
             
 
-            var Recip = _context.UserRecipient.Where(x => x.Id == mess.RecipientId).FirstOrDefault();
+            var Recip = _context.UserRecipient.FirstOrDefault(x => x.Id == mess.RecipientId);
 
 
             if (Recip==null ){
 
-                var recProfile = _context.UserProfile.Where(x => x.Id == mess.RecipientId).FirstOrDefault();
+                var recProfile = _context.UserProfile.FirstOrDefault(x => x.Id == mess.RecipientId);
                 if (recProfile== null)
                 {
                     return BadRequest();
@@ -99,16 +111,19 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             return Ok();
         }
         [HttpPost("deletemessage")]
-        public ActionResult<List<Chat>> DeleteMessage([FromBody]ModelSendMessage message)
+        public ActionResult<IsSuccess> DeleteMessage([FromBody]ModelMessage message)
         {
-            if (!ModelState.IsValid)
+            if (User.Claims.ToList()[0] != null)
             {
-                var errors = CustomValidator.GetErrorsByModel(ModelState);
-                return BadRequest(errors);
+                if (User.Claims.ToList()[0].Value.ToString() != message.SenderId|| User.Claims.ToList()[0].Value.ToString()!=message.RecipientId)
+                {
+                    return BadRequest();
+                }
+
             }
 
 
-            Messages mess = new Messages { RecipientId = message.RecipientId, SenderId = message.SenderId, Text = message.Text };
+
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
@@ -116,14 +131,23 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             }
             try
             {
-                var Sender = _context.UserProfile.Where(x => x.Id == mess.RecipientId).FirstOrDefault();
-                var Recip = _context.UserRecipient.Where(x => x.Id == mess.RecipientId).FirstOrDefault();
-                var Mess = Recip.Messages.Where(x => x.SenderId == message.SenderId && message.RecipientId == x.RecipientId && x.Text == mess.Text).FirstOrDefault();
-                Recip.Messages.Remove(Mess);
+                var Message = _context.Messages.First(x => 
+                    x.RecipientId == message.RecipientId && x.SenderId == message.SenderId && 
+                    x.Text == message.Text && x.DateCreate == message.DateCreate);
+                if (Message == null)
+                {
+                    return BadRequest();
 
-                Sender.Messages.Remove(Mess);
+                }
 
-                _context.Messages.Remove(Mess);
+                var Sender = Message.UserSender;
+                var Recip = Message.UserRecipient;
+                
+                Recip.Messages.Remove(Message);
+
+                Sender.Messages.Remove(Message);
+
+                _context.Messages.Remove(Message);
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -134,33 +158,57 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
 
             return Ok();
         }
-        [HttpPost("GetChats")]
-        public ActionResult<List<string>> GetChats([FromBody]UserModel UserID)
+        [HttpPost("getchats")]
+        public ActionResult<ListChats> GetChats([FromBody]UserModel UserID)
         {
+            //User.Claims.ToList()[0].Value.ToString();
+
+
+            if (User.Claims.ToList()[0] != null)
+            {
+                if (User.Claims.ToList()[0].Value.ToString() != UserID.UserID)
+                {
+                    return BadRequest();
+                }
+
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            List<string> interlocutors = new List<string>();
+            List<UserProfile> interlocutors = new List<UserProfile>();
+            UserProfile visitor;
             try
             {
-                
-                foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
-                {
-                    interlocutors.Add(item.Key);
-                }
+
+                visitor = _context.UserProfile
+                    .SingleOrDefault(x => x.Id == UserID.UserID);
+                interlocutors = visitor
+                    .Messages.GroupBy(x => x.UserRecipient.UserProfile)
+                    .Select(i => i.Key).ToList();
+
+                //foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
+                //{
+                //    interlocutors.Add(item.Key);
+                //}
             }
             catch (Exception)
             {
+
+
 
                 return BadRequest();
             }
             try
             {
-                foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
-                {
-                    interlocutors.Add(item.Key);
-                }
+                interlocutors.AddRange(visitor
+                    .Messages.GroupBy(x => x.UserSender)
+                    .Select(i => i.Key).ToList());
+                //foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
+                //{
+                //    interlocutors.Add(item.Key);
+                //}
             }
             catch (Exception)
             {
@@ -177,11 +225,22 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
                     return BadRequest();
                 }
 
+
+
             }
+
+            ListChats chats = new ListChats();
+            chats.Chats = new List<Chat>();
+            interlocutors.ForEach(x => chats.Chats.Add(
+                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, RecipientName = x.NickName, SenderName = visitor.NickName }
+                ));
 
 
             return Ok(interlocutors);
         }
+
+
+
     }
 
 }

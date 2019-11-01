@@ -14,6 +14,7 @@ var ps;
 class UserLayout extends React.Component {
   constructor(props) {
     super(props);
+    console.log(routes)
     this.state = {
       backgroundColor: "blue",
       sidebarOpened:
