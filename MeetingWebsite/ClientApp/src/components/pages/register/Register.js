@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,FormGroup,Label } from 'reactstrap';
+import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,FormGroup,Label ,FormFeedback} from 'reactstrap';
 import DatePicker from 'react-date-picker';
 import Select from 'react-select';
 import classnames from 'classnames';
@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import * as registerActions from './reducer';
 import get from "lodash.get";
-
-
+import { thisExpression } from '@babel/types';
+import {RadioGroup, RadioButton,Radio,FormControlLabel} from 'react-radio-group'
 
 const optionsCity = [
   { value: 'Вінниця‎', label: 'Вінниця‎' },
@@ -36,15 +36,7 @@ const optionsCity = [
   { value: 'Черкаси', label: 'Черкаси' },
   { value: 'Чернівці', label: 'Чернівці' },
   { value: 'Чернігів', label: 'Чернігів' },
-
-
 ];
-
-
-
-
-
-
 
 class Register extends Component {
   state = {
@@ -61,8 +53,11 @@ class Register extends Component {
     isLoading: false,
     visible: false,
     errorsServer: {},
-
+    
     tmp_city: { value: '', label: 'Виберіть місто ' }, 
+
+
+    
     date: new Date(),
   }
   onChange = date => this.setState({ date })
@@ -95,10 +90,16 @@ class Register extends Component {
         { [name]: value })
     }
   }
-  
 
-  handleChange = (name, selectValue) => {
-    this.setState({ [name]: selectValue });
+
+ handleChange1 = (e) => {
+  this.setState({
+  tmp_city: e,city:e.value  
+  })
+ }
+ 
+  handleChange = (e) => {
+    this.setStateByErrors(e.target.name, e.target.value);
   }
 
   onSubmitForm = (e) => {
@@ -106,15 +107,23 @@ class Register extends Component {
     const { nickName ,email,dateOfBirth,gender, password,repitPassword, city,errorsServer } = this.state;   
     console.log("state",this.state);
     let errors = {};
-    const regex_password = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,24}$/;
-    const regex_repitPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,24}$/;
     const regex_email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    const regex_password = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
+                         ///^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,24}$/
+    const regex_repitPassword = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
+    console.log("Erors",errors);
+    if (nickName === "") errors.nickName = "Поле не може бути пустим!";
+    if (city === "Виберіть місто") errors.city = "Поле не може бути пустим!";
+    if (!regex_email.test(email)) errors.email = "Не правильний формат електронної пошти!";
+    if (email === "") errors.email = "Поле не може бути пустим!";
+    if (dateOfBirth === "") errors.dateOfBirth = "Виберіть дату!";
+    if (gender === "") errors.gender = "Виберіть стать!";
+    if (!regex_password.test(password)) errors.password = "Пароль повинен мати мінімум 8 символів на латиниці, нижній і верхній регістр, спеціальний символ та цифри!";
+    if (password === "" ) errors.password = "Поле не може бути пустим!";
+    if (!regex_repitPassword.test(repitPassword)) errors.repitPassword="Пароль повинен мати мінімум 8 символів на латиниці, нижній і верхній регістр, спеціальний символ та цифри!";
+    if (repitPassword === "") errors.repitPassword = "Поле не може бути пустим!";
+    if (password != repitPassword) errors.repitPassword = "Паролі не співпадають";
 
-    if (!regex_email.test(email)&&!regex_repitPassword.test(repitPassword)) errors.email = "Не правильний формат електронної пошти!";
-    if (email === ""&&repitPassword ==="") errors.email = "Поле не може бути пустим!";
-
-    if (!regex_password.test(password)&&!regex_repitPassword.test(repitPassword)) errors.password = "Пароль повинен мати мінімум 6 символів на латиниці, нижній і верхній регістр, та цифри!";
-    if (password === ""&& repitPassword === "") errors.password = "Поле не може бути пустим!";
     console.log("Erors",errors);
     const isValid = Object.keys(errors).length === 0
     if (isValid) {
@@ -130,7 +139,7 @@ class Register extends Component {
         city:city,
         };
 
-      this.props.Register(model);      
+      this.props.register(model);      
     }
     else {
       console.log("false");
@@ -138,10 +147,8 @@ class Register extends Component {
     }
   }
 
-
-
   render() {
-    const{tmp_city}=this.state;
+    const{tmp_city,errors,visible,errorsServer}=this.state;
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -159,30 +166,34 @@ class Register extends Component {
                             <i className="fa fa-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Нікнейм" autoComplete="on" />
+                        <Input type="text" placeholder="Нікнейм" autoComplete="on" 
+                       className={classnames("form-control", { "is-invalid": !!errors.nickName })}
+                       id="nickName"
+                       name="nickName"
+                      // value={this.state.email}
+                       onChange={this.handleChange} />
+                     {!!errors.nickName ? <div className="invalid-feedback">{errors.nickName}</div> : ""}
                       </InputGroup>
 
 
                       <Select
                        className="mb-4  "
-                       
+                    
                         value={tmp_city}
-                        onChange={(e) => this.handleChange("tmp_city")}
+                        onChange={(e) => this.handleChange1(e)}
                         options={optionsCity} />
-                        
-
-
+                 
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="fa fa-envelope"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" placeholder="Електронна адреса" autoComplete="on" />
+                        <Input type="email" placeholder="Електронна пошта" autoComplete="on"
                         className={classnames("form-control", { "is-invalid": !!errors.email })}
                         id="email"
                         name="email"
-                        value={this.state.email}
+                       // value={this.state.email}
                         onChange={this.handleChange} />
                       {!!errors.email ? <div className="invalid-feedback">{errors.email}</div> : ""}
                       </InputGroup>
@@ -194,91 +205,51 @@ class Register extends Component {
                           </InputGroupText>
                         </InputGroupAddon>
 
-                        <DatePicker
-          value={this.state.date}
-          onChange={this.onChange}
-        />
+                        <Input
+                  invalid={!!errors.dateOfBirth || !!errorsServer.dateOfBirth}
+                  type="date"
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  onChange={this.handleChange}
+                  value={this.dateOfBirth}/>
+                  <FormFeedback valid={!errorsServer.dateOfBirth}>{errorsServer.dateOfBirth}</FormFeedback>
+                  <FormFeedback valid={!errors.dateOfBirth}>{errors.dateOfBirth}</FormFeedback>
 
-                        {/* <Input type="date" placeholder="Дата народження" autoComplete="on" /> */}
+
+                        {/* <DatePicker
+        value={this.state.date}
+        onChange={this.handleChange2}
+      /> */}
+
+                      
                       </InputGroup>
 
-                      <InputGroup className="mb-4">
+                      <InputGroup  className="mb-4">
                       <InputGroupAddon addonType="prepend">
                        <i className="ml-4 mt-3 fas fa-venus-mars"></i>
-                        <p className="text-muted ml-3 mt-3">Стать</p>
-
-
-
-                          <FormGroup check inline>
-                          <p className="text-muted form-check-label ml-1" check htmlFor="inline-radio1">Чол</p>
-                          <Input className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
+                        <p  className="text-muted ml-3 mt-3">Стать</p>
+ 
+                          <FormGroup   check inline>
+                          <p className="text-muted form-check-label ml-1" >Чол </p>
+                          <Input    invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}  className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="gender" value="Man"      />
+                          <FormFeedback valid={!errorsServer.gender}>{errorsServer.gender}</FormFeedback>
+                          <FormFeedback valid={!errors.gender}>{errors.gender}</FormFeedback>
                           </FormGroup>
                           <FormGroup check inline>
-                          <p className="text-muted form-check-label ml-1" check htmlFor="inline-radio2">Жін</p>
-                          <Input className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
+                          <p className="text-muted form-check-label ml-1" > Жін</p>
+                          <Input  invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}   className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="gender" value="Women" />
+                          <FormFeedback valid={!errorsServer.gender}>{errorsServer.gender}</FormFeedback>
+                          <FormFeedback valid={!errors.gender}>{errors.gender}</FormFeedback>
                           </FormGroup>
+                          
+
                           </InputGroupAddon> 
+                       
                           </InputGroup>
-{/* 
-                    <FormGroup row>
-                    <Col md="3">
-                      <Label>Inline Radios</Label>
-                    </Col>
-                    <Col md="9">
-                      <FormGroup check inline>
-                        <Input className="form-check-input" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
-                        <Label className="form-check-label" check htmlFor="inline-radio1">One</Label>
-                      </FormGroup>
-                      <FormGroup check inline>
-                        <Input className="form-check-input" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
-                        <Label className="form-check-label" check htmlFor="inline-radio2">Two</Label>
-                      </FormGroup>
-                
-                    </Col>
-                  </FormGroup> */}
+ 
 
 
 
-
-
-                    {/* <FormGroup>
-                    <InputGroup className="mb-4">
-                        <InputGroupAddon addonType="prepend">
-                         
-                            <i className="fas fa-venus-mars"></i>
-
-                        <p className="text-muted ml-3">Gender</p>
-
-                        <FormGroup check inline>
-                        <Label className="form-check-label ml-1" check htmlFor="inline-radio1">Male</Label>
-                        <Input className="form-check-input ml-1" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
-                      </FormGroup>
-                      <FormGroup check inline>
-                        <Label className="form-check-label ml-1" check htmlFor="inline-radio2">Female</Label>
-                        <Input className="form-check-input ml-1" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
-                      </FormGroup>
-
-                        </InputGroupAddon> 
-                      </InputGroup> */}
-
-                      {/* <p className="text-muted"><i className="fas fa-venus-mars"></i>Gender</p> */}
-                      {/* <FormGroup check inline>
-                        <Label className="form-check-label" check htmlFor="inline-radio1">Male</Label>
-                        <Input className="form-check-input" type="radio" id="inline-radio1" name="inline-radios" value="option1" />
-                      </FormGroup>
-                      <FormGroup check inline>
-                        <Label className="form-check-label" check htmlFor="inline-radio2">Female</Label>
-                        <Input className="form-check-input" type="radio" id="inline-radio2" name="inline-radios" value="option2" />
-                      </FormGroup> */}
-                      
-
-
-                        {/* <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="fas fa-venus-mars"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input type="password" placeholder="Gender" autoComplete="on" /> */}
 
 
 
@@ -288,7 +259,17 @@ class Register extends Component {
                             <i className="fa fa-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Пароль" autoComplete="on" />
+                        <Input className={classnames('form-control', { 'is-invalid': !!errors.password })}
+                          type={classnames(visible ? "text" : "password")}
+                          id="password"
+                          name="password"
+                          placeholder="Пароль"
+                          autoComplete="off"
+                          onChange={this.handleChange} />
+                        {!!errors.password ?
+                          <div className="invalid-feedback">
+                            {errors.password}
+                          </div> : ''}
                       </InputGroup>
 
                       <InputGroup className="mb-4">
@@ -297,7 +278,17 @@ class Register extends Component {
                             <i className="fa fa-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="password" placeholder="Повторіть пароль" autoComplete="on" />
+                        <Input className={classnames('form-control', { 'is-invalid': !!errors.repitPassword })}
+                          type={classnames(visible ? "text" : "password")}
+                          id="repitPassword"
+                          name="repitPassword"
+                          placeholder="Повторіть пароль"
+                          autoComplete="off"
+                          onChange={this.handleChange} />
+                        {!!errors.repitPassword ?
+                          <div className="invalid-feedback">
+                            {errors.repitPassword}
+                          </div> : ''}
                       </InputGroup>
 
                       <Row>
@@ -339,4 +330,5 @@ const mapDispatch = {
   }
 }
 
-export default Register;
+
+export default connect(mapStateToProps, mapDispatch)(Register);

@@ -102,8 +102,9 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             var str = "";
 
-            DateTime model_date = DateTime.ParseExact(model.DateOfBirth, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-            if (model_date.Month == 3 && model_date.Day >= 21 || model_date.Month == 4 && model_date.Day <= 20)         //дописать по числам
+            DateTime model_date = DateTime.Parse(model.DateOfBirth);
+            //DateTime model_date = DateTime.ParseExact(model.DateOfBirth, "yyyy.MM.dd", CultureInfo.InvariantCulture);
+            if (model_date.Month == 3 && model_date.Day >= 21 || model_date.Month == 4 && model_date.Day <= 20)         
             {
                 str = "Овен";
             }
@@ -171,8 +172,8 @@ namespace MeetingWebsite.Areas.Account.Controllers
             {
                 DateOfRegister = DateTime.Now,
                 NickName = model.NickName,
-                DateOfBirth = DateTime.ParseExact(model.DateOfBirth, "dd.MM.yyyy", CultureInfo.InvariantCulture),             
-                ZodiacId=zodiac.Id,
+                DateOfBirth =  DateTime.Parse(model.DateOfBirth),             
+                ZodiacId =zodiac.Id,
                 CityId=city.Id,
                 GenderId= gender.Id
             };
@@ -208,23 +209,23 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             //создать юзера  
 
-            var result2 = _signInManager
-                .PasswordSignInAsync(user, model.Password, false, false).Result;
+            //var result2 = _signInManager
+            //    .PasswordSignInAsync(user, model.Password, false, false).Result;
 
-            if (!result2.Succeeded)
-            {
-                return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
-            }
+            //if (!result2.Succeeded)
+            //{
+            //    return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+            //}
 
-            await _signInManager.SignInAsync(user, isPersistent: false);
+            //await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return Ok(
-                 new
-                 {
-                     token = _tokenService.CreateToken(user),
-                     refToken = _tokenService.CreateRefreshToken(user)
-                 }
-                );
+            //return Ok(
+            //     new
+            //     {
+            //         token = _tokenService.CreateToken(user),
+            //         refToken = _tokenService.CreateRefreshToken(user)
+            //     }
+            //    );
         }
 
         [HttpPost("refresh/{refreshToken}")]
