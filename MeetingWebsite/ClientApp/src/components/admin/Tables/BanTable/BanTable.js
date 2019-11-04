@@ -4,6 +4,7 @@ import get from "lodash.get";
 import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
+import Paginator from '../../../Paginator';
 import Select from 'react-select';
 // reactstrap components
 import {
@@ -15,7 +16,12 @@ import {
   Row,
   Col,
   Container,
-  Button
+  Button,
+  Input,
+  Pagination, 
+  PaginationItem,
+  PaginationLink,
+  Modal, ModalBody, ModalFooter, ModalHeader
 } from "reactstrap";
 
 const optionsMonth = [
@@ -41,35 +47,124 @@ const optionsYear = [
 ];
 
 
-class Tables extends React.Component {
+class BanTable extends React.Component {
 
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     isLoading: true,
-    tmp_month: { value: '01', label: 'Січень' },
-    tmp_year: { value: '2019', label: '2019р' },   
+    tmp_NickName: '',
+    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_year: { value: '2019', label: '2019р' }, 
+    modal: false,
+    danger: false,
+    temp_id:'',
+    temp_user:'',
+    temp_description:'',
+    temp_currentpage: 1,
+    totalCount:0 
+    };
+    this.toggle = this.toggle.bind(this);
+    this.onClickPage = this.onClickPage.bind(this);
+    this.toggleDanger = this.toggleDanger.bind(this);  
   }
+
+//Modal
+toggle() {
+  this.setState({
+    modal: !this.state.modal,
+  });
+}
+
+onClickPage(pageNumber) {
+  // const { typeOfSort, sortByAscending } = this.props;
+   console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+   const { tmp_year,tmp_month,tmp_NickName} = this.state;
+
+   let year = tmp_year.value;
+   let month = tmp_month.value;
+   let nickname = tmp_NickName;
+   let currentPage = pageNumber;
+   this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
+   this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+ }
+
+
+SetUnBan=(e,id,nickname)=>
+{
+  e.preventDefault();
+  console.log("SETBAN__________________________________",id);
+   this.setState({temp_id:id,temp_user:nickname});
+   this.toggleDanger();
+}
+
+UnBanUser=()=>
+{
+  const {temp_id} = this.state;
+  let id=temp_id;
+  // const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+  // let year = tmp_year.value;
+  // let month = tmp_month.value;
+  // let nickname = tmp_NickName;
+  // let currentPage = temp_currentpage;
+  console.log("BAN228__________________________________",id);
+  console.log("Ban====================");
+  this.props.unBanUser({id});
+  //this.props.getUsersData({ year,month,nickname,currentPage});
+
+}
+
+//Table
+toggleDanger() {
+  this.setState({
+    danger: !this.state.danger,
+  });
+}
+
 
   handleChange = (name, selectValue) => {
     this.setState({ [name]: selectValue }, this.filterSearchData);
   }
 
   filterSearchData = () => {
-    const { tmp_month, tmp_year } = this.state;
+    const { tmp_month, tmp_year,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
-    this.props.getBansData({ year, month });
-  }
+   let currentPage = temp_currentpage;
+   let nickname = tmp_NickName;
+    this.props.getBansData({ year, month,nickname,currentPage });
+    }
 
   componentDidMount = () => {
-    const { tmp_month, tmp_year } = this.state;
+    const { tmp_month, tmp_year,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
-    this.props.getBansData({ year, month });
+    let currentPage = temp_currentpage;
+    let nickname = tmp_NickName;
+     this.props.getBansData({ year, month,nickname,currentPage });
+    this.props.getBansData({ year, month,nickname,currentPage });
+  }
+
+  Click(e)
+  {
+    e.preventDefault();
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
+    console.log("CLICK__________________________________",tmp_NickName);
+    this.props.getBansData({year,month,nickname,currentPage})
+  }
+
+  PostFilters = (e) => {
+    console.log("EEEEEEEE",e);
+    this.setState({tmp_NickName:e})
   }
 
   render() {
-    const { tmp_year, tmp_month } = this.state;
-    const { listUsers, isListLoading } = this.props;
+    const { tmp_year, tmp_month,temp_user } = this.state;
+    const { listBans, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
     return (
@@ -96,6 +191,16 @@ class Tables extends React.Component {
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
                     </Col>
+                    <Col className="col-md-2">
+                      <Input
+                        onChange={(e) => this.PostFilters(`${e.target.value}`)}
+                        placeholder="Нік"/>
+                    </Col>
+                    <Col className="col-md-2">
+                       <Button onClick={(e)=>this.Click(e)} color='info'>
+                        Відправити фільтри
+                      </Button>
+                    </Col>
                   </Row>                 
                 </CardHeader>
                 <CardBody>
@@ -110,19 +215,38 @@ class Tables extends React.Component {
                     </thead>
                     <tbody className="align-items-center">
                     {
-                        listUsers.map(item => {
+                        listBans.map(item => {
                           return (<tr key={item.id}>
                             {/* <th scope="row">{counter++}</th> */}
                             <td>{item.nickname}</td>
                             <td>{item.bandate}</td>
                             <td>{item.description}</td>
-                           <td><Button color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button></td>
-                          </tr>
+                            <td>
+                            <div className="animated fadeIn">
+                            <Button 
+                            onClick={(e) => this.SetUnBan(e,item.id,item.nickname)}
+                             color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+                           <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                              className={'modal-danger ' + this.props.className}>
+                              <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
+                              <ModalBody>
+                              Ви впевнені що хочете розблукувати користувача {temp_user}?
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="danger" onClick={this.UnBanUser}>Так</Button>{' '}
+                                <Button color="secondary">Ні</Button>
+                              </ModalFooter>
+                            </Modal>
+                    </div>   
+                        </td>
+                        </tr>
                           )
                         })
                       }
                     </tbody>
                   </Table>
+                  <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+                   </Paginator>  
                 </CardBody>
               </Card>
             </Col>
@@ -136,8 +260,8 @@ class Tables extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listUsers: get(state, "userTable.list.data"),
-    isListLoading: get(state, "userTable.list.loading"),  
+    listBans: get(state, "banTable.list.data"),
+    isListLoading: get(state, "banTable.list.loading"),  
   };
 }
 
@@ -145,9 +269,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBansData: filter => {
       dispatch(getListActions.getBansData(filter));
+    },
+    unBanUser: filter => {
+      dispatch(getListActions.unBanUser(filter));
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+export default connect(mapStateToProps, mapDispatchToProps)(BanTable);
 
