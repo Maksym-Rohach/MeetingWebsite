@@ -203,12 +203,12 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            //return Ok(
-            //   new
-            //   {
-            //       token = _tokenService.CreateToken(user),
-            //       refToken = _tokenService.CreateRefreshToken(user)
-            //   });
+            return Ok(
+               new
+               {
+                   token = _tokenService.CreateToken(user),
+                   refToken = _tokenService.CreateRefreshToken(user)
+               });
 
             //создать юзера  
 
