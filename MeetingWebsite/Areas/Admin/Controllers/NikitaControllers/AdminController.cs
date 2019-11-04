@@ -38,14 +38,6 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             query = query.Skip((filter.CurrentPage-1) * count_users)
                 .Take(count_users);
 
-            //var users = _context.UserProfile
-            //    .AsQueryable()
-            //    .Select(a => a)
-            //    .Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks
-            //    .Select(b => b)
-            //    .Where(b => b.Id == a.Id).Count())
-            //    .Skip(filter.CurrentPage * count_users - minus)
-            //    .Take(count_users);
                 
 
             if (filter.NickName!="")
@@ -54,7 +46,6 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             }
 
 
-            //userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Select(b => b).Where(b => b.Id == a.Id).Count()).AsQueryable().Count();
             foreach (var item in query)
             {
                 var temp = _context.UserAccessLocks.Select(a => a).Where(a => item.Id == a.Id).AsQueryable();
