@@ -93,7 +93,8 @@ const {activeIndex} = this.state;
       return (
         <React.Fragment>
 
-          <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top">
+          <Nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
+
             <NavItem>
               <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </NavLink>
             </NavItem>
@@ -101,13 +102,13 @@ const {activeIndex} = this.state;
               <NavLink href="#" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
+              <NavLink href="#/boys" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Вхід</NavLink>
+              <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Зареєструватись</NavLink>
+              <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Зареєструватись</NavLink>
             </NavItem>
           </Nav>
 
@@ -116,14 +117,12 @@ const {activeIndex} = this.state;
             <div className="container text-center text-white my-auto">
               <h1 className="mb-1 text-white display-4 animated fadeInUp  delay-1s ">LOVE IS...</h1>
               <h3 className="mb-5">
-                <p className="mb-5 wow fadeInUp  ">Найкращий сайт знайомств в Україні</p>
+                <p className="mb-5 wow fadeInUp ">Найкращий сайт знайомств в Україні</p>
               </h3>
               <a className=" js-scroll-trigger text-white animated fadeInUp  delay-1s" href="#about"><i className="fas fa-chevron-down "></i></a>
             </div>
             <div className="overlay"></div>
           </header>
-
-
 
           
           <section className="content-section text-white    bg-primary" id="about">
@@ -367,43 +366,30 @@ const {activeIndex} = this.state;
             <div className="container ">
               <div className="row text-center slws-heading mb-3 animated fadeInUp  delay-1s">
                 <div className="col-md-8 offset-md-2 ">
-                  <h2 className="display-4 font-italic">Love is?</h2>
-                  <p className="sub-heading "> Cайт знайомств, на якому мінімум інформації про користувача. </p>
-                  <p className="sub-heading ">Якщо ви перебуваєте в активному пошуку майбутнього обранця, користуйтеся послугами тільки нашого сайту))))</p>
-                  <h3 className="display-4 font-italic">Любов - це ... </h3>
+                   <h2 className="display-4 font-italic">Кохання - це ... </h2>
                 </div>
               </div>
 
               <div className="row">
                 <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s"></div>
+              </div> 
 
-      </div> 
-
-                  <div className="animated fadeIn">
-                      <Container>
-                       <Row >
-                          <Col xs="12" xl="12" >
-                            <Carousel  
-                              // className="Carousel-fixed-top blur"
-                              // interval={false}
-                              //ride={true}
-                              activeIndex={activeIndex}
-                              next={this.next}
-                              previous={this.previous}
-                              // onClickHandler={this.goToIndex}
-                              ride="carousel">                      
-                                {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} /> */}
-                                  {slides}
-                                  {/* <CarouselControl direction="prev" directionText="Попередній" onClickHandler={this.previous} />
-                                  <CarouselControl direction="next" directionText="Наступний" onClickHandler={this.next} /> */}
-                            </Carousel>
-                          </Col>
-                        </Row>
-                      </Container>
-                   </div> 
-                  </div>
-    
-            
+              <div className="animated fadeIn">
+                <Container>
+                  <Row >
+                    <Col xs="12" xl="12" >
+                      <Carousel  
+                        activeIndex={activeIndex}
+                        next={this.next}
+                        previous={this.previous}
+                        ride="carousel">                      
+                          {slides}
+                      </Carousel>
+                    </Col>
+                  </Row>
+                </Container>
+              </div> 
+            </div>
           </section>
 
           <section className="bg-primary text-white text-center" id="services">
