@@ -39,7 +39,7 @@ namespace MeetingWebsite.DAL.Entities
         {
             Random rnd = new Random();
             UserProfile up = new UserProfile();
-            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс" };
+            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс","Микита" };
             string email = "helloworld"+context.UserProfile.Count()+"@gmail.com";
             DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
             int genderid = num % 2 == 0 ? 1 : 2;
@@ -53,7 +53,7 @@ namespace MeetingWebsite.DAL.Entities
             up.Avatar = avatar;
             up.CityId = cityid;
             up.DateOfBirth = DateOfBirth;
-            up.DateOfRegister = DateOfBirth;
+            up.DateOfRegister = DateTime.Now;
             up.GenderId = genderid;
             up.NickName = nicknames[rnd.Next(0, 19)]+num;//18
             up.ZodiacId = zodiacid;
@@ -67,7 +67,7 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 30; i++)
             {
                 GetRandomUserProfile(i, userManager, context);
             }
