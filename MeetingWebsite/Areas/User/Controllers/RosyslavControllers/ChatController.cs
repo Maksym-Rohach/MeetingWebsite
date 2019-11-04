@@ -37,27 +37,16 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
                 return BadRequest(errors);
             }
-            foreach (var item in _context.UserRecipient)
+            var array = _context.Messages.Where(x => (x.SenderId == filter.chat.SenderId || x.SenderId == filter.chat.RecipientId) && (x.RecipientId == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId));
+            List<ModelMessage> models = new List<ModelMessage>();
+            foreach (var item in array)
             {
-                
-                if (item.Messages == null)
-                {
-                    item.Messages = new List<Messages>();
-                }
-            }
-            //if(Mode)
-            
-            List<ModelMessage> messageList = new List<ModelMessage>();
-            //var lis=_context.UserRecipient.Where(x=>x.)
-            var k = _context.UserProfile.Where(x => x.Id == filter.chat.SenderId || x.Id == filter.chat.RecipientId).ToList();
-            List<Messages> mess = new List<Messages>();
-            foreach (var item in k)
-            {
-                mess.AddRange(item.Messages.Where(x => x.RecipientId
-                   == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId).ToList());
+                models.Add(new ModelMessage { SenderId = item.SenderId, DateCreate = item.DateCreate, RecipientId = item.RecipientId, Text = item.Text });
             }
 
-            return Ok(messageList);
+
+
+            return Ok(models);
         }
         [HttpPost("sendmessage")]
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
