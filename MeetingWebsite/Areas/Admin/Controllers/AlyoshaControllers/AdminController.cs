@@ -36,7 +36,8 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 atm.Id = item.Id;
                 
                 atm.Nickname = item.Name;
-               // atm.DateForValid = item.DateForValid;
+
+ 
                 //arm.Registrdate = item.DateOfBirth;
                 //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 //urm.City = city;
@@ -74,7 +75,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 VipTableModel vtm = new VipTableModel();
                 vtm.Id = item.Id;
                 vtm.Nickname = item.User.NickName;
-                //vtm.DateForValid = item.DateForValid;
+                vtm.DateForValid = item.DateForValid.ToString("dd.MM.yyyy");
                 //vtm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
 
                 //  string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
