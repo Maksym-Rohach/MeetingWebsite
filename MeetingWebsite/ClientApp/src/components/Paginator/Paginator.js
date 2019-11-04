@@ -41,7 +41,7 @@ class Paginator extends React.Component {
     {
       if(i>first+3)
       {
-        pages.push(pagesCount-2);
+        //pages.push(pagesCount-2);
         pages.push(pagesCount-1);
         pages.push(pagesCount);
         break;
