@@ -3,23 +3,15 @@ import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar, captionHeader, caption } from 'reactstrap';
 import './instruments/css/palette.css';
 import logo from './instruments/img/logo.jpg';
+import { transform } from '@babel/core';
 const items = [
 {
-  //src: 'http://pngimg.com/uploads/alien/alien_PNG27.png',
-  //altText: 'Slide 1',
-  //caption: 'Марсіанин',
 caption: '... це насамперед відповідальність, а потім уже насолода',
 },
 {
-  //src: 'https://i.pinimg.com/originals/d0/6a/e0/d06ae0849c47867d80afd8be7e0073a6.png',
-  //altText: 'Slide 2',
-  //caption: 'Віночок',
 caption: '... це виявити найкраще одне в одному',
 },
 {
-  //src: 'https://bipbap.ru/wp-content/uploads/2018/01/579a4bc07d7bf15632b7e802.png',
-  //altText: 'Slide 3',
-  //caption: 'Пончик',
   caption: 'покласти часточку лимона в її чай.',
 },
 ]; 
@@ -85,18 +77,19 @@ const {activeIndex} = this.state;
      >
        <img className="d-block w-100" src={item.src} alt={item.altText} />
        <CarouselCaption 
-      // captionText={item.caption} 
-       captionHeader={item.caption} />
+       captionText={item.caption} 
+      // captionHeader={item.caption}
+       />
      </CarouselItem>
    );
  });
       return (
         <React.Fragment>
 
-          <Nav className="navbar navbar-expand-lg  bg-black shadow fixed-top">
-
+          <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top font-weight-bold text-uppercase">
+           <div className="collapse navbar-collapse ">
             <NavItem>
-              <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 35, height: 35}}/> </NavLink>
+              <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 40, height: 40}}/> </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
@@ -104,12 +97,15 @@ const {activeIndex} = this.state;
             <NavItem>
               <NavLink href="#/boys" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
             </NavItem>
+            </div>
+            <div className="collapse navbar-collapse justify-content-end" id="navigation">
             <NavItem>
               <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Зареєструватись</NavLink>
+              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
             </NavItem>
+            </div>
           </Nav>
 
 
@@ -128,33 +124,10 @@ const {activeIndex} = this.state;
           <section className="content-section text-white    bg-primary" id="about">
             <div className="container">
               <div className="row p-3">
-
+                <h2 className="display-4 font-italic">Як все працює? </h2>
                 <div className="row align-items-center ">
-                  <div className="col-8 col-md-4 animated fadeInUp  delay-1s">
-                    <img alt="image" className="img-fluid" src="./img/bread-4077812_1920.jpg" />
-                  </div>
-
-                  <div className="col-4 col-md-2 animated fadeInUp  delay-1s">
-                    <div className="row">
-                      <div className="col-12">
-                        <img alt="image" className="img-fluid" src="./img/4.jpg" />
-                      </div>
-                    </div>
-
-                    <div className="row mt-4">
-                      <div className="col-12">
-                        <img alt="image" className="img-fluid" src="./img/3.jpg" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className=" col-md-6 col-lg-5 ml-auto pt-5 pt-md-0 animated fadeInUp  delay-1s">
-
-                    <h1><img alt="image" className="img-fluid" src="./img/pallete.svg" /> </h1>
-                    <p className="mt-3">Aenean vitae dolor luctus, aliquet odio vitae, rhoncus enim. In hac habitasse platea dictumst. Integer non viverra ipsum. Pellentesque accumsan orci in molestie finibus. </p>
-                    <p className="mt-3">Aenean vitae dolor luctus, aliquet odio vitae, rhoncus enim. In hac habitasse platea dictumst. Integer non viverra ipsum. Pellentesque accumsan orci in molestie finibus. </p>
-                  </div>
-                </div>
+                <a className="btn btn-dark display-4 font-italic" href="#/register">Знайдіть свою ідеальну пару</a>
+                 </div>  
               </div>
             </div>
           </section>
@@ -303,60 +276,6 @@ const {activeIndex} = this.state;
               </Card>
             </Col>
           </Row>
-
-{/* 
-
-                <div className="col-12 col-lg-6 col-xl-5 ml-sm-auto pt-lg-0 animated fadeInUp  delay-1s">
-                  <h1 className="display-4 font-italic mb-2">We Offer</h1>
-                  <div className="row ">
-                    <div className="col-12 col-sm-6 col-xl-5">
-                      <h4 className="my-3 display-5 font-italic">Pasta's</h4>
-                      <p>Nam faucibus euismod velit, a accumsan metus. </p>
-                    </div>
-                    <div className="col-12 col-sm-6 col-xl-5 m-auto pt-3 pt-sm-0">
-                      <h4 className="my-3 display-5 font-italic">Fresh Breads</h4>
-                      <p> Morbi ipsum quam, aliquam vitae risus at, faucibus ultricies quam.</p>
-                    </div>
-                  </div>
-
-                  <div className="row pt-3">
-                    <div className="col-12 col-sm-6 col-xl-5">
-                      <h4 className="my-3 display-5 font-italic">Pizza</h4>
-                      <p>Nam faucibus euismod velit, a accumsan metus. </p>
-                    </div>
-                    <div className="col-12 col-sm-6 col-xl-5 m-auto pt-3 pt-sm-0">
-                      <h4 className="my-3 display-5 font-italic">Farm to Table </h4>
-                      <p> Morbi ipsum quam, aliquam vitae risus at, faucibus ultricies quam.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-md-8 col-lg-6 m-md-auto ml-lg-0 mr-lg-auto  mt-2 animated fadeInUp  delay-1s">
-                  <div id="featured-carousel" className="carousel slide carousel-fade" data-ride="carousel">
-
-                    <div className="carousel-inner">
-                      <div className="carousel-item active">
-                        <img className="d-block w-100" src="./img/spaghetti-863304_1280.jpg" alt="First slide" />
-                      </div>
-                      <div className="carousel-item">
-                        <img className="d-block w-100" src="./img/bread-4077812_1920.jpg" alt="Second slide" />
-                      </div>
-                      <div className="carousel-item">
-                        <img className="d-block w-100" src="./img/2.jpg" alt="Third slide" />
-                      </div>
-                      <div className="carousel-item">
-                        <img className="d-block w-100" src="./img/pasta-1181189_1920.jpg" alt="Third slide" />
-                      </div>
-                    </div>
-                    <a className="carousel-control-prev" href="#featured-carousel" role="button" data-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="sr-only">Previous</span>
-                    </a>
-                    <a className="carousel-control-next" href="#featured-carousel" role="button" data-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="sr-only">Next</span>
-                    </a>
-                  </div>
-                </div> */}
               </div>
             </div>
           </section>
@@ -366,24 +285,32 @@ const {activeIndex} = this.state;
             <div className="container ">
               <div className="row text-center slws-heading mb-3 animated fadeInUp  delay-1s">
                 <div className="col-md-8 offset-md-2 ">
-                   <h2 className="display-4 font-italic">Кохання - це ... </h2>
+                  <h2 className="display-4 font-italic">Love is?</h2>
+                  <p className="sub-heading "> Cайт знайомств, на якому мінімум інформації про користувача. </p>
+                  <p className="sub-heading ">Якщо ви перебуваєте в активному пошуку майбутнього обранця, користуйтеся послугами тільки нашого сайту))))</p>
+                  <h3 className="display-4 font-italic">Любов - це ... </h3>
                 </div>
               </div>
-
               <div className="row">
                 <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s"></div>
               </div> 
-
               <div className="animated fadeIn">
                 <Container>
                   <Row >
                     <Col xs="12" xl="12" >
                       <Carousel  
+                        // className="Carousel-fixed-top blur"
+                        // interval={false}
+                        //ride={true}
                         activeIndex={activeIndex}
                         next={this.next}
                         previous={this.previous}
+                        // onClickHandler={this.goToIndex}
                         ride="carousel">                      
-                          {slides}
+                        {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} /> */}
+                        {slides}
+                        {/* <CarouselControl direction="prev" directionText="Попередній" onClickHandler={this.previous} />
+                        <CarouselControl direction="next" directionText="Наступний" onClickHandler={this.next} /> */}
                       </Carousel>
                     </Col>
                   </Row>
@@ -402,7 +329,7 @@ const {activeIndex} = this.state;
                       <h2 className="mx-auto mb-5 font-italic display-4">Хлопця або чоловіка
                                 <em></em>
                       </h2>
-                      <a className="btn btn-dark js-scroll-trigger " href="reservation.html">Знайти!</a>
+                      <a className="btn btn-dark js-scroll-trigger " href="#">Знайти!</a>
                     </div>
                   </section>
                 </div>
@@ -423,8 +350,7 @@ const {activeIndex} = this.state;
 
        <footer className="footer text-center p-4">
             <div className="container">
-              <p className="text-muted mb-2">Love is </p>
-              <p className="text-muted small mb-0">Corporation "JMDNLARR" </p>
+              <p className="text-muted mb-0 text-light"> Made with <i className="fa fa-heart heart text-danger"></i> by Creative Tim  </p>
             </div>
           </footer>         
         </React.Fragment>
