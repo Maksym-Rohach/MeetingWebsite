@@ -6,6 +6,7 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
 import Modal from '../../../Notifications/Modals/Modals';
+
 // reactstrap components
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   Row,
   Col,
   Container,
+  Badge,
   Button,
   Input,
   Pagination, 
@@ -66,7 +68,7 @@ class Tables extends React.Component {
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    // this.props.getUsersData({ year,month,nickname});
   }
 
   componentDidMount = () => {
@@ -74,7 +76,7 @@ class Tables extends React.Component {
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    // this.props.getUsersData({ year,month,nickname});
   }
 
   // Click(e)//проблема тут!!!
@@ -93,8 +95,9 @@ class Tables extends React.Component {
   }
 
   render() {
+    const counter = 1;
     const { tmp_year, tmp_month, tmp_NickName } = this.state;
-    const { listUsers, isListLoading } = this.props;
+    const { listVips, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
     return (
@@ -109,7 +112,7 @@ class Tables extends React.Component {
                   <Col className="col-md-2">
                   <CardTitle tag="h4">Таблиця VIP користувачів</CardTitle>
                   </Col>
-                  <Col className="col-md-2">
+                  {/* <Col className="col-md-2">
                       <Select
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
@@ -130,27 +133,29 @@ class Tables extends React.Component {
                        <Button onClick={(e)=>this.Click(e)} color='info'>
                         Відправити фільтри
                       </Button>
-                    </Col>
+                    </Col> */}
                   </Row>                 
                 </CardHeader>
                 <CardBody>
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
+                        <th>#</th>
                         <th>Нікнейм</th>
-                        <th>Дата реєстрації</th>
+                        <th>Діє до</th>
                         <th>Місто</th>
                         <th>Статус</th>
                       </tr>
                     </thead>
                     <tbody className="align-items-center">
                     {
-                        listUsers.map(item => {
+                        listVips.map(item => {
                           return (<tr key={item.id}>
                             {/* <th scope="row">{counter++}</th> */}
+                            <td>{counter++}</td>
                             <td>{item.nickname}</td>
                             {/* <td>{item.registrdate}</td>    Замінити на дату закінчення */}
-                            <td>{item.city}</td>
+                            {/* <td>{item.city}</td> */}
                             <td>{item.DateForValid}</td>
                             <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
                             {/* <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td> */}
@@ -160,7 +165,7 @@ class Tables extends React.Component {
                       }
                     </tbody>
                   </Table>
-                  <Pagination>
+                  {/* <Pagination>
                   <PaginationItem>
                     <PaginationLink previous tag="button"></PaginationLink>
                   </PaginationItem>
@@ -179,7 +184,7 @@ class Tables extends React.Component {
                   <PaginationItem>
                     <PaginationLink next tag="button"></PaginationLink>
                   </PaginationItem>
-                </Pagination>
+                </Pagination> */}
                 </CardBody>
               </Card>
             </Col>
@@ -193,15 +198,15 @@ class Tables extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listUsers: get(state, "userTable.list.data"),
-    isListLoading: get(state, "userTable.list.loading"),  
+    listVips: get(state, "vipTable.list.data"),
+    isListLoading: get(state, "vipTable.list.loading"),  
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUsersData: filter => {
-      dispatch(getListActions.getUsersData(filter));
+    getVipsData: filter => {
+      dispatch(getListActions.getVipsData(filter));
     }
   }
 }

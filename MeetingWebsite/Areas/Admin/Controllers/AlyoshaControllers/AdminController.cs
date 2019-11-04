@@ -34,12 +34,14 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             {
                 AdminTableModel atm = new AdminTableModel();
                 atm.Id = item.Id;
+                
                 atm.Nickname = item.Name;
-                //urm.Registrdate = item.DateOfBirth;
+               // atm.DateForValid = item.DateForValid;
+                //arm.Registrdate = item.DateOfBirth;
                 //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 //urm.City = city;
-                // atm.Status = "Активный";
-                atms.Admins.Add(atm);
+                atm.Status = "Активный";
+                //atms.Admins.Add(atm);
             }
             return Ok(atms.Admins);
         }
@@ -49,7 +51,8 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
         {
             // vtm - VipTableModel
             // vtms - VipTableModels
-            //  var models = _context.VipUsers.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
+
+            // var models = _context.VipUsers.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
             // var query = _context.VipUsers.Select(a => a).Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month).AsQueryable();
             var query = _context.VipUsers
                 .Include(x => x.User)
@@ -61,7 +64,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             if (!string.IsNullOrEmpty(filter.NickName))
             {
 
-               // query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
+               //query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
             }
 
             VipTableModels vtms = new VipTableModels();
@@ -74,8 +77,10 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 //vtm.DateForValid = item.DateForValid;
                 //vtm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
 
-                string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
-                vtm.City = city;
+                //  string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
+                //vtm.City = city;
+                //vtm.City = item.User.CityId;
+
                 vtm.Status = "Активний";
                 //vtms.Users.Add(vtm);
             }

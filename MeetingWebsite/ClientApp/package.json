@@ -1,8 +1,8 @@
 {
-  "name": "black-dashboard-react",
+  "name": "MeetingWebSite",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://creativetimofficial.github.io/black-dashboard-react/#/dashboard",
+  
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
     "@types/react": "16.4.16",
