@@ -46,7 +46,7 @@ namespace MeetingWebsite.DAL.Entities
         public virtual City City { get; set; }
         public virtual DbUser User { get; set; }
 
-        public virtual ICollection<Messages> Messages { get; set; } = new List<Messages>();
-
+        public virtual ICollection<Messages> Messages { get; set; }
+        public int Age { get; internal set; }
     }
 }
