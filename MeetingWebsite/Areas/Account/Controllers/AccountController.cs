@@ -49,6 +49,9 @@ namespace MeetingWebsite.Areas.Account.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
+           
+
+
             if (!ModelState.IsValid)
             {
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
@@ -200,12 +203,12 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return Ok(
-               new
-               {
-                   token = _tokenService.CreateToken(user),
-                   refToken = _tokenService.CreateRefreshToken(user)
-               });
+            //return Ok(
+            //   new
+            //   {
+            //       token = _tokenService.CreateToken(user),
+            //       refToken = _tokenService.CreateRefreshToken(user)
+            //   });
 
             //создать юзера  
 
