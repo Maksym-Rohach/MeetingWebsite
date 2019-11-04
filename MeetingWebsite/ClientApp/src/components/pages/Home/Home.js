@@ -92,7 +92,7 @@ const {activeIndex} = this.state;
               <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 40, height: 40}}/> </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
+              <NavLink href="#/" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#/boys" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
@@ -103,7 +103,7 @@ const {activeIndex} = this.state;
               <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
+              <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
             </NavItem>
             </div>
           </Nav>
@@ -123,13 +123,12 @@ const {activeIndex} = this.state;
           
           <section className="content-section text-white    bg-primary" id="about">
             <div className="container">
-              <div className="row p-3">
+             
                 <h2 className="display-4 font-italic">Як все працює? </h2>
                 <div className="row align-items-center ">
                 <a className="btn btn-dark display-4 font-italic" href="#/register">Знайдіть свою ідеальну пару</a>
                  </div>  
-              </div>
-            </div>
+                        </div>
           </section>
 
 
@@ -329,7 +328,7 @@ const {activeIndex} = this.state;
                       <h2 className="mx-auto mb-5 font-italic display-4">Хлопця або чоловіка
                                 <em></em>
                       </h2>
-                      <a className="btn btn-dark js-scroll-trigger " href="#">Знайти!</a>
+                      <a className="btn btn-dark js-scroll-trigger " href="#/boys">Знайти!</a>
                     </div>
                   </section>
                 </div>
