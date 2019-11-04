@@ -23,23 +23,39 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("users")]
         public ActionResult GetUserTable([FromBody] UserTableFilters filter)//проблема з виводом
         {
-            int count_users = 10,minus=0;
-
-            if (filter.CurrentPage==1)
-            {
-                minus = count_users;
-            }
-            var users = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month&&0==_context.UserAccessLocks.Select(b=>b).Where(b=>b.Id==a.Id).Count()).Skip(filter.CurrentPage * count_users - minus).Take(count_users).AsQueryable();
-
-            if (filter.NickName!="")
-            {
-                users = users.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
-            }
+            int count_users = 10;
             UserTableModels userTableModels = new UserTableModels();
             userTableModels.Users = new List<UserTableModel>();
 
-            userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Select(b => b).Where(b => b.Id == a.Id).Count()).AsQueryable().Count();
-            foreach (var item in users)
+            var query = _context.UserProfile
+                .AsQueryable();
+
+            query = query
+                .Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Where(b => b.Id == a.Id).Count());
+
+            userTableModels.TotalCount = query.Count();
+
+            query = query.Skip((filter.CurrentPage-1) * count_users)
+                .Take(count_users);
+
+            //var users = _context.UserProfile
+            //    .AsQueryable()
+            //    .Select(a => a)
+            //    .Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks
+            //    .Select(b => b)
+            //    .Where(b => b.Id == a.Id).Count())
+            //    .Skip(filter.CurrentPage * count_users - minus)
+            //    .Take(count_users);
+                
+
+            if (filter.NickName!="")
+            {
+                query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
+            }
+
+
+            //userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Select(b => b).Where(b => b.Id == a.Id).Count()).AsQueryable().Count();
+            foreach (var item in query)
             {
                 var temp = _context.UserAccessLocks.Select(a => a).Where(a => item.Id == a.Id).AsQueryable();
                 if (temp.Count()!=0)//проверка чи є бан

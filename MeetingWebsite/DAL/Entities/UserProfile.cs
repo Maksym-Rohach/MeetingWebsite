@@ -47,6 +47,6 @@ namespace MeetingWebsite.DAL.Entities
         public virtual DbUser User { get; set; }
 
         public virtual ICollection<Messages> Messages { get; set; }
-        public int Age { get; internal set; }
+        //public int Age { get; internal set; }
     }
 }
