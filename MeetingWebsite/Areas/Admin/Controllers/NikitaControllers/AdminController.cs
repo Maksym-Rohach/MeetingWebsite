@@ -21,7 +21,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("users")]
-        public ActionResult GetUserTable([FromBody] UserTableFilters filter)//проблема з баном при скіпе
+        public ActionResult GetUserTable([FromBody] UserTableFilters filter)//проблема з виводом
         {
             int count_users = 10,minus=0;
 
