@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using MeetingWebsite.DAL.Entities;
 using System.Linq.Expressions;
 using MeetingWebsite.Areas.User.ViewModels;
-using MeetingWebsite.Areas.User.ViewModels.ArtemModels;
 
 namespace MeetingWebsite.Controllers.ArtemControl
 {
@@ -22,37 +21,43 @@ namespace MeetingWebsite.Controllers.ArtemControl
             _context = context;
         }
         
-        [HttpPost("getprofile")]
-        public IActionResult GetUserProfile([FromBody]GetUserProfileModel model)
+        [HttpGet("getprofile")]
+        public IActionResult GetUserProfile()
         {
-            var tmp = _context.UserProfile.Where(a => a.User.Email == model.Email).SingleOrDefault();
-            //if (tmp == null)
-            //{
-            //    return new UserProfileModel { Description = _context.UserProfile.Count().ToString() };
-            //}
+            var i = User.Claims.ToList()[0].Value.ToString();
+            //var i = "6907f4f1-2b5c-4331-af10-7b2b1c0ff830";
+            var tmp = _context.UserProfile.SingleOrDefault(a => a.Id == i);
             var birthDate = tmp.DateOfBirth;
             int age = DateTime.Now.Year - birthDate.Year;
-            return Ok(
-                new UserProfileModel()
-                {
-                    NickName = tmp.NickName,
-                    Age = (birthDate > DateTime.Now.AddYears(-age)) ? age-- : age,
-                    City = _context.City.Where(a=>a.Id == tmp.CityId).SingleOrDefault().Name,
-                    Gender = _context.Gender.Where(a => a.Id == tmp.GenderId).SingleOrDefault().Type,
-                    Zodiac = _context.Zodiac.Where(a => a.Id == tmp.ZodiacId).SingleOrDefault().Name,
-                    Description = tmp.Description
-                }
-                );
+            UserProfileModel model = new UserProfileModel()
+            {
+                NickName = tmp.NickName,
+                Age = (birthDate > DateTime.Now.AddYears(-age)) ? age-- : age,
+                City = _context.City.Where(a => a.Id == tmp.CityId).SingleOrDefault().Name,
+                Gender = _context.Gender.Where(a => a.Id == tmp.GenderId).SingleOrDefault().Type,
+                Zodiac = _context.Zodiac.Where(a => a.Id == tmp.ZodiacId).SingleOrDefault().Name,
+                Description = tmp.Description,
+                Email = _context.Users.SingleOrDefault(a => a.Id == i).Email
+            };
+
+            return Ok(model);
         }
         [HttpPost("setprofile")]
 
         public void SetUserProfile([FromBody]UserProfileModel model)
         {
-            var tmp = _context.UserProfile.Where(a => a.User.Id == model.Id).SingleOrDefault();
-            tmp.NickName = model.NickName;
-            tmp.CityId = _context.City.Where(a=> a.Name == model.City).SingleOrDefault().Id;
-            tmp.GenderId = _context.Gender.Where(a => a.Type == model.Gender).SingleOrDefault().Id;
-            tmp.Description = model.Description;
+            var i = User.Claims.ToList()[0].Value.ToString();
+            //var i = "6907f4f1-2b5c-4331-af10-7b2b1c0ff830";
+            var tmp = _context.UserProfile.Where(a => a.User.Id == i).SingleOrDefault();
+            if(model.NickName!="")
+                tmp.NickName = model.NickName;
+            if (model.City != "")
+                tmp.CityId = _context.City.Where(a=> a.Name == model.City).SingleOrDefault().Id;
+            if (model.Description != "")
+                tmp.Description = model.Description;
+            if (model.Email != "")
+                tmp.User.Email = model.Email;
+            
             _context.SaveChanges();
         }
 

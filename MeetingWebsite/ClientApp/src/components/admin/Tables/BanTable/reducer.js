@@ -16,6 +16,8 @@ const initialState = {
     },   
 }
 
+
+
 export const getBansData = (model) => {
     return (dispatch) => {
         dispatch(getListActions.started());

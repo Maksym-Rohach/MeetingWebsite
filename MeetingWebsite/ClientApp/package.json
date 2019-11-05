@@ -1,8 +1,7 @@
 {
-  "name": "black-dashboard-react",
+  "name": "MeetingWebsite",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://creativetimofficial.github.io/black-dashboard-react/#/dashboard",
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
     "@types/react": "16.4.16",
@@ -25,9 +24,10 @@
     "react": "16.9.0",
     "react-app-polyfill": "^1.0.3",
     "react-chartjs-2": "^2.8.0",
-    "react-cropper": "^1.2.0",
+    "react-cropper": "^1.3.0",
     "react-date-picker": "^7.8.2",
     "react-dom": "16.9.0",
+    "react-file-picker": "0.0.6",
     "react-google-maps": "9.4.5",
     "react-notification-alert": "0.0.8",
     "react-redux": "^7.1.0",
