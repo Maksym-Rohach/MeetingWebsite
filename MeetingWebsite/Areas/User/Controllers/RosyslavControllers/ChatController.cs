@@ -54,7 +54,7 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
 
 
 
-            return Ok(model);
+            return Ok(models);
         }
         [HttpPost("sendmessage")]
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
@@ -186,17 +186,11 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             UserProfile visitor;
             try
             {
-
-                visitor = _context.UserProfile
-                    .SingleOrDefault(x => x.Id == UserID.UserID);
-                interlocutors = visitor
-                    .Messages.GroupBy(x => x.UserRecipient.UserProfile)
-                    .Select(i => i.Key).ToList();
-
-                //foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
-                //{
-                //    interlocutors.Add(item.Key);
-                //}
+                
+                foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
+                {
+                    interlocutors.Add(item.Key);
+                }
             }
             catch (Exception)
             {
@@ -207,13 +201,10 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             }
             try
             {
-                interlocutors.AddRange(visitor
-                    .Messages.GroupBy(x => x.UserSender)
-                    .Select(i => i.Key).ToList());
-                //foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
-                //{
-                //    interlocutors.Add(item.Key);
-                //}
+                foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
+                {
+                    interlocutors.Add(item.Key);
+                }
             }
             catch (Exception)
             {
