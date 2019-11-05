@@ -69,12 +69,14 @@ export const boysReducer = (state = initialState, action) => {
       }
       case BOYS_SUCCESS: {
         console.log("BOYS_SUCCESS)", action.payload);
-          newState = update.set(state, 'list.loading', false);
-          newState = update.set(newState, 'list.failed', false);
-          newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload.getListBoys);
-          newState = update.set(newState, 'list.getCities', action.payload.cities);
-          newState = update.set(newState, 'list.getZodiacs', action.payload.zodiacs);
+          newState = update.set(state, 'loading', false);
+          newState = update.set(newState, 'failed', false);
+          newState = update.set(newState, 'success', true);
+          newState = update.set(newState, 'list.getListBoys', action.payload.getListBoys);
+          newState = update.set(newState, 'list.getCities', action.payload.getCities);
+          newState = update.set(newState, 'list.getZodiacs', action.payload.getZodiacs);
+          newState = update.set(newState, 'list.totalCount', action.payload.totalCount);
+          newState = update.set(newState, 'list.currentPage', action.payload.currentPage);
           
 
           break;
