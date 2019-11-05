@@ -12,7 +12,7 @@ caption: '... це насамперед відповідальність, а п�
 caption: '... це виявити найкраще одне в одному',
 },
 {
-  caption: 'покласти часточку лимона в її чай.',
+caption: '... покласти часточку лимона в її чай.',
 },
 ]; 
 
@@ -60,9 +60,7 @@ const {activeIndex} = this.state;
  const slides = items.map((item)=> {
  return (
    <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-    <div className="d-block w-100"/>
-    <CarouselCaption
-     captionText = {item.caption} />   
+    <CarouselCaption captionText = {item.caption} />   
   </CarouselItem>
   
  );
@@ -86,8 +84,8 @@ const {activeIndex} = this.state;
       return (
         <React.Fragment>
 
-          <Nav pills className="navbar navbar-expand-lg  bg-black shadow fixed-top font-weight-bold text-uppercase">
-           <div className="collapse navbar-collapse ">
+          <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase">
+           {/* <div className="collapse navbar-collapse "> */}
             <NavItem>
               <NavLink href ="#"><img alt="bobik" className="img-fluid" src={logo}  style={{width: 40, height: 40}}/> </NavLink>
             </NavItem>
@@ -97,15 +95,15 @@ const {activeIndex} = this.state;
             <NavItem>
               <NavLink href="#/boys" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
             </NavItem>
-            </div>
-            <div className="collapse navbar-collapse justify-content-end" id="navigation">
+            {/* </div>
+            <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
             <NavItem>
               <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
             </NavItem>
-            </div>
+            {/* </div> */}
           </Nav>
 
 
@@ -121,14 +119,13 @@ const {activeIndex} = this.state;
           </header>
 
           
-          <section className="content-section text-white    bg-primary" id="about">
-            <div className="container">
-             
+          <section className="content-section text-white    bg-light text-black " id="about">
+            <div className="container text-center text-white my-auto">
                 <h2 className="display-4 font-italic">Як все працює? </h2>
-                <div className="row align-items-center ">
-                <a className="btn btn-dark display-4 font-italic" href="#/register">Знайдіть свою ідеальну пару</a>
+                 <div className="align-items-center ">
+                    <a className="btn btn-dark display-4 font-italic" href="#/register">Знайдіть свою ідеальну пару</a>
                  </div>  
-                        </div>
+            </div>
           </section>
 
 
@@ -285,7 +282,6 @@ const {activeIndex} = this.state;
               <div className="row text-center slws-heading mb-3 animated fadeInUp  delay-1s">
                 <div className="col-md-8 offset-md-2 ">
                   <h2 className="display-4 font-italic">Love is?</h2>
-                  <p className="sub-heading "> Cайт знайомств, на якому мінімум інформації про користувача. </p>
                   <p className="sub-heading ">Якщо ви перебуваєте в активному пошуку майбутнього обранця, користуйтеся послугами тільки нашого сайту))))</p>
                   <h3 className="display-4 font-italic">Любов - це ... </h3>
                 </div>
@@ -293,7 +289,7 @@ const {activeIndex} = this.state;
               <div className="row">
                 <div className="col-sm-12 pt-5 animated fadeInUp  delay-1s"></div>
               </div> 
-              <div className="animated fadeIn">
+             <div className="animated fadeIn">
                 <Container>
                   <Row >
                     <Col xs="12" xl="12" >
@@ -307,7 +303,41 @@ const {activeIndex} = this.state;
                         // onClickHandler={this.goToIndex}
                         ride="carousel">                      
                         {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} /> */}
-                        {slides}
+                        <CarouselItem>
+                        <img
+						className="d-block w-100"
+						src="https://picsum.photos/800/400?text=First slide&bg=373940"
+						alt="First slide"
+					/>
+                          <CarouselCaption>
+                        <h3>"... це насамперед відповідальність, а потім уже насолода"</h3>
+                          </CarouselCaption>
+                        </CarouselItem>
+                        
+                        <CarouselItem>
+                        <img
+						className="d-block w-100"
+						src="https://picsum.photos/800/400?text=Second slide&bg=282c34"
+						alt="Third slide"
+					/>
+                          <CarouselCaption>
+                      <h3>"... це виявити найкраще одне в одному"</h3>
+                          </CarouselCaption>
+                        </CarouselItem>
+                        
+                        <CarouselItem>
+                        <img
+						className="d-block w-100"
+						src="https://picsum.photos/800/400?text=Third slide&bg=20232a"
+						alt="Third slide"
+					/>
+                          <CarouselCaption>
+                      <h3>"... покласти часточку лимона в її чай."</h3>
+                          </CarouselCaption>
+                        </CarouselItem>
+
+                        
+                        
                         {/* <CarouselControl direction="prev" directionText="Попередній" onClickHandler={this.previous} />
                         <CarouselControl direction="next" directionText="Наступний" onClickHandler={this.next} /> */}
                       </Carousel>
@@ -321,23 +351,23 @@ const {activeIndex} = this.state;
           <section className="bg-primary text-white text-center" id="services">
             <div className="container-fluid p-0">
               <div className="row no-gutters">
-                <div className="col-md-6">
+                <div className="col-md-6 animated fadeInUp  delay-1s">
 
                   <section className="callout">
                     <div className="container text-center text-white animated fadeInUp  delay-1s">
                       <h2 className="mx-auto mb-5 font-italic display-4">Хлопця або чоловіка
-                                <em></em>
                       </h2>
                       <a className="btn btn-dark js-scroll-trigger " href="#/boys">Знайти!</a>
                     </div>
                   </section>
+
                 </div>
                 <div className="col-md-6 animated fadeInUp  delay-1s">
 
                   <section className="callout-1">
                     <div className="container text-center text-white ">
                       <h2 className="mx-auto mb-5 font-italic display-4">Дівчину або жінку
-                            </h2>
+                      </h2>
                       <a className="btn btn-dark js-scroll-trigger" href="#">Знайти!</a>
                     </div>
                   </section>
