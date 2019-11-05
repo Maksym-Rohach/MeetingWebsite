@@ -190,12 +190,14 @@ class UserTable extends React.Component {
                   </Col>
                   <Col className="col-md-2">
                       <Select
+                        style={{color:"black"}}
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
                         options={optionsMonth} />
                     </Col>
                     <Col className="col-md-2">
                       <Select
+                        style={{color:"black"}}
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
@@ -239,7 +241,7 @@ class UserTable extends React.Component {
                               className={'modal-danger ' + this.props.className}>
                               <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
                               <ModalBody>
-                              <Input onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                              <Input style={{color:"black"}} onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
                               </ModalBody>
                               <ModalFooter>
                                 <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
