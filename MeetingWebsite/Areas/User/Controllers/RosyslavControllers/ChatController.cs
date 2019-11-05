@@ -24,7 +24,11 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
         [HttpPost("loadmessages")]
         public ActionResult<ListMessages> GetMessageList([FromBody]MessageFilter  filter)
         {
-            if (User.Claims.ToList()[0] != null)
+            if (filter.Count < 0 || filter.From < 0)
+            {
+                return BadRequest();
+            }
+            if (User.Claims.ToList().Count>0)
             {
                 if (User.Claims.ToList()[0].Value.ToString() != filter.chat.SenderId||
                     User.Claims.ToList()[0].Value.ToString() != filter.chat.RecipientId)
@@ -42,9 +46,10 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
                 .Where(x => (x.SenderId == filter.chat.SenderId || x.SenderId == filter.chat.RecipientId) 
                    && (x.RecipientId == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId)).ToList();
             ListMessages model = new ListMessages();
-            foreach (var item in array)
+            model.messages=new List<ModelMessage>();
+            for (int i = filter.From; i < filter.Count+filter.From&&i < array.Count; i++)
             {
-                model.messages.Add(new ModelMessage { SenderId = item.SenderId, DateCreate = item.DateCreate, RecipientId = item.RecipientId, Text = item.Text });
+                model.messages.Add(new ModelMessage { SenderId = array[i].SenderId, DateCreate = array[i].DateCreate, RecipientId = array[i].RecipientId, Text = array[i].Text });
             }
 
 
@@ -54,7 +59,7 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
         [HttpPost("sendmessage")]
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
         {
-            if (User.Claims.ToList()[0] != null)
+            if (User.Claims.ToList().Count>0)
             {
                 if (User.Claims.ToList()[0].Value.ToString() != message.SenderId)
                 {
@@ -111,9 +116,9 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             return Ok();
         }
         [HttpPost("deletemessage")]
-        public ActionResult<IsSuccess> DeleteMessage([FromBody]ModelMessage message)
+        public ActionResult<ChatIsSuccess> DeleteMessage([FromBody]ModelMessage message)
         {
-            if (User.Claims.ToList()[0] != null)
+            if (User.Claims.ToList().Count>0)
             {
                 if (User.Claims.ToList()[0].Value.ToString() != message.SenderId|| User.Claims.ToList()[0].Value.ToString()!=message.RecipientId)
                 {
@@ -155,8 +160,8 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
 
                 return BadRequest();
             }
-
-            return Ok();
+            ChatIsSuccess isSuccess = new ChatIsSuccess { IsSuccess = true };
+            return Ok(isSuccess);
         }
         [HttpPost("getchats")]
         public ActionResult<ListChats> GetChats([FromBody]UserModel UserID)
@@ -164,7 +169,7 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             //User.Claims.ToList()[0].Value.ToString();
 
 
-            if (User.Claims.ToList()[0] != null)
+            if (User.Claims.ToList().Count>0)
             {
                 if (User.Claims.ToList()[0].Value.ToString() != UserID.UserID)
                 {

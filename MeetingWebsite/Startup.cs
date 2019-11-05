@@ -33,7 +33,7 @@ namespace MeetingWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddSignalR();
             services.AddCors();
 
             services.AddDbContext<EFDbContext>(options =>
@@ -84,7 +84,7 @@ namespace MeetingWebsite
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             app.UseCors(
-               builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

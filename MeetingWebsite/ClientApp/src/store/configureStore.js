@@ -9,8 +9,7 @@ import { createBrowserHistory } from 'history';
 import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 import {registerReducer} from '../components/pages/register/reducer';
-import { MessageListReducer} from "../components/Chat/MessageList/reduser";
-import { SendMessageReducer} from "../components/Chat/Compose/reduser";
+import {getMessagesReducer} from '../components/Chat/chat/reducer'
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createBrowserHistory({ basename: baseUrl });
 
@@ -25,8 +24,7 @@ export default function configureStore (history, initialState) {
       banTable: banTableReducer,
       registryShedule: registrySheduleReducer,
       register: registerReducer,
-      messageList: MessageListReducer,
-      sendMessage:SendMessageReducer
+      messages:getMessagesReducer
     };
 
     const middleware = [

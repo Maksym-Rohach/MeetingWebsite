@@ -1,10 +1,10 @@
 {
-  "name": "black-dashboard-react",
+  "name": "MeetingWebsite",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://creativetimofficial.github.io/black-dashboard-react/#/dashboard",
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
+    "@microsoft/signalr": "^3.0.0",
     "@types/react": "16.4.16",
     "axios": "^0.19.0",
     "babel-eslint": "10.0.2",
@@ -12,6 +12,7 @@
     "chart.js": "^2.7.2",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.5.2",
+    "emoji-picker-react": "^3.0.0",
     "font-awesome": "^4.7.0",
     "history": "4.7.2",
     "immutability-helper": "^3.0.1",
@@ -41,6 +42,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "rimraf": "^3.0.0",
+    "signalr-client-react": "^0.2.0",
     "simple-line-icons": "^2.4.1",
     "webpack": "4.39.1"
   },

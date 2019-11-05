@@ -1,14 +1,18 @@
 import React from 'react';
 import './Compose.css';
-import { connect } from 'react-redux';
-import get from "lodash.get";
-import * as getListActions from './reduser';
+import Picker from 'emoji-picker-react';
+
 class Compose extends React.Component{
   constructor(props) {
     super(props);
     this.MessageField=React.createRef();
     console.log('state  '+this.state)
     console.log('props:  '+this.props)
+    this.StickOpen=false;
+    this.MouseInStick = this.MouseInStick.bind(this);
+    this.MouseLeaveStick = this.MouseLeaveStick.bind(this);
+    this.OnStickClick = this.OnStickClick.bind(this);
+
   }
   SendClick(){
     console.log(this.MessageField.Text);
@@ -22,24 +26,66 @@ class Compose extends React.Component{
 
 
   }
+  MouseInStick(){
+    if(!this.StickOpen)
+    {
+    console.log("hi")
+    var element = document.getElementById("Smiles");
+    element.classList.add("Display")
+    }
+
+  }
+  MouseLeaveStick(){
+    if(!this.StickOpen)
+    {
+      var element = document.getElementById("Smiles");
+      element.classList.remove("Display")
+
+    }
+
+  }
+  OnStickClick(){
+    var element = document.getElementById("Smiles");
+    if(!this.StickOpen)
+    {
+      element.classList.add("Display")
+    }
+    else{
+      element.classList.remove("Display")
+
+    }
 
 
+    this.StickOpen=!this.StickOpen
+
+  }
+  onEmojiChoose(event, emojiObject){
+    var input = document.getElementById("SendField");
+
+    input.value+=emojiObject.emoji;
+
+  }
   render() {
     //var x = jwt.decode(localStorage.jwttoken)
     //console.log(x)
     return (
       <div className="compose">
-        <button className="SendMess">send</button>
-        <button className="StickName">stick</button>
+        <button className="SendMess"><i className="fas fa-arrow-left"></i></button>
+        <button className="StickName" onMouseEnter={this.MouseInStick} onMouseLeave={this.MouseLeaveStick} onClick={this.OnStickClick}><i className="far fa-smile"></i></button>
         <input
           type="text"
           className="compose-input"
           placeholder="Type a message, @name"
+          id="SendField"
+          
         />
 
         {
           this.props.rightItems
         }
+        <div className="Smiles" id= "Smiles">
+        <Picker onEmojiClick={this.onEmojiChoose} />
+        </div>
       </div>
     );
 }
@@ -49,19 +95,4 @@ class Compose extends React.Component{
 
 }
 
-const mapStateToProps = state => {
-  console.log("State=======", state);
-  return {
-    res: get(state, "sendMessage.list.data"),
-    isMessagesLoaded: get(state, "sendMessage.list.loading"),  
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sendMessages: filter => {
-      dispatch(getListActions.sendMessages(filter));
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Compose);
+export default Compose;

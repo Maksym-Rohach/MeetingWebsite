@@ -4,7 +4,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 import UserNavBar from "./UserNavBar";
 import UserSideBar from "./UserSideBar";
 
-
 import routes from "../../routes/UserRoutes/UserRoutes";
 
 import logo from "assets/img/react-logo.png";
@@ -87,6 +86,17 @@ class UserLayout extends React.Component {
     }
     return "Brand";
   };
+  scroll = (e)=>{
+    var objDiv = document.getElementById("content");
+if(objDiv.scrollTop==0)
+{
+  console.log("i am 0")
+
+}
+
+
+
+}
   render() {
     return (
       <>
@@ -103,7 +113,8 @@ class UserLayout extends React.Component {
             toggleSidebar={this.toggleSidebar}
             
           />
-          <div
+          <div  onScroll={(e)=>this.scroll(e)}
+          id="content"
             className="main-panel"
             ref="mainPanel"
             data={this.state.backgroundColor}
@@ -123,4 +134,5 @@ class UserLayout extends React.Component {
   }
 }
 
-export default UserLayout;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+export default UserLayout;

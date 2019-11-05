@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.Areas.User.ViewModels.RostyslavModels
 {
-    public class IsSuccess
+    public class ChatIsSuccess
     {
         public bool IsSuccess { get; set; }
     }

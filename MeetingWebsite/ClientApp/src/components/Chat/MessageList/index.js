@@ -3,32 +3,270 @@ import Compose from '../Compose';
 import ToolbarButton from '../ToolbarButton';
 import Message from '../Message';
 import moment from 'moment';
-import * as getListActions from './reduser';
-import get from "lodash.get";
 import './MessageList.css';
-import { connect } from 'react-redux';
-import { array } from 'prop-types';
 const MY_USER_ID = '09bc180c-2c73-4fd4-8141-07e86b09235f';
 class MessageList extends React.Component{
-componentDidMount(){
-  console.log("hi")
-  this.props.getMessages({
-    "From":0,
-    "Count":100,
-      "chat": {
-      "senderId":"a1167217-20c9-4ab6-96ab-5d5d75291afb",
-      "RecipientId":"09bc180c-2c73-4fd4-8141-07e86b09235f"
-      }
-    }
-    )
 
-
-}
 getMessages  () {
   var a= ([
       {
         id: 1,
-        senderId: 'apple',
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
+        message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
+        DateCreate: new Date().getTime()
+      },{
+        id: 1,
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
         message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
         DateCreate: new Date().getTime()
       },
@@ -46,19 +284,19 @@ getMessages  () {
       },
       {
         id: 4,
-        senderId: 'apple',
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
         message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
         DateCreate: new Date().getTime()
       },
       {
         id: 5,
-        senderId: 'apple',
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
         message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
         DateCreate: new Date().getTime()
       },
       {
         id: 6,
-        senderId: 'apple',
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
         message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
         DateCreate: new Date().getTime()
       },
@@ -76,7 +314,7 @@ getMessages  () {
       },
       {
         id: 9,
-        senderId: 'apple',
+        senderId: '09bc180c-2c73-4fd4-8141-07e86b09235f',
         message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
         DateCreate: new Date().getTime()
       },
@@ -99,13 +337,19 @@ getMessages  () {
         DateCreate: new Date().getTime()
       },
     ])
-    console.log(a)
-    return this.props.Messages;
+    return a;
+}
+scroll(){
+  //console.log("scroled")
+
 }
 renderMessages () {
   var messages=this.getMessages();
-console.log(messages)
   let i = 0;
+  if(!messages)
+  {
+    return (<div></div>)
+  }
   let messageCount = messages.length;
   let tempMessages = [];
 
@@ -120,11 +364,13 @@ console.log(messages)
     let startsSequence = true;
     let endsSequence = true;
     let showTimestamp = true;
+    //new Date().toTimeString
+    //console.log("data1:   "+new Date(Date.now()).toUTCString())
     if (previous) {
       let previousMoment = moment(previous.DateCreate);
       let previousDuration = moment.duration(currentMoment.diff(previousMoment));
       prevBySameAuthor = previous.senderId === current.senderId;
-      
+      //console.log(previous.DateCreate)
       if (prevBySameAuthor && previousDuration.as('hours') < 1) {
         startsSequence = false;
       }
@@ -161,32 +407,18 @@ console.log(messages)
 
   return tempMessages;
 }
-render(props) {
+render() {
 
       return(
-      <div className="message-list">
+      <div className="message-list" >
 
 
         <div className="message-list-container">{this.renderMessages()}</div>
 
-        <Compose RecipID="" MyID=""/>
+        <Compose />
       </div>
     );
 }
 }
-const mapStateToProps = state => {
-  console.log("State=======", state);
-  return {
-    Messages: get(state, "messageList.list.data"),
-    isMessagesLoaded: get(state, "messageList.list.loading"),  
-  };
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getMessages: filter => {
-      dispatch(getListActions.getMessages(filter));
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
+export default MessageList;
