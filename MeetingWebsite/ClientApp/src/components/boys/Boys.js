@@ -19,8 +19,8 @@ import '../pages/Home/instruments/scss/palette.scss';
 class Boys extends Component {
     state = {
         isLoading: true,
-        tmp_zodiac: {value: 'q', label: 'Zodiac'},
-        tmp_city: {value:'w', label: 'City'},
+        tmp_zodiac: {value: 'q', label: 'Зодіак'},
+        tmp_city: {value:'w', label: 'Місто'},
         tmp_age: {value:'1', label: '18'},   
         collapse: true,
         fadeIn: true,

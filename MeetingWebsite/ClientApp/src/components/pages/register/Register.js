@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import * as registerActions from './reducer';
 import get from "lodash.get";
 import { thisExpression } from '@babel/types';
-import {RadioGroup, RadioButton,Radio,FormControlLabel} from 'react-radio-group'
+// import {RadioGroup, RadioButton,Radio,FormControlLabel} from 'react-radio-group'
 
 const optionsCity = [
   { value: 'Вінниця‎', label: 'Вінниця‎' },
