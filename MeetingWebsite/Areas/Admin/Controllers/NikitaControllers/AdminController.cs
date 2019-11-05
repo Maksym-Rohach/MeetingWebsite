@@ -128,7 +128,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         {
             var data = _context.UserProfile.AsQueryable();
             List<int> monthes = new List<int>();
-            for (int i = 0; i < 12; i++)
+            for (int i = 1; i < 13; i++)
             {
                 monthes.Add(data.Select(a => a).Where(a => a.DateOfRegister.Month == i&& a.DateOfRegister.Year==filter.Year).Count());
             }

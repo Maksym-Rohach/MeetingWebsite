@@ -86,7 +86,7 @@ onClickPage(pageNumber) {
    let nickname = tmp_NickName;
    let currentPage = pageNumber;
    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
-   this.props.getUsersData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
+   this.props.getBansData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
  }
 
 
@@ -123,7 +123,8 @@ toggleDanger() {
 
 
   handleChange = (name, selectValue) => {
-    this.setState({ [name]: selectValue }, this.filterSearchData);
+    console.log("totalCount DID MOUNT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",this.props.totalCount);
+    this.setState({ [name]: selectValue,totalCount:this.props.totalCount }, this.filterSearchData);
   }
 
   filterSearchData = () => {
@@ -142,7 +143,7 @@ toggleDanger() {
     let month = tmp_month.value;
     let currentPage = temp_currentpage;
     let nickname = tmp_NickName;
-    console.log("totalCount DID MOUNT",this.props.totalCount);
+    //console.log("totalCount DID MOUNT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",this.props.totalCount);
     this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({ year, month,nickname,currentPage });
    // this.props.getBansData({ year, month,nickname,currentPage });
@@ -162,7 +163,6 @@ toggleDanger() {
   }
 
   PostFilters = (e) => {
-    console.log("EEEEEEEE",e);
     this.setState({tmp_NickName:e,totalCount:this.props.totalCount})
   }
 
@@ -265,7 +265,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listBans: get(state, "banTable.list.data"),
-    totalCount: get(state, "userTable.list.totalCount"),
+    totalCount: get(state, "banTable.list.totalCount"),
     isListLoading: get(state, "banTable.list.loading"),  
   };
 }
