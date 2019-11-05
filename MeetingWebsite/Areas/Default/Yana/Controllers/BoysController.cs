@@ -78,12 +78,12 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
 
             foreach (var item in city)
             {
-                GetCities.Add(new GetCity {CityID=item.Id,CityName=item.Name });
+                GetCities.Add(new GetCity {Value=item.Id.ToString(), Label=item.Name });
             }
 
             foreach(var item in zodiac)
             {
-                GetZodiacs.Add(new GetZodiac { ZodiacID = item.Id, ZodiacName = item.Name });
+                GetZodiacs.Add(new GetZodiac { Value = item.Id.ToString(), Label = item.Name });
             }
 
             result.TotalCount = query.Count();

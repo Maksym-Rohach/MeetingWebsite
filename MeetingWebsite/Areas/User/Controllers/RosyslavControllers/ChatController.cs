@@ -37,16 +37,25 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
                 var errors = CustomValidator.GetErrorsByModel(ModelState);
                 return BadRequest(errors);
             }
-            var array = _context.Messages.Where(x => (x.SenderId == filter.chat.SenderId || x.SenderId == filter.chat.RecipientId) && (x.RecipientId == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId));
-            List<ModelMessage> models = new List<ModelMessage>();
-            foreach (var item in array)
-            {
-                models.Add(new ModelMessage { SenderId = item.SenderId, DateCreate = item.DateCreate, RecipientId = item.RecipientId, Text = item.Text });
-            }
+            var array = _context.Messages.Where(x => (x.SenderId == filter.chat.SenderId ||
+                x.SenderId == filter.chat.RecipientId) && (x.RecipientId == filter.chat.RecipientId ||
+                x.RecipientId == filter.chat.SenderId))
+                .Select(m => new ModelMessage
+                {
+                    SenderId = m.SenderId,
+                    DateCreate = m.DateCreate,
+                    RecipientId = m.RecipientId,
+                    Text = m.Text
+                }).ToList();
+            //List<ModelMessage> models = new List<ModelMessage>();
+            //foreach (var item in array)
+            //{
+            //    models.Add(new ModelMessage { SenderId = item.SenderId, DateCreate = item.DateCreate, RecipientId = item.RecipientId, Text = item.Text });
+            //}
 
 
 
-            return Ok(models);
+            return Ok(array);
         }
         [HttpPost("sendmessage")]
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
@@ -144,11 +153,15 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             List<string> interlocutors = new List<string>();
             try
             {
-                
-                foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
-                {
-                    interlocutors.Add(item.Key);
-                }
+                interlocutors = _context.UserProfile
+                    .SingleOrDefault(x => x.Id == UserID.UserID)
+                    .Messages.GroupBy(x => x.RecipientId)
+                    .Select(i => i.Key).ToList();
+               
+                //foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
+                //{
+                //    interlocutors.Add(item.Key);
+                //}
             }
             catch (Exception)
             {
@@ -157,10 +170,14 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             }
             try
             {
-                foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
-                {
-                    interlocutors.Add(item.Key);
-                }
+                interlocutors.AddRange( _context.UserProfile
+                    .SingleOrDefault(x => x.Id == UserID.UserID)
+                    .Messages.GroupBy(x => x.SenderId)
+                    .Select(i => i.Key).ToList());
+                //foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
+                //{
+                //    interlocutors.Add(item.Key);
+                //}
             }
             catch (Exception)
             {
