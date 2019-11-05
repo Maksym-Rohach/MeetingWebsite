@@ -52,9 +52,7 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
                        
             GetListBoysModel result = new GetListBoysModel();
             result.CurrentPage = filter.CurrentPage;
-            var query = _context.UserProfile.AsQueryable();
-
-            
+            var query = _context.UserProfile.AsQueryable();            
 
             if (filter.CityId > 0)
             {
@@ -65,8 +63,6 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
             {
                 query = query.Where(x => x.ZodiacId == filter.ZodiacId);
             }
-
-
 
             var today = DateTime.Today;
 
@@ -94,9 +90,9 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
 
             boys = query
                     .Include(c => c.City)
-                    .OrderBy(u => u.Id)
-                    .Skip((filter.CurrentPage - 1) * 10)
+                    .OrderBy(u => Guid.NewGuid())
                     .Take(10)
+                    .Skip((filter.CurrentPage - 1) * 10)                 
                     .Select(u => new GetBoysModel
                     {
                         City = u.City.Name,

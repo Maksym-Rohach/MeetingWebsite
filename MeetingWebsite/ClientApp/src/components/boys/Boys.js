@@ -9,7 +9,7 @@ import * as getListActions from './reducer';
 import { connect } from 'react-redux';
 import './style.scss';
 import '../pages/Home/instruments/scss/palette.scss';
-  
+
 
   // const optionsCity = [
   //   {value: "", label: ""},
