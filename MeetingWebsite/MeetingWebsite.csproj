@@ -7,6 +7,7 @@
     <IsPackable>false</IsPackable>
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+    <UserSecretsId>9d105435-b1ab-4fa3-9e92-5eb2d7faa351</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,14 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191014171731_n.cs" />
-    <Compile Remove="Migrations\20191014171731_n.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Areas\User\ViewModels\" />
     <Folder Include="Uploaded\" />
   </ItemGroup>
 
