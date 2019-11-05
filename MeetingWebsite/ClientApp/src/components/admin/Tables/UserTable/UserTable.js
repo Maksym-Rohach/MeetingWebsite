@@ -56,7 +56,7 @@ class UserTable extends React.Component {
     this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_month: { value: '11', label: 'Листопад' },
     tmp_year: { value: '2019', label: '2019р' }, 
     modal: false,
     danger: false,

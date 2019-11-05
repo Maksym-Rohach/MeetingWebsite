@@ -32,19 +32,15 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
 
             query = query
                 .Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Where(b => b.Id == a.Id).Count());
-
-            userTableModels.TotalCount = query.Count();
-
-            query = query.Skip((filter.CurrentPage-1) * count_users)
-                .Take(count_users);
-
-                
-
+            
             if (filter.NickName!="")
             {
                 query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
             }
+            userTableModels.TotalCount = query.Count();
 
+                query = query.Skip((filter.CurrentPage-1) * count_users)
+                .Take(count_users);
 
             foreach (var item in query)
             {
@@ -69,32 +65,28 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         [HttpPost("ban-list")]
         public ActionResult GetBanTable([FromBody] UserTableFilters filter)
         {
-            int count_users = 5,minus = 0;
+            int count_users = 10;
+            BanTableModels banTableModels = new BanTableModels();
+            banTableModels.Bans = new List<BanTableModel>();
 
-            if (filter.CurrentPage == 1)
-            {
-                minus = count_users;
-            }
-
-            var bans = _context.UserAccessLocks
-                .Select(a=>a)
-                .Where(a=>a.LockDate.Year==filter.Year&&a.LockDate.Month==filter.Month)
-                .Skip(filter.CurrentPage * count_users - minus)
-                .Take(count_users)
-                .AsQueryable();
-
+            var query = _context.UserAccessLocks.AsQueryable();
+            query = query
+                .Where(a => a.LockDate.Year == filter.Year && a.LockDate.Month == filter.Month);
+                
             if (filter.NickName != "")
             {
-                bans = bans
+                query = query
                     .Select(a => a)
                     .Where(a => _context.UserProfile.FirstOrDefault(b => b.Id == a.Id).NickName.Contains(filter.NickName));
             }
 
-            BanTableModels banTableModels = new BanTableModels();
-            banTableModels.Bans = new List<BanTableModel>();
-            banTableModels.TotalCount = _context.UserAccessLocks.Select(a => a).Where(a => a.LockDate.Year == filter.Year && a.LockDate.Month == filter.Month).AsQueryable().Count();
+            banTableModels.TotalCount = query.Count();
 
-            foreach (var item in bans)
+            query= query
+            .Skip((filter.CurrentPage - 1) * count_users)
+            .Take(count_users);
+     
+            foreach (var item in query)
             {
                 BanTableModel banTableModel = new BanTableModel();
                 banTableModel.Id = item.Id;

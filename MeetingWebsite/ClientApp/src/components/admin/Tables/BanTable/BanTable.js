@@ -86,7 +86,7 @@ onClickPage(pageNumber) {
    let nickname = tmp_NickName;
    let currentPage = pageNumber;
    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
-   this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+   this.props.getUsersData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
  }
 
 
@@ -132,6 +132,7 @@ toggleDanger() {
     let month = tmp_month.value;
    let currentPage = temp_currentpage;
    let nickname = tmp_NickName;
+   this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({ year, month,nickname,currentPage });
     }
 
@@ -141,8 +142,10 @@ toggleDanger() {
     let month = tmp_month.value;
     let currentPage = temp_currentpage;
     let nickname = tmp_NickName;
-     this.props.getBansData({ year, month,nickname,currentPage });
+    console.log("totalCount DID MOUNT",this.props.totalCount);
+    this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({ year, month,nickname,currentPage });
+   // this.props.getBansData({ year, month,nickname,currentPage });
   }
 
   Click(e)
@@ -154,12 +157,13 @@ toggleDanger() {
     let nickname = tmp_NickName;
     let currentPage = temp_currentpage;
     console.log("CLICK__________________________________",tmp_NickName);
+    this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({year,month,nickname,currentPage})
   }
 
   PostFilters = (e) => {
     console.log("EEEEEEEE",e);
-    this.setState({tmp_NickName:e})
+    this.setState({tmp_NickName:e,totalCount:this.props.totalCount})
   }
 
   render() {
@@ -261,6 +265,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listBans: get(state, "banTable.list.data"),
+    totalCount: get(state, "userTable.list.totalCount"),
     isListLoading: get(state, "banTable.list.loading"),  
   };
 }
