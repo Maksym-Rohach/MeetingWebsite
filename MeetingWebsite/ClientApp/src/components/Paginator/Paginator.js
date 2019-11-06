@@ -57,9 +57,8 @@ class Paginator extends React.Component {
     return (
             <Pagination>
                   <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
+                    <PaginationLink tag="button"onClick={()=>this.onPageChanged(1)}>До початку</PaginationLink>
                   </PaginationItem>
-
                   {pages.map(p => {
               return p === -1 ? (
                 <PaginationItem disabled key={p}>

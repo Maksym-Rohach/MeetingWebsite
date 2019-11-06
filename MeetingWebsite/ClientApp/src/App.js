@@ -27,13 +27,13 @@ class App extends Component {
         <Router>
             <React.Suspense fallback={loading()}>
                 <Switch>
-                    <Route path="/login" name="Login" render={props => <Login {...props} />} />
-                    <Route path="/register" name="Register" render={props => <Register {...props} />} />
-                    <Route path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
-                    <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
-                    <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    
-                    <Route path="/boys" name="Boys" render={props => <Boys {...props} />} />
-                    <Route path="/" name="Home" render={props => <Home {...props} />} />
+                    <Route  path="/login" name="Login" render={props => <Login {...props} />} />
+                    <Route  path="/register" name="Register" render={props => <Register {...props} />} />
+                    <Route  path="/admin" name="Admin" render={props => <AdminLayout {...props} />} />
+                    <Route  path="/user" name="User" render={props => <UserLayout {...props} />} /> 
+                    <Route  path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    
+                    <Route  path="/boys" name="Boys" render={props => <Boys {...props} />} />
+                    <Route exact path="/" name="Home" render={props => <Home {...props} />} />
                 </Switch>
                 </React.Suspense>
       </Router>
