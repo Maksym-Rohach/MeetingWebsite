@@ -48,7 +48,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
         }
 
         [HttpPost("vips")] //UserTableFilters
-        public ActionResult GetVipTable([FromBody] VipTableFilters filter)
+        public ActionResult GetVipTable()//([FromBody] VipTableFilters filter)
         {
             // vtm - VipTableModel
             // vtms - VipTableModels
@@ -60,13 +60,13 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 .AsQueryable();
 
 
-            query = query.Select(a => a)
-                .Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month);
-            if (!string.IsNullOrEmpty(filter.NickName))
-            {
+            //query = query.Select(a => a)
+            //    .Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month);
+            //if (!string.IsNullOrEmpty(filter.NickName))
+            //{
 
-               //query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
-            }
+            //    query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
+            //}
 
             VipTableModels vtms = new VipTableModels();
             vtms.Vips = new List<VipTableModels>();
@@ -78,8 +78,8 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 vtm.DateForValid = item.DateForValid.ToString("dd.MM.yyyy");
                 //vtm.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
 
-                //  string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
-                //vtm.City = city;
+                string city = _context.City.FirstOrDefault(a => a.Id == item.User.CityId).Name;
+                vtm.City = city;
                 //vtm.City = item.User.CityId;
 
                 vtm.Status = "Активний";

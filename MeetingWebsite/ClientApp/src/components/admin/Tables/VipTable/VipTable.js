@@ -155,7 +155,7 @@ class Tables extends React.Component {
                             <td>{counter++}</td>
                             <td>{item.nickname}</td>
                             {/* <td>{item.registrdate}</td>    Замінити на дату закінчення */}
-                            {/* <td>{item.city}</td> */}
+                            <td>{item.city}</td>
                             <td>{item.DateForValid}</td>
                             <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
                             {/* <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td> */}
