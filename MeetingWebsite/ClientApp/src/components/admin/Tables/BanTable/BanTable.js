@@ -6,6 +6,7 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Paginator from '../../../Paginator';
 import Select from 'react-select';
+import '../UserTable/color.scss';
 // reactstrap components
 import {
   Card,
@@ -185,12 +186,14 @@ toggleDanger() {
                   </Col>
                   <Col className="col-md-2">
                       <Select
+                        className="fontnikita"      
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
                         options={optionsMonth} />
                     </Col>
                     <Col className="col-md-2">
                       <Select
+                        className="fontnikita"      
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />

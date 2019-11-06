@@ -6,6 +6,8 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
 import Paginator from '../../../Paginator';
+import './color.scss';
+
 //import Modal from '../../../Notifications/Modals/Modals';
 
 // reactstrap components
@@ -182,22 +184,22 @@ class UserTable extends React.Component {
       <div className="content">
           <Row>
             <Col md="12">
-              <Card>
+              <Card >
                 <CardHeader>
                   <Row>
                   <Col className="col-md-2">
                   <CardTitle tag="h4">Таблиця користувачів</CardTitle>
                   </Col>
                   <Col className="col-md-2">
-                      <Select
-                        style={{color:"black"}}
+                      <Select           
+                        className="fontnikita"                     
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
                         options={optionsMonth} />
                     </Col>
                     <Col className="col-md-2">
                       <Select
-                        style={{color:"black"}}
+                        className="fontnikita"
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
