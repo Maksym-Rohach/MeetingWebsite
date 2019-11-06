@@ -21,37 +21,53 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
         }
 
         [HttpPost("users")]
-        public ActionResult GetUserTable([FromBody] UserTableFilters filter)
+        public ActionResult GetUserTable([FromBody] UserTableFilters filter)//проблема з виводом
         {
-            int count_users = 10,minus=0;
-
-            if (filter.CurrentPage==1)
-            {
-                minus = count_users;
-            }
-            var users = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).Skip(filter.CurrentPage * count_users - minus).Take(count_users).AsQueryable();
-
-            if (filter.NickName!="")
-            {
-                users = users.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
-            }
+            int count_users = 10;
             UserTableModels userTableModels = new UserTableModels();
             userTableModels.Users = new List<UserTableModel>();
 
-            userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable().Count();
-            foreach (var item in users)
+            var query = _context.UserProfile
+                .AsQueryable();
+
+            query = query
+                .Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Where(b => b.Id == a.Id).Count());
+
+            userTableModels.TotalCount = query.Count();
+
+            query = query.Skip((filter.CurrentPage-1) * count_users)
+                .Take(count_users);
+
+            //var users = _context.UserProfile
+            //    .AsQueryable()
+            //    .Select(a => a)
+            //    .Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks
+            //    .Select(b => b)
+            //    .Where(b => b.Id == a.Id).Count())
+            //    .Skip(filter.CurrentPage * count_users - minus)
+            //    .Take(count_users);
+                
+
+            if (filter.NickName!="")
+            {
+                query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
+            }
+
+
+            //userTableModels.TotalCount = _context.UserProfile.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month && 0 == _context.UserAccessLocks.Select(b => b).Where(b => b.Id == a.Id).Count()).AsQueryable().Count();
+            foreach (var item in query)
             {
                 var temp = _context.UserAccessLocks.Select(a => a).Where(a => item.Id == a.Id).AsQueryable();
                 if (temp.Count()!=0)//проверка чи є бан
                 {
-                    userTableModels.TotalCount--;
+                    userTableModels.TotalCount=userTableModels.TotalCount--;
                     continue;
                 }
 
                 UserTableModel userTableModel = new UserTableModel();
                 userTableModel.Id = item.Id;
                 userTableModel.Nickname = item.NickName;
-                userTableModel.Registrdate = item.DateOfBirth.ToString("dd.MM.yyyy");
+                userTableModel.Registrdate = item.DateOfRegister.ToString("dd.MM.yyyy");
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 userTableModel.City = city;
                 userTableModel.Status = "Не забанений";
@@ -131,7 +147,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             List<int> monthes = new List<int>();
             for (int i = 0; i < 12; i++)
             {
-                monthes.Add(data.Select(a => a).Where(a => a.DateOfBirth.Month == i&& a.DateOfBirth.Year==filter.Year).Count());
+                monthes.Add(data.Select(a => a).Where(a => a.DateOfRegister.Month == i&& a.DateOfRegister.Year==filter.Year).Count());
             }
             return Ok(monthes);
         }

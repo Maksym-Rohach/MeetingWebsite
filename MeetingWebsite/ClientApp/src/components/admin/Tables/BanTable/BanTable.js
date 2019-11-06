@@ -4,6 +4,7 @@ import get from "lodash.get";
 import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
+import Paginator from '../../../Paginator';
 import Select from 'react-select';
 // reactstrap components
 import {
@@ -60,9 +61,11 @@ class BanTable extends React.Component {
     temp_id:'',
     temp_user:'',
     temp_description:'',
-    temp_currentpage: 1 
+    temp_currentpage: 1,
+    totalCount:0 
     };
     this.toggle = this.toggle.bind(this);
+    this.onClickPage = this.onClickPage.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);  
   }
 
@@ -72,6 +75,20 @@ toggle() {
     modal: !this.state.modal,
   });
 }
+
+onClickPage(pageNumber) {
+  // const { typeOfSort, sortByAscending } = this.props;
+   console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+   const { tmp_year,tmp_month,tmp_NickName} = this.state;
+
+   let year = tmp_year.value;
+   let month = tmp_month.value;
+   let nickname = tmp_NickName;
+   let currentPage = pageNumber;
+   this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
+   this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+ }
+
 
 SetUnBan=(e,id,nickname)=>
 {
@@ -228,26 +245,8 @@ toggleDanger() {
                       }
                     </tbody>
                   </Table>
-                  <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next tag="button"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+                  <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+                   </Paginator>  
                 </CardBody>
               </Card>
             </Col>

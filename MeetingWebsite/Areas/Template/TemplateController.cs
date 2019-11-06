@@ -67,7 +67,11 @@ namespace MeetingWebsite.Areas.Template
                     })
                     .ToList();
 
-            result.Users = users;           
+            result.Users = users;
+
+
+          
+
 
             return Ok(result);
         }
