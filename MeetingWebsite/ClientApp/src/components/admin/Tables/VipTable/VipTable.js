@@ -95,13 +95,13 @@ class Tables extends React.Component {
   }
 
   render() {
-    const counter = 1;
+    let counter = 1;
     const { tmp_year, tmp_month, tmp_NickName } = this.state;
     const { listVips, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
     return (
-      <>
+      <React.Fragment>      
       {isListLoading && <EclipseWidget />}
       <div className="content">
           <Row>
@@ -190,7 +190,7 @@ class Tables extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }

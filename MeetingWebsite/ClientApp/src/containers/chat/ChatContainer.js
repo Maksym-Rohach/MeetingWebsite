@@ -37,14 +37,14 @@ class ChatLayout extends React.Component {
 
     
     return (
-      <>
+      <React.Fragment>      
       <div className=" content">
         <div className="ChatLayout">
         <MessageList />
             
         </div>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }

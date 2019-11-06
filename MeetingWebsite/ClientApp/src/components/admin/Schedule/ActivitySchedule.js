@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
   };
   render() {
     return (
-      <>
+      <React.Fragment>      
         <div className="content">
           <Row>
             <Col xs="12">
@@ -146,7 +146,7 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           </div>
-          </>
+          </React.Fragment>      
           );
   }
 }

@@ -36,7 +36,7 @@ class Tables extends React.Component {
     console.log("---props--------------------------------", this.props);
     let counter = 1;
     return (
-      <>
+      <React.Fragment>      
       <div className="content">
           <Row>
             <Col md="12">
@@ -76,7 +76,7 @@ class Tables extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }

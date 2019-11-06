@@ -35,7 +35,7 @@ import {
 class UserProfile extends React.Component {
   render() {
     return (
-      <>
+      <React.Fragment>      
         <div className="content">
           <Row>
             <Col md="8">
@@ -233,7 +233,7 @@ class UserProfile extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }
