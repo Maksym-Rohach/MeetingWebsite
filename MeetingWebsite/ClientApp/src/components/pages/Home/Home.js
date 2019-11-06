@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, Navbar, captionHeader, caption } from 'reactstrap';
 import './instruments/css/palette.css';
 import logo from './instruments/img/logo.jpg';
-import { transform } from '@babel/core';
+import { connect } from 'react-redux';
+import get from "lodash.get";
+import * as getListActions from './reducer';
+//import { transform } from '@babel/core';
 const items = [
 {
 caption: '... це насамперед відповідальність, а потім уже насолода',
@@ -21,12 +24,19 @@ class Home extends Component {
 constructor(props)
 {
   super(props);
-  this.state = {activeIndex: 0 };
+  this.state = {
+    listUsers:[],
+    activeIndex: 0 
+  };
   this.next = this.next.bind(this);
   this.previous = this.previous.bind(this);
   this.goToIndex = this.goToIndex.bind(this);
   this.onExiting = this.onExiting.bind(this);
   this.onExited = this.onExited.bind(this);
+}
+
+componentDidMount = () => { 
+  this.props.getUserData();
 }
 
 onExiting(){
@@ -55,7 +65,9 @@ goToIndex(newIndex) {
 }
 
 render() {
-const {activeIndex} = this.state;
+const {activeIndex, listUsers} = this.state;
+const {listUsers} = this.props;
+console.log("listUsers",listUsers);
 
  const slides = items.map((item)=> {
  return (
@@ -135,23 +147,36 @@ const {activeIndex} = this.state;
               <div className="row align-items-center">
 
               <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
-                <Col xs="12" sm="4" md="3" >
-                  <Card className="border-primary">
-                    <CardBody>
-                      <div>
-                        <img alt ="photo" className ="img-fluid" src="https://lh3.googleusercontent.com/1M3sCaOjMM9ddzzsDW2P-rlxBMA9VV7hjan_KGxSdvtU6_gHvhICx7OjGHy2Kv8S0kZuTXqdhYDOr-J8nNZqCooei78ioKP9XLpf4GntSzwf_NC4gjKrXZlgc-0OQI2lxJgxaoAmpJLiUGRVMN3X-Uu_eP_fQ6jJ5K-kcZ3BKj9pM05u7YDhW8bcwWhRiOYBNkvzMFZ_fVqA3Gt0tggMvEZ-wT1rt7YrLYlz8MFStGI8Z75CDLKA-24xVhnKhSFxoIvZ-iIMr858-zTiCk5xNObY0NbK1yFJnh_ERiiJ_rAOTGxICjI_L7Rb0NpGZCl0bRS2BAoh87MChO59Cp9XGsrgde7u_GFnsA0ywni3LeJSHAOFxGyAlvscbaCVvr_IkU0BznZcdLGjoJlodd5AP5N8OG7ggZjzKZbrKaIQ4GfmG9A9ia8YMocYIz9WzNIs8bHDYyrZcAu7oeKqx2K7wJ49nZ1nt1xs98l4iUi89hqTXOhpKnN2Yn8UHAMnji1rB4Sxqwpd8VKbcI5KDVTt1UMp4E-dD2zRDNTIVcBVT4yM8s3ZSaXpdNmtAyP_foVttfB1QCc5eH3tshuXhhfAmufyDjFSlg_GXwphpiYSlXVzdkVKPo6wOl_f6aBwiz8By_yEHeyyrF9zgd9PmSgk_jckIEoPWZXOChY6vSWxjzpjD4xEk35Tc7c=w495-h880-no" />
-                     </div>
-                       Місце для вашої реклами
+                  {
+                    listUsers.map(item => {
+                      return (
+                        <Col xs="12" sm="4" md="3" >
+                          <Card className="border-primary">
+                            <CardBody>
+                              <div key={item.id}>
+                                <img alt="photo" className="img-fluid" src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB" />
+                              </div>
+                              {item.name}
+                              {item.city}
+                              {item.age}
+                              {item.zodiac}
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      )
+                    })
+                  }
+               
+                        
+                       {/* Місце для вашої реклами
                 <div className="text-center">
                   <a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
                 </div>
-                  </CardBody>
-              </Card>
-            </Col>
+                  
             <Col xs="12" sm="4" md="3" >
               <Card className="border-primary">
                 <CardBody>
-                <div><img alt ="photo" className ="img-fluid" src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB" />
+                
                   </div>
                   Місце для вашої реклами
                   <div className="text-center"><a href="#" className="social-link rounded-circle text-white mr-3">See Profile</a>
@@ -270,7 +295,7 @@ const {activeIndex} = this.state;
                   </div>
                 </CardBody>
               </Card>
-            </Col>
+            </Col> */}
           </Row>
               </div>
             </div>
@@ -385,5 +410,23 @@ const {activeIndex} = this.state;
         </React.Fragment>
     );
   }
-}   
-export default Home;
+}  
+
+const mapStateToProps = state => {
+  console.log("mapStateToProps=======", state);
+  return {
+    listUsers: get(state, "home.post.data.getHomeUserModel"),
+    isListLoading: get(state, "home.post.loading"),  
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserData: filter => {
+      dispatch(getListActions.getUserData(filter));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+

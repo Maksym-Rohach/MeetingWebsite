@@ -10,6 +10,7 @@ import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 import {registerReducer} from '../components/pages/register/reducer';
 import { boysReducer } from '../components/boys/reducer';
+import {homeReducer} from '../components/pages/Home/reducer';
 
 import { MessageListReducer} from "../components/Chat/MessageList/reduser";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -27,7 +28,8 @@ export default function configureStore (history, initialState) {
       registryShedule: registrySheduleReducer,     
       boys: boysReducer,
       register: registerReducer,
-      messageList: MessageListReducer
+      messageList: MessageListReducer,
+      home: homeReducer
     };
 
     const middleware = [
