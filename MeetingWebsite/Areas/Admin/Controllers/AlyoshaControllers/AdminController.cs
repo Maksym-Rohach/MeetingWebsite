@@ -31,16 +31,10 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 AdminTableModel atm = new AdminTableModel();
                 atm.Id = item.Id;
                 atm.Nickname = item.NickName;
-                //urm.Registrdate = item.DateOfBirth;
-                //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
-                //urm.City = city;
                 atm.Status = "Активный";
                 atms.Admins.Add(atm);
             }
             return Ok(atms.Admins);
-        }
-
-
-       
+        }      
     }
 }

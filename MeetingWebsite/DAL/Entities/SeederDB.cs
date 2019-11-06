@@ -55,7 +55,7 @@ namespace MeetingWebsite.DAL.Entities
             up.DateOfBirth = DateOfBirth;
             up.DateOfRegister = DateTime.Now.AddMonths(-4);
             up.GenderId = genderid;
-            up.NickName = nicknames[rnd.Next(0, 19)]+num;//18
+            up.NickName = nicknames[rnd.Next(0, 18)]+num;//18
             up.ZodiacId = zodiacid;
             up.User = user;
 

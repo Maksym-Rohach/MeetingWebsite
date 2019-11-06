@@ -137,7 +137,7 @@ class Boys extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("State=======", state);
+  console.log("mapStateToProps======Boys=", state);
   return {
     listUsers: get(state, "boys.list.getListBoys"),
     listCities: get(state,"boys.list.getCities"),

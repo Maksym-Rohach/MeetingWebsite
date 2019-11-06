@@ -5,7 +5,8 @@ import { loginReducer} from "../components/pages/login/reducer";
 import { refreshReducer } from '../components/refreshToken/reducer';
 import refreshTokenMiddleware from './middleware/refreshTokenMiddleware';
 import { userTableReducer} from "../components/admin/Tables/UserTable/reducer";
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
+import createHistory from 'history/createHashHistory';
 import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 import {registerReducer} from '../components/pages/register/reducer';
@@ -13,7 +14,7 @@ import { boysReducer } from '../components/boys/reducer';
 
 import { MessageListReducer} from "../components/Chat/MessageList/reduser";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-export const history = createBrowserHistory({ basename: baseUrl });
+export const history = createHistory({ basename: baseUrl });
 
 
 
