@@ -30,7 +30,7 @@ export default function configureStore (history, initialState) {
       registryShedule: registrySheduleReducer,     
       boys: boysReducer,
       register: registerReducer,
-      messageList: MessageListReducer
+      messageList: MessageListReducer,
       registryShedule: registrySheduleReducer,
       register: registerReducer,
       adminTable: adminTableReducer,
