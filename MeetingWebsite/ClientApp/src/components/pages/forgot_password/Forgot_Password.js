@@ -118,7 +118,7 @@ class Forgot_Password extends Component {
                         </Col>
                         <Col xs="6" className="text-right">
                         <Link to="/login">
-                          <Button color="sucess" className="px-0"> Згадали пароль?</Button>
+                          <Button color="success" className="px-4"> Згадали пароль?</Button>
                         </Link>
                       </Col>
                       </Row>
