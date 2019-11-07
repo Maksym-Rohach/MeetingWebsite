@@ -231,6 +231,46 @@ namespace MeetingWebsite.Areas.Account.Controllers
             //    );
         }
 
+        [HttpPost("forgot_password")]
+        public async Task<IActionResult> Forgot_Password([FromBody]Forgot_PasswordViewModel model)
+        {
+
+
+
+            if (!ModelState.IsValid)
+            {
+                var errors = CustomValidator.GetErrorsByModel(ModelState);
+                return BadRequest(errors);
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            if (user == null)
+            {
+                return BadRequest(new { invalid = "Вказана поштова скринька не знайдена" });
+            }
+
+            //var result = _signInManager
+            //    .PasswordSignInAsync(user, model.Password, false, false).Result;
+
+            //if (!result.Succeeded)
+            //{
+            //    return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+            //}
+
+
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            return Ok(
+               new
+               {
+                   token = _tokenService.CreateToken(user),
+                   refToken = _tokenService.CreateRefreshToken(user)
+               });
+        }
+
+
+
         [HttpPost("refresh/{refreshToken}")]
         public IActionResult RefreshToken([FromRoute]string refreshToken)
         {

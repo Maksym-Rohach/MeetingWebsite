@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,Redirect} from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardFooter, CardGroup,
          Col, Container, Form, Input, InputGroup,
@@ -23,11 +23,11 @@ class Forgot_Password extends Component {
     visible: false,
     errorsServer: {}
   }
-  passwordVisible = (e)=>{
-    this.setState({
-      visible: !this.state.visible,
-    });
-  }
+  // passwordVisible = (e)=>{
+  //   this.setState({
+  //     visible: !this.state.visible,
+  //   });
+  // }
 
   static getDerivedStateFromProps(nextProps, prevState) {
 
@@ -56,6 +56,7 @@ class Forgot_Password extends Component {
 
   }
   onSubmitForm = (e) => {
+    console.log(this.state.errorsServer)
     e.preventDefault();
     const { email,  errorsServer } = this.state;   
 
@@ -65,6 +66,7 @@ class Forgot_Password extends Component {
     if (!regex_email.test(email)) errors.email = "Не правильний формат електронної пошти!";
     if (email === "") errors.email = "Поле не може бути пустим!";
 
+    
     const isValid = Object.keys(errors).length === 0
     if (isValid) {
       this.setState({ isLoading: true });
@@ -78,9 +80,11 @@ class Forgot_Password extends Component {
       this.setState({ errors });
     }
   }
+
   render() {
-    const { errors, isLoading, profileUrl, visible, errorsServer } = this.state;
-    return (
+    const { errors, isLoading, profileUrl, visible, errorsServer,done} = this.state;
+    console.log("dfdfdfd", errorsServer)
+    const form = (
         <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center pt-5 mt-5">
@@ -89,16 +93,13 @@ class Forgot_Password extends Component {
                 <Card className="p-4">
                   <CardBody>
                   <Form onSubmit={this.onSubmitForm}>
-                      {!!errorsServer.invalid ?
-                          <div className="alert alert-danger">
-                              {errorsServer.invalid}.
-                          </div> : ""}
-                      <h1>Відновлення паролю</h1>
+                    {!!errors.invalid ? <div className="alert alert-danger">{errors.invalid}.</div> : ""}
+                    <h3>Відновлення паролю</h3>
                       <p className="text-muted">Вкажіть ваш емейл</p>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                        <i className="fas fa-at"></i>
+                        <i className="fa fa-envelope"></i>
                         </InputGroupText>
                         </InputGroupAddon>                     
                         <Input type="email" placeholder="Електронна пошта" autoComplete="on"
@@ -116,8 +117,10 @@ class Forgot_Password extends Component {
                           <Button color="success" className="px-4">Відновити</Button>
                         </Col>
                         <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">На головну</Button>
-                        </Col>
+                        <Link to="/login">
+                          <Button color="sucess" className="px-0"> Згадали пароль?</Button>
+                        </Link>
+                      </Col>
                       </Row>
                     </Form>
                   </CardBody>
@@ -127,13 +130,16 @@ class Forgot_Password extends Component {
             </Col>
           </Row>
         </Container>
+        {isLoading && <EclipseWidget />}
       </div>
     );
+    return done ? <Redirect to="/login" /> : form;
   }
 }
 
 Forgot_Password.propTypes =
   {
+    
     forgot_password: PropTypes.func.isRequired
   }
 

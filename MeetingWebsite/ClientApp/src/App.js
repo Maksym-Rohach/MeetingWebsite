@@ -34,7 +34,7 @@ class App extends Component {
                     <Route path="/user" name="User" render={props => <UserLayout {...props} />} /> 
                     <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    
                     <Route path="/boys" name="Boys" render={props => <Boys {...props} />} />
-                    <Route path="/" name="Home" render={props => <Home {...props} />} />
+                    <Route exact path="/" name="Home" render={props => <Home {...props} />} />
                     <Route path="/forgot_password" name="Forgot_Password" render={props => <Forgot_Password {...props} />} />
                 </Switch>
                 </React.Suspense>
