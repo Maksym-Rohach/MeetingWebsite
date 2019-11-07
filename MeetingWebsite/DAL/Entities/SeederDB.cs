@@ -53,7 +53,7 @@ namespace MeetingWebsite.DAL.Entities
             up.Avatar = avatar;
             up.CityId = cityid;
             up.DateOfBirth = DateOfBirth;
-            up.DateOfRegister = DateTime.Now.AddMonths(-4);
+            up.DateOfRegister = DateTime.Now;
             up.GenderId = genderid;
             up.NickName = nicknames[rnd.Next(0, 18)]+num;//18
             up.ZodiacId = zodiacid;
@@ -67,32 +67,32 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            for (int i = 0; i < 50; i++)
-            {
-                GetRandomUserProfile(i, userManager, context);
-            }
+            //for (int i = 0; i < 50; i++)
+            //{
+            //    GetRandomUserProfile(i, userManager, context);
+            //}
 
-            if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
+            if (true)
             {
-                string email = "yana@gmail.com";
-                string roleName = "User";
+                string email = "supernikd@gmail.com";
+                string roleName = "Admin";
 
                 var userProfile = new UserProfile
                 {
-                    NickName = "Яна",
+                    NickName = "Nikd",
                     DateOfBirth = DateTime.Now,
-                    GenderId = 2,
-                    CityId = 20,
-                    ZodiacId = 5,
+                    GenderId = 1,
+                    CityId = 15,
+                    ZodiacId = 12,
                     Avatar = "",
                     User = new DbUser
                     {
                         Email = email,
                         UserName = email,
-                        PhoneNumber = "+22(222)222-22-22"
+                        PhoneNumber = "+380972330877"
                     }
                 };
-                var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
+                var result = userManager.CreateAsync(userProfile.User, "KAida0077").Result;
                 context.UserProfile.Add(userProfile);
                 context.SaveChanges();
                 result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
