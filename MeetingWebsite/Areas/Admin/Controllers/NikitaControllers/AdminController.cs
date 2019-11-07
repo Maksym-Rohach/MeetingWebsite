@@ -54,6 +54,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
                 UserTableModel userTableModel = new UserTableModel();
                 userTableModel.Id = item.Id;
                 userTableModel.Nickname = item.NickName;
+                userTableModel.Mail = _context.Users.Select(a => a).Where(a => a.Id == item.Id).FirstOrDefault().UserName;
                 userTableModel.Registrdate = item.DateOfRegister.ToString("dd.MM.yyyy");
                 string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 userTableModel.City = city;

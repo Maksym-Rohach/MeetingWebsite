@@ -10,6 +10,7 @@ namespace MeetingWebsite.Areas.Account.ViewModels
     {
         public string Id { get; set; }
         public string Nickname { get; set; }
+        public string Mail { get; set; }
         public string Registrdate { get; set; }
         public string City { get; set; }
         public string Status { get; set; }

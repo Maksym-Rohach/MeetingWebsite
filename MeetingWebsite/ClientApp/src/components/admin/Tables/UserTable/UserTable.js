@@ -221,6 +221,7 @@ class UserTable extends React.Component {
                     <thead className="text-primary">
                       <tr>
                         <th>Нікнейм</th>
+                        <th>Пошта</th>
                         <th>Дата реєстрації</th>
                         <th>Місто</th>
                         <th>Статус</th>
@@ -232,6 +233,7 @@ class UserTable extends React.Component {
                           return (<tr key={item.id}>
                             {/* <th scope="row">{counter++}</th> */}
                             <td>{item.nickname}</td>
+                            <td>{item.mail}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
                             <td>
