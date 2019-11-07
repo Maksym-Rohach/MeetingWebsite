@@ -32,12 +32,31 @@ class Boys extends Component {
         this.setState({ [name]: selectValue }, this.filterSearchBoys);
       }
       
+      sendFilters = () => {
+        const { tmp_age, tmp_zodiac, tmp_city } = this.state;  
+        let city = tmp_city.value;
+        let zodiac = tmp_zodiac.value;
+        let age = tmp_age.value; 
+        console.log("STATEEEEEEEEEEEEEEEEEE",this.state)
+        const model = {
+          city: city,
+          age: age,
+          zodiac: zodiac,
+          };
+  
+        this.props.boys(model);      
+      }
+    
+    
+      
+
+
       filterSearchBoys = () => {
         const {tmp_zodiac, tmp_city, tmp_age, currentPage} = this.state;
-        let zodiac = tmp_zodiac.value;
-        let city = tmp_city.value;
+        let zodiacId = tmp_zodiac.value;
+        let cityId = tmp_city.value;
         let age = tmp_age.value;
-        this.props.getBoysData({zodiac, city, age, currentPage});
+        this.props.getBoysData({zodiacId, cityId, age, currentPage});
       }
       
       componentDidMount = () => {
@@ -72,7 +91,7 @@ class Boys extends Component {
                 <h3 style={{color:"#c0c0c0", marginBottom:"5px"}}> <strong>Пошук</strong> </h3>
               </CardHeader>
               <CardBody style={{marginTop: "-10px"}} >
-                <Form  action="" method="post" className="form-horizontal">
+                <Form onSubmit={this.sendFilters} action="" method="post" className="form-horizontal">
                   <FormGroup row>              
                     <Col xs = "4">
                     <Select
@@ -94,7 +113,7 @@ class Boys extends Component {
                         onChange={(e) => this.handleChange("tmp_age", e)}
                         options={option} />
                     </Col>
-                    <Button type="submit" size="sm" color="success" className="ml-3 mt-3"><i className="fa fa-dot-circle-o"></i> Пошук</Button>     
+                    {/* <Button type="submit" size="sm" color="success" className="ml-3 mt-3"><i className="fa fa-dot-circle-o"></i> Пошук</Button>      */}
                   </FormGroup>
                 </Form>
               </CardBody>
