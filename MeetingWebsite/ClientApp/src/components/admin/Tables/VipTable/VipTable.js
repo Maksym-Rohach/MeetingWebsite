@@ -5,7 +5,8 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
-import Modal from '../../../Notifications/Modals/Modals';
+import Paginator from '../../../Paginator';
+//import Modal from '../../../Notifications/Modals/Modals';
 
 // reactstrap components
 import {
@@ -22,7 +23,8 @@ import {
   Input,
   Pagination, 
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  Modal, ModalBody, ModalFooter, ModalHeader
 } from "reactstrap";
 
 const optionsMonth = [
@@ -49,49 +51,91 @@ const optionsYear = [
 
 
 
-class Tables extends React.Component {
 
-  state = {
+class VipTable extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '1', label: 'Січень' },
-    tmp_year: { value: '2019', label: '2019р' },   
+    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_year: { value: '2019', label: '2019р' }, 
+    modal: false,
+    danger: false,
+    temp_id:'',
+    temp_description:'',
+    temp_currentpage: 1,
+    totalCount:0
+    };
+    this.toggle = this.toggle.bind(this);
+    this.onClickPage = this.onClickPage.bind(this);
+       
   }
 
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
+
+
+  onClickPage(pageNumber) {
+    // const { typeOfSort, sortByAscending } = this.props;
+     console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+     const { tmp_year,tmp_month,tmp_NickName} = this.state;
+     let year = tmp_year.value;
+     let month = tmp_month.value;
+     let nickname = tmp_NickName;
+     let currentPage = pageNumber;
+     this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber,totalCount:this.props.totalCount });
+     this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+   }
+
+
+
   handleChange = (name, selectValue) => {
+    this.setState({temp_currentpage:1})
     this.setState({ [name]: selectValue },this.filterSearchData);
   }
 
 
   filterSearchData = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    // this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    this.setState({totalCount:this.props.totalCount});
+    this.props.getVipsData({ year,month,nickname,currentPage});
   }
 
   componentDidMount = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    // this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    console.log("COMPONENTDIDMOUNT");
+    this.setState({totalCount:this.props.totalCount});
+    this.props.getVipsData({ year,month,nickname,currentPage});
   }
 
-  // Click(e)//проблема тут!!!
-  // {
-  //   e.preventDefault();
-  //   const { tmp_year,tmp_month,tmp_NickName } = this.state;
-  //   let year = tmp_year.value;
-  //   let month = tmp_month.value;
-  //   let nickname = tmp_NickName;
-  //   console.log("CLICK__________________________________",tmp_NickName);
-  //   this.props.getUsersData({year,month,nickname})
-  // }
+  Click(e)//проблема тут!!!
+  {
+    e.preventDefault();
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
+    this.setState({totalCount:this.props.totalCount});
+    console.log("CLICK__________________________________",tmp_NickName);
+    this.props.getVipsData({year,month,nickname,currentPage})
+  }
   PostFilters = (e) => {
-    console.log("EEEEEEEE",e);
-    this.setState({tmp_NickName:e})
+    console.log("PostFilters",e);
+    this.setState({tmp_NickName:e,totalCount:this.props.totalCount})
   }
 
   render() {
@@ -103,7 +147,7 @@ class Tables extends React.Component {
     return (
       <React.Fragment>      
       {isListLoading && <EclipseWidget />}
-      <div className="content">
+<div className="content">
           <Row>
             <Col md="12">
               <Card>
@@ -112,7 +156,7 @@ class Tables extends React.Component {
                   <Col className="col-md-2">
                   <CardTitle tag="h4">Таблиця VIP користувачів</CardTitle>
                   </Col>
-                  {/* <Col className="col-md-2">
+                  <Col className="col-md-2">
                       <Select
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
@@ -133,64 +177,46 @@ class Tables extends React.Component {
                        <Button onClick={(e)=>this.Click(e)} color='info'>
                         Відправити фільтри
                       </Button>
-                    </Col> */}
+                    </Col>
                   </Row>                 
                 </CardHeader>
-                <CardBody>
-                  <Table className="tablesorter" responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>#</th>
-                        <th>Нікнейм</th>
-                        <th>Діє до</th>
-                        <th>Місто</th>
-                        <th>Статус</th>
-                      </tr>
-                    </thead>
-                    <tbody className="align-items-center">
-                    {
-                        listVips.map(item => {
-                          return (<tr key={item.id}>
-                            {/* <th scope="row">{counter++}</th> */}
-                            <td>{counter++}</td>
-                            <td>{item.nickname}</td>
-                            {/* <td>{item.registrdate}</td>    Замінити на дату закінчення */}
-                            <td>{item.city}</td>
-                            <td>{item.DateForValid}</td>
-                            <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
-                            {/* <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td> */}
-                          </tr>
-                          )
-                        })
-                      }
-                    </tbody>
-                  </Table>
-                  {/* <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next tag="button"></PaginationLink>
-                  </PaginationItem>
-                </Pagination> */}
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-        </React.Fragment>      
+  <CardBody>
+    <Table className="tablesorter" responsive>
+      <thead className="text-primary">
+        <tr>
+           <th>#</th>
+           <th>Нікнейм</th>
+           <th>Діє до</th>
+           <th>Місто</th>
+           <th>Статус</th>
+          </tr>
+      </thead>
+      <tbody className="align-items-center">
+        {
+          listVips.map(item => {
+            return (<tr key={item.id}>
+              {/* <th scope="row">{counter++}</th> */}
+              <td>{counter++}</td>
+              <td>{item.nickname}</td>
+              <td>{item.dateForValid}</td>
+              <td>{item.city}</td>
+             
+              <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+              {/* <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td> */}
+            </tr>
+            )
+          })
+        }
+      </tbody>
+    </Table>
+      <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+      </Paginator>   
+  </CardBody>
+    </Card>
+    </Col>
+    </Row>
+</div>
+  </React.Fragment>      
     );
   }
 }
@@ -199,6 +225,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listVips: get(state, "vipTable.list.data"),
+    totalCount: get(state, "userTable.list.totalCount"),
     isListLoading: get(state, "vipTable.list.loading"),  
   };
 }
@@ -211,7 +238,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+export default connect(mapStateToProps, mapDispatchToProps)(VipTable);
 
 
 
