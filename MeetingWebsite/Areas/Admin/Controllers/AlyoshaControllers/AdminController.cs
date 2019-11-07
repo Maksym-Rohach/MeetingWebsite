@@ -69,7 +69,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             //}
 
             VipTableModels vtms = new VipTableModels();
-            vtms.Vips = new List<VipTableModels>();
+            vtms.Vips = new List<VipTableModel>();
             foreach (var item in query)
             {
                 VipTableModel vtm = new VipTableModel();
@@ -83,7 +83,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 //vtm.City = item.User.CityId;
 
                 vtm.Status = "Активний";
-                //vtms.Users.Add(vtm);
+                vtms.Vips.Add(vtm);
             }
             return Ok(vtms.Vips);
         }

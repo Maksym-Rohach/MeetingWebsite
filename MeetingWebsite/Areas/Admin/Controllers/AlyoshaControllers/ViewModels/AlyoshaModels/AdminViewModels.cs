@@ -34,7 +34,7 @@ using Microsoft.AspNetCore.Mvc;
 
     public class VipTableModels
     {
-        public List<VipTableModels> Vips { get; set; }
+        public List<VipTableModel> Vips { get; set; }
     }
 
     public class VipTableFilters
