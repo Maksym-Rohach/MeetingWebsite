@@ -21,7 +21,7 @@ export const getUserData = () => {
             HomeService.home()
             .then((response) => {
                 console.log("+++++++++++Response", response);
-                dispatch(getListActions.success(response.data));               
+                dispatch(getListActions.success(response.data.getHomeUserModel));               
             }, err=> { throw err; })
             .catch(err=> {
               dispatch(getListActions.failed(err.response));
