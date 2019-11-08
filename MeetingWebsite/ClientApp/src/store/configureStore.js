@@ -35,7 +35,7 @@ export default function configureStore (history, initialState) {
       registryShedule: registrySheduleReducer,
       register: registerReducer,
       adminTable: adminTableReducer,
-      vipTable: vipTableReducer
+      vipTable: vipTableReducer,
       messageList: MessageListReducer,
       home: homeReducer
     };

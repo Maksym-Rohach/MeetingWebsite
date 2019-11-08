@@ -6,6 +6,7 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
 import Paginator from '../../../Paginator';
+import '../UserTable/color.scss';
 //import Modal from '../../../Notifications/Modals/Modals';
 
 // reactstrap components
@@ -59,7 +60,7 @@ class VipTable extends React.Component {
     this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_month: { value: '11', label: 'Листопад' },
     tmp_year: { value: '2019', label: '2019р' }, 
     modal: false,
     danger: false,
@@ -158,12 +159,14 @@ class VipTable extends React.Component {
                   </Col>
                   <Col className="col-md-2">
                       <Select
+                       className="fontnikita"      
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
                         options={optionsMonth} />
                     </Col>
                     <Col className="col-md-2">
                       <Select
+                       className="fontnikita"      
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
