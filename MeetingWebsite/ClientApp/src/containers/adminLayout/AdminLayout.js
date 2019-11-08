@@ -88,7 +88,7 @@ class AdminLayout extends React.Component {
   };
   render() {
     return (
-      <>      
+      <React.Fragment>     
         <div className="wrapper">
           <AdminSideBar
             {...this.props}
@@ -116,7 +116,7 @@ class AdminLayout extends React.Component {
           </div>
           {/* <AdminTable/> */}
         </div>
-      </>
+        </React.Fragment>   
     );
   }
 }

@@ -6,6 +6,8 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
 import Paginator from '../../../Paginator';
+import './color.scss';
+
 //import Modal from '../../../Notifications/Modals/Modals';
 
 // reactstrap components
@@ -56,7 +58,7 @@ class UserTable extends React.Component {
     this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_month: { value: '11', label: 'Листопад' },
     tmp_year: { value: '2019', label: '2019р' }, 
     modal: false,
     danger: false,
@@ -182,20 +184,22 @@ class UserTable extends React.Component {
       <div className="content">
           <Row>
             <Col md="12">
-              <Card>
+              <Card >
                 <CardHeader>
                   <Row>
                   <Col className="col-md-2">
                   <CardTitle tag="h4">Таблиця користувачів</CardTitle>
                   </Col>
                   <Col className="col-md-2">
-                      <Select
+                      <Select           
+                        className="fontnikita"                     
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
                         options={optionsMonth} />
                     </Col>
                     <Col className="col-md-2">
                       <Select
+                        className="fontnikita"
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
@@ -217,6 +221,7 @@ class UserTable extends React.Component {
                     <thead className="text-primary">
                       <tr>
                         <th>Нікнейм</th>
+                        <th>Пошта</th>
                         <th>Дата реєстрації</th>
                         <th>Місто</th>
                         <th>Статус</th>
@@ -228,6 +233,7 @@ class UserTable extends React.Component {
                           return (<tr key={item.id}>
                             {/* <th scope="row">{counter++}</th> */}
                             <td>{item.nickname}</td>
+                            <td>{item.mail}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
                             <td>
@@ -239,7 +245,7 @@ class UserTable extends React.Component {
                               className={'modal-danger ' + this.props.className}>
                               <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
                               <ModalBody>
-                              <Input onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                              <Input style={{color:"black"}} onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
                               </ModalBody>
                               <ModalFooter>
                                 <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
