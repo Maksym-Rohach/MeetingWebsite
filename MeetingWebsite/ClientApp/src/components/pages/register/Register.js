@@ -282,7 +282,7 @@ class Register extends Component {
                         </Col>
                         <Col xs="6" className="text-right">
                         <Link to="/">
-                          <Button color="success" className="px-0">На головну</Button>
+                          <Button color="success" className="px-3">На головну</Button>
                           </Link>
                         </Col>
                         {/* <Row>
