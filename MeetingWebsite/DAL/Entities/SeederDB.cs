@@ -67,35 +67,33 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            //for (int i = 0; i < 50; i++)
-            //{
-            //    GetRandomUserProfile(i, userManager, context);
-            //}
+            for (int i = 0; i < 874; i++)
+            {
+                GetRandomUserProfile(i, userManager, context);
+            }
 
-            if (true)
+            if (userManager.FindByEmailAsync("supernikd@gmail.com").Result == null)
             {
                 string email = "supernikd@gmail.com";
                 string roleName = "Admin";
 
-                var userProfile = new UserProfile
+                var adminProfile = new AdminProfile
                 {
-                    NickName = "Nikd",
-                    DateOfBirth = DateTime.Now,
-                    GenderId = 1,
-                    CityId = 15,
-                    ZodiacId = 12,
-                    Avatar = "",
+                    Name = "Nikd",
+                    // DateOfBirth = DateTime.Now,
+
                     User = new DbUser
                     {
                         Email = email,
                         UserName = email,
-                        PhoneNumber = "+380972330877"
+                        PhoneNumber = "+38(097)233-08-77"
                     }
                 };
-                var result = userManager.CreateAsync(userProfile.User, "KAida0077").Result;
-                context.UserProfile.Add(userProfile);
+
+                var result = userManager.CreateAsync(adminProfile.User, "Kaida007-").Result;
+                context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
-                result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
             };
 
             if (userManager.FindByEmailAsync("masha@gmail.com").Result == null)
