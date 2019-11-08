@@ -20,9 +20,12 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
             _context = context;
         }
 
+
+
         [HttpPost("users")]
         public ActionResult GetUserTable([FromBody] UserTableFilters filter)//проблема з виводом
         {
+           
             int count_users = 10;
             UserTableModels userTableModels = new UserTableModels();
             userTableModels.Users = new List<UserTableModel>();
