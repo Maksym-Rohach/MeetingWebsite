@@ -9,6 +9,7 @@ import * as getListActions from './reducer';
 import { connect } from 'react-redux';
 import './style.scss';
 import '../pages/Home/instruments/scss/palette.scss';
+import Paginator from '../Paginator';
 
 
   // const optionsCity = [
@@ -17,7 +18,9 @@ import '../pages/Home/instruments/scss/palette.scss';
   // ];
  
 class Boys extends Component {
-    state = {
+  constructor(props) {
+    super(props);
+    this.state = {
         isLoading: true,
         tmp_zodiac: {value: 'q', label: 'Зодіак'},
         tmp_city: {value:'w', label: 'Місто'},
@@ -26,8 +29,12 @@ class Boys extends Component {
         fadeIn: true,
         timeout: 300,
         currentPage: 1,
+        temp_currentpage: 1,
+        totalCount: 0,
       };
-
+      this.onClickPage = this.onClickPage.bind(this);
+    }
+       
       handleChange = (name, selectValue) => {
         this.setState({ [name]: selectValue }, this.filterSearchBoys);
       }
@@ -47,10 +54,6 @@ class Boys extends Component {
         this.props.boys(model);      
       }
     
-    
-      
-
-
       filterSearchBoys = () => {
         const {tmp_zodiac, tmp_city, tmp_age, currentPage} = this.state;
         let zodiacId = tmp_zodiac.value;
@@ -66,6 +69,19 @@ class Boys extends Component {
         let age = tmp_age.value;
         this.props.getBoysData({zodiac, city, age, currentPage });
       }
+
+      onClickPage(pageNumber) {
+        // const { typeOfSort, sortByAscending } = this.props;
+         console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+         const { tmp_city,tmp_zodiac,tmp_age} = this.state;        
+         let city = tmp_city.value;
+         let zodiac = tmp_zodiac.value;
+         let age = tmp_age.value;
+         let currentPage = pageNumber;
+         this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
+         //this.props.getBansData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
+         this.props.getBoysData({city,zodiac,age,currentPage: pageNumber, totalCount:this.props.totalCount});
+       }
       
   render() {
     console.log("Line 50 ===============", this.props);
@@ -146,9 +162,24 @@ class Boys extends Component {
                  <p className = "ml-3">Львів, Україна</p>
                </Row>
               </CardFooter>
+               
             </Card>
           </Col>
-        </Row>
+        </Row>     
+
+       
+
+      </div>
+
+      <div className="row justify-content-md-center">
+        <div className="col col-lg-2">          
+        </div>
+        <div className="col-md-auto">
+        <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+      </Paginator>
+        </div>
+        <div className="col col-lg-2">          
+        </div>
       </div>
       </React.Fragment>
     );
