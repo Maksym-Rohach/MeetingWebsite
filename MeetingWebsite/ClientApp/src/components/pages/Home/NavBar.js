@@ -4,6 +4,10 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import './instruments/css/palette.css';
 import { catchClause } from '@babel/types';
 import logo from './instruments/img/logo.jpg';
+import { connect } from 'tls';
+import { logout } from '../login/reducer';
+import { withRouter } from 'react-router-dom';
+
 
 class NavBar extends Component {
 
@@ -40,8 +44,14 @@ class NavBar extends Component {
 </React.Fragment>
         );
     }
-
-
-
 }
+
+const mapStateToProps = state => {
+  console.log("mapStateToProps=======", state);
+  return {
+    login: state.login
+  };
+}
+
 export default NavBar;
+//export default withRouter(connect( mapStateToProps, null, { logout })(NavBar));

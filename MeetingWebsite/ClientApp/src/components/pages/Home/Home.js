@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, captionHeader, caption } from 'reactstrap';
 import './instruments/css/palette.css';
-
 import { connect } from 'react-redux';
 import get from "lodash.get";
 import * as getListActions from './reducer';
 import EclipseWidget from '../../eclipse';
-import Navb from './NavBar';
+import Header from './NavBar';
 import Footer from './Footer';
 //import { transform } from '@babel/core';
  const items = [
@@ -43,6 +42,11 @@ componentDidMount = () => {
   this.props.getUserData();
 }
 
+signOut=(e)=> {
+  e.preventDefault();
+  this.props.logout();
+}
+
  onExiting(){
    this.animathing = true;
  }
@@ -70,7 +74,7 @@ componentDidMount = () => {
 
 render() {
 //const {activeIndex, listUsers, isListLoading} = this.state;
-const {isListLoading, listUsers} = this.props;
+const {isListLoading, listUsers, login} = this.props; 
 console.log("listUsers", listUsers);
 
   const slides = items.map((item)=> {
@@ -101,8 +105,8 @@ console.log("listUsers", listUsers);
         <React.Fragment>
           {isListLoading && <EclipseWidget />}
 
-          <Navb></Navb>
-
+          <Header onLogout={e => this.signOut(e)}
+          login={login} />
 
           <header id="masthead" className="masthead d-flex pb-5 ">
             <div className="container text-center text-white my-auto">
@@ -284,6 +288,7 @@ console.log("listUsers", listUsers);
 const mapStateToProps = state => {
   console.log("mapStateToProps=======", state);
   return {
+    login: state.login,
     listUsers: get(state, "home.post.data"),
     isListLoading: get(state, "home.post.loading"),  
   };
@@ -297,5 +302,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+//export default withRouter(connect(mapStateToProps, mapDispatchToProps, { logout })(Home));
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+
 
