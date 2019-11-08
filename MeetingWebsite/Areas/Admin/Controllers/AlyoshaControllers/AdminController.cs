@@ -48,25 +48,25 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
         }
 
         [HttpPost("vips")] //UserTableFilters
-        public ActionResult GetVipTable()//([FromBody] VipTableFilters filter)
+        public ActionResult GetVipTable([FromBody] VipTableFilters filter)//()
         {
             // vtm - VipTableModel
             // vtms - VipTableModels
 
-            // var models = _context.VipUsers.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
-            // var query = _context.VipUsers.Select(a => a).Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month).AsQueryable();
-            var query = _context.VipUsers
+           // var models = _context.VipUsers.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
+            var query = _context.VipUsers.Select(a => a).Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month).AsQueryable();
+            query = _context.VipUsers
                 .Include(x => x.User)
                 .AsQueryable();
 
 
-            //query = query.Select(a => a)
-            //    .Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month);
-            //if (!string.IsNullOrEmpty(filter.NickName))
-            //{
+            query = query.Select(a => a)
+                .Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month);
+            if (!string.IsNullOrEmpty(filter.NickName))
+            {
 
-            //    query = query.Select(a => a).Where(a => a.NickName.Contains(filter.NickName));
-            //}
+                query = query.Select(a => a).Where(a => a.User.NickName.Contains(filter.NickName));
+            }
 
             VipTableModels vtms = new VipTableModels();
             vtms.Vips = new List<VipTableModel>();
@@ -87,7 +87,6 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             }
             return Ok(vtms.Vips);
         }
-
 
 
 
