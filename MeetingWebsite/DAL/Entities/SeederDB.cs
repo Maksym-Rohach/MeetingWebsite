@@ -60,7 +60,7 @@ namespace MeetingWebsite.DAL.Entities
             up.Avatar = avatar;
             up.CityId = cityid;
             up.DateOfBirth = DateOfBirth;
-            up.DateOfRegister = DateTime.Now;
+            up.DateOfRegister = DateTime.Now.AddMonths(-4);
             up.GenderId = genderid;
             up.NickName = nicknames[rnd.Next(0, 18)]+num;//18
             up.ZodiacId = zodiacid;
@@ -74,7 +74,7 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 50; i++)
             {
                 GetRandomUserProfile(i, userManager, context);
             }

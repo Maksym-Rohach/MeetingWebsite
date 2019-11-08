@@ -13,6 +13,7 @@ import {registerReducer} from '../components/pages/register/reducer';
 import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
 import {vipTableReducer} from '../components/admin/Tables/VipTable/reducer';
 import { boysReducer } from '../components/boys/reducer';
+import {homeReducer} from '../components/pages/Home/reducer';
 
 import { MessageListReducer} from "../components/Chat/MessageList/reduser";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -35,6 +36,8 @@ export default function configureStore (history, initialState) {
       register: registerReducer,
       adminTable: adminTableReducer,
       vipTable: vipTableReducer
+      messageList: MessageListReducer,
+      home: homeReducer
     };
 
     const middleware = [

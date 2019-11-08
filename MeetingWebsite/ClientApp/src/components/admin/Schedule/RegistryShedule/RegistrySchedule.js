@@ -3,6 +3,12 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
+import * as getListActions from './reducer';
+import EclipseWidget from '../../../eclipse';
+import Select from 'react-select';
+import { connect } from 'react-redux';
+import get from "lodash.get";
+import '../../Tables/UserTable/color.scss';
 
 // reactstrap components
 import {
@@ -54,6 +60,13 @@ class Dashboard extends React.Component {
                     <Col className="text-left" sm="6">
                       <h5 className="card-category">Активність</h5>
                       <CardTitle tag="h2">Графік</CardTitle>
+                    </Col>
+                    <Col className="col-md-2">
+                      <Select
+                        className="fontnikita"      
+                        value={tmp_year}
+                        onChange={(e) => this.handleChange("tmp_year", e)}
+                        options={optionsYear} />
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
