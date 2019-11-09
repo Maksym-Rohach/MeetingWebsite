@@ -18,6 +18,7 @@ const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/Home'));
 const Boys = React.lazy(() => import('./components/boys'));
 const Register = React.lazy(() => import('./components/pages/register'));
+const NewPassword = React.lazy(() => import('./components/NewPassword'));
 
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
                     <Route  path="/user" name="User" render={props => <UserLayout {...props} />} /> 
                     <Route  path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    
                     <Route  path="/boys" name="Boys" render={props => <Boys {...props} />} />
+                    <Route  path="/reset-password" name="NewPassword" render={props => <NewPassword {...props} />} />
                     <Route exact path="/" name="Home" render={props => <Home {...props} />} />
                 </Switch>
                 </React.Suspense>
