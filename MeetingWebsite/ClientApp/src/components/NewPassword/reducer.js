@@ -10,6 +10,7 @@ export const RESETPASS_POST_FAILED = "RESETPASS_POST_FAILED";
 const initialState = {
     list: {
         ok: false,
+        errors: {},
         loading: false,
         success: false,
         failed: false,
@@ -47,7 +48,7 @@ export const getListActions = {
         console.log("failed: (response)", response);
         return {           
             type: RESETPASS_POST_FAILED,
-            //errors: response.data
+            errors: response.data
         }
     }
   }
@@ -74,7 +75,9 @@ export const resetPasswordReducer = (state = initialState, action) => {
       case RESETPASS_POST_FAILED: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.success', false);
+          newState = update.set(newState, 'list.errors', action.errors);
           newState = update.set(newState, 'list.failed', true);
+          console.log("RESETPASS_POST_FAILED)", action);
           break;
       }
       default: {

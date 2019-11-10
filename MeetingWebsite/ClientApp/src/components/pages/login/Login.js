@@ -92,7 +92,7 @@ class Login extends Component {
                 <Card className="p-4">
                   <CardBody>
                   <Form onSubmit={this.onSubmitForm}>
-                      {!!errorsServer.invalid ?
+                      {!!errorsServer ?
                           <div className="alert alert-danger">
                               {errorsServer.invalid}.
                           </div> : ""}

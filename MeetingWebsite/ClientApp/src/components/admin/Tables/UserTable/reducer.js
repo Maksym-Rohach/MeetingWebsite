@@ -6,6 +6,10 @@ export const MAPING_POST_STARTED = "MAPING_POST_STARTED";
 export const MAPING_POST_SUCCESS = "MAPING_POST_SUCCESS";
 export const MAPING_POST_FAILED = "MAPING_POST_FAILED";
 
+export const BAN_POST_STARTED = "BAN_POST_STARTED";
+export const BAN_POST_SUCCESS = "BAN_POST_SUCCESS";
+export const BAN_POST_FAILED = "BAN_POST_FAILED";
+
 
 const initialState = {
     list: {
@@ -15,6 +19,12 @@ const initialState = {
         success: false,
         failed: false,
     },   
+    ban:
+    {
+        loading: false,
+        success: false,
+        failed: false,
+    }   
 }
 
 export const getUsersData = (model) => {
@@ -33,15 +43,14 @@ export const getUsersData = (model) => {
 
 export const BanUser = (model) => {
     return (dispatch) => {
-        dispatch(getListActions.started());
+        dispatch(getBanActions.started());
             UserTableService.banUser(model)//треба вернути назад список юзеров
-            // .then((response) => {
-            //     console.log("+++++++++++Response", response);
-            //     dispatch(getListActions.success(response.data));               
-            // }, err=> { throw err; })
-            // .catch(err=> {
-            //   dispatch(getListActions.failed(err.response));
-            // });
+            .then((response) => {
+                getBanActions.success(response.data)
+            }, err=> { throw err; })
+            .catch(err=> {
+              dispatch(getBanActions.failed(err.response));
+            });
     }
 }
 
@@ -66,6 +75,29 @@ export const getListActions = {
         }
     }
   }
+
+  export const getBanActions = {
+    started: () => {
+        return {
+            type: BAN_POST_STARTED
+        }
+    },  
+    success: (data) => {
+        console.log("+++++++++++Data", data);
+        return {
+            type: BAN_POST_SUCCESS,
+            payload: data
+        }
+    },  
+    failed: (response) => {
+        console.log("failed: (response)", response);
+        return {           
+            type: BAN_POST_FAILED,
+            //errors: response.data
+        }
+    }
+  }
+
 
 export const userTableReducer = (state = initialState, action) => { 
   let newState = state;
@@ -93,6 +125,24 @@ export const userTableReducer = (state = initialState, action) => {
           newState = update.set(newState, 'list.failed', true);
           break;
       }
+      case BAN_POST_STARTED: {
+        newState = update.set(state, 'list.loading', true);
+        newState = update.set(newState, 'list.success', false);
+        newState = update.set(newState, 'list.failed', false);
+        break;
+    }
+    case BAN_POST_SUCCESS: {
+        newState = update.set(state, 'list.loading', false);
+        newState = update.set(newState, 'list.failed', false);
+        newState = update.set(newState, 'list.success', true);
+        break; 
+    }
+    case BAN_POST_FAILED: {
+        newState = update.set(state, 'list.loading', false);
+        newState = update.set(newState, 'list.success', false);
+        newState = update.set(newState, 'list.failed', true);
+        break;
+    }
       default: {
           return newState;
       }

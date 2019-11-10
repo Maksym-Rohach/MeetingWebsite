@@ -29,14 +29,28 @@ namespace MeetingWebsite.Areas.Account.Controllers.NikitaController
 
 
         [HttpPost("reset-pass")]
-        public async Task<IActionResult> GetUserTable([FromBody] ResetPasswordFilters filter)
+        public async Task<IActionResult> ChangePassword([FromBody] ResetPasswordFilters filter)
         {
             ResetPasswordModels resetPassModels = new ResetPasswordModels();
+
+            if (!ModelState.IsValid)
+            {
+                var errors = CustomValidator.GetErrorsByModel(ModelState);
+                return BadRequest(errors);
+            }
 
             var user = _context.Users.FirstOrDefault(u => u.Email == filter.Email);
             if (user == null)
             {
                 return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
+            }
+
+            var result1 = _signInManager
+               .PasswordSignInAsync(user, filter.OldPass, false, false).Result;
+
+            if (!result1.Succeeded)
+            {
+                return BadRequest(new { invalid = "Користувача із вказаним паролем не знайдено" });
             }
 
             var result = _signInManager

@@ -4,6 +4,7 @@ import get from "lodash.get";
 import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../eclipse';
+import classnames from 'classnames';
 import Select from 'react-select';
 
 // reactstrap components
@@ -30,14 +31,18 @@ class ResetPassword extends React.Component {
     super(props);
     this.state = {
     isLoading: true,
+    errors: {},
+    errorsServer:{},
     email: '',
     oldPass: '',
     newPass: ''
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
 
-//Table
+    return { errorsServer: nextProps.errors };
+}
   handleChange = (name, selectValue) => {
     this.setState({ [name]: selectValue },this.filterSearchData);
   }
@@ -56,7 +61,25 @@ class ResetPassword extends React.Component {
   {
     e.preventDefault();
     const { email,oldPass,newPass} = this.state;
+    let errors = {};
+    const regex_password = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,24}$/;
+    const regex_email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    
+    if (!regex_email.test(email)) errors.email = "Не правильний формат електронної пошти!";
+    if (email === "") errors.email = "Поле не може бути пустим!";
+
+    if (!regex_password.test(oldPass)) errors.password = "Пароль повинен мати мінімум 6 символів на латиниці, нижній і верхній регістр, та цифри!";
+    if (oldPass === "") errors.password = "Поле не може бути пустим!";
+    const isValid = Object.keys(errors).length === 0
+
+    if (isValid) { 
     this.props.getResetData({email,oldPass,newPass});
+    }
+    else {
+      this.setState({ errors:errors });  
+      console.log("---STATE2--------------------------------", this.state);
+    }  
+  
   }
 
   PostFilters = (name, selectValue) => {
@@ -64,7 +87,7 @@ class ResetPassword extends React.Component {
   }
 
   render() {
-    const {  } = this.state;
+    const { errors,errorsServer } = this.state;
     const {isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
@@ -76,25 +99,45 @@ class ResetPassword extends React.Component {
           <Row className="justify-content-center pt-5 mt-5">
             <Col md="8">
                 <Card className="p-4">
-                  <CardBody>
+                  <CardBody >
+                
                   <Form>
+                      {!!errorsServer ?
+                          <div className="alert alert-danger">
+                              {errorsServer}.
+                          </div> : ""}
                   <Row>
                   <CardTitle tag="h4">Зміна паролю</CardTitle>
                   </Row>
                     <Row>
                       <Input
+                      type="email" placeholder="Електронна пошта" autoComplete="on"
+                        className={classnames("form-control", { "is-invalid": !!errors.email })}
                         onChange={(e) => this.PostFilters("email",`${e.target.value}`)}
                         placeholder="Пошта"/>
+                         <div className="invalid-feedback">{errors.email}</div>
                     </Row>
                     <Row>
                       <Input
+                       className={classnames('form-control', { 'is-invalid': !!errors.password })}
+                        type="password"
                         onChange={(e) => this.PostFilters("oldPass",`${e.target.value}`)}
                         placeholder="Введіть ваш поточний пароль"/>
+                         {!!errors.password ?
+                          <div className="invalid-feedback">
+                            {errors.password}
+                          </div> : ''}
                     </Row>
                     <Row>
                       <Input
+                       className={classnames('form-control', { 'is-invalid': !!errors.password })}
+                        type="password"
                         onChange={(e) => this.PostFilters("newPass",`${e.target.value}`)}
                         placeholder="Введіть ваш новий пароль"/>
+                         {!!errors.password ?
+                          <div className="invalid-feedback">
+                            {errors.password}
+                          </div> : ''}
                     </Row>
                     <Row>
                        <Button onClick={(e)=>this.Click(e)} color='info'>
@@ -108,65 +151,6 @@ class ResetPassword extends React.Component {
           </Row>
         </Container>
       </div>
-      {/* <div className="content">
-          <Row>
-            <Col md="12">
-              <Card >
-                <CardBody>
-                      
-                </CardBody>
-                {/* <CardBody>
-                  <Table className="tablesorter" responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>Нікнейм</th>
-                        <th>Пошта</th>
-                        <th>Дата реєстрації</th>
-                        <th>Місто</th>
-                        <th>Статус</th>
-                      </tr>
-                    </thead>
-                    <tbody className="align-items-center">
-                    {
-                        listUsers.map(item => {
-                          return (<tr key={item.id}>
-                            {/* <th scope="row">{counter++}</th> }
-                            <td>{item.nickname}</td>
-                            <td>{item.mail}</td>
-                            <td>{item.registrdate}</td>
-                            <td>{item.city}</td>
-                            <td>
-                            <div className="animated fadeIn">
-                            <Button 
-                            onClick={(e) => this.SetBan(e,item.id)}
-                           color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
-                           <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
-                              className={'modal-danger ' + this.props.className}>
-                              <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
-                              <ModalBody>
-                              <Input style={{color:"black"}} onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
-                              </ModalBody>
-                              <ModalFooter>
-                                <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
-                                <Button color="secondary">Ні</Button>
-                              </ModalFooter>
-                            </Modal>
-                    </div>   
-                        </td>
-                        </tr>
-                          )
-                        })
-                      }
-                    </tbody>
-                  </Table>    
-
-                    <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
-                   </Paginator>       
-                </CardBody>}
-              </Card>
-            </Col>
-          </Row>
-        </div> */}
       </>
     );
   }
@@ -177,6 +161,7 @@ const mapStateToProps = state => {
   return {
     //listUsers: get(state, "userTable.list.ok"),
     isListLoading: get(state, "resetPassword.list.loading"),  
+    errorsServer: get(state, "resetPassword.list.data"), 
   };
 }
 
