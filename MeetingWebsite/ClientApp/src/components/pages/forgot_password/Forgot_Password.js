@@ -23,12 +23,7 @@ class Forgot_Password extends Component {
     visible: false,
     errorsServer: {}
   }
-  // passwordVisible = (e)=>{
-  //   this.setState({
-  //     visible: !this.state.visible,
-  //   });
-  // }
-
+ 
   static getDerivedStateFromProps(nextProps, prevState) {
 
     return { isLoading: nextProps.loading, errorsServer: nextProps.errors };
