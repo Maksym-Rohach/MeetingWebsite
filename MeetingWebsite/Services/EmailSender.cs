@@ -42,6 +42,3 @@ namespace MeetingWebsite.Services
         }
     }
 }
-
-
-
