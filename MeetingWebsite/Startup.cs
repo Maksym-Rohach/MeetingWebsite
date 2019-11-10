@@ -44,7 +44,7 @@ namespace MeetingWebsite
             services.AddIdentity<DbUser, DbRole>()
                 .AddEntityFrameworkStores<EFDbContext>()
                  .AddDefaultTokenProviders();
-            //services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
             //services.AddScoped<IFileService, FileService>();
 
             services.AddScoped<IJWTTokenService, JWTTokenService>();

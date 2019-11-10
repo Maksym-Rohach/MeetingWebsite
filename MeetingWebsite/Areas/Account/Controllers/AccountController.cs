@@ -24,7 +24,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
         private readonly UserManager<DbUser> _userManager;
         private readonly SignInManager<DbUser> _signInManager;
         private readonly IConfiguration _configuration;
-        //private readonly IEmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
         //private readonly IFileService _fileService;
         private readonly IJWTTokenService _tokenService;
 
@@ -33,15 +33,15 @@ namespace MeetingWebsite.Areas.Account.Controllers
            SignInManager<DbUser> signInManager,
            IConfiguration configuration,
            //IFileService fileService,
-           IJWTTokenService tokenService)
-        // IEmailSender emailSender)
+           IJWTTokenService tokenService,
+           IEmailSender emailSender)
 
         {
             _userManager = userManager;
             _context = context;
             _signInManager = signInManager;
             _configuration = configuration;
-            //_emailSender = emailSender;
+            _emailSender = emailSender;
             //_fileService = fileService;
             _tokenService = tokenService;
         }
@@ -209,26 +209,6 @@ namespace MeetingWebsite.Areas.Account.Controllers
                    token = _tokenService.CreateToken(user),
                    refToken = _tokenService.CreateRefreshToken(user)
                });
-
-            //создать юзера  
-
-            //var result2 = _signInManager
-            //    .PasswordSignInAsync(user, model.Password, false, false).Result;
-
-            //if (!result2.Succeeded)
-            //{
-            //    return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
-            //}
-
-            //await _signInManager.SignInAsync(user, isPersistent: false);
-
-            //return Ok(
-            //     new
-            //     {
-            //         token = _tokenService.CreateToken(user),
-            //         refToken = _tokenService.CreateRefreshToken(user)
-            //     }
-            //    );
         }
 
         [HttpPost("forgot_password")]
@@ -249,7 +229,36 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 return BadRequest(new { invalid = "Вказана поштова скринька не знайдена" });
             }
 
-            return Ok();
+            string password_ = PasswordGenerator.GenerationPassword();
+
+            var newPassword = _userManager.PasswordHasher.HashPassword(user, password_);
+            user.PasswordHash = newPassword;
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { invalid = "В процесі зміни паролю виникла помилка" });
+            }
+
+            var result_client = _context.UserProfile.FirstOrDefault(u => u.Id == user.Id);
+            if (result_client != null)
+            {
+                string name = $"{result_client.NickName} ";
+
+
+                await _emailSender.SendEmailAsync(user.Email, "Відновлення паролю",
+              $"Шановний(на)  <strong>{name}</strong>" +
+              $"<br/>" +
+              $"Ваш тимчасовай пароль: " +
+              $"<br/>" +
+              $"<strong>{password_}</strong>" +
+              $"<br/>" +
+              $"Для входу нажміть на посилання:    <a href='https://idealcrud.azurewebsites.net/#/login'>Перейти</a>");
+                return Ok();
+
+            }
+
+                return Ok();
         }
 
 
