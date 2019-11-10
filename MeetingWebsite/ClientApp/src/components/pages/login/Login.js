@@ -142,7 +142,7 @@ class Login extends Component {
                         </Col>
                         <Col xs="6" className="text-right">
                         <Link to="/forgot_password">
-                          <Button color="success" className="px-0">Забули пароль?</Button>
+                          <Button color="success" className="px-2">Забули пароль?</Button>
                           </Link>
                         </Col>
                       </Row>

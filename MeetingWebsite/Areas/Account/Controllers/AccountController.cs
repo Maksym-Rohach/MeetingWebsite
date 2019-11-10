@@ -249,24 +249,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 return BadRequest(new { invalid = "Вказана поштова скринька не знайдена" });
             }
 
-            //var result = _signInManager
-            //    .PasswordSignInAsync(user, model.Password, false, false).Result;
-
-            //if (!result.Succeeded)
-            //{
-            //    return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
-            //}
-
-
-
-            await _signInManager.SignInAsync(user, isPersistent: false);
-
-            return Ok(
-               new
-               {
-                   token = _tokenService.CreateToken(user),
-                   refToken = _tokenService.CreateRefreshToken(user)
-               });
+            return Ok();
         }
 
 
