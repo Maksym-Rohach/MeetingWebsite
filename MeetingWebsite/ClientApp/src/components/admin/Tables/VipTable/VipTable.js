@@ -203,8 +203,11 @@ class VipTable extends React.Component {
               <td>{item.nickname}</td>
               <td>{item.dateForValid}</td>
               <td>{item.city}</td>
-             
-              <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>
+              {(((new Date(item.dateForValid)-new Date())/1000/60/60/24)<=1)?(<td><Badge style={{ width: 70 }} color="danger">Спливає</Badge></td>):(<td><Badge style={{ width: 70 }} color="info">Активний</Badge></td>)}
+              {/* {console.log("i am here")}
+              {console.log(((new Date(item.dateForValid)-new Date())))} */}
+             <td><Badge></Badge></td>
+              {/* <td><Badge style={{ width: 70 }} color="info">Активний</Badge></td> */}
               {/* <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td> */}
             </tr>
             )

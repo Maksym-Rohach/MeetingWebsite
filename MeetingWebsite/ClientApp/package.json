@@ -12,6 +12,7 @@
     "chart.js": "^2.7.2",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.5.2",
+    "duration-js": "^4.0.0",
     "font-awesome": "^4.7.0",
     "history": "4.7.2",
     "immutability-helper": "^3.0.1",
