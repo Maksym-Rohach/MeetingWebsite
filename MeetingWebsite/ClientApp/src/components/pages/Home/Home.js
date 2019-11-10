@@ -8,6 +8,9 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../eclipse';
 import Header from './NavBar';
 import Footer from './Footer';
+import { logout } from '../login/reducer';
+import { withRouter } from 'react-router-dom';
+
 //import { transform } from '@babel/core';
  const items = [
  {
@@ -298,9 +301,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserData: filter => {
       dispatch(getListActions.getUserData(filter));
+    },
+    logout: filter => {
+      dispatch(logout(filter));
     }
   }
 }
+
 
 //export default withRouter(connect(mapStateToProps, mapDispatchToProps, { logout })(Home));
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

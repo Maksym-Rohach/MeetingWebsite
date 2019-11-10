@@ -9,9 +9,31 @@ import { logout } from '../login/reducer';
 import { withRouter } from 'react-router-dom';
 
 
-class NavBar extends Component {
+class Header extends Component {
 
     render() {
+
+      const { isAuthenticated } = this.props.login;
+    console.log("this.props.login",this.props);
+
+      const logoutLink = (
+        <NavItem className="d-flex align-items-center">
+          <NavLink href="#/" onClick={e => this.props.onLogout(e)}
+            className="social-link rounded-circle text-white mr-3">
+            Вихід
+          </NavLink>
+        </NavItem>
+      );
+
+      const loginLink = (
+        <NavItem className="d-flex align-items-center">
+          <NavLink href="#/login"
+            className="social-link rounded-circle text-white mr-3" >
+            Вхід
+             </NavLink>
+        </NavItem>
+      );
+
         return (
             <React.Fragment>
            
@@ -28,16 +50,19 @@ class NavBar extends Component {
             </NavItem>
             {/* </div>
             <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
-            <NavItem>
+            {/* <NavItem>
               <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
-            </NavItem>
+            </NavItem> */}
             <NavItem>
               <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
             </NavItem>
-            <NavItem>
+            {/* <NavItem>
               <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Вихід</NavLink>
-            </NavItem>
+            </NavItem> */}
+              {/* {isAuthenticated ? userLink : null} */}
+              {isAuthenticated ? logoutLink : loginLink}
             {/* </div> */}
+
           </Nav>
 
 
@@ -53,5 +78,5 @@ const mapStateToProps = state => {
   };
 }
 
-export default NavBar;
-//export default withRouter(connect( mapStateToProps, null, { logout })(NavBar));
+export default Header;
+//export default withRouter(connect( mapStateToProps, null, { logout })(Header));
