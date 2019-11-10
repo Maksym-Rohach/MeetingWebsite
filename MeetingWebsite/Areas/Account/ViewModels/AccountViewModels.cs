@@ -24,10 +24,10 @@ namespace MeetingWebsite.Areas.Account.ViewModels
         public string RepitPassword { get; set; }
 
         public string City { get; set; }
+    }
 
-
-
-
-
+    public class ForgotPasswordModel
+    {
+        public string Email { get; set; }
     }
 }
