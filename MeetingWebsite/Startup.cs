@@ -1,5 +1,6 @@
 using MeetingWebsite.DAL.Entities;
 using MeetingWebsite.Helpers;
+using MeetingWebsite.Hubs;
 using MeetingWebsite.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -43,7 +44,8 @@ namespace MeetingWebsite
             services.AddIdentity<DbUser, DbRole>()
                 .AddEntityFrameworkStores<EFDbContext>()
                  .AddDefaultTokenProviders();
-            //services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
             //services.AddScoped<IFileService, FileService>();
 
             services.AddScoped<IJWTTokenService, JWTTokenService>();
@@ -78,7 +80,7 @@ namespace MeetingWebsite
                 configuration.RootPath = "ClientApp/build";
             });
 
-            
+            services.AddSignalR(o => o.EnableDetailedErrors = true);//disable detailed errors on production
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,7 +103,7 @@ namespace MeetingWebsite
             app.UseSpaStaticFiles();
             app.UseSession();
 
-         //  SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+           // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
             #region InitStaticFiles AdminImages
             string pathUser = InitStaticFiles
@@ -130,6 +132,11 @@ namespace MeetingWebsite
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
+            });
+
+            app.UseSignalR(route =>
+            {
+                route.MapHub<AddMessageHub>("/api/clientwaiter");
             });
         }
     }

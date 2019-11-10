@@ -16,6 +16,7 @@ import { boysReducer } from '../components/boys/reducer';
 import {homeReducer} from '../components/pages/Home/reducer';
 
 import { MessageListReducer} from "../components/Chat/MessageList/reduser";
+import signalRMiddleware from './middleware/signalRMiddleware';
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createHistory({ basename: baseUrl });
 
@@ -42,6 +43,8 @@ export default function configureStore (history, initialState) {
 
     const middleware = [
       thunk,
+      refreshTokenMiddleware(),
+      signalRMiddleware(),
       routerMiddleware(history)
     ];
 

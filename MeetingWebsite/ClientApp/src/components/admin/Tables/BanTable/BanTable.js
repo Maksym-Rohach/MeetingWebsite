@@ -103,15 +103,15 @@ UnBanUser=()=>
 {
   const {temp_id} = this.state;
   let id=temp_id;
-  // const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
-  // let year = tmp_year.value;
-  // let month = tmp_month.value;
-  // let nickname = tmp_NickName;
-  // let currentPage = temp_currentpage;
+  const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+  let year = tmp_year.value;
+  let month = tmp_month.value;
+  let nickname = tmp_NickName;
+  let currentPage = temp_currentpage;
   console.log("BAN228__________________________________",id);
   console.log("Ban====================");
   this.props.unBanUser({id});
-  //this.props.getUsersData({ year,month,nickname,currentPage});
+  this.props.getBansData({ year,month,nickname,currentPage});
 
 }
 

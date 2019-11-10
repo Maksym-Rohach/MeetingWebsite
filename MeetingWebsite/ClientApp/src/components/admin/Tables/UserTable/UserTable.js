@@ -103,15 +103,15 @@ class UserTable extends React.Component {
     const { temp_id,temp_description} = this.state;
     let id=temp_id;
     let description=temp_description;
-    // const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
-    // let year = tmp_year.value;
-    // let month = tmp_month.value;
-    // let nickname = tmp_NickName;
-    // let currentPage = temp_currentpage;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
     console.log("BAN228__________________________________",id,description);
     console.log("Ban====================");
     this.props.BanUser({id,description});
-    //this.props.getUsersData({ year,month,nickname,currentPage});
+    this.props.getUsersData({ year,month,nickname,currentPage});
 
   }
 
