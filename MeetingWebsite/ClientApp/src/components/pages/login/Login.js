@@ -152,10 +152,10 @@ class Login extends Component {
                 <Card className="text-white py-5 d-md-down-none my-gradient" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Знайдіть свою ідеальну пару.</h2>
+                      <h3>Знайдіть свою ідеальну пару</h3>
                       {/* <p>Знайдіть свою ідеальну пару.</p> */}
                       <Link to="/register">
-                        <Button color="success" className="mt-3" active tabIndex={-1}>Зареєструватись!</Button>
+                        <Button color="success" className="mt-3" active tabIndex={-1}>Зареєструватись</Button>
                       </Link>
                     </div>
                   </CardBody>
