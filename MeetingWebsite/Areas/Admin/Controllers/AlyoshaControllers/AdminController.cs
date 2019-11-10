@@ -52,7 +52,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
         {
             // vtm - VipTableModel
             // vtms - VipTableModels
-
+           
            // var models = _context.VipUsers.Select(a => a).Where(a => a.DateOfRegister.Year == filter.Year && a.DateOfRegister.Month == filter.Month).AsQueryable();
             var query = _context.VipUsers.Select(a => a).Where(a => a.DateForValid.Year == filter.Year && a.DateForValid.Month == filter.Month).AsQueryable();
             query = _context.VipUsers
