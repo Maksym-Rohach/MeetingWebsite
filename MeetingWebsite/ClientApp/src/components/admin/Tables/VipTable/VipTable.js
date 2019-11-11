@@ -84,6 +84,7 @@ class VipTable extends React.Component {
   onClickPage(pageNumber) {
     // const { typeOfSort, sortByAscending } = this.props;
      console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+     console.log("cor__________________________________",this.props.totalCount);
      const { tmp_year,tmp_month,tmp_NickName} = this.state;
      let year = tmp_year.value;
      let month = tmp_month.value;
@@ -144,7 +145,7 @@ class VipTable extends React.Component {
     const { tmp_year, tmp_month, tmp_NickName } = this.state;
     const { listVips, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
-    console.log("---props--------------------------------", this.props);
+    console.log("---props--------------------------------", listVips);
     return (
       <React.Fragment>      
       {isListLoading && <EclipseWidget />}
@@ -230,8 +231,8 @@ class VipTable extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listVips: get(state, "vipTable.list.data"),
-    totalCount: get(state, "userTable.list.totalCount"),
+    listVips: get(state, "vipTable.list.data.vips"),
+    totalCount: get(state, "vipTable.list.data.totalCount"),
     isListLoading: get(state, "vipTable.list.loading"),  
   };
 }

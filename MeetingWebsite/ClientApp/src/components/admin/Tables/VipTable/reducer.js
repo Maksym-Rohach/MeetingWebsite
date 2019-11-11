@@ -10,6 +10,7 @@ export const MAPING_POST_FAILED = "MAPING_POST_FAILED";
 const initialState = {
     list: {
         data: [],
+        totalCount:0,
         loading: false,
         success: false,
         failed: false,
@@ -68,6 +69,7 @@ export const vipTableReducer = (state = initialState, action) => {
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
           newState = update.set(newState, 'list.data', action.payload);
+          newState = update.set(newState, 'list.totalCount', action.payload.totalCount);
           console.log("MAPING_POST_SUCCESS)", action.payload);
 
           break;

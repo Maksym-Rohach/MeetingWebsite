@@ -35,6 +35,7 @@ using Microsoft.AspNetCore.Mvc;
     public class VipTableModels
     {
         public List<VipTableModel> Vips { get; set; }
+        public int TotalCount { get; set; }
     }
 
     public class VipTableFilters
