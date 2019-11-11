@@ -45,7 +45,7 @@ namespace MeetingWebsite
                 .AddEntityFrameworkStores<EFDbContext>()
                  .AddDefaultTokenProviders();
 
-            services.AddSingleton<IChatService, ChatService>();
+           // services.AddSingleton<IChatService, ChatService>();
 
             services.AddTransient<IEmailSender, EmailSender>();
             //services.AddScoped<IFileService, FileService>();
@@ -135,10 +135,10 @@ namespace MeetingWebsite
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<ChatHub>("chat");
-            });
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<ChatHub>("chat");
+            //});
             //app.UseSignalR(route =>
             //{
             //    route.MapHub<ChatService>("/api/clientwaiter");

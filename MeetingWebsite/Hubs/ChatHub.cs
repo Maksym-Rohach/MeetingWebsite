@@ -17,7 +17,7 @@ namespace MeetingWebsite.Hubs
         {
             var chatMessage = _chatService.CreateNewMessage("Juergen", message);
             // Call the MessageAdded method to update clients.
-            Clients.All.InvokeAsync("MessageAdded", chatMessage);
+            //Clients.All.InvokeAsync("MessageAdded", chatMessage);
         }
     }
 }
