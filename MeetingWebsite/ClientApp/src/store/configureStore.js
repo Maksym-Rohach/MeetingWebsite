@@ -36,8 +36,8 @@ export default function configureStore(history, initialState) {
 
     const middleware = [
       thunk,
-      refreshTokenMiddleware(),
-      signalRMiddleware(),
+        refreshTokenMiddleware(),
+     // signalRMiddleware(),
       routerMiddleware(history)
     ];
 
