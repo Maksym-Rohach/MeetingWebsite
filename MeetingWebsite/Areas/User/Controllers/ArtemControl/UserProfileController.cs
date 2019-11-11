@@ -25,7 +25,7 @@ namespace MeetingWebsite.Controllers.ArtemControl
         public IActionResult GetUserProfile()
         {
             //var i = User.Claims.ToList()[0].Value.ToString();
-            var i = "167c07db-6a0f-4ed8-af44-ae54fe6129bd";
+            var i = "fe623d77-2603-4787-99f6-e13337cc4083";
             var tmp = _context.UserProfile.SingleOrDefault(a => a.Id == i);
             var birthDate = tmp.DateOfBirth;
             int age = DateTime.Now.Year - birthDate.Year;
@@ -47,14 +47,11 @@ namespace MeetingWebsite.Controllers.ArtemControl
         public IActionResult ChangeUserProfile([FromBody]UserProfileModel model)
         {
             //var i = User.Claims.ToList()[0].Value.ToString();
-            var i = "167c07db-6a0f-4ed8-af44-ae54fe6129bd";
+            var i = "fe623d77-2603-4787-99f6-e13337cc4083";
             var tmp = _context.UserProfile.SingleOrDefault(a => a.User.Id == i);
             tmp.NickName = model.NickName;
             tmp.CityId = _context.City.SingleOrDefault(a => a.Name == model.City).Id;
             tmp.Description = model.Description;
-            
-            //tmp.User.Email = model.Email;
-            //tmp.User.NormalizedEmail = model.Email;
             _context.Users.Where(a => a.Id == tmp.Id).SingleOrDefault().Email = model.Email;
             _context.Users.Where(a => a.Id == tmp.Id).SingleOrDefault().NormalizedEmail = model.Email.ToUpper();
             _context.SaveChanges();

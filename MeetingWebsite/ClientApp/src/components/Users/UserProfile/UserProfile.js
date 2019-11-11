@@ -73,7 +73,7 @@ class UserProfile extends React.Component {
 
     componentDidMount = () => {
         this.props.getUserData();
-        this.setState({ nickName: this.props.listUsers.nickName, description: this.props.listUsers.description, age: this.props.listUsers.age, city: this.props.listUsers.city, gender: this.props.listUsers.gender, zodiac: this.props.listUsers.zodiac, email: this.props.listUsers.email });
+       console.log("---propsggggggggggggggg--------------------------------", this.props.listUsers);
         console.log("---stateggggggggggggggg--------------------------------", this.state);
 
     }
@@ -89,8 +89,8 @@ class UserProfile extends React.Component {
         let NickName = nickName;
         let Description = description;
         let City = city;
-        let Email = email
-        this.props.setUserData({ NickName, Description, City, Email })
+        let Email = email;
+        this.props.setUserData({ NickName, Description, City, Email });
     }
 
     _crop() {
@@ -99,8 +99,12 @@ class UserProfile extends React.Component {
     }
     
 
+
     render() {
-        const { nickName, description, age, city, gender, zodiac, email } = this.props.listUsers ;
+        if (!this.props.listUsers) {
+            return (<div>хрень {this.props.listUsers}</div>)
+        }
+        const { nickName, description, age, city, gender, zodiac, email } = this.props.listUsers;
         console.log("---state--------------------------------", this.state);
         console.log("---props--------------------------------", this.props);
         
@@ -145,11 +149,10 @@ class UserProfile extends React.Component {
                                                 <Input name="descr" style={{ maxHeight: 160, height: 160 }}
                                                     cols="80"
                                                     defaultValue={description}
-                                                    
+                                                    onChange={(e) => this.PostChanges('description', e.target.value)}
                                                     placeholder="Тут може бути ваший опис."
                                                     rows="8"
                                                     type="textarea"
-                                                    onChange={(e) => this.PostChanges('description', e.target.value)}
                                                 />
                                             </FormGroup>
                                         </Col>
