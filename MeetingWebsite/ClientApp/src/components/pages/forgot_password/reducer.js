@@ -75,7 +75,7 @@ export const forgot_password = (model) => {
       Forgot_Password_Service.forgot_password(model)
           .then((response) => {
               dispatch(forgot_passwordActions.success());
-              loginByJWT(response.data, dispatch);
+              //loginByJWT(response.data, dispatch);
               // const pushUrl = getUrlToRedirect();
               // console.log("----PushUrl----", pushUrl);
               // history.push(pushUrl);
@@ -149,31 +149,4 @@ export const forgot_passwordActions = {
   // }
 }
 
-export function logout() {
-  return dispatch => {
-      logoutByJWT(dispatch);
-  };
-}
-
-
-export const loginByJWT = (tokens, dispatch) => {
-  const {token, refToken}=tokens;
-  console.log('Hello app Token: ', token);
-  var user = jwt.decode(token);
-  console.log('Hello app User: ', user);
-  if (!Array.isArray(user.roles)) {
-      user.roles = Array.of(user.roles);
-  }
-  localStorage.setItem('jwtToken', token);
-  localStorage.setItem('refreshToken', refToken);
-  setAuthorizationToken(token);
-  dispatch(forgot_passwordActions.setCurrentUser(user));
-}
-
-export const logoutByJWT = (dispatch) => {
-  localStorage.removeItem('jwtToken');
-  localStorage.removeItem('refreshToken');
-  setAuthorizationToken(false);
-  dispatch(forgot_passwordActions.setCurrentUser({}));
-}
 

@@ -28,8 +28,8 @@ namespace MeetingWebsite.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                // From = new EmailAddress("brok.ua2019@gmail.com", "LOVE IS..."),
-                From = new EmailAddress("dmytro.chepyshko@gmail.com", "LOVE IS..."),
+                From = new EmailAddress("brok.ua2019@gmail.com", "LOVE IS..."),
+                //From = new EmailAddress("dmytro.chepyshko@gmail.com", "LOVE IS..."),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

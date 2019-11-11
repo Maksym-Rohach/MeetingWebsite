@@ -207,14 +207,18 @@ class Forgot_Password extends Component {
     e.preventDefault();
     const { email } = this.state;
     let errors = {};
- 
+
+    const regex_email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (!regex_email.test(email)) errors.email = "Не правильний формат електронної пошти!";
+    if (email === "") errors.email = "Поле не може бути пустим!";
+
     const isValid = Object.keys(errors).length === 0;
     if (isValid) {
       this.setState({ isLoading: true, done: false });
       var url = `${serverUrl}api/account/forgot_password`;
       var data = { email };
-      axios
-        .post(url, data)
+      console.log("d1233123123123132222222");
+      axios.post(url, data)
         .then(res => {
           this.setState({ isLoading: false, done: true });
         })
