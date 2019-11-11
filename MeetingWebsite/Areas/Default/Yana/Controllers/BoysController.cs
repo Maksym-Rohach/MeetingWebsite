@@ -49,24 +49,44 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
             }
 
             var GenderId = _context.Gender.Where(x => x.Type == "Man").SingleOrDefault();
-                       
+            var a = (DateTime.Now.Year * 100 + DateTime.Now.Month) * 100 + DateTime.Now.Day;
             GetListBoysModel result = new GetListBoysModel();
             result.CurrentPage = filter.CurrentPage;
-            var query = _context.UserProfile.AsQueryable();            
-
-            if (filter.CityId > 0)
+            int CityId = -1;
+            bool isCityIdParsed = int.TryParse(filter.CityId, out CityId);
+            int ZodiacId = -1;
+            bool isZodiacIdParsed= int.TryParse(filter.ZodiacId, out ZodiacId);
+            var query = _context.UserProfile.AsQueryable();
+            //int CityId = Convert.ToInt32(filter.CityId);
+            //int ZodiacId = Convert.ToInt32(filter.ZodiacId);
+            int Age = -1;
+            bool isAgeParsed = int.TryParse(filter.Age, out Age);
+            //int Age = Convert.ToInt32(filter.Age);
+            if (isCityIdParsed)
             {
-                query = query.Where(x => x.CityId == filter.CityId);
+                if (CityId > 0)
+                {
+                    query = query.Where(x => x.CityId == CityId);
+                }
             }
-
-            if (filter.ZodiacId > 0)
+            if (isZodiacIdParsed)
             {
-                query = query.Where(x => x.ZodiacId == filter.ZodiacId);
+                if (ZodiacId > 0)
+                {
+                    query = query.Where(x => x.ZodiacId == ZodiacId);
+                }
             }
-
+            if(isAgeParsed)
+            {
+               
+                if (Age > 0)
+                {
+                    query.Where(x => filter.Age == ((a - (x.DateOfBirth.Year * 100 + x.DateOfBirth.Month) * 100 + x.DateOfBirth.Day) / 10000).ToString());
+                }
+            }
             var today = DateTime.Today;
 
-            var a = (today.Year * 100 + today.Month) * 100 + today.Day;        
+              
 
 
             List<GetBoysModel> boys = new List<GetBoysModel>();
@@ -90,6 +110,7 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
 
             boys = query
                     .Include(c => c.City)
+                    .Where(u => u.GenderId == GenderId.Id && ((a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000)<int.Parse(filter.Age_to)&& ((a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000)>int.Parse(filter.Age_from))
                     .OrderBy(u => Guid.NewGuid())
                     .Take(10)
                     .Skip((filter.CurrentPage - 1) * 10)                 

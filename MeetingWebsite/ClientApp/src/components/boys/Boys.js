@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 import './style.scss';
 import '../pages/Home/instruments/scss/palette.scss';
 import Paginator from '../Paginator';
-
-
+import Navb from '../pages/Home/NavBar';
+import Footer from '../pages/Home/Footer';
   // const optionsCity = [
   //   {value: "", label: ""},
 
@@ -24,7 +24,8 @@ class Boys extends Component {
         isLoading: true,
         tmp_zodiac: {value: 'q', label: 'Зодіак'},
         tmp_city: {value:'w', label: 'Місто'},
-        tmp_age: {value:'1', label: '18'},   
+        tmp_age_from: {value:'1', label: '18'},   
+        tmp_age_to: {value:'1', label:'89'},
         collapse: true,
         fadeIn: true,
         timeout: 300,
@@ -40,14 +41,17 @@ class Boys extends Component {
       }
       
       sendFilters = () => {
-        const { tmp_age, tmp_zodiac, tmp_city } = this.state;  
+        console.log("STATEEEEEEEEEEEEEEEEE222222222E",this.state)
+        const { tmp_age_from,tmp_age_to, tmp_zodiac, tmp_city } = this.state;  
         let city = tmp_city.value;
         let zodiac = tmp_zodiac.value;
-        let age = tmp_age.value; 
+        let age_from = tmp_age_from.value;
+        let age_to = tmp_age_to.value; 
         console.log("STATEEEEEEEEEEEEEEEEEE",this.state)
         const model = {
           city: city,
-          age: age,
+          age_from: age_from,
+          age_to: age_to,
           zodiac: zodiac,
           };
   
@@ -55,39 +59,43 @@ class Boys extends Component {
       }
     
       filterSearchBoys = () => {
-        const {tmp_zodiac, tmp_city, tmp_age, currentPage} = this.state;
+        const {tmp_zodiac, tmp_city, tmp_age_from, tmp_age_to, currentPage} = this.state;
         let zodiacId = tmp_zodiac.value;
         let cityId = tmp_city.value;
-        let age = tmp_age.value;
-        this.props.getBoysData({zodiacId, cityId, age, currentPage});
+        let age_from = tmp_age_from.value;
+        let age_to = tmp_age_to.value; 
+        this.props.getBoysData({zodiacId, cityId, age_from, age_to, currentPage});
       }
       
       componentDidMount = () => {
-        const { tmp_city, tmp_zodiac,tmp_age, currentPage } = this.state;
+        const { tmp_city, tmp_zodiac,tmp_age_to, tmp_age_from, currentPage } = this.state;
         let zodiac = tmp_zodiac.value;
         let city = tmp_city.value;
-        let age = tmp_age.value;
-        this.props.getBoysData({zodiac, city, age, currentPage });
+        let age_from = tmp_age_from.value;
+        let age_to = tmp_age_to.value; 
+        this.props.getBoysData({zodiac, city, age_from, age_to, currentPage });
       }
 
       onClickPage(pageNumber) {
         // const { typeOfSort, sortByAscending } = this.props;
          console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
-         const { tmp_city,tmp_zodiac,tmp_age} = this.state;        
+         const { tmp_city,tmp_zodiac,tmp_age_from, tmp_age_to} = this.state;        
          let city = tmp_city.value;
          let zodiac = tmp_zodiac.value;
-         let age = tmp_age.value;
+         let age_from = tmp_age_from.value;
+         let age_to = tmp_age_to.value;
          let currentPage = pageNumber;
          this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
          //this.props.getBansData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
-         this.props.getBoysData({city,zodiac,age,currentPage: pageNumber, totalCount:this.props.totalCount});
+         this.props.getBoysData({city,zodiac,age_from,age_to,currentPage: pageNumber, totalCount:this.props.totalCount});
        }
       
   render() {
     console.log("Line 50 ===============", this.props);
-    const {tmp_city, tmp_zodiac, tmp_age} = this.state;
+    const {tmp_city, tmp_zodiac, tmp_age_from, tmp_age_to} = this.state;
     console.log("Line 52 ===============", this.props);
     const {listCities, listZodiacs} = this.props;
+    const {listUsers}= this.props;
     console.log("this props ==================",this.props);
     let option=[];
     let counter = 0;
@@ -96,8 +104,13 @@ class Boys extends Component {
     {
       option[counter++]={value:`${i}`, label:`${i}`};
     }
+    for (let q = 18; q<90; q++)
+    {
+      option[counter++]={value:`${q}`, label:`${q}`};
+    }
     return (
-      <React.Fragment>      
+      <React.Fragment>
+        <Navb></Navb>      
          <h2 style={{textAlign: "center"}}>Знайомства з хлопцями в Україні</h2>
       <div className="app flex-row align-items-center">
        <Container className="fontyana">
@@ -109,27 +122,32 @@ class Boys extends Component {
               <CardBody style={{marginTop: "-10px"}} >
                 <Form onSubmit={this.sendFilters} action="" method="post" className="form-horizontal">
                   <FormGroup row>              
-                    <Col xs = "4">
+                    <Col xs = "3">
                     <Select
                         value={tmp_city}
                         onChange={(e) => this.handleChange("tmp_city", e)}
                         options={listCities} />
                     </Col>
                
-                    <Col xs = "4">
+                    <Col xs = "3">
                     <Select
                         value={tmp_zodiac}
                         onChange={(e) => this.handleChange("tmp_zodiac", e)}
                         options={listZodiacs} />
                     </Col>
                   
-                    <Col xs = "4">
+                    <Col xs = "3">
                       <Select
-                        value={tmp_age}
-                        onChange={(e) => this.handleChange("tmp_age", e)}
+                        value={tmp_age_from}
+                        onChange={(e) => this.handleChange("tmp_age_from", e)}
                         options={option} />
                     </Col>
-                    {/* <Button type="submit" size="sm" color="success" className="ml-3 mt-3"><i className="fa fa-dot-circle-o"></i> Пошук</Button>      */}
+                    <Col xs = "3">
+                      <Select
+                        value={tmp_age_to}
+                        onChange={(e) => this.handleChange("tmp_age_to", e)}
+                        options={option} />
+                    </Col>
                   </FormGroup>
                 </Form>
               </CardBody>
@@ -138,39 +156,47 @@ class Boys extends Component {
             </Container>
 
       </div>
+      <section className=" text-white content-section bg-about">
+            <div className="container" >
+              <div className="row align-items-center">
+
+                <Row className="container text-white mt-5 mb-5 pl-0 pr-0" >
+                  {
+                    listUsers.map(item => {
+                      return (
+                        <Col xs="12" sm="4" md="3" >
+                          <Card className="border-primary">
+                            <CardBody>
+                              <div key={item.id}>
+                                <img alt="photo" className="img-fluid" 
+                                // src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
+                                 />
+                              </div>
+                              <Row>
+                                <strong className="ml-3">{item.name}</strong>
+                                <p className="ml-2">   {item.age}</p>
+                              </Row>
+                              <Row>
+                                <p className="ml-3">{item.city}, Україна</p>
+                              </Row>
+                              <Row>
+                                <p className="ml-3"> {item.zodiac}</p>
+                              </Row>
+
+
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      )
+                    })
+                  }
+                  
+                </Row>
+              </div>
+            </div>
+          </section>
+
       
-
-      <div className="animated fadeIn">
-        <Row>
-        
-          <Col xs="12" sm="6" md="2">
-            <Card className = "ml-5">
-              <CardBody>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-                laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuLorem ipsum dolor sit amet, consectetu
-                 {/* <Card.Img variant="top" src="holder.js/100px160" /> */}
-                 
-              </CardBody>
-              
-              <CardFooter>
-              
-               <Row>
-                  <strong className = "ml-3">Arcadiy</strong>
-                  <p className = "ml-2">18 років</p>
-               </Row>
-               <Row>
-                 <p className = "ml-3">Львів, Україна</p>
-               </Row>
-              </CardFooter>
-               
-            </Card>
-          </Col>
-        </Row>     
-
-       
-
-      </div>
-
       <div className="row justify-content-md-center">
         <div className="col col-lg-2">          
         </div>
@@ -181,6 +207,7 @@ class Boys extends Component {
         <div className="col col-lg-2">          
         </div>
       </div>
+      <Footer></Footer>
       </React.Fragment>
     );
   }
