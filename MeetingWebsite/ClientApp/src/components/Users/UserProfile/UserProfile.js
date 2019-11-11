@@ -1,7 +1,7 @@
 import React from "react";
 import * as getUserActions from './reducer';
 import Cropper from "react-cropper"
-import { ImagePicker } from 'react-file-picker'
+//import { ImagePicker } from 'react-file-picker'
 import 'cropperjs/dist/cropper.css';
 import { connect } from 'react-redux';
 import get from "lodash.get";
