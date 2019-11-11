@@ -52,7 +52,7 @@ class AdminLayout extends React.Component {
       if (navigator.platform.indexOf("Win") > -1) {
         let tables = document.querySelectorAll(".table-responsive");
         for (let i = 0; i < tables.length; i++) {
-          ps = new PerfectScrollbar(tables[i]);
+          ps = new PerfectScrollbar(tables[i]); 
         }
       }
       document.documentElement.scrollTop = 0;
