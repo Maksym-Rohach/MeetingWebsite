@@ -1,26 +1,26 @@
-import update from '../../../helpers/update';
-import GetMessageService from './GetMessagesService';
+import update from '../../helpers/update'
+import ChatsService from './ChatsService';
 
 
-export const GETMESSAGES_POST_STARTED = "GETMESSAGES_POST_STARTED";
-export const GETMESSAGES_POST_SUCCESS = "GETMESSAGES_POST_SUCCESS";
-export const GETMESSAGES_POST_FAILED = "GETMESSAGES_POST_FAILED";
+export const GETCHATS_POST_STARTED = "GETCHATS_POST_STARTED";
+export const GETCHATS_POST_SUCCESS = "GETCHATS_POST_SUCCESS";
+export const GETCHATS_POST_FAILED = "GETCHATS_POST_FAILED";
 
 
 const initialState = {
     list: {
-        data:[],
+        data:{},
         loading: false,
         success: false,
         failed: false,
     },
-    someprop:""
 }
-export const getMessages = (model) => {
+export const getChats = (model) => {
     return (dispatch) => {
         dispatch(getListActions.started());
-        GetMessageService.getMessages(model)
+        ChatsService.getChats(model)
             .then((response) => {
+                console.log("GETCHATS response:  ", response);
                 dispatch(getListActions.success(response.data));               
             }, err=> { throw err; })
             .catch(err=> {
@@ -32,43 +32,46 @@ export const getMessages = (model) => {
 export const getListActions = {
     started: () => {
         return {
-            type: GETMESSAGES_POST_STARTED
+            type: GETCHATS_POST_STARTED
         }
     },  
     success: (data) => {
+        console.log("+++++++++++Data", data);
         return {
-            type: GETMESSAGES_POST_SUCCESS,
+            type: GETCHATS_POST_SUCCESS,
             payload: data
         }
     },  
     failed: (response) => {
+        console.log("failed: (response)", response);
         return {           
-            type: GETMESSAGES_POST_FAILED,
+            type: GETCHATS_POST_FAILED,
             //errors: response.data
         }
     }
   }
 
-export const getMessagesReducer = (state = initialState, action) => { 
+export const getChatsReducer = (state = initialState, action) => { 
   let newState = state;
 
   switch (action.type) {
 
-      case GETMESSAGES_POST_STARTED: {
+      case GETCHATS_POST_STARTED: {
           newState = update.set(state, 'list.loading', true);
           newState = update.set(newState, 'list.success', false);
           newState = update.set(newState, 'list.failed', false);
           break;
       }
-      case GETMESSAGES_POST_SUCCESS: {
+      case GETCHATS_POST_SUCCESS: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
           newState = update.set(newState, 'list.data', action.payload);
+          console.log("GETCHATS_POST_SUCCESS)", action.payload);
 
           break;
       }
-      case GETMESSAGES_POST_FAILED: {
+      case GETCHATS_POST_FAILED: {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.success', false);
           newState = update.set(newState, 'list.failed', true);
@@ -80,10 +83,3 @@ export const getMessagesReducer = (state = initialState, action) => {
   }
   return newState;
 }
-
-
-
-
-
-
-

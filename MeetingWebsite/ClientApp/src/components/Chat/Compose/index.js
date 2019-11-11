@@ -14,6 +14,16 @@ class Compose extends React.Component{
     this.OnStickClick = this.OnStickClick.bind(this);
 
   }
+  scroll = (e)=>{
+    var objDiv = document.getElementById("content");
+    if(objDiv.scrollTop==0)
+    {
+      console.log("i am 0")
+    }
+
+
+
+}
   SendClick(){
     console.log(this.MessageField.Text);
     return;
@@ -69,7 +79,7 @@ class Compose extends React.Component{
     //var x = jwt.decode(localStorage.jwttoken)
     //console.log(x)
     return (
-      <div className="compose">
+      <div className="compose" id="content">
         <button className="SendMess"><i className="fas fa-arrow-left"></i></button>
         <button className="StickName" onMouseEnter={this.MouseInStick} onMouseLeave={this.MouseLeaveStick} onClick={this.OnStickClick}><i className="far fa-smile"></i></button>
         <input

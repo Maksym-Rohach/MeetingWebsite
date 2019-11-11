@@ -1,6 +1,6 @@
 import UserProfile from "../../components/Users/UserProfile/UserProfile";
 import Login from "../../components/pages/login";
-import Chat from "../../components/Chat/chat/ChatLayout";
+import Chat from "../../containers/chat/ChatContainer";
 var routes = [
   {
     path: "/profile",

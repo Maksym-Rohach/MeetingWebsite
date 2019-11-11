@@ -3,17 +3,20 @@ import { Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import UserNavBar from "./UserNavBar";
 import UserSideBar from "./UserSideBar";
-
-import routes from "../../routes/UserRoutes/UserRoutes";
-
+import { connect, Provider } from "react-redux";
+import get from "lodash.get";
+import * as getListActions from './reducer';
 import logo from "assets/img/react-logo.png";
-
+import ChatLayout from "../../components/Chat/chat/ChatLayout";
+import UserProfile from "../../components/admin/Tables/AdminTable/AdminTable";
+import a from "../../components/Users/UserProfile/UserProfile"
 var ps;
 
 class UserLayout extends React.Component {
   constructor(props) {
     super(props);
-    console.log(routes)
+    localStorage.setItem("MYID", "09bc180c-2c73-4fd4-8141-07e86b09235f")
+    this.props.routes.chats=[ ]
     this.state = {
       backgroundColor: "blue",
       sidebarOpened:
@@ -21,6 +24,13 @@ class UserLayout extends React.Component {
     };
   }
   componentDidMount() {
+    this.props.getChats(
+      {
+        "UserID":localStorage.getItem("MYID")
+      }
+
+    )
+    
     if (navigator.platform.indexOf("Win") > -1) {
       document.documentElement.className += " perfect-scrollbar-on";
       document.documentElement.classList.remove("perfect-scrollbar-off");
@@ -31,6 +41,7 @@ class UserLayout extends React.Component {
       }
     }
   }
+  
   componentWillUnmount() {
     if (navigator.platform.indexOf("Win") > -1) {
       ps.destroy();
@@ -57,15 +68,20 @@ class UserLayout extends React.Component {
     this.setState({ sidebarOpened: !this.state.sidebarOpened });
   };
   getRoutes = routes => {
+    //routes.push({path:"/profile", key:"profile"})
+    console.log(routes)
+    var isprofilepushed=false;
     return routes.map((prop, key) => {
       if (prop.layout === "/user") {
-        return (
+        console.log(prop.layout + "/"+prop.recipientId)
+
+        return(
           <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
+          path={prop.layout + "/"+prop.recipientId}
+          component={ChatLayout}
+          key={key}></Route> 
         );
+
       } else {
         return null;
       }
@@ -75,35 +91,35 @@ class UserLayout extends React.Component {
     this.setState({ backgroundColor: color });
   };
   getBrandText = path => {
-    for (let i = 0; i < routes.length; i++) {
+    for (let i = 0; i < this.props.routes.chats.length; i++) {
       if (
         this.props.location.pathname.indexOf(
-          routes[i].layout + routes[i].path
+          this.props.routes.chats[i].layout + this.props.routes.chats[i].path
         ) !== -1
       ) {
-        return routes[i].name;
+        return this.props.routes.chats[i].name;
       }
     }
     return "Brand";
   };
-  scroll = (e)=>{
-    var objDiv = document.getElementById("content");
-if(objDiv.scrollTop==0)
-{
-  console.log("i am 0")
+  scrollTo(param){
+    if(param==="bottom")
+    {
+        var objDiv = document.getElementById("content");      
+        objDiv.scrollTop=objDiv.clientHeight
+        return;
+    }
+    objDiv.scrollTop=param;
 
-}
-
-
-
-}
+  }
   render() {
     return (
       <>
+
         <div className="wrapper">
           <UserSideBar
             {...this.props}
-            routes={routes}
+            routes={this.props.routes.chats}
             bgColor={this.state.backgroundColor}
             logo={{
               innerLink: "../",
@@ -113,11 +129,12 @@ if(objDiv.scrollTop==0)
             toggleSidebar={this.toggleSidebar}
             
           />
-          <div  onScroll={(e)=>this.scroll(e)}
+          <div  
           id="content"
             className="main-panel"
             ref="mainPanel"
             data={this.state.backgroundColor}
+            
           >
             <UserNavBar
               {...this.props}
@@ -126,13 +143,28 @@ if(objDiv.scrollTop==0)
               sidebarOpened={this.state.sidebarOpened}
               HeaderPanerStyle="ChatStyle"
             />
-            <Switch>{this.getRoutes(routes)}</Switch>
+            <Switch key="switch">{this.getRoutes(this.props.routes.chats)}<Route
+            path="/profile"
+            component={ChatLayout}
+            key="profile"></Route></Switch>
           </div>
         </div>
       </>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    routes: get(state, "chats.list.data"),
+    isListLoading: get(state, "chats.list.loading"),  
+  };
+}
 
-
-export default UserLayout;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getChats: filter => {
+      dispatch(getListActions.getChats(filter));
+    }
+  }
+}
+export default  connect(mapStateToProps, mapDispatchToProps)(UserLayout);;

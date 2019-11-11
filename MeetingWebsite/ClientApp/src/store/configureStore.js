@@ -11,8 +11,7 @@ import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
 import {registerReducer} from '../components/pages/register/reducer';
 import { boysReducer } from '../components/boys/reducer';
-
-import { MessageListReducer} from "../components/Chat/MessageList/reduser";
+import { getChatsReducer } from '../containers/userLayout/reducer';
 import {getMessagesReducer} from '../components/Chat/chat/reducer'
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createHistory({ basename: baseUrl });
@@ -29,7 +28,8 @@ export default function configureStore (history, initialState) {
       registryShedule: registrySheduleReducer,     
       boys: boysReducer,
       register: registerReducer,
-      messages:getMessagesReducer
+      messages:getMessagesReducer,
+      chats:getChatsReducer
     };
 
     const middleware = [

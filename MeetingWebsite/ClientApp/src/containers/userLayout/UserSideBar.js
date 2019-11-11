@@ -34,6 +34,7 @@ class Sidebar extends React.Component {
     super(props);
     this.activeRoute.bind(this);
   }
+
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
@@ -54,15 +55,26 @@ class Sidebar extends React.Component {
   linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
+  newChatLoded(x){
+    console.log(x.recipientId)
+    localStorage.setItem("ActiveRecipient", x.recipientId)
+    console.log("new recipient :"+localStorage.getItem("ActiveRecipient"))
+  }
   render() {
+    
+
     const { bgColor, routes, rtlActive, logo } = this.props;
+    if(routes[0])
+    {
+    localStorage.setItem("ActiveRecipient", routes[0].recipientId)
+    }
     let logoImg = null;
     let logoText = null;
     if (logo !== undefined) {
       if (logo.outterLink !== undefined) {
         logoImg = (
           <a
-            href={logo.outterLink}
+            href="/user/profile"
             className="simple-text logo-mini"
             target="_blank"
             onClick={this.props.toggleSidebar}
@@ -74,7 +86,7 @@ class Sidebar extends React.Component {
         );
         logoText = (
           <a
-            href={logo.outterLink}
+            href="/user/profile"
             className="simple-text logo-normal"
             target="_blank"
             onClick={this.props.toggleSidebar}
@@ -85,7 +97,7 @@ class Sidebar extends React.Component {
       } else {
         logoImg = (
           <Link
-            to={logo.innerLink}
+            to="/user/profile"
             className="simple-text logo-mini"
             onClick={this.props.toggleSidebar}
           >
@@ -96,7 +108,7 @@ class Sidebar extends React.Component {
         );
         logoText = (
           <Link
-            to={logo.innerLink}
+            to="/user/profile"
             className="simple-text logo-normal"
             onClick={this.props.toggleSidebar}
           >
@@ -118,7 +130,7 @@ class Sidebar extends React.Component {
             {routes.map((prop, key) => {
               if (prop.redirect) return null;
               return (
-                <li
+                <li onClick={this.newChatLoded(prop)}
                   className={
                     this.activeRoute(prop.path) +
                     (prop.pro ? " active-pro" : "")
@@ -126,10 +138,9 @@ class Sidebar extends React.Component {
                   key={key}
                 >
                   <NavLink
-                    to={prop.layout + prop.path}
+                    to={prop.layout +"/"+ prop.recipientId}
                     className="nav-link"
                     activeClassName="active"
-                    onClick={this.props.toggleSidebar}
                   >
                     <i className={prop.icon} />
                     <p>{rtlActive ? prop.rtlName : prop.name}</p>

@@ -102,7 +102,7 @@ namespace MeetingWebsite
             app.UseSpaStaticFiles();
             app.UseSession();
 
-           // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+            SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
             #region InitStaticFiles AdminImages
             string pathUser = InitStaticFiles

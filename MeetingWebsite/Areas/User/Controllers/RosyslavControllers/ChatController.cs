@@ -45,6 +45,7 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             var array = _context.Messages
                 .Where(x => (x.SenderId == filter.chat.SenderId || x.SenderId == filter.chat.RecipientId) 
                    && (x.RecipientId == filter.chat.RecipientId || x.RecipientId == filter.chat.SenderId)).ToList();
+            array.Reverse();
             ListMessages model = new ListMessages();
             model.messages=new List<ModelMessage>();
             for (int i = filter.From; i < filter.Count+filter.From&&i < array.Count; i++)
@@ -54,11 +55,12 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
 
 
 
-            return Ok(models);
+            return Ok(model);
         }
         [HttpPost("sendmessage")]
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
-        {
+        { 
+
             if (User.Claims.ToList().Count>0)
             {
                 if (User.Claims.ToList()[0].Value.ToString() != message.SenderId)
@@ -166,76 +168,23 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
         [HttpPost("getchats")]
         public ActionResult<ListChats> GetChats([FromBody]UserModel UserID)
         {
-            //User.Claims.ToList()[0].Value.ToString();
-
-
-            if (User.Claims.ToList().Count>0)
-            {
-                if (User.Claims.ToList()[0].Value.ToString() != UserID.UserID)
-                {
-                    return BadRequest();
-                }
-
-            }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
             List<UserProfile> interlocutors = new List<UserProfile>();
-            UserProfile visitor;
-            try
-            {
-                
-                foreach (var item in _context.UserProfile.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.RecipientId).ToList())
-                {
-                    interlocutors.Add(item.Key);
-                }
-            }
-            catch (Exception)
-            {
-
-
-
-                return BadRequest();
-            }
-            try
-            {
-                foreach (var item in _context.UserRecipient.Where(x => x.Id == UserID.UserID).FirstOrDefault().Messages.GroupBy(x => x.SenderId).ToList())
-                {
-                    interlocutors.Add(item.Key);
-                }
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    UserRecipient recipient = new UserRecipient();
-                    recipient.Id = UserID.UserID;
-                    recipient.Messages = new List<Messages>();
-                    _context.UserRecipient.Add(recipient);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    return BadRequest();
-                }
-
-
-
-            }
-
+            interlocutors.AddRange(_context.Messages.Where(x => x.SenderId == UserID.UserID).GroupBy(x=>x.UserRecipient.UserProfile).Select(x => x.Key).ToList());
+            interlocutors.AddRange(_context.Messages.Where(x => x.RecipientId == UserID.UserID).GroupBy(x => x.UserSender).Select(x => x.Key).ToList());
+            interlocutors = interlocutors.GroupBy(x => x.Id).Select(x => x.First()).ToList();
             ListChats chats = new ListChats();
             chats.Chats = new List<Chat>();
             interlocutors.ForEach(x => chats.Chats.Add(
-                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, RecipientName = x.NickName, SenderName = visitor.NickName }
+                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id}
                 ));
 
 
-            return Ok(interlocutors);
+            return Ok(chats);
         }
-
-
 
     }
 
