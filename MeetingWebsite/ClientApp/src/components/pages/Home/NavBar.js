@@ -40,7 +40,6 @@ class Header extends Component {
       );
 
 
-
         return (
             <React.Fragment>
            
@@ -57,7 +56,7 @@ class Header extends Component {
             </NavItem>
             {/* </div>
             <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
-            
+
               {/* {isAuthenticated ? userLink : null} */}
               {isAuthenticated ? logoutLink : loginLink}
               {!isAuthenticated ? registerLink : null} 

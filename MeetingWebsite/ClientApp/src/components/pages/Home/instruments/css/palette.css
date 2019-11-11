@@ -534,8 +534,8 @@ p.sub-footer-text a {
   height: auto;
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(18, 18, 18, 0.5)), to(rgba(18, 18, 18, 0.9))), url(../img/food-1932466_1920.jpg) fixed;
-  background: linear-gradient(90deg, rgba(18, 18, 18, 0.5) 0, rgba(18, 18, 18, 0.9) 100%), url(../img/food-1932466_1920.jpg) fixed;
+  /* background: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(18, 18, 18, 0.5)), to(rgba(18, 18, 18, 0.9))), url(../img/food-1932466_1920.jpg) fixed;
+  background: linear-gradient(90deg, rgba(18, 18, 18, 0.5) 0, rgba(18, 18, 18, 0.9) 100%), url(../img/food-1932466_1920.jpg) fixed; */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
