@@ -10,8 +10,10 @@ import { connect } from 'react-redux';
 import './style.scss';
 import '../pages/Home/instruments/scss/palette.scss';
 import Paginator from '../Paginator';
-import Navb from '../pages/Home/NavBar';
+import Header from '../pages/Home/NavBar';
 import Footer from '../pages/Home/Footer';
+import { logout } from '../pages/login/reducer';
+
   // const optionsCity = [
   //   {value: "", label: ""},
 
@@ -94,7 +96,7 @@ class Boys extends Component {
     console.log("Line 50 ===============", this.props);
     const {tmp_city, tmp_zodiac, tmp_age_from, tmp_age_to} = this.state;
     console.log("Line 52 ===============", this.props);
-    const {listCities, listZodiacs} = this.props;
+    const {listCities, listZodiacs, login} = this.props;
     const {listUsers}= this.props;
     console.log("this props ==================",this.props);
     let option=[];
@@ -110,7 +112,8 @@ class Boys extends Component {
     }
     return (
       <React.Fragment>
-        <Navb></Navb>      
+        <Header onLogout={e => this.signOut(e)}
+          login={login} />      
          <h2 style={{textAlign: "center"}}>Знайомства з хлопцями в Україні</h2>
       <div className="app flex-row align-items-center">
        <Container className="fontyana">
@@ -219,7 +222,8 @@ const mapStateToProps = state => {
     listUsers: get(state, "boys.list.getListBoys"),
     listCities: get(state,"boys.list.getCities"),
     listZodiacs: get(state, "boys.list.getZodiacs"),
-    isListLoading: get(state, "boys.list.loading"),      
+    isListLoading: get(state, "boys.list.loading"),  
+    login: state.login,    
   };  
 }
 
@@ -227,6 +231,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBoysData: filter => {
       dispatch(getListActions.getBoysData(filter));
+    },
+    logout: filter => {
+      dispatch(logout(filter));
     }
   }
 }
