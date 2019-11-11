@@ -99,7 +99,7 @@ class Boys extends Component {
     console.log("this props ==================",this.props);
     let option=[];
     let counter = 0;
-    console.log("line 55 =====================", this.props);    
+   
     for (let i = 18; i<90; i++)
     {
       option[counter++]={value:`${i}`, label:`${i}`};

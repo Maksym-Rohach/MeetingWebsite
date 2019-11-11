@@ -1,17 +1,17 @@
 import update from '../../../helpers/update';
-import LoginService from './LoginService';
+import Forgot_Password_Service from './Forgot_Password_Service';
 import isEmpty from 'lodash/isEmpty';
 import setAuthorizationToken from '../../../utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 import redirectStatusCode from '../../../services/redirectStatusCode';
 import history from '../../../utils/history';
 
-export const LOGIN_POST_STARTED = "login/LOGIN_POST_STARTED";
-export const LOGIN_POST_SUCCESS = "login/LOGIN_POST_SUCCESS";
-export const LOGIN_POST_FAILED = "login/LOGIN_POST_FAILED";
-export const LOGIN_SET_CURRENT_USER = "login/SET_CURRENT_USER";
+export const FORGOT_PASSWORD_STARTED = "FORGOT_PASSWORD_STARTED";
+export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
+export const FORGOT_PASSWORD_FAILED  = "FORGOT_PASSWORD_FAILED";
+// export const Forgot_Password_SET_CURRENT_USER = "Forgot_Password_SET_CURRENT_USER";
 
-
+ 
 const initialState = {
     post: {
         loading: false,
@@ -28,36 +28,36 @@ const initialState = {
     }
 }
 
-export const loginReducer = (state = initialState, action) => {
+export const forgot_passwordReducer = (state = initialState, action) => {
   let newState = state;
 
   switch (action.type) {
 
-      case LOGIN_POST_STARTED: {
+      case FORGOT_PASSWORD_STARTED: {
           newState = update.set(state, 'post.loading', true);
           newState = update.set(newState, 'post.success', false);
           newState = update.set(newState, 'post.errors', {});
           newState = update.set(newState, 'post.failed', false);
           break;
       }
-      case LOGIN_SET_CURRENT_USER: {
-          return {
-              ...state,
-              isAuthenticated: !isEmpty(action.user),
-              user: action.user
-          };
-      }
-      case LOGIN_POST_SUCCESS: {
+      // case Forgot_Password_SET_CURRENT_USER: {
+      //     return {
+      //         ...state,
+      //         isAuthenticated: !isEmpty(action.user),
+      //         user: action.user
+      //     };
+      // }
+      case FORGOT_PASSWORD_SUCCESS: {
           newState = update.set(state, 'post.loading', false);
           newState = update.set(newState, 'post.failed', false);
           newState = update.set(newState, 'post.errors', {});
           newState = update.set(newState, 'post.success', true);
           break;
       }
-      case LOGIN_POST_FAILED: {
+      case FORGOT_PASSWORD_FAILED: {
           newState = update.set(state, 'post.loading', false);
           newState = update.set(newState, 'post.success', false);
-          newState = update.set(newState, 'post.errors', action.errors);
+          newState = update.set(newState, 'post.errors', action);
           newState = update.set(newState, 'post.failed', true);
           break;
       }
@@ -69,83 +69,84 @@ export const loginReducer = (state = initialState, action) => {
   return newState;
 }
 
-export const login = (model) => {
+export const forgot_password = (model) => {
   return (dispatch) => {
-      dispatch(loginActions.started());
-      LoginService.login(model)
+      dispatch(forgot_passwordActions.started());
+      Forgot_Password_Service.forgot_password(model)
           .then((response) => {
-              dispatch(loginActions.success());
+              dispatch(forgot_passwordActions.success());
               loginByJWT(response.data, dispatch);
-              const pushUrl = getUrlToRedirect();
-              console.log("----PushUrl----", pushUrl);
-              history.push(pushUrl);
+              // const pushUrl = getUrlToRedirect();
+              // console.log("----PushUrl----", pushUrl);
+              // history.push(pushUrl);
 
           }, err=> { throw err; })
           .catch(err=> {
-            dispatch(loginActions.failed(err.response));
+            dispatch(forgot_passwordActions.failed(err.response));
             redirectStatusCode(err.response.status);
           });
   }
 }
 
-function getUrlToRedirect () {
+// function getUrlToRedirect () {
 
-  var user = jwt.decode(localStorage.jwtToken);
-  let roles = user.roles;
-  let path = '';
-  if (Array.isArray(roles)) {
-    for (let i = 0; i < roles.length; i++) {
+//   var user = jwt.decode(localStorage.jwtToken);
+//   let roles = user.roles;
+//   let path = '';
+//   if (Array.isArray(roles)) {
+//     for (let i = 0; i < roles.length; i++) {
      
-      if (roles[i] == "User") {      
-        path = "/user";
-        break;
-      }
-      else if (roles[i] == "Admin") {        
-        path = "/admin";
-        break;
-      }
-    }
-  }
-  else {
-    if (roles == "User") {
-      path = "/user";
-    }
-    else if (roles == "Admin") {
-      path = "/admin";
-    }
-  }
-  console.log("++++++++++Exit++++++++++", path);
-  return path;
-}
+//       if (roles[i] == "User") {      
+//         path = "/admin";
+//         break;
+//       }
+//       else if (roles[i] == "Admin") {        
+//         path = "/admin";
+//         break;
+//       }
+//     }
+//   }
+//   else {
+//     if (roles == "User") {
+//       path = "/admin";
+//     }
+//     else if (roles == "Admin") {
+//       path = "/admin";
+//     }
+//   }
+//   console.log("++++++++++Exit++++++++++", path);
+//   return path;
+// }
 
 
-export const loginActions = {
+export const forgot_passwordActions = {
   started: () => {
       return {
-          type: LOGIN_POST_STARTED
+          type: FORGOT_PASSWORD_STARTED
       }
   },
 
   success: () => {
       return {
-          type: LOGIN_POST_SUCCESS
+          type: FORGOT_PASSWORD_SUCCESS
       }
   },
 
   failed: (response) => {
+    console.log("Failed",response);
       return {
-          type: LOGIN_POST_FAILED,
-          errors: response.data
+          type: FORGOT_PASSWORD_FAILED,
+          errors: response.data.invalid
       }
   },
 
-  setCurrentUser: (user) => {
-    console.log('LOGIN_SET_CURRENT_USER: ', user);
-      return {
-          type: LOGIN_SET_CURRENT_USER,
-          user
-      }
-  }
+  // setCurrentUser: (user) => {
+  //   console.log('Forgot_Password_SET_CURRENT_USER: ', user);
+  //     return {
+  //         type: FORGOT_PASSWORD_CURRENT_USER,
+  //         user
+  //     }
+  // }
 }
 
 export function logout() {
@@ -166,13 +167,13 @@ export const loginByJWT = (tokens, dispatch) => {
   localStorage.setItem('jwtToken', token);
   localStorage.setItem('refreshToken', refToken);
   setAuthorizationToken(token);
-  dispatch(loginActions.setCurrentUser(user));
+  dispatch(forgot_passwordActions.setCurrentUser(user));
 }
 
 export const logoutByJWT = (dispatch) => {
   localStorage.removeItem('jwtToken');
   localStorage.removeItem('refreshToken');
   setAuthorizationToken(false);
-  dispatch(loginActions.setCurrentUser({}));
+  dispatch(forgot_passwordActions.setCurrentUser({}));
 }
 
