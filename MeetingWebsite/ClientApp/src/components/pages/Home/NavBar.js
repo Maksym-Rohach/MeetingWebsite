@@ -18,21 +18,28 @@ class Header extends Component {
 
       const logoutLink = (
         <NavItem className="d-flex align-items-center">
-          <NavLink href="#/" onClick={e => this.props.onLogout(e)}
-            className="social-link rounded-circle text-white mr-3">
+          <Link to="#/" onClick={e => this.props.onLogout(e)}
+            className="social-link rounded-circle text-white mr-5">
             Вихід
-          </NavLink>
+          </Link>
         </NavItem>
       );
 
       const loginLink = (
         <NavItem className="d-flex align-items-center">
-          <NavLink href="#/login"
-            className="social-link rounded-circle text-white mr-3" >
+          <Link to="/login"
+            className="social-link rounded-circle text-white mr-5" >
             Вхід
-             </NavLink>
+             </Link>
         </NavItem>
       );
+      const registerLink = (
+        <NavItem>
+              <Link to="/register" className="social-link rounded-circle text-white mr-5"> Реєстрація</Link>
+            </NavItem>
+      );
+
+
 
         return (
             <React.Fragment>
@@ -50,17 +57,10 @@ class Header extends Component {
             </NavItem>
             {/* </div>
             <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
-            {/* <NavItem>
-              <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
-            </NavItem> */}
-            <NavItem>
-              <Link to="/register" className="social-link rounded-circle text-white mr-5"> Реєстрація</Link>
-            </NavItem>
-            {/* <NavItem>
-              <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Вихід</NavLink>
-            </NavItem> */}
+            
               {/* {isAuthenticated ? userLink : null} */}
               {isAuthenticated ? logoutLink : loginLink}
+              {!isAuthenticated ? registerLink : null} 
             {/* </div> */}
 
           </Nav>
