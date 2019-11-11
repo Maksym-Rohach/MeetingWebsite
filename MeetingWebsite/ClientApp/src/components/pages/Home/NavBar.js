@@ -14,24 +14,24 @@ class NavBar extends Component {
           <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase">
             {/* <div className="collapse navbar-collapse "> */}
             <NavItem>
-              <NavLink href="#"><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </NavLink>
+              <Link to="/#"><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
             </NavItem>
             <NavItem>
-              <NavLink href="#/" className="social-link rounded-circle text-white mr-3">Дівчата</NavLink>
+              <Link to="" className="social-link rounded-circle text-white mr-3">Дівчата</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="#/boys" className="social-link rounded-circle text-white mr-3"> Хлопці</NavLink>
+              <Link to="/boys" className="social-link rounded-circle text-white mr-3"> Хлопці</Link>
             </NavItem>
             {/* </div>
             <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
             <NavItem>
-              <NavLink href="#/login" className="social-link rounded-circle text-white mr-3" > Вхід</NavLink>
+              <Link to="/login" className="social-link rounded-circle text-white mr-3" > Вхід</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Реєстрація</NavLink>
+              <Link to="/register" className="social-link rounded-circle text-white mr-3"> Реєстрація</Link>
             </NavItem>
             <NavItem>
-              <NavLink href="#/register" className="social-link rounded-circle text-white mr-3"> Вихід</NavLink>
+              <Link to="/register" className="social-link rounded-circle text-white mr-3"> Вихід</Link>
             </NavItem>
             {/* </div> */}
           </Nav>
