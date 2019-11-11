@@ -35,13 +35,13 @@ export const BanUser = (model) => {
     return (dispatch) => {
         dispatch(getListActions.started());
             UserTableService.banUser(model)//треба вернути назад список юзеров
-            .then((response) => {
-                console.log("+++++++++++Response", response);
-                dispatch(getListActions.success(response.data));               
-            }, err=> { throw err; })
-            .catch(err=> {
-              dispatch(getListActions.failed(err.response));
-            });
+            // .then((response) => {
+            //     console.log("+++++++++++Response", response);
+            //     dispatch(getListActions.success(response.data));               
+            // }, err=> { throw err; })
+            // .catch(err=> {
+            //   dispatch(getListActions.failed(err.response));
+            // });
     }
 }
 

@@ -35,8 +35,10 @@ export default function configureStore(history, initialState) {
     };
 
     const middleware = [
-        thunk,
-        routerMiddleware(history)
+      thunk,
+      refreshTokenMiddleware(),
+      signalRMiddleware(),
+      routerMiddleware(history)
     ];
 
     const enhancers = [];

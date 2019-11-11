@@ -1,13 +1,15 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "./AdminNavBar";
 import AdminSideBar from "./AdminSideBar";
 import { Container, Row } from 'reactstrap';
-
+import { logout } from '../../components/pages/login/reducer';
+import get from 'lodash.get';
+import { connect } from 'react-redux';
 import routes from "../../routes/AdminRoutes/AdminRoutes";
-
 import logo from "assets/img/react-logo.png";
+import PropTypes from 'prop-types';
 
 var ps;
 
@@ -20,24 +22,31 @@ class AdminLayout extends React.Component {
         document.documentElement.className.indexOf("nav-open") !== -1
     };
   }
-  componentDidMount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
-      document.documentElement.classList.remove("perfect-scrollbar-off");
-      ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
-      let tables = document.querySelectorAll(".table-responsive");
-      for (let i = 0; i < tables.length; i++) {
-        ps = new PerfectScrollbar(tables[i]);
-      }
-    }
+
+  signOut(e) {
+    e.preventDefault();
+    this.props.logout();
+    this.props.history.push('/login');
   }
-  componentWillUnmount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      ps.destroy();
-      document.documentElement.className += " perfect-scrollbar-off";
-      document.documentElement.classList.remove("perfect-scrollbar-on");
-    }
-  }
+
+  // componentDidMount() {
+  //   if (navigator.platform.indexOf("Win") > -1) {
+  //     document.documentElement.className += " perfect-scrollbar-on";
+  //     document.documentElement.classList.remove("perfect-scrollbar-off");
+  //     ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
+  //     let tables = document.querySelectorAll(".table-responsive");
+  //     for (let i = 0; i < tables.length; i++) {
+  //       ps = new PerfectScrollbar(tables[i]);
+  //     }
+  //   }
+  // }
+  // componentWillUnmount() {
+  //   if (navigator.platform.indexOf("Win") > -1) {
+  //     ps.destroy();
+  //     document.documentElement.className += " perfect-scrollbar-off";
+  //     document.documentElement.classList.remove("perfect-scrollbar-on");
+  //   }
+  // }
   componentDidUpdate(e) {
     if (e.history.action === "PUSH") {
       if (navigator.platform.indexOf("Win") > -1) {
@@ -87,38 +96,67 @@ class AdminLayout extends React.Component {
     return "Brand";
   };
   render() {
-    return (
-      <React.Fragment>     
-        <div className="wrapper">
-          <AdminSideBar
+
+    const { login } = this.props;
+
+    let isAccess = false;
+
+    if(login.isAuthenticated)
+    {
+      const { roles } = login.user;
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i] === 'Admin')
+          isAccess = true;
+      }
+    }
+    const content = (
+     <React.Fragment>
+      <div className="wrapper">
+        <AdminSideBar
+          {...this.props}
+          routes={routes}
+          bgColor={this.state.backgroundColor}
+          logo={{
+            outterLink: "https://www.creative-tim.com/",
+            text: "Creative Tim",
+            imgSrc: logo
+          }}
+          toggleSidebar={this.toggleSidebar}
+        />
+        <div
+          className="main-panel"
+          ref="mainPanel"
+          data={this.state.backgroundColor}
+        >
+          <AdminNavbar
             {...this.props}
-            routes={routes}
-            bgColor={this.state.backgroundColor}
-            logo={{
-              outterLink: "https://www.creative-tim.com/",
-              text: "Creative Tim",
-              imgSrc: logo
-            }}
+            brandText={this.getBrandText(this.props.location.pathname)}
             toggleSidebar={this.toggleSidebar}
+            sidebarOpened={this.state.sidebarOpened}
           />
-          <div
-            className="main-panel"
-            ref="mainPanel"
-            data={this.state.backgroundColor}
-          >
-            <AdminNavbar
-              {...this.props}
-              brandText={this.getBrandText(this.props.location.pathname)}
-              toggleSidebar={this.toggleSidebar}
-              sidebarOpened={this.state.sidebarOpened}
-            />
-            <Switch>{this.getRoutes(routes)}</Switch>
-          </div>
-          {/* <AdminTable/> */}
+          <Switch>{this.getRoutes(routes)}</Switch>
         </div>
-        </React.Fragment>   
+      </div>
+      </React.Fragment> 
+    )
+    return (
+      isAccess ? content
+        : <Redirect to="/login" />
     );
   }
 }
 
-export default AdminLayout;
+const mapStateToProps = (state) => {
+  return {
+    login: get(state, 'login')
+  };
+}
+
+AdminLayout.propTypes =
+  {
+    logout: PropTypes.func.isRequired,
+    login: PropTypes.object.isRequired
+  }
+
+export default connect(mapStateToProps, { logout })(AdminLayout);
+
