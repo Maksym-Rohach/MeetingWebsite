@@ -17,6 +17,8 @@ const initialState = {
     },   
 }
 
+
+
 export const getBansData = (model) => {
     return (dispatch) => {
         console.log("+++++++++++model++++++++++", model);
