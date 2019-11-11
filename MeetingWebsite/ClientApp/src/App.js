@@ -19,6 +19,8 @@ const Home = React.lazy(() => import('./components/pages/Home'));
 const Boys = React.lazy(() => import('./components/boys'));
 const Register = React.lazy(() => import('./components/pages/register'));
 const NewPassword = React.lazy(() => import('./components/NewPassword'));
+const UserProfileModal = React.lazy(() => import('./components/UserProfileModal'));
+
 
 
 class App extends Component {
@@ -35,6 +37,7 @@ class App extends Component {
                     <Route  path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    
                     <Route  path="/boys" name="Boys" render={props => <Boys {...props} />} />
                     <Route  path="/reset-password" name="NewPassword" render={props => <NewPassword {...props} />} />
+                    <Route  path="/userprofilemodal" name="UserProfileModal" render={props => <UserProfileModal {...props} />} />
                     <Route exact path="/" name="Home" render={props => <Home {...props} />} />
                 </Switch>
                 </React.Suspense>
