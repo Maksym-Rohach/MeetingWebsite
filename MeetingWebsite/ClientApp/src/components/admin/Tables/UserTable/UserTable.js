@@ -178,7 +178,7 @@ class UserTable extends React.Component {
     const { listUsers, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
-    return (
+    return ( 
       <>
       {isListLoading && <EclipseWidget />}
       <div className="content">

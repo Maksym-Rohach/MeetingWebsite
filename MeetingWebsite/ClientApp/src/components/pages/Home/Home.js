@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardBody, CarouselControl, CarouselIndicators, CarouselCaption, CarouselItem,  Col, Container, Carousel, Row, captionHeader, caption } from 'reactstrap';
 import './instruments/css/palette.css';
-
 import { connect } from 'react-redux';
 import get from "lodash.get";
 import * as getListActions from './reducer';
@@ -124,7 +123,6 @@ console.log("listUsers", listUsers);
               </div>
             </div>
           </section>
-
 
 
           <section className=" text-white content-section bg-about">
