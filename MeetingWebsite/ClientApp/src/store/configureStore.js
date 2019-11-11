@@ -10,9 +10,6 @@ import createHistory from 'history/createHashHistory';
 import { banTableReducer } from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer } from "../components/admin/Schedule/RegistryShedule/reducer";
 import { registerReducer } from '../components/pages/register/reducer';
-import { banTableReducer} from "../components/admin/Tables/BanTable/reducer";
-import { registrySheduleReducer} from "../components/admin/Schedule/RegistryShedule/reducer";
-import {registerReducer} from '../components/pages/register/reducer';
 import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
 import {vipTableReducer} from '../components/admin/Tables/VipTable/reducer';
 import { boysReducer } from '../components/boys/reducer';
@@ -36,21 +33,11 @@ export default function configureStore(history, initialState) {
         register: registerReducer,
         userProf: userProfileReducer,
         messageList: MessageListReducer,
-        home: homeReducer
-      login: loginReducer,
-      refreshToken: refreshReducer,
-      userTable: userTableReducer,
-      banTable: banTableReducer,
-      registryShedule: registrySheduleReducer,     
-      boys: boysReducer,
-      register: registerReducer,
-      messageList: MessageListReducer,
-      registryShedule: registrySheduleReducer,
-      register: registerReducer,
-      adminTable: adminTableReducer,
-      vipTable: vipTableReducer,
-      messageList: MessageListReducer,
-      home: homeReducer
+        home: homeReducer,
+        adminTable: adminTableReducer,
+        vipTable: vipTableReducer,
+      
+     
     };
 
     const middleware = [
