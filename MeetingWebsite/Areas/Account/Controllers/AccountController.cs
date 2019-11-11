@@ -72,11 +72,11 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 return BadRequest(new { invalid = "Користувача із вказаними обліковими даними не знайдено" });
             }
 
-            // var block = _context.UserAccessLocks.FirstOrDefault(u => u.Id == user.Id);
-            //if (block != null)
-            //{
-            //    return BadRequest(new { invalid = "Нажаль Вас Заблоковано" });
-            //}
+            var block = _context.UserAccessLocks.FirstOrDefault(u => u.Id == user.Id);
+            if (block != null)
+            {
+                return BadRequest(new { invalid = "Нажаль Вас Заблоковано" });
+            }
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
@@ -287,5 +287,7 @@ namespace MeetingWebsite.Areas.Account.Controllers
                 refToken = _refreshToken.Token
             });
         }
+
+        
     }
 }

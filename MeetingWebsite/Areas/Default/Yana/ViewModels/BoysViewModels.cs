@@ -26,14 +26,14 @@ namespace MeetingWebsite.Areas.Default.Yana.ViewModels
 
     public class GetZodiac
     {
-        public int ZodiacID { get; set; }
-        public string ZodiacName { get; set; }
+        public string Value { get; set; }
+        public string Label { get; set; }
     }
 
     public class GetCity
     {
-        public int CityID { get; set; }
-        public string CityName { get; set; }
+        public string Value { get; set; }
+        public string Label { get; set; }
     }
 
     public class GetListBoysModel
