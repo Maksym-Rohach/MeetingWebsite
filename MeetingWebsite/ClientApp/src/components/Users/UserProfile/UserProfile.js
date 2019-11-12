@@ -1,4 +1,5 @@
 import React from "react";
+import Select from 'react-select';
 import * as getUserActions from './reducer';
 //import { ImagePicker } from 'react-file-picker'
 import 'cropperjs/dist/cropper.css';
@@ -63,6 +64,7 @@ class UserProfile extends React.Component {
         this.state =
             {
                 isLoading: true,
+                isLoadedPrevious: false,
                 nickName: "",
                 description: "",
                 age: 0,
@@ -76,11 +78,14 @@ class UserProfile extends React.Component {
         this.Click = this.Click.bind(this);
     }
 
+    componentDidUpdate = () => {
+        if (this.props.listUsers.email != null && this.props.listUsers.email != "" && !this.state.isLoadedPrevious) {
+            this.setState({ isLoadedPrevious: true, nickName: this.props.listUsers.nickName, description: this.props.listUsers.description, age: this.props.listUsers.age, city: this.props.listUsers.city, gender: this.props.listUsers.gender, zodiac: this.props.listUsers.zodiac, email: this.props.listUsers.email });
+        }
+    }
+
     componentDidMount = () => {
         this.props.getUserData();
-       console.log("---propsggggggggggggggg--------------------------------", this.props.listUsers);
-        console.log("---stateggggggggggggggg--------------------------------", this.state);
-
     }
 
     PostChanges = (name, source) => {
@@ -89,7 +94,6 @@ class UserProfile extends React.Component {
 
     Click(e) {
         e.preventDefault();
-        console.log("---state!!!!!!!!!!!!!!!!--------------------------------", this.state);
         const { nickName, description, age, city, gender, zodiac, email } = this.state;
         let NickName = nickName;
         let Description = description;
@@ -115,9 +119,10 @@ class UserProfile extends React.Component {
         if (!this.props.listUsers) {
             return (<div>хрень {this.props.listUsers}</div>)
         }
-        const { nickName, description, age, city, gender, zodiac, email } = this.props.listUsers;
-        console.log("---state--------------------------------", this.state);
-        console.log("---props--------------------------------", this.props);
+
+        const { nickName, description, age, gender, zodiac, email } = this.state;
+        const City = {value: 'w', label: this.state.city};
+        const Cities = this.props.listUsers.cities;
         
     return (
         <>
@@ -162,7 +167,7 @@ class UserProfile extends React.Component {
                                                 <label>Про мене</label>
                                                 <Input name="descr" style={{ maxHeight: 160, height: 160 }}
                                                     cols="80"
-                                                    defaultValue={description}
+                                                    value={description}
                                                     onChange={(e) => this.PostChanges('description', e.target.value)}
                                                     placeholder="Тут може бути ваший опис."
                                                     rows="8"
@@ -212,12 +217,11 @@ class UserProfile extends React.Component {
                                         <Col className="pr-md-1" md="6">
                                             <FormGroup>
                                                 <label>Місто</label>
-                                                <Input
+                                                <Select
                                                     name="city"
-                                                   defaultValue={city}
-                                                    placeholder="(Необов'язково)вул. Центральна"
-                                                    type="text"
-                                                    onChange={(e) => this.PostChanges('city', e.target.value)}
+                                                    value={City}
+                                                    onChange={(e) => this.PostChanges('city', e.label)}
+                                                    options={Cities}
                                                 />
                                             </FormGroup>
                                         </Col>
@@ -252,7 +256,6 @@ class UserProfile extends React.Component {
   }
 }
 const mapStateToProps = state => {
-    console.log("State=======", state);
     return {
         listUsers: get(state, "userProf.list.data"),
         isListLoading: get(state, "userProf.list.loading"),
