@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import "assets/scss/black-dashboard-react.scss";
 import "assets/css/black-dashboard-react.css";
 import "assets/demo/demo.css";
@@ -19,13 +19,14 @@ const Home = React.lazy(() => import('./components/pages/Home'));
 const Girls = React.lazy(() => import('./components/Girls'));
 const Boys = React.lazy(() => import('./components/boys'));
 const Register = React.lazy(() => import('./components/pages/register'));
+const Forgot_Password = React.lazy(() => import('./components/pages/forgot_password'));
 
 
 class App extends Component {
 
     render() {
       return (
-        // <Router>
+        <Router>
             <React.Suspense fallback={loading()}>
                 <Switch>
                     <Route path="/login" name="Login" render={props => <Login {...props} />} />
@@ -37,10 +38,11 @@ class App extends Component {
                                      
                     <Route path="/users" name="AdminUsers" render={props => <AdminUsers {...props} />} />                    
                     <Route path="/boys" name="Boys" render={props => <Boys {...props} />} />
-                    <Route path="/" name="Home" render={props => <Home {...props} />} />
+                    <Route exact path="/" name="Home" render={props => <Home {...props} />} />
+                    <Route path="/forgot_password" name="Forgot_Password" render={props => <Forgot_Password {...props} />} />
                 </Switch>
                 </React.Suspense>
-      // </Router>
+      </Router>
     );
   }
 }

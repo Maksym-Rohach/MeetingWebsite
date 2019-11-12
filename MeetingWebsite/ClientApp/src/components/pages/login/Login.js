@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,Redirect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardFooter, CardGroup,
          Col, Container, Form, Input, InputGroup,
@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import * as loginActions from './reducer';
 import get from "lodash.get";
-
 import EclipseWidget from '../../eclipse';
+
 class Login extends Component {
   state = {
     email: '',
@@ -82,8 +82,8 @@ class Login extends Component {
     }
   }
   render() {
-    const { errors, isLoading, profileUrl, visible, errorsServer } = this.state;
-    return (
+    const { errors, isLoading, profileUrl, visible, errorsServer,done } = this.state;
+    const form = (
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center pt-5 mt-5">
@@ -101,7 +101,7 @@ class Login extends Component {
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                        <i className="fas fa-at"></i>
+                        <i className="fa fa-envelope"></i>
                         </InputGroupText>
                         </InputGroupAddon>                     
                         <Input type="email" placeholder="Електронна пошта" autoComplete="on"
@@ -141,7 +141,9 @@ class Login extends Component {
                           <Button color="success" className="px-4">Вхід</Button>
                         </Col>
                         <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Забули пароль?</Button>
+                        <Link to="/forgot_password">
+                          <Button color="success" className="px-2">Забули пароль?</Button>
+                          </Link>
                         </Col>
                       </Row>
                     </Form>
@@ -150,11 +152,10 @@ class Login extends Component {
                 <Card className="text-white py-5 d-md-down-none my-gradient" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+                      <h3>Знайдіть свою ідеальну пару</h3>
+                      {/* <p>Знайдіть свою ідеальну пару.</p> */}
                       <Link to="/register">
-                        <Button color="success" className="mt-3" active tabIndex={-1}>Register Now!</Button>
+                        <Button color="success" className="mt-3" active tabIndex={-1}>Зареєструватись</Button>
                       </Link>
                     </div>
                   </CardBody>
@@ -163,8 +164,10 @@ class Login extends Component {
             </Col>
           </Row>
         </Container>
+        {isLoading && <EclipseWidget />}
       </div>
     );
+    return done ? <Redirect to="/forgot_password" /> : form;
   }
 }
 

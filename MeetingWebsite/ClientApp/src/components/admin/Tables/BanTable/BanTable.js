@@ -6,6 +6,7 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Paginator from '../../../Paginator';
 import Select from 'react-select';
+import '../UserTable/color.scss';
 // reactstrap components
 import {
   Card,
@@ -86,7 +87,7 @@ onClickPage(pageNumber) {
    let nickname = tmp_NickName;
    let currentPage = pageNumber;
    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber });
-   this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+   this.props.getBansData({ year,month,nickname,currentPage: pageNumber,totalCount:this.props.totalCount });
  }
 
 
@@ -102,15 +103,15 @@ UnBanUser=()=>
 {
   const {temp_id} = this.state;
   let id=temp_id;
-  // const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
-  // let year = tmp_year.value;
-  // let month = tmp_month.value;
-  // let nickname = tmp_NickName;
-  // let currentPage = temp_currentpage;
+  const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+  let year = tmp_year.value;
+  let month = tmp_month.value;
+  let nickname = tmp_NickName;
+  let currentPage = temp_currentpage;
   console.log("BAN228__________________________________",id);
   console.log("Ban====================");
   this.props.unBanUser({id});
-  //this.props.getUsersData({ year,month,nickname,currentPage});
+  this.props.getBansData({ year,month,nickname,currentPage});
 
 }
 
@@ -123,7 +124,8 @@ toggleDanger() {
 
 
   handleChange = (name, selectValue) => {
-    this.setState({ [name]: selectValue }, this.filterSearchData);
+    console.log("totalCount DID MOUNT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",this.props.totalCount);
+    this.setState({ [name]: selectValue,totalCount:this.props.totalCount }, this.filterSearchData);
   }
 
   filterSearchData = () => {
@@ -132,6 +134,7 @@ toggleDanger() {
     let month = tmp_month.value;
    let currentPage = temp_currentpage;
    let nickname = tmp_NickName;
+   this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({ year, month,nickname,currentPage });
     }
 
@@ -141,8 +144,10 @@ toggleDanger() {
     let month = tmp_month.value;
     let currentPage = temp_currentpage;
     let nickname = tmp_NickName;
-     this.props.getBansData({ year, month,nickname,currentPage });
+    //console.log("totalCount DID MOUNT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",this.props.totalCount);
+    this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({ year, month,nickname,currentPage });
+   // this.props.getBansData({ year, month,nickname,currentPage });
   }
 
   Click(e)
@@ -154,12 +159,12 @@ toggleDanger() {
     let nickname = tmp_NickName;
     let currentPage = temp_currentpage;
     console.log("CLICK__________________________________",tmp_NickName);
+    this.setState({totalCount:this.props.totalCount});
     this.props.getBansData({year,month,nickname,currentPage})
   }
 
   PostFilters = (e) => {
-    console.log("EEEEEEEE",e);
-    this.setState({tmp_NickName:e})
+    this.setState({tmp_NickName:e,totalCount:this.props.totalCount})
   }
 
   render() {
@@ -181,12 +186,14 @@ toggleDanger() {
                   </Col>
                   <Col className="col-md-2">
                       <Select
+                        className="fontnikita"      
                         value={tmp_month}
                         onChange={(e) => this.handleChange("tmp_month", e)}
                         options={optionsMonth} />
                     </Col>
                     <Col className="col-md-2">
                       <Select
+                        className="fontnikita"      
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
@@ -261,6 +268,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listBans: get(state, "banTable.list.data"),
+    totalCount: get(state, "banTable.list.totalCount"),
     isListLoading: get(state, "banTable.list.loading"),  
   };
 }
