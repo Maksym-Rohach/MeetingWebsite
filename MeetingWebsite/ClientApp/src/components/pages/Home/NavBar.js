@@ -17,7 +17,7 @@ class Header extends Component {
     console.log("this.props.login",this.props);
 
       const logoutLink = (
-        <NavItem className="d-flex align-items-center">
+        <NavItem className="d-flex align-items-center ">
           <Link to="#/" onClick={e => this.props.onLogout(e)}
             className="social-link rounded-circle text-white mr-5">
             Вихід
@@ -26,7 +26,7 @@ class Header extends Component {
       );
 
       const loginLink = (
-        <NavItem className="d-flex align-items-center">
+        <NavItem className="d-flex align-items-center ">
           <Link to="/login"
             className="social-link rounded-circle text-white mr-5" >
             Вхід
@@ -34,7 +34,7 @@ class Header extends Component {
         </NavItem>
       );
       const registerLink = (
-        <NavItem>
+        <NavItem className="d-flex align-items-center ">
               <Link to="/register" className="social-link rounded-circle text-white mr-5"> Реєстрація</Link>
             </NavItem>
       );
@@ -49,7 +49,7 @@ class Header extends Component {
               <Link to="/#" className="mr-5"><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
             </NavItem>
             <NavItem>
-              <Link to="" className="social-link rounded-circle text-white mr-5">Дівчата</Link>
+              <Link to="/girls" className="social-link rounded-circle text-white mr-5">Дівчата</Link>
             </NavItem>
             <NavItem>
               <Link to="/boys" className="social-link rounded-circle text-white mr-5"> Хлопці</Link>
