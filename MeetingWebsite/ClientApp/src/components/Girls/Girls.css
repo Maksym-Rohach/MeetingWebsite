@@ -1,3 +1,106 @@
+
+.Poisk{
+width:1000px;
+}
+
+.Input{
+width: 800px;
+}
+
+.Line{
+    border: none; /* Убираем границу */
+    background-color:grey; /* Цвет линии */
+    color:grey; /* Цвет линии для IE6-7 */
+    height: 1px; /* Толщина линии */
+    width: 1200px;
+}
+#exampleInputEmail1
+{
+    width:299px;
+    
+}
+#exampleInputEmail2
+{
+    padding: 10px;
+    
+}
+#Pagination{
+    width: 300px;
+    left:30%;
+}
+.GirlsProfile{
+    
+   width: 205px;
+   display: inline-block;
+left:30px;
+   background-color: white;
+    padding: 10px;
+    position: relative;
+    
+    padding-bottom: 45px;
+    margin: 15px 10px;  
+    
+    border: 0.1px solid gray; /* Белая рамка */
+   
+}
+.GirlsProfile:hover{
+    /* width:220px; */
+    /* height: 250px; */
+    color:red;
+    cursor: pointer;
+    transform:scale(1.1);
+    z-index: 1;
+    padding:0px;
+    padding-bottom: 45px;
+}
+.GirlsProfile:hover img{
+    width:205px;
+    height:180px;
+   
+}
+
+girlsimg{
+     
+    
+}
+l1{
+    position: absolute;
+    top: 0;
+    left: 8%;
+
+      
+}
+body {
+background:white;
+}
+Label{
+    
+    position: absolute;
+    left:10%;
+    bottom:2%;
+}
+.Name{
+    font-weight: bold;
+    font: size 20;
+    bottom: 5%;
+}
+.City{
+
+    bottom: -5px;
+}
+/* .grow:hover{ */
+     
+        /* -webkit-transform: scale(0.5); */
+        /* -ms-transform: scale(0.5); */
+        /* transform: scale(0.5); */
+      
+/* } */
+footer{
+    
+    margin-top:70%;
+    margin-left: 40;
+}
+
 .align-items-center {
 
 }

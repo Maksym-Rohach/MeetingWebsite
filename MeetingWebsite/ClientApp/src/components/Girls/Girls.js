@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+//  import Girl1 from "../img/Girl1.jpg";
+ import Girl1 from "../../assets/img/Girl1.jpg"
+ import Girl2 from "../../assets/img/Girl2.jpg"
+ import Girl3 from "../../assets/img/Girl3.jpg"
+ import Girl4 from "../../assets/img/Girl4.jpg"
+ import Girl5 from "../../assets/img/Girl5.jpg"
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody,CardHeader, CardFooter, CardGroup,
-         Col, Container,Label, Form,FormGroup, Input, InputGroup,
-         InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+         Col, Container,Label, Form,FormGroup,PaginationLink,Pagination,PaginationItem,PaginationItemProps, Input, InputGroup,
+         InputGroupAddon, InputGroupText, Row,hr } from 'reactstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import * as loginActions from './reducer';
 import get from "lodash.get";
 import './Girls.css';
+
 
 //import EclipseWidget from '../../eclipse';
 class Girls extends Component {
@@ -60,31 +67,128 @@ class Girls extends Component {
     return (
       <div className="app flex-row align-items-center">
         <Container>
-         <div>
+         <div className="Poisk">
          <Card>
               <CardHeader>
-                <strong>Inline</strong> Form
+                <strong>Пошук</strong> 
               </CardHeader>
               <CardBody>
                 <Form action="" method="post" inline>
                   <FormGroup className="pr-1">
-                    <Label htmlFor="exampleInputName2" className="pr-1">Name</Label>
-                    <Input type="text" id="exampleInputName2" placeholder="Jane Doe" required />
+                   
+                    <Input type="text" id="exampleInputName2" placeholder="Шукаю друзів" required />
                   </FormGroup>
                   <FormGroup className="pr-1">
-                    <Label htmlFor="exampleInputEmail2" className="pr-1">Email</Label>
-                    <Input type="email" id="exampleInputEmail2" placeholder="jane.doe@example.com" required />
+                   
+                    <Input  type="email" id="exampleInputEmail1" placeholder="Київська область, Київ                                            ▾" required />
+                  </FormGroup>
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Вік: 18 — 80" required />
+                  </FormGroup>
+                  
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Cтать: Чоловіча" required />
+                  </FormGroup>
+                  
+                  
+                    
+                  <hr className="Line"></hr>
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Знак зодіаку: Водолій" required />
+                  </FormGroup>
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Дружба та спілкування" required />
+                  </FormGroup>
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Настрій" required />
+                  </FormGroup>
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Ріст" required />
+                  </FormGroup>
+                  <FormGroup className="pr-1">
+                    
+                    <Input type="email" id="exampleInputEmail2" placeholder="Вага" required />
                   </FormGroup>
                 </Form>
               </CardBody>
               <CardFooter>
-                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Submit</Button>
-                <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Reset</Button>
+                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Пошук</Button>
+                
               </CardFooter>
             </Card>
          </div>
+         <Container>
+          <div className="GirlsProfile"> 
+            <img src = {Girl1} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Ірина  23 роки</Label>
+            <Label className="City">Україна, Київ</Label>
+            
+            
+          </div>
+          <div className="GirlsProfile"> 
+            <img src = {Girl2} id="Girl1" className="girlsimg"/> 
+            
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl3} id="Girl1" className="girlsimg"/> 
+            
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl4} id="Girl1" className="girlsimg"/> 
+            
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl5} id="Girl1" className="girlsimg"/> 
+            
+          </div>  
+         </Container>
+         <footer>
+         <div className="Down">
+         <Container>
+
+         <Card id="Pagination">
+          
+          <CardBody>
+            <Pagination size="lg" >
+              <PaginationItem>
+                <PaginationLink previous tag="button" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink tag="button">
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink tag="button">
+                  2
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink tag="button">
+                  3
+                </PaginationLink>
+              </PaginationItem>
+              <PaginationItem className="d-none d-sm-block">
+                <PaginationLink next tag="button" />
+              </PaginationItem>
+            </Pagination>
+           
+              </CardBody>
+              </Card>
+              
+         </Container>
+        
+         </div>
+         </footer>
         </Container>
       </div>
+      
     );
   }
 }

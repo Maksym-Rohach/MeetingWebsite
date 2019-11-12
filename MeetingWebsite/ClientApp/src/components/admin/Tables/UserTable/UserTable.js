@@ -5,7 +5,9 @@ import { push } from 'react-router-redux';
 import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
-import Modal from '../../../Notifications/Modals/Modals';
+import Paginator from '../../../Paginator';
+//import Modal from '../../../Notifications/Modals/Modals';
+
 // reactstrap components
 import {
   Card,
@@ -20,7 +22,8 @@ import {
   Input,
   Pagination, 
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  Modal, ModalBody, ModalFooter, ModalHeader
 } from "reactstrap";
 
 const optionsMonth = [
@@ -46,50 +49,126 @@ const optionsYear = [
 ];
 
 
+class UserTable extends React.Component {
 
-class Tables extends React.Component {
-
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     isLoading: true,
     tmp_NickName: '',
-    tmp_month: { value: '1', label: 'Січень' },
-    tmp_year: { value: '2019', label: '2019р' },   
+    tmp_month: { value: '10', label: 'Жовтень' },
+    tmp_year: { value: '2019', label: '2019р' }, 
+    modal: false,
+    danger: false,
+    temp_id:'',
+    temp_description:'',
+    temp_currentpage: 1,
+    totalCount:0
+    };
+    this.toggle = this.toggle.bind(this);
+    this.onClickPage = this.onClickPage.bind(this);
+    this.toggleDanger = this.toggleDanger.bind(this);  
+  }
+//Modal
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 
+  SetBan=(e,id)=>
+  {
+    e.preventDefault();
+    console.log("SETBAN__________________________________",id);
+     this.setState({temp_id:id});
+     this.toggleDanger();
+  }
+
+  onClickPage(pageNumber) {
+   // const { typeOfSort, sortByAscending } = this.props;
+    console.log("NUM PAGE ON USER TABLE__________________________________",pageNumber);
+    const { tmp_year,tmp_month,tmp_NickName} = this.state;
+    let year = tmp_year.value;
+    let month = tmp_month.value;
+    let nickname = tmp_NickName;
+    let currentPage = pageNumber;
+    this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber,totalCount:this.props.totalCount });
+    this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+  }
+
+  Ban=()=>
+  {
+    const { temp_id,temp_description} = this.state;
+    let id=temp_id;
+    let description=temp_description;
+    // const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
+    // let year = tmp_year.value;
+    // let month = tmp_month.value;
+    // let nickname = tmp_NickName;
+    // let currentPage = temp_currentpage;
+    console.log("BAN228__________________________________",id,description);
+    console.log("Ban====================");
+    this.props.BanUser({id,description});
+    //this.props.getUsersData({ year,month,nickname,currentPage});
+
+  }
+
+  PostBanFilters = (e) => {
+    //e.preventDefault();
+    console.log("BAN222__________________________________",e);
+    this.setState({temp_description:e})
+  }
+
+  toggleDanger() {
+    this.setState({
+      danger: !this.state.danger,
+    });
+  }
+
+//Table
   handleChange = (name, selectValue) => {
+    this.setState({temp_currentpage:1})
     this.setState({ [name]: selectValue },this.filterSearchData);
   }
 
 
   filterSearchData = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    this.setState({totalCount:this.props.totalCount});
+    this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
   componentDidMount = () => {
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
-    this.props.getUsersData({ year,month,nickname});
+    let currentPage = temp_currentpage;
+    console.log("COMPONENTDIDMOUNT");
+    this.setState({totalCount:this.props.totalCount});
+    this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
-  Click(e)//проблема тут!!!
+  Click(e)
   {
     e.preventDefault();
-    const { tmp_year,tmp_month,tmp_NickName } = this.state;
+    const { tmp_year,tmp_month,tmp_NickName,temp_currentpage } = this.state;
     let year = tmp_year.value;
     let month = tmp_month.value;
     let nickname = tmp_NickName;
+    let currentPage = temp_currentpage;
+    this.setState({totalCount:this.props.totalCount});
     console.log("CLICK__________________________________",tmp_NickName);
-    this.props.getUsersData({year,month,nickname})
+    this.props.getUsersData({year,month,nickname,currentPage})
   }
+
   PostFilters = (e) => {
     console.log("EEEEEEEE",e);
-    this.setState({tmp_NickName:e})
+    this.setState({tmp_NickName:e,totalCount:this.props.totalCount})
   }
 
   render() {
@@ -151,33 +230,34 @@ class Tables extends React.Component {
                             <td>{item.nickname}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
-                            <td><Modal color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Modal></td>
-                          </tr>
+                            <td>
+                            <div className="animated fadeIn">
+                            <Button 
+                            onClick={(e) => this.SetBan(e,item.id)}
+                           color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+                           <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                              className={'modal-danger ' + this.props.className}>
+                              <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
+                              <ModalBody>
+                              <Input onChange={(e) => this.PostBanFilters(`${e.target.value}`)} placeholder="Причина"></Input>
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
+                                <Button color="secondary">Ні</Button>
+                              </ModalFooter>
+                            </Modal>
+                    </div>   
+                        </td>
+                        </tr>
                           )
                         })
                       }
                     </tbody>
-                  </Table>
-                  <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next tag="button"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+                  </Table>    
+
+                    <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
+                   </Paginator>       
+  
                 </CardBody>
               </Card>
             </Col>
@@ -192,6 +272,7 @@ const mapStateToProps = state => {
   console.log("State=======", state);
   return {
     listUsers: get(state, "userTable.list.data"),
+    totalCount: get(state, "userTable.list.totalCount"),
     isListLoading: get(state, "userTable.list.loading"),  
   };
 }
@@ -200,9 +281,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUsersData: filter => {
       dispatch(getListActions.getUsersData(filter));
+    },
+    BanUser: filter => {
+      dispatch(getListActions.BanUser(filter));
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+export default connect(mapStateToProps, mapDispatchToProps)(UserTable);
 
