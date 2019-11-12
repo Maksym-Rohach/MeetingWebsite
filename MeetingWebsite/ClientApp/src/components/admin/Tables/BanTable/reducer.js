@@ -10,11 +10,14 @@ export const BAN_POST_FAILED = "BAN_POST_FAILED";
 const initialState = {
     list: {
         data: [],
+        totalCount:0,
         loading: false,
         success: false,
         failed: false,
     },   
 }
+
+
 
 export const getBansData = (model) => {
     return (dispatch) => {
@@ -35,13 +38,13 @@ export const unBanUser = (model) => {
     return (dispatch) => {
         dispatch(getListActions.started());
         BanTableService.unbanUser(model)//треба вернути назад список юзеров
-            .then((response) => {
-                console.log("+++++++++++Response", response);
-                dispatch(getListActions.success(response.data));               
-            }, err=> { throw err; })
-            .catch(err=> {
-              dispatch(getListActions.failed(err.response));
-            });
+            // .then((response) => {
+            //     console.log("+++++++++++Response", response);
+            //     dispatch(getListActions.success(response.data));               
+            // }, err=> { throw err; })
+            // .catch(err=> {
+            //   dispatch(getListActions.failed(err.response));
+            // });
     }
 }
 
@@ -83,6 +86,7 @@ export const banTableReducer = (state = initialState, action) => {
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
           newState = update.set(newState, 'list.data', action.payload.bans);
+          newState = update.set(newState, 'list.totalCount', action.payload.totalCount);
           console.log("BAN_POST_SUCCESS)", action.payload);
 
           break;

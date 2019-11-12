@@ -39,6 +39,13 @@ class Paginator extends React.Component {
     let dots=false;
     for(let i=first;i<pagesCount+1;i++)
     {
+      if(i>first+3)
+      {
+        //pages.push(pagesCount-2);
+        pages.push(pagesCount-1);
+        pages.push(pagesCount);
+        break;
+      }
       if(i==first+3)
       {
         pages.push(-1);
@@ -50,9 +57,8 @@ class Paginator extends React.Component {
     return (
             <Pagination>
                   <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
+                    <PaginationLink tag="button"onClick={()=>this.onPageChanged(1)}>До початку</PaginationLink>
                   </PaginationItem>
-
                   {pages.map(p => {
               return p === -1 ? (
                 <PaginationItem disabled key={p}>
