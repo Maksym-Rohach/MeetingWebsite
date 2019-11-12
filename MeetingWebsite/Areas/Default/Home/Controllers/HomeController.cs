@@ -49,7 +49,7 @@ namespace MeetingWebsite.Areas.Default.Home.Controllers
                     Zodiac = u.Zodiac.Name,
                     Age = (D - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000
                 })
-.OrderBy(u => Guid.NewGuid()).Take(12)
+.OrderBy(u => Guid.NewGuid()).Take(8)
                 .ToList();
             result.GetHomeUserModel = users;
 
