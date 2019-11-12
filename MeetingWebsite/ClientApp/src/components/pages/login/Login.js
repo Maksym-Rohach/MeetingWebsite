@@ -64,7 +64,7 @@ class Login extends Component {
     if (!regex_email.test(email)) errors.email = "Не правильний формат електронної пошти!";
     if (email === "") errors.email = "Поле не може бути пустим!";
 
-    if (!regex_password.test(password)) errors.password = "Пароль повинен мати мінімум 6 символів на латиниці, нижній і верхній регістр, та цифри!";
+    if (!regex_password.test(password)) errors.password = "Пароль повинен мати мінімум 8 символів на латиниці, нижній і верхній регістр, спеціальний символ та цифри!";
     if (password === "") errors.password = "Поле не може бути пустим!";
 
     const isValid = Object.keys(errors).length === 0
@@ -89,7 +89,7 @@ class Login extends Component {
           <Row className="justify-content-center pt-5 mt-5">
             <Col md="8">
               <CardGroup>
-                <Card className="p-4">
+                <Card className="p-3">
                   <CardBody>
                   <Form onSubmit={this.onSubmitForm}>
                       {!!errorsServer.invalid ?
@@ -149,13 +149,12 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white py-5 d-md-down-none my-gradient" style={{ width: '44%' }}>
+                <Card className="text-white py-3 d-md-down-none my-gradient" style={{ width: '44%' }}>
                   <CardBody className="text-center">
-                    <div>
-                      <h3>Знайдіть свою ідеальну пару</h3>
-                      {/* <p>Знайдіть свою ідеальну пару.</p> */}
+                    <div className="justify-content-center pt-5 mt-3">
+                        <h3> Почни спілкування з цікавими людьми</h3>
                       <Link to="/register">
-                        <Button color="success" className="mt-3" active tabIndex={-1}>Зареєструватись</Button>
+                        <Button color="success" className="  mt-5" active tabIndex={-1}>Зареєструватись</Button>
                       </Link>
                     </div>
                   </CardBody>

@@ -203,6 +203,17 @@ namespace MeetingWebsite.Areas.Account.Controllers
 
             await _signInManager.SignInAsync(user, isPersistent: false);
 
+            string name = $"{userProfile.NickName} ";
+
+
+            await _emailSender.SendEmailAsync(user.Email, "Ласкаво просимо, ",
+          $"Шановний(на)  <strong>{name}</strong>" +
+          $"<br/>" +
+          $"Ви успішно пройшли реєстрацію" +
+          $"<br/>" +
+          $"<br/>" +
+          $"Для входу нажміть на посилання:    <a href='https://idealcrud.azurewebsites.net/#/login'>Перейти</a>");
+
             return Ok(
                new
                {
