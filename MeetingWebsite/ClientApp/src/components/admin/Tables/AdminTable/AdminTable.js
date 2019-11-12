@@ -8,6 +8,7 @@ import Select from 'react-select';
 // reactstrap components
 import {
   Card,
+  Badge,
   CardHeader,
   CardBody,
   CardTitle,
@@ -55,6 +56,7 @@ class Tables extends React.Component {
                       <tr>
                       <th>#</th>
                       <th>Нікнейм</th>
+                      {/* <th>Статус</th> */}
                       {/* <th>ID</th> */}
                       </tr>
                     </thead>
@@ -64,6 +66,7 @@ class Tables extends React.Component {
                           return (<tr key={item.id}>
                             <td>{counter++}</td>
                             <td>{item.nickname}</td>
+                            {/* <td><Badge color="info">Активний</Badge></td> */}
                             {/* <td>{item.id}</td> */}
                           </tr>
                           )
