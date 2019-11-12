@@ -105,16 +105,16 @@ namespace MeetingWebsite
             app.UseSpaStaticFiles();
             app.UseSession();
 
-          // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+            // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
-            #region InitStaticFiles AdminImages
-            string pathUser = InitStaticFiles
+            #region InitStaticFiles ClientImages
+            string pathClient = InitStaticFiles
                 .CreateFolderServer(env, this.Configuration,
                     new string[] { "ImagesPath", "ImagesPathUsers" });
 
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(pathUser),
+                FileProvider = new PhysicalFileProvider(pathClient),
                 RequestPath = new PathString("/" + Configuration.GetValue<string>("UserUrlImages"))
             });
             #endregion;

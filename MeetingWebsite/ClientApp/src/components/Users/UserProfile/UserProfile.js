@@ -1,10 +1,12 @@
 import React from "react";
 import * as getUserActions from './reducer';
-import Cropper from "react-cropper"
 //import { ImagePicker } from 'react-file-picker'
 import 'cropperjs/dist/cropper.css';
 import { connect } from 'react-redux';
 import get from "lodash.get";
+import Cropper from "react-cropper";
+import CropperPage from "../../Cropper/CropperPage";
+ 
 
 // reactstrap components
 import {
@@ -27,6 +29,7 @@ import {
 import { Z_BLOCK } from "zlib";
 
 const cropper = React.createRef(null);
+const Avatar = "assets/img/emilyz.jpg";
 
 var Zodiacs = {};
 
@@ -66,7 +69,9 @@ class UserProfile extends React.Component {
                 city: "",
                 gender: "",
                 zodiac: "",
-                email: ""
+                email: "",
+                avatar: Avatar,
+                showCropper: false
             };
         this.Click = this.Click.bind(this);
     }
@@ -90,7 +95,8 @@ class UserProfile extends React.Component {
         let Description = description;
         let City = city;
         let Email = email;
-        this.props.setUserData({ NickName, Description, City, Email });
+        let Avatar = avatar;
+        this.props.setUserData({ NickName, Description, City, Email, Avatar });
     }
 
     _crop() {
@@ -98,7 +104,12 @@ class UserProfile extends React.Component {
         // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
     }
     
-
+    getCroppedImage = img => {
+        this.setState({
+          avatar: img,
+          showCropper: false
+        });
+    }
 
     render() {
         if (!this.props.listUsers) {
@@ -134,13 +145,16 @@ class UserProfile extends React.Component {
                                     <Row>
                                         <Col className="pr-md-1" md="4">
                                             <FormGroup>
-                                                <a style={{ paddingLeft: '15%'  }} href="#pablo" onClick={e => e.preventDefault()}>
+                                                <a style={{ paddingLeft: '15%'  }} onClick={() => { this.setState({showCropper: true})}}>
                                                     <img  style={{height: 200, width: 200}}
                                                         alt="..."
                                                         className="avatar"
-                                                        src={require("assets/img/emilyz.jpg")}
+                                                        src={this.state.avatar}
+                                                        //src={require("assets/img/emilyz.jpg")}
                                                     />
+                                                <CropperPage ref="cropperPage" getCroppedImage={this.getCroppedImage} />
                                                 </a>
+                                                
                                             </FormGroup>
                                         </Col>
                                         <Col md="8">
