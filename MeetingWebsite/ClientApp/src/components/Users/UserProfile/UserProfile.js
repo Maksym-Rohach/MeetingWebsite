@@ -94,7 +94,7 @@ class UserProfile extends React.Component {
 
     Click(e) {
         e.preventDefault();
-        const { nickName, description, age, city, gender, zodiac, email } = this.state;
+        const { nickName, description, age, city, gender, zodiac, email, avatar } = this.state;
         let NickName = nickName;
         let Description = description;
         let City = city;
