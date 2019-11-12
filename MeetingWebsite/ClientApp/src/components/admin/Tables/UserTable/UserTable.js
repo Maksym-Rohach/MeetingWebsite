@@ -6,6 +6,7 @@ import * as getListActions from './reducer';
 import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
 import Paginator from '../../../Paginator';
+import UserModal from '../../../UserProfileModal'
 import './color.scss';
 
 //import Modal from '../../../Notifications/Modals/Modals';
@@ -61,13 +62,15 @@ class UserTable extends React.Component {
     tmp_month: { value: '11', label: 'Листопад' },
     tmp_year: { value: '2019', label: '2019р' }, 
     modal: false,
-    danger: false,
+    danger2: false,
     temp_id:'',
+    danger:false,
     temp_description:'',
     temp_currentpage: 1,
     totalCount:0
     };
     this.toggle = this.toggle.bind(this);
+    this.ForModal = this.ForModal.bind(this);
     this.onClickPage = this.onClickPage.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);  
   }
@@ -82,8 +85,11 @@ class UserTable extends React.Component {
   {
     e.preventDefault();
     console.log("SETBAN__________________________________",id);
-     this.setState({temp_id:id});
-     this.toggleDanger();
+    // this.setState({temp_id:id});
+
+     this.setState({danger2:!this.state.danger2});
+
+    // this.toggleDanger();
   }
 
   onClickPage(pageNumber) {
@@ -155,6 +161,12 @@ class UserTable extends React.Component {
     this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
+  ForModal()
+  {
+    console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",this)
+      this.setState({danger2:!this.state.danger2});
+  }
+
   Click(e)
   {
     e.preventDefault();
@@ -174,7 +186,7 @@ class UserTable extends React.Component {
   }
 
   render() {
-    const { tmp_year, tmp_month, tmp_NickName } = this.state;
+    const { tmp_year, tmp_month, tmp_NickName,danger2 } = this.state;
     const { listUsers, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
@@ -231,8 +243,9 @@ class UserTable extends React.Component {
                     {
                         listUsers.map(item => {
                           return (<tr key={item.id}>
+                            
                             {/* <th scope="row">{counter++}</th> */}
-                            <td>{item.nickname}</td>
+                            <td onClick={this.ForModal}>{item.nickname}</td>
                             <td>{item.mail}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
@@ -241,6 +254,9 @@ class UserTable extends React.Component {
                             <Button 
                             onClick={(e) => this.SetBan(e,item.id)}
                            color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
+
+                          <UserModal id={item.id} danger={danger2}></UserModal>
+
                            <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
                               className={'modal-danger ' + this.props.className}>
                               <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
@@ -251,8 +267,9 @@ class UserTable extends React.Component {
                                 <Button color="danger" onClick={this.Ban}>Так</Button>{' '}
                                 <Button color="secondary">Ні</Button>
                               </ModalFooter>
-                            </Modal>
+                            </Modal>  
                     </div>   
+                   
                         </td>
                         </tr>
                           )
@@ -260,7 +277,7 @@ class UserTable extends React.Component {
                       }
                     </tbody>
                   </Table>    
-
+      
                     <Paginator callBackParams={this.onClickPage} totalCount={this.props.totalCount} currentPage={this.state.temp_currentpage} >
                    </Paginator>       
   

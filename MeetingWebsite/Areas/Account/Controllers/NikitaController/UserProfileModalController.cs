@@ -22,12 +22,18 @@ namespace MeetingWebsite.Areas.Account.Controllers.NikitaController
         [HttpPost("get-user")]
         public ActionResult GetUserTable([FromBody] UserModalFilters filter)//проблема з виводом
         {
-            var user = _context.UserProfile.Select(a => a).Where(a => a.Id == filter.Id).FirstOrDefault();
+            var for_age = (DateTime.Now.Year * 100 + DateTime.Now.Month) * 100 + DateTime.Now.Day;
+
+            var user = _context.UserProfile
+                .Select(a => a)
+                .Where(a => a.Id == filter.Id)
+                .FirstOrDefault();
+
+           var Age = (for_age - (user.DateOfBirth.Year * 100 + user.DateOfBirth.Month) * 100 + user.DateOfBirth.Day) / 10000;
 
             UserModalModel userModalModel = new UserModalModel();
-
             userModalModel.Avatar = user.Avatar;
-            userModalModel.Birthday = user.DateOfBirth.ToLongDateString();
+            userModalModel.Birthday = Age.ToString();//user.DateOfBirth.ToLongDateString();
             userModalModel.City = _context.City.Select(a=>a).Where(a=>user.CityId==a.Id).FirstOrDefault().Name;
             userModalModel.Gender = _context.Gender.Select(a => a).Where(a => user.GenderId==a.Id).FirstOrDefault().Type;
             userModalModel.NickName = user.NickName;

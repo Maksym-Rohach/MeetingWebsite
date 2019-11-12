@@ -58,7 +58,7 @@ namespace MeetingWebsite.DAL.Entities
             up.NickName = nicknames[rnd.Next(0, 18)]+num;//18
             up.ZodiacId = zodiacid;
             up.User = user;
-
+            up.Status = "Тестовий статус маленька дівчинка/хлопчик шкукає кохання";
             var result = userManager.CreateAsync(up.User, "Qwerty1-").Result;
             context.UserProfile.Add(up);
             context.SaveChanges();
@@ -67,7 +67,7 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            for (int i = 0; i < 874; i++)
+            for (int i = 0; i < 12; i++)
             {
                 GetRandomUserProfile(i, userManager, context);
             }
