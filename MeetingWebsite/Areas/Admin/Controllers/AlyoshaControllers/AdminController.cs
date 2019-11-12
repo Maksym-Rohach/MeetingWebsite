@@ -22,7 +22,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
             _context = context;
         }
 
-        [HttpPost("admins")]
+        [HttpGet("admins")]
         //public ActionResult<AdminTableModels> GetUserTable()
         public ActionResult GetAminTable()
 
@@ -42,7 +42,8 @@ namespace MeetingWebsite.Areas.Admin.Controllers.AlyoshaControllers
                 //string city = _context.City.FirstOrDefault(a => a.Id == item.CityId).Name;
                 //urm.City = city;
                 atm.Status = "Активный";
-                //atms.Admins.Add(atm);
+                atms.Admins.Add(atm);
+                
             }
             return Ok(atms.Admins);
         }

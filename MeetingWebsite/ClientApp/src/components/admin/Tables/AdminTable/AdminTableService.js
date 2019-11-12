@@ -3,6 +3,6 @@ import {serverUrl} from '../../../../config';
 
 export default class AdminTableService {
     static adminTable(model) {
-        return axios.post(`${serverUrl}api/admin/admins`, model)
+        return axios.get(`${serverUrl}api/admin/admins`, model)
     };
 }
