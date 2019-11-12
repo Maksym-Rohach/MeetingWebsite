@@ -19,14 +19,14 @@ const initialState = {
 export const setUserData = (mod) => {
     return (dispatch) => {
         dispatch(getUserActions.started());
-        UserProfileService.setProfile(mod)
-            .then((response) => {
-                console.log("+++++++++++Response", response);
-                dispatch(getUserActions.success(response.data));
-            }, err => { throw err; })
-            .catch(err => {
-                dispatch(getUserActions.failed(err.response));
-            });
+        UserProfileService.setProfile(mod);
+            //.then((response) => {
+            //    console.log("+++++++++++Response", response);
+            //    dispatch(getUserActions.success(response.data));
+            //}, err => { throw err; })
+            //.catch(err => {
+            //    dispatch(getUserActions.failed(err.response));
+            //});
     }
 }
 

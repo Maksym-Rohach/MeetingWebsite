@@ -27,6 +27,7 @@ namespace MeetingWebsite.Controllers.ArtemControl
             //var i = User.Claims.ToList()[0].Value.ToString();
             var i = "fe623d77-2603-4787-99f6-e13337cc4083";
             var tmp = _context.UserProfile.SingleOrDefault(a => a.Id == i);
+            
             var birthDate = tmp.DateOfBirth;
             int age = DateTime.Now.Year - birthDate.Year;
             List<GetCityModel> GetCities = new List<GetCityModel>();
