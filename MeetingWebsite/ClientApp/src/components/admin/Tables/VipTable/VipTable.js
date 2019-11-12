@@ -91,7 +91,7 @@ class VipTable extends React.Component {
      let nickname = tmp_NickName;
      let currentPage = pageNumber;
      this.setState({ currentPage: pageNumber,temp_currentpage:pageNumber,totalCount:this.props.totalCount });
-     this.props.getUsersData({ year,month,nickname,currentPage: pageNumber});
+     this.props.getVipsData({ year,month,nickname,currentPage: pageNumber});
    }
 
 
@@ -231,8 +231,8 @@ class VipTable extends React.Component {
 const mapStateToProps = state => {
   console.log("State=======", state);
   return {
-    listVips: get(state, "vipTable.list.data.vips"),
-    totalCount: get(state, "vipTable.list.data.totalCount"),
+    listVips: get(state, "vipTable.list.data"),
+    totalCount: get(state, "vipTable.list.totalCount"),
     isListLoading: get(state, "vipTable.list.loading"),  
   };
 }

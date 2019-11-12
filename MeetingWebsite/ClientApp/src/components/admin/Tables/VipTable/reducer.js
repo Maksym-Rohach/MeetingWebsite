@@ -68,7 +68,7 @@ export const vipTableReducer = (state = initialState, action) => {
           newState = update.set(state, 'list.loading', false);
           newState = update.set(newState, 'list.failed', false);
           newState = update.set(newState, 'list.success', true);
-          newState = update.set(newState, 'list.data', action.payload);
+          newState = update.set(newState, 'list.data', action.payload.vips);
           newState = update.set(newState, 'list.totalCount', action.payload.totalCount);
           console.log("MAPING_POST_SUCCESS)", action.payload);
 

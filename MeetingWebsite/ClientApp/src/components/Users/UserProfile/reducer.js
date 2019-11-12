@@ -98,10 +98,3 @@ export const userProfileReducer = (state = initialState, action) => {
     }
     return newState;
 }
-
-
-
-
-
-
-
