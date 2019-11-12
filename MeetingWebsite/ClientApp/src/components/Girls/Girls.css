@@ -1,4 +1,8 @@
-
+.align-items-center
+{
+    background: linear-gradient(45deg, #292929 25%, transparent 25%, transparent 75%, #292929 75%), linear-gradient(45deg, #292929 25%, transparent 25%, transparent 75%, #292929 75%) 0.1875em 0.1875em, radial-gradient(at 50% 0, #484847, #090909);
+background-size: 0.375em 0.375em, 0.375em 0.375em, 100% 100%;
+}
 .Poisk{
 width:1000px;
 }
@@ -6,6 +10,8 @@ width:1000px;
 .Input{
 width: 800px;
 }
+
+  
 
 .Line{
     border: none; /* Убираем границу */
@@ -71,7 +77,7 @@ l1{
       
 }
 body {
-background:white;
+background: #525f7f;
 }
 Label{
     
@@ -101,8 +107,8 @@ footer{
     margin-left: 40;
 }
 
-.align-items-center {
-
+.Down {
+top:50px;
 }
 
 body {

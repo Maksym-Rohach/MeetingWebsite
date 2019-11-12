@@ -5,6 +5,13 @@ import React, { Component } from 'react';
  import Girl3 from "../../assets/img/Girl3.jpg"
  import Girl4 from "../../assets/img/Girl4.jpg"
  import Girl5 from "../../assets/img/Girl5.jpg"
+ import Girl6 from "../../assets/img/Girl6.jpg"
+ import Girl7 from "../../assets/img/Girl7.jpg"
+ import Girl8 from "../../assets/img/Girl8.jpg"
+ import Girl9 from "../../assets/img/Girl9.jpg"
+ import Girl10 from "../../assets/img/Girl10.jpg"
+ import Girl11 from "../../assets/img/Girl11.jpg"
+ import Girl12 from "../../assets/img/Girl12.jpg"
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody,CardHeader, CardFooter, CardGroup,
          Col, Container,Label, Form,FormGroup,PaginationLink,Pagination,PaginationItem,PaginationItemProps, Input, InputGroup,
@@ -74,53 +81,33 @@ class Girls extends Component {
               </CardHeader>
               <CardBody>
                 <Form action="" method="post" inline>
-                  <FormGroup className="pr-1">
-                   
-                    <Input type="text" id="exampleInputName2" placeholder="Шукаю друзів" required />
-                  </FormGroup>
+                  
                   <FormGroup className="pr-1">
                    
                     <Input  type="email" id="exampleInputEmail1" placeholder="Київська область, Київ                                            ▾" required />
                   </FormGroup>
                   <FormGroup className="pr-1">
                     
-                    <Input type="email" id="exampleInputEmail2" placeholder="Вік: 18 — 80" required />
+                    <Input type="email" id="exampleInputEmail2" placeholder="Вік(мін)" required />
                   </FormGroup>
                   
                   <FormGroup className="pr-1">
                     
-                    <Input type="email" id="exampleInputEmail2" placeholder="Cтать: Чоловіча" required />
+                    <Input type="email" id="exampleInputEmail2" placeholder="Вік(макс)" required />
                   </FormGroup>
                   
                   
+                  
                     
-                  <hr className="Line"></hr>
+                  
                   <FormGroup className="pr-1">
                     
                     <Input type="email" id="exampleInputEmail2" placeholder="Знак зодіаку: Водолій" required />
                   </FormGroup>
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Дружба та спілкування" required />
-                  </FormGroup>
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Настрій" required />
-                  </FormGroup>
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Ріст" required />
-                  </FormGroup>
-                  <FormGroup className="pr-1">
-                    
-                    <Input type="email" id="exampleInputEmail2" placeholder="Вага" required />
-                  </FormGroup>
+                  
                 </Form>
               </CardBody>
-              <CardFooter>
-                <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Пошук</Button>
-                
-              </CardFooter>
+              
             </Card>
          </div>
          <Container>
@@ -133,19 +120,58 @@ class Girls extends Component {
           </div>
           <div className="GirlsProfile"> 
             <img src = {Girl2} id="Girl1" className="girlsimg"/> 
-            
+            <Label className="Name" >Ольга  22 роки</Label>
+            <Label className="City">Україна, Житомир</Label>
           </div>  
           <div className="GirlsProfile"> 
             <img src = {Girl3} id="Girl1" className="girlsimg"/> 
-            
+            <Label className="Name" >Дарья  24 роки</Label>
+            <Label className="City">Україна, Тернопіль</Label>
           </div>  
           <div className="GirlsProfile"> 
             <img src = {Girl4} id="Girl1" className="girlsimg"/> 
-            
+            <Label className="Name" >Ірина  19 років</Label>
+            <Label className="City">Україна, Біла Цервка</Label>
           </div>  
           <div className="GirlsProfile"> 
             <img src = {Girl5} id="Girl1" className="girlsimg"/> 
-            
+            <Label className="Name" >Євгенія  19 років</Label>
+            <Label className="City">Україна, Харків</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl6} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Марго  29 років</Label>
+            <Label className="City">Україна, Одеса</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl7} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Олександра  29 років</Label>
+            <Label className="City">Україна, Київ</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl8} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Марія  37 років</Label>
+            <Label className="City">Україна, Київ</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl9} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Мілана  25 років</Label>
+            <Label className="City">Україна, Київ</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl10} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Ірина  23 роки</Label>
+            <Label className="City">Україна, Київ</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl11} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Софія  26 років</Label>
+            <Label className="City">Україна, Київ</Label>
+          </div>  
+          <div className="GirlsProfile"> 
+            <img src = {Girl12} id="Girl1" className="girlsimg"/> 
+            <Label className="Name" >Каріна  23 роки</Label>
+            <Label className="City">Україна, Київ</Label>
           </div>  
          </Container>
          <footer>
