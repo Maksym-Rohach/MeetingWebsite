@@ -39,7 +39,7 @@ namespace MeetingWebsite.DAL.Entities
         {
             Random rnd = new Random();
             UserProfile up = new UserProfile();
-            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс" };
+            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс","Микита" };
             string email = "helloworld"+context.UserProfile.Count()+"@gmail.com";
             DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
             int genderid = num % 2 == 0 ? 1 : 2;
@@ -53,7 +53,7 @@ namespace MeetingWebsite.DAL.Entities
             up.Avatar = avatar;
             up.CityId = cityid;
             up.DateOfBirth = DateOfBirth;
-            up.DateOfRegister = DateOfBirth;
+            up.DateOfRegister = DateTime.Now;
             up.GenderId = genderid;
             up.NickName = nicknames[rnd.Next(0, 18)]+num;//18
             up.ZodiacId = zodiacid;
@@ -67,35 +67,33 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 874; i++)
             {
                 GetRandomUserProfile(i, userManager, context);
             }
 
-            if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
+            if (userManager.FindByEmailAsync("supernikd@gmail.com").Result == null)
             {
-                string email = "yana@gmail.com";
-                string roleName = "User";
+                string email = "supernikd@gmail.com";
+                string roleName = "Admin";
 
-                var userProfile = new UserProfile
+                var adminProfile = new AdminProfile
                 {
-                    NickName = "Яна",
-                    DateOfBirth = DateTime.Now,
-                    GenderId = 2,
-                    CityId = 20,
-                    ZodiacId = 5,
-                    Avatar = "",
+                    Name = "Nikd",
+                    // DateOfBirth = DateTime.Now,
+
                     User = new DbUser
                     {
                         Email = email,
                         UserName = email,
-                        PhoneNumber = "+22(222)222-22-22"
+                        PhoneNumber = "+38(097)233-08-77"
                     }
                 };
-                var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
-                context.UserProfile.Add(userProfile);
+
+                var result = userManager.CreateAsync(adminProfile.User, "Kaida007-").Result;
+                context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
-                result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
             };
 
             if (userManager.FindByEmailAsync("masha@gmail.com").Result == null)

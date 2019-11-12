@@ -8,6 +8,8 @@ import EclipseWidget from '../../../eclipse';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import get from "lodash.get";
+import '../../Tables/UserTable/color.scss';
+
 // reactstrap components
 import {
   Card,
@@ -180,6 +182,7 @@ class RegistrySchedule extends React.Component {
                     </Col>
                     <Col className="col-md-2">
                       <Select
+                        className="fontnikita"      
                         value={tmp_year}
                         onChange={(e) => this.handleChange("tmp_year", e)}
                         options={optionsYear} />
