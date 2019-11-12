@@ -60,6 +60,7 @@ class UserProfile extends React.Component {
         this.state =
             {
                 isLoading: true,
+                isLoadedPrevious: false,
                 nickName: "",
                 description: "",
                 age: 0,
@@ -71,11 +72,17 @@ class UserProfile extends React.Component {
         this.Click = this.Click.bind(this);
     }
 
+    componentDidUpdate = () => {
+        if (this.props.listUsers.email != null && this.props.listUsers.email != "" && !this.state.isLoadedPrevious) {
+            console.log("HOHEL");
+            this.setState({ isLoadedPrevious: true, nickName: this.props.listUsers.nickName, description: this.props.listUsers.description, age: this.props.listUsers.age, city: this.props.listUsers.city, gender: this.props.listUsers.gender, zodiac: this.props.listUsers.zodiac, email: this.props.listUsers.email });
+        }
+    }
+
     componentDidMount = () => {
         this.props.getUserData();
-       console.log("---propsggggggggggggggg--------------------------------", this.props.listUsers);
+        console.log("---propsggggggggggggggg--------------------------------", this.props);
         console.log("---stateggggggggggggggg--------------------------------", this.state);
-
     }
 
     PostChanges = (name, source) => {
@@ -104,7 +111,13 @@ class UserProfile extends React.Component {
         if (!this.props.listUsers) {
             return (<div>хрень {this.props.listUsers}</div>)
         }
-        const { nickName, description, age, city, gender, zodiac, email } = this.props.listUsers;
+
+        
+
+        const { nickName, description, age, city, gender, zodiac, email } = this.state;
+
+
+        console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",this.props.listUsers);
         console.log("---state--------------------------------", this.state);
         console.log("---props--------------------------------", this.props);
         
@@ -148,7 +161,7 @@ class UserProfile extends React.Component {
                                                 <label>Про мене</label>
                                                 <Input name="descr" style={{ maxHeight: 160, height: 160 }}
                                                     cols="80"
-                                                    defaultValue={description}
+                                                    value={description}
                                                     onChange={(e) => this.PostChanges('description', e.target.value)}
                                                     placeholder="Тут може бути ваший опис."
                                                     rows="8"

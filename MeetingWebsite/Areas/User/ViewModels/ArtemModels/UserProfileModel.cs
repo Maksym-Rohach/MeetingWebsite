@@ -14,6 +14,14 @@ namespace MeetingWebsite.Areas.User.ViewModels
         public string Gender { get; set; }
         public string Zodiac { get; set; }
         public string Email { get; set; }
-        
+        public List<GetCityModel> Cities { get; set; }
+
     }
+
+    public class GetCityModel
+    {
+        public string Value { get; set; }
+        public string Label { get; set; }
+    }
+
 }
