@@ -14,7 +14,7 @@ namespace MeetingWebsite.Areas.Admin.Controllers.NikitaControllers
     public class AdminController : ControllerBase
     {
         private readonly EFDbContext _context;
-
+ 
         public AdminController(EFDbContext context)
         {
             _context = context;

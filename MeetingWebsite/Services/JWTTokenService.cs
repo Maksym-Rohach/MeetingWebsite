@@ -83,7 +83,7 @@ namespace MeetingWebsite.Services
             var jwt = new JwtSecurityToken(
                 signingCredentials: signingCredentials,
                 claims: claims,
-                expires: DateTime.Now.AddHours(1));
+                expires: DateTime.Now.AddDays(1));
 
             return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
