@@ -96,7 +96,7 @@ class UserProfile extends React.Component {
     }
 
     
-
+  
     componentDidMount = () => {
         console.log("componentDidMount==========================");
         this.props.getUserData();
