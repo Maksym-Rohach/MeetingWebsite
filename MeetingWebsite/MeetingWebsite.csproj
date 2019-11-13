@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\ViewModels\" />
+    <Folder Include="Areas\Default\" />
     <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Uploaded\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

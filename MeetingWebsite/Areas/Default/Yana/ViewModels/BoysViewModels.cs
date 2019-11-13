@@ -7,10 +7,12 @@ namespace MeetingWebsite.Areas.Default.Yana.ViewModels
 {
     public class BoysViewModels
     {
-        public int ZodiacId { get; set; }
-        public int Age { get; set; }
+        public string ZodiacId { get; set; } = "default";
+        public string Age { get; set; } = "default";
+        public string Age_to { get; set; } = "default";
+        public string Age_from { get; set; } = "default";
         public string Status { get; set; }  
-        public int CityId { get; set; }
+        public string CityId { get; set; } = "default";
         public int CurrentPage { get; set; }
         public int GenderId { get; set; }
     }
@@ -22,6 +24,7 @@ namespace MeetingWebsite.Areas.Default.Yana.ViewModels
         public int Age { get; set; }
         public string City { get; set; }
         public string Status { get; set; }
+        
     }
 
     public class GetZodiac
