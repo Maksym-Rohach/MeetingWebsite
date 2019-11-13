@@ -9,6 +9,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import configureStore, {history} from './store/configureStore';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import * as loginActions from './components/pages/login/reducer';
 //import setAuthorizationToken from './utils/setAuthorizationToken';
 //import { setCurrentUser } from './actions/authActions';
 import jwt from 'jsonwebtoken';
@@ -22,13 +23,14 @@ const store = configureStore(history, initialState);
 
 
 if(localStorage.jwtToken) {
-    let token = localStorage.jwtToken;
-    let user = jwt.decode(token);
-    if (!Array.isArray(user.roles)) {
-        user.roles = Array.of(user.roles);
-    }
+  let data = {token: localStorage.jwtToken, refToken: localStorage.refreshToken};
+  let user = jwt.decode(data.token);
+  if (!Array.isArray(user.roles)) {
+    user.roles = Array.of(user.roles);
+}
     // setAuthorizationToken(token);
     // store.dispatch(setCurrentUser(user));
+    loginActions.loginByJWT(data, store.dispatch);
 }
 const rootElement = document.getElementById('root');
 

@@ -9,6 +9,9 @@ import { userTableReducer } from "../components/admin/Tables/UserTable/reducer";
 import createHistory from 'history/createHashHistory';
 import { banTableReducer } from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer } from "../components/admin/Schedule/RegistryShedule/reducer";
+import { registerReducer } from '../components/pages/register/reducer';
+import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
+import {vipTableReducer} from '../components/admin/Tables/VipTable/reducer';
 import { registerReducer } from '../components/pages/register/reducer'; 
 import { boysReducer } from '../components/boys/reducer';
 import { getChatsReducer, sendMessageReducer, informBackReducer } from '../containers/userLayout/reducer';
@@ -32,12 +35,8 @@ export default function configureStore(history, initialState) {
         boys: boysReducer,
         register: registerReducer,
         userProf: userProfileReducer,
-        chats: getChatsReducer,
-        home: homeReducer,
-        messages:getMessagesReducer,
-        sendMessage:sendMessageReducer,
-        inform:informBackReducer
-
+        messageList: MessageListReducer,
+        home: homeReducer
     };
 
     const middleware = [

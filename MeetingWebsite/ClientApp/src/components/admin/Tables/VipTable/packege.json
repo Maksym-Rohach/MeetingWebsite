@@ -1,0 +1,6 @@
+{
+    "name": "VipTable",
+    "version": "0.0.0",
+    "private": true,
+    "main": "./VipTable.js"
+  }

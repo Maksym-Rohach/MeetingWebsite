@@ -46,6 +46,8 @@ namespace MeetingWebsite
                 .AddEntityFrameworkStores<EFDbContext>()
                  .AddDefaultTokenProviders();
 
+           // services.AddSingleton<IChatService, ChatService>();
+
             services.AddTransient<IEmailSender, EmailSender>();
             //services.AddScoped<IFileService, FileService>();
 
@@ -99,12 +101,13 @@ namespace MeetingWebsite
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseSession();
 
-            //SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
+           // SeederDB.SeedData(app.ApplicationServices, env, this.Configuration);
 
             #region InitStaticFiles AdminImages
             string pathUser = InitStaticFiles
@@ -113,7 +116,7 @@ namespace MeetingWebsite
 
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(pathUser),
+                FileProvider = new PhysicalFileProvider(pathClient),
                 RequestPath = new PathString("/" + Configuration.GetValue<string>("UserUrlImages"))
             });
             #endregion;
@@ -131,14 +134,17 @@ namespace MeetingWebsite
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseReactDevelopmentServer(npmScript: "start"); 
                 }
             });
-
-            app.UseSignalR(route =>
-            {
-                route.MapHub<AddMessageHub>("/api/clientwaiter");
-            });
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<ChatHub>("chat");
+            //});
+            //app.UseSignalR(route =>
+            //{
+            //    route.MapHub<ChatService>("/api/clientwaiter");
+            //});
         }
     }
 }
