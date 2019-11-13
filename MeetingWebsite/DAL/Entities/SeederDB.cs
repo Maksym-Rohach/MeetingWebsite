@@ -67,35 +67,33 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 874; i++)
             {
                 GetRandomUserProfile(i, userManager, context);
             }
 
-            if (userManager.FindByEmailAsync("yana@gmail.com").Result == null)
+            if (userManager.FindByEmailAsync("supernikd@gmail.com").Result == null)
             {
-                string email = "yana@gmail.com";
-                string roleName = "User";
+                string email = "supernikd@gmail.com";
+                string roleName = "Admin";
 
-                var userProfile = new UserProfile
+                var adminProfile = new AdminProfile
                 {
-                    NickName = "Яна",
-                    DateOfBirth = DateTime.Now,
-                    GenderId = 2,
-                    CityId = 20,
-                    ZodiacId = 5,
-                    Avatar = "",
+                    Name = "Nikd",
+                    // DateOfBirth = DateTime.Now,
+
                     User = new DbUser
                     {
                         Email = email,
                         UserName = email,
-                        PhoneNumber = "+22(222)222-22-22"
+                        PhoneNumber = "+38(097)233-08-77"
                     }
                 };
-                var result = userManager.CreateAsync(userProfile.User, "Qwerty1-").Result;
-                context.UserProfile.Add(userProfile);
+
+                var result = userManager.CreateAsync(adminProfile.User, "Kaida007-").Result;
+                context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
-                result = userManager.AddToRoleAsync(userProfile.User, roleName).Result;
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
             };
 
             if (userManager.FindByEmailAsync("masha@gmail.com").Result == null)

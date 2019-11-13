@@ -25,9 +25,13 @@ namespace MeetingWebsite.Areas.Account.ViewModels
 
         public string City { get; set; }
 
+    }
 
+    public class Forgot_PasswordViewModel
+    {
 
-
+        public string Email { get; set; }
 
     }
+
 }
