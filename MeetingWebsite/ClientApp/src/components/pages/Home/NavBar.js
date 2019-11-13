@@ -14,7 +14,7 @@ class Header extends Component {
     render() {
 
       const { isAuthenticated } = this.props.login;
-    console.log("this.props.login",this.props);
+      console.log("this.props.login", this.props);
 
       const logoutLink = (
         <NavItem className="d-flex align-items-center ">
@@ -41,32 +41,32 @@ class Header extends Component {
 
 
         return (
-            <React.Fragment>
-           
-          <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase">
-            {/* <div className="collapse navbar-collapse "> */}
-            <NavItem>
-              <Link to="/#" className="mr-5"><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/girls" className="social-link rounded-circle text-white mr-5 ">Дівчата</Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/boys" className="social-link rounded-circle text-white mr-5 "> Хлопці</Link>
-            </NavItem>
-            {/* </div>
+          <React.Fragment>
+
+            <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase">
+              {/* <div className="collapse navbar-collapse "> */}
+              <NavItem >
+                <Link to="/#" className="mr-5 "><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/girls" className="social-link rounded-circle text-white mr-5 ">Дівчата</Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/boys" className="social-link rounded-circle text-white mr-5 "> Хлопці</Link>
+              </NavItem>
+              {/* </div>
             <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
 
 
               {/* {isAuthenticated ? userLink : null} */}
               {isAuthenticated ? logoutLink : loginLink}
-              {!isAuthenticated ? registerLink : null} 
-            {/* </div> */}
+              {!isAuthenticated ? registerLink : null}
+              {/* </div> */}
 
-          </Nav>
+            </Nav>
 
 
-</React.Fragment>
+          </React.Fragment>
         );
     }
 }
