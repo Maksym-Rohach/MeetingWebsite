@@ -1,12 +1,14 @@
 import React from "react";
 import Select from 'react-select';
 import * as getUserActions from './reducer';
+import * as editUserActions from './reducer';
 //import { ImagePicker } from 'react-file-picker'
 import 'cropperjs/dist/cropper.css';
 import { connect } from 'react-redux';
 import get from "lodash.get";
 import Cropper from "react-cropper";
 import CropperPage from "../../Cropper/CropperPage";
+import { serverUrl } from "../../../config";
  
 
 // reactstrap components
@@ -67,7 +69,7 @@ class UserProfile extends React.Component {
                 isLoadedPrevious: false,
                 nickName: "",
                 description: "",
-                age: 0,
+                age: 18,
                 city: "",
                 gender: "",
                 zodiac: "",
@@ -79,14 +81,40 @@ class UserProfile extends React.Component {
     }
 
     componentDidUpdate = () => {
-        if (this.props.listUsers.email != null && this.props.listUsers.email != "" && !this.state.isLoadedPrevious) {
-            this.setState({ isLoadedPrevious: true, nickName: this.props.listUsers.nickName, description: this.props.listUsers.description, age: this.props.listUsers.age, city: this.props.listUsers.city, gender: this.props.listUsers.gender, zodiac: this.props.listUsers.zodiac, email: this.props.listUsers.email });
+        if (this.props.user.email != null && this.props.user.email != "" && !this.state.isLoadedPrevious) {
+            this.setState({ isLoadedPrevious: true, 
+                nickName: this.props.user.nickName, 
+                description: this.props.user.description, 
+                age: this.props.user.age, 
+                city: this.props.user.city, 
+                gender: this.props.user.gender, 
+                zodiac: this.props.user.zodiac, 
+                email: this.props.user.email,
+                avatar: this.props.user.avatar
+             });
         }
     }
 
+    
+
     componentDidMount = () => {
+        console.log("componentDidMount==========================");
         this.props.getUserData();
     }
+
+    // static getDerivedStateFromProps(nextProps, prevState){
+    //     //console.log("ssssssssssssssssssssssssss",nextProps);
+    //     return{
+    //         nickName: this.props.user.nickName, 
+    //         description: this.props.user.description, 
+    //         age: this.props.user.age, 
+    //         city: this.props.user.city, 
+    //         gender: this.props.user.gender, 
+    //         zodiac: this.props.user.zodiac, 
+    //         email: this.props.user.email,
+    //         avatar: this.props.user.avatar
+    //     };
+    // }
 
     PostChanges = (name, source) => {
         this.setState({ [name]: source }); 
@@ -116,13 +144,13 @@ class UserProfile extends React.Component {
     }
 
     render() {
-        if (!this.props.listUsers) {
-            return (<div>хрень {this.props.listUsers}</div>)
+        if (!this.props.user) {
+            return (<div>хрень {this.props.user}</div>)
         }
 
-        const { nickName, description, age, gender, zodiac, email } = this.state;
+        const { nickName, description, age, gender, zodiac, email, avatar } = this.state;
         const City = {value: 'w', label: this.state.city};
-        const Cities = this.props.listUsers.cities;
+        const Cities = this.props.user.cities;
         
     return (
         <>
@@ -154,9 +182,8 @@ class UserProfile extends React.Component {
                                                     <img  style={{height: 200, width: 200}}
                                                         alt="..."
                                                         className="avatar"
-                                                        src={this.state.avatar}
-                                                        //src={require("assets/img/emilyz.jpg")}
-                                                    />
+                                                        src={`${serverUrl}${avatar}?t=${new Date().getTime()}`}/>
+                                                    
                                                 <CropperPage ref="cropperPage" getCroppedImage={this.getCroppedImage} />
                                                 </a>
                                                 
@@ -256,8 +283,9 @@ class UserProfile extends React.Component {
   }
 }
 const mapStateToProps = state => {
+    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQ", state);
     return {
-        listUsers: get(state, "userProf.list.data"),
+        user: get(state, "userProf.list.data"),
         isListLoading: get(state, "userProf.list.loading"),
     };
 }
@@ -268,7 +296,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getUserActions.getUserData(filter));
         },
         setUserData: filter => {
-            dispatch(getUserActions.setUserData(filter));
+            dispatch(editUserActions.setUserData(filter));
         }
     }
 }

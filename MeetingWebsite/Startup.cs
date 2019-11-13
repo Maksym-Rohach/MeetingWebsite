@@ -100,6 +100,7 @@ namespace MeetingWebsite
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -132,7 +133,7 @@ namespace MeetingWebsite
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseReactDevelopmentServer(npmScript: "start"); 
                 }
             });
             //app.UseSignalR(routes =>
