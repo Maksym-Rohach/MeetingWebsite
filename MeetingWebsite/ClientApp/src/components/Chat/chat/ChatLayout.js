@@ -19,6 +19,11 @@ class ChatLayout extends React.Component {
   constructor(props) {
     super(props);
     console.log("!!!!!!!!!!!!!!!!!!!!!!I AM CREATED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    this.state={
+      myID:localStorage.getItem("MYID"),
+      ActiveRecipient:localStorage.getItem("ActiveRecipient")
+
+    }
   }
 
   render() {
@@ -27,7 +32,7 @@ class ChatLayout extends React.Component {
       <>
         <div className="content">
         <div className="ChatLayout">
-        <MessageList  />
+        <MessageList  MyID={this.state.myID} ActiveRecipient={this.state.ActiveRecipient}/>
         </div>
         </div>
       </>

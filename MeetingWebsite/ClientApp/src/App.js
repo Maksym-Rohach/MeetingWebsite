@@ -24,6 +24,7 @@ const Forgot_Password = React.lazy(() => import('./components/pages/forgot_passw
 class App extends Component {
 
     render() {
+      console.log("hi")
       return (
         <Router>
             <React.Suspense fallback={loading()}>

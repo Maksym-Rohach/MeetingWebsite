@@ -172,18 +172,42 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             {
                 return BadRequest();
             }
+            var AllIncomeMessage = _context.Messages.Where(x => x.RecipientId == UserID.UserID).ToList();
+            AllIncomeMessage.Reverse();
             List<UserProfile> interlocutors = new List<UserProfile>();
             interlocutors.AddRange(_context.Messages.Where(x => x.SenderId == UserID.UserID).GroupBy(x=>x.UserRecipient.UserProfile).Select(x => x.Key).ToList());
             interlocutors.AddRange(_context.Messages.Where(x => x.RecipientId == UserID.UserID).GroupBy(x => x.UserSender).Select(x => x.Key).ToList());
             interlocutors = interlocutors.GroupBy(x => x.Id).Select(x => x.First()).ToList();
             ListChats chats = new ListChats();
             chats.Chats = new List<Chat>();
+
             interlocutors.ForEach(x => chats.Chats.Add(
-                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id}
+                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id, CountUnreaded=GetCountIncomeMessages(x.Id, AllIncomeMessage)}
                 ));
 
 
             return Ok(chats);
+        }
+        [HttpPost("informread")]
+        public ActionResult InforRead([FromBody]Chat chat)
+        {
+            var messages = _context.Messages.Where(x => x.SenderId == chat.RecipientId && x.RecipientId == chat.SenderId).ToList();
+            messages.ForEach(x=>x.DateRecipientRead=DateTime.Now);
+            _context.SaveChanges();
+            return Ok();
+        }
+        public int GetCountIncomeMessages(string senderId, List<Messages> messages )
+        {
+            int i = 0;
+            var message_s = messages.Where(x => x.SenderId == senderId).ToList();
+            for (; i < message_s.Count; i++)
+            {
+                if (message_s[i].DateRecipientRead != null)
+                {
+                    return i;
+                }
+            }
+            return i;
         }
 
     }

@@ -13,5 +13,6 @@ namespace MeetingWebsite.Areas.User.ViewModels.RostyslavModels
         public string path { get; set; }
         public string SenderId { get; set; }
         public string RecipientId { get; set; }
+        public int CountUnreaded { get; set; }
     }
 }

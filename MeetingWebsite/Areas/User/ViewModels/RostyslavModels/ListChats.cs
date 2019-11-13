@@ -9,5 +9,6 @@ namespace MeetingWebsite.Areas.User.ViewModels.RostyslavModels
     {
         public List<Chat> Chats { get; set; }
 
+
     }
 }
