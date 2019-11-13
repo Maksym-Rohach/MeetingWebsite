@@ -1,7 +1,7 @@
-// import {
-//     JsonHubProtocol,
-//     HubConnectionBuilder
-// } from '@aspnet/signalr';
+import {
+    JsonHubProtocol,
+    HubConnectionBuilder
+} from '@aspnet/signalr';
 // import { approveReceived } from '../../components/Order/actions';
 // import { orderReceived } from '../../components/Waiter/actions';
 // import { getDataFromLocal } from '../../utils';
