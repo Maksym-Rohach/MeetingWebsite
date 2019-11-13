@@ -64,6 +64,7 @@ class UserTable extends React.Component {
     modal: false,
     danger2: false,
     temp_id:'',
+    temp_id2:'',
     danger:false,
     temp_description:'',
     temp_currentpage: 1,
@@ -85,11 +86,11 @@ class UserTable extends React.Component {
   {
     e.preventDefault();
     console.log("SETBAN__________________________________",id);
-    // this.setState({temp_id:id});
+     this.setState({temp_id:id});
 
-     this.setState({danger2:!this.state.danger2});
+    // this.setState({danger2:!this.state.danger2});
 
-    // this.toggleDanger();
+     this.toggleDanger();
   }
 
   onClickPage(pageNumber) {
@@ -161,10 +162,11 @@ class UserTable extends React.Component {
     this.props.getUsersData({ year,month,nickname,currentPage});
   }
 
-  ForModal()
+  ForModal(e,id)
   {
-    console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",this)
-      this.setState({danger2:!this.state.danger2});
+    e.preventDefault();
+      this.setState({danger2:!this.state.danger2,temp_id2:id});
+      console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",this.state)
   }
 
   Click(e)
@@ -245,7 +247,7 @@ class UserTable extends React.Component {
                           return (<tr key={item.id}>
                             
                             {/* <th scope="row">{counter++}</th> */}
-                            <td onClick={this.ForModal}>{item.nickname}</td>
+                            <td onClick={(e) => this.ForModal(e,item.id)}>{item.nickname}</td>
                             <td>{item.mail}</td>
                             <td>{item.registrdate}</td>
                             <td>{item.city}</td>
@@ -254,9 +256,6 @@ class UserTable extends React.Component {
                             <Button 
                             onClick={(e) => this.SetBan(e,item.id)}
                            color = {item.status==="Не забанений"?"info":"warning"}>{item.status}</Button>
-
-                          <UserModal id={item.id} danger={danger2}></UserModal>
-
                            <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
                               className={'modal-danger ' + this.props.className}>
                               <ModalHeader toggle={this.toggleDanger}>Забанить</ModalHeader>
@@ -283,6 +282,7 @@ class UserTable extends React.Component {
   
                 </CardBody>
               </Card>
+              <UserModal id={this.state.temp_id2} danger={this.state.danger2}></UserModal>
             </Col>
           </Row>
         </div>

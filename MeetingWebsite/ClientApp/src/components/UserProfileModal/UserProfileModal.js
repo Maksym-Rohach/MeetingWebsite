@@ -14,21 +14,12 @@ import '../admin/Tables/UserTable/color.scss';
 // reactstrap components
 import {
   Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  Table,
   Row,
   Col,
   Container,
   Button,
-  Input,
-  Pagination, 
-  PaginationItem,
-  PaginationLink,
-  CardText,
-  CardFooter,
-  Modal, ModalBody, ModalFooter, ModalHeader
+  Modal,
+  ModalFooter
 } from "reactstrap";
 
 class UserProfileModal extends React.Component {
@@ -49,6 +40,8 @@ class UserProfileModal extends React.Component {
     };
     this.toggle = this.toggle.bind(this);
     this.toggleDanger = this.toggleDanger.bind(this);  
+    this.SayHello = this.SayHello.bind(this); 
+    this.GetUser = this.GetUser.bind(this); 
   }
 
   toggle() {
@@ -68,19 +61,41 @@ class UserProfileModal extends React.Component {
   }
 
   componentDidMount = () => {
-    const {id}=this.props;
-    this.setState({danger:this.props.danger})
-    this.props.getUserModalData({"id":id});
+    
   }
 
-  Click(e)
+
+  componentWillReceiveProps()
   {
-    e.preventDefault();
+    if(this.state.danger==false)
+    {
+    const {id,danger}=this.props;
+    this.setState({danger:true})
+   // console.log("---ID!!!!!!!------", id);
+  //  console.log("---props ON MODAL228!!!!!!!--------------------------------", this.props);
+
+    //this.props.getUserModalData({"id":id});
+    }  
+  }
+
+GetUser()
+{
+  const {id}=this.props;
+  this.props.getUserModalData({"id":id});
+}
+
+  SayHello()
+  {
+    if(this.state.danger==true)
+    {
+    const {id}=this.props;
+    this.props.sayHelloToUser({"Text":"Привет","RecipientId":id,"SenderId":"0101ddc8-fe0e-406f-9f12-f6d015194d3b"})
+    }
   }
 
   render() {
     const {  } = this.state;
-    const { nickname,gender,birthday,avatar,zodiac,city,status, isListLoading } = this.props;
+    const { nickname,gender,birthday,avatar,zodiac,city,status, isListLoading, danger,id } = this.props;
     console.log("---state ON MODAL!!!!!!!--------------------------------", this.state);
     console.log("---props ON MODAL!!!!!!!--------------------------------", this.props);
     return (
@@ -90,7 +105,7 @@ class UserProfileModal extends React.Component {
           <Row>
             <Col md="12">
               <Card  className="fontnikita">
-                <Modal style={{width: 1000,maxWidth:1000}} isOpen={this.state.danger} toggle={this.toggleDanger}
+                <Modal onOpened={this.GetUser} style={{width: 1000,maxWidth:1000}} isOpen={this.state.danger} toggle={this.toggleDanger}
                              className={'modal-danger ' + this.props.className}>
             <Container className= "align-items-center content-section  bg-dark text-black ">
            		<div className="profile_inner p_120">
@@ -114,8 +129,8 @@ class UserProfileModal extends React.Component {
            		</div>
                </Container>
                <ModalFooter className= "bg-dark">
-                 <Link to="/user">
-                  <Button  color="info">Написати</Button>{' '}
+                 <Link to={"/user/"+id}>
+                  <Button  color="info" onClick={this.SayHello}>Написати</Button>{' '}
                   </Link>
                 </ModalFooter>
                </Modal>     
@@ -146,6 +161,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserModalData: filter => {
       dispatch(getListActions.getUserModalData(filter));
+    },
+      sayHelloToUser: filter => {
+        dispatch(getListActions.sayHelloToUser(filter));
     }
   }
 }

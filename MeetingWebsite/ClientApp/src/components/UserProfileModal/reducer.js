@@ -37,6 +37,11 @@ export const getUserModalData = (model) => {
     }
 }
 
+export const sayHelloToUser = (model) => {
+    return (dispatch) => {
+        UserProfileModalService.sayHello(model)
+    }
+}
 
 export const getListActions = {
     started: () => {
