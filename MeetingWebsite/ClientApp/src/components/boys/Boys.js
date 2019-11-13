@@ -13,6 +13,7 @@ import Paginator from '../Paginator';
 import Header from '../pages/Home/NavBar';
 import Footer from '../pages/Home/Footer';
 import { logout } from '../pages/login/reducer';
+import './Boys.css';
 
   // const optionsCity = [
   //   {value: "", label: ""},
@@ -26,8 +27,8 @@ class Boys extends Component {
         isLoading: true,
         tmp_zodiac: {value: 'q', label: 'Зодіак'},
         tmp_city: {value:'w', label: 'Місто'},
-        tmp_age_from: {value:'1', label: '18'},   
-        tmp_age_to: {value:'1', label:'89'},
+        tmp_age_from: {value:'17', label: 'From'},   
+        tmp_age_to: {value:'90', label:'To'},
         collapse: true,
         fadeIn: true,
         timeout: 300,
@@ -116,20 +117,23 @@ class Boys extends Component {
           login={login} />      
          <h2 style={{textAlign: "center"}}>Знайомства з хлопцями в Україні</h2>
       <div className="app flex-row align-items-center">
-       <Container className="fontyana">
-        <div >
-        <Card className="bgyana">
+       {/* <Container className="fontyana"> */}
+       <Container>
+        <div className="Poisk">
+        {/* <Card className="bgyana"> */}
+        <Card>
               <CardHeader >
-                <h3 style={{color:"#c0c0c0", marginBottom:"5px"}}> <strong>Пошук</strong> </h3>
+              <strong>Пошук</strong> 
+                {/* <h3 style={{color:"#c0c0c0", marginBottom:"5px"}}> <strong>Пошук</strong> </h3> */}
               </CardHeader>
               <CardBody style={{marginTop: "-10px"}} >
                 <Form onSubmit={this.sendFilters} action="" method="post" className="form-horizontal">
-                  <FormGroup row>              
-                    <Col xs = "3">
-                    <Select
+                  <FormGroup row >              
+                    <Col xs = "3" >
+                    <Select 
                         value={tmp_city}
                         onChange={(e) => this.handleChange("tmp_city", e)}
-                        options={listCities} />
+                        options={listCities} style={{background:"red"}}/>
                     </Col>
                
                     <Col xs = "3">
@@ -172,7 +176,7 @@ class Boys extends Component {
                             <CardBody>
                               <div key={item.id}>
                                 <img alt="photo" className="img-fluid" 
-                                // src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
+                                src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
                                  />
                               </div>
                               <Row>

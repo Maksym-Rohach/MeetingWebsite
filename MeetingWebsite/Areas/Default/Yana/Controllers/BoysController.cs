@@ -117,7 +117,7 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
                     .Select(u => new GetBoysModel
                     {
                         City = u.City.Name,
-                        Status = "Status",
+                        Status = "status",//u.Description,
                         Age = (a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000,
                         Name = u.NickName,
                         Avatar = u.Avatar

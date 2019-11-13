@@ -41,7 +41,7 @@ namespace MeetingWebsite.DAL.Entities
             UserProfile up = new UserProfile();
             List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс","Микита" };
             string email = "helloworld"+context.UserProfile.Count()+"@gmail.com";
-            DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
+            DateTime DateOfBirth = DateTime.Now.AddYears(-num);
             int genderid = num % 2 == 0 ? 1 : 2;
             int cityid = rnd.Next(1,21);
             int zodiacid = 5;

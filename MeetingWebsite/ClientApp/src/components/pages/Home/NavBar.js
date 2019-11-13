@@ -43,7 +43,7 @@ class Header extends Component {
               <Link to="/#" className="mr-5"><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
             </NavItem>
             <NavItem>
-              <Link to="" className="social-link rounded-circle text-white mr-5">Дівчата</Link>
+              <Link to="/girls" className="social-link rounded-circle text-white mr-5">Дівчата</Link>
             </NavItem>
             <NavItem>
               <Link to="/boys" className="social-link rounded-circle text-white mr-5"> Хлопці</Link>
