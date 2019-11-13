@@ -30,7 +30,8 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             }
             if (User.Claims.ToList().Count>0)
             {
-                if (User.Claims.ToList()[0].Value.ToString() != filter.chat.SenderId||
+                var a = User.Claims.ToList()[0].Value;
+                if (User.Claims.ToList()[0].Value.ToString() != filter.chat.SenderId&&
                     User.Claims.ToList()[0].Value.ToString() != filter.chat.RecipientId)
                 {
                     return BadRequest();
@@ -61,14 +62,14 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
         public ActionResult AddMessage([FromBody]ModelSendMessage message)
         { 
 
-            if (User.Claims.ToList().Count>0)
-            {
-                if (User.Claims.ToList()[0].Value.ToString() != message.SenderId)
-                {
-                    return BadRequest();
-                }
-
-            }
+            //if (User.Claims.ToList().Count>0)
+            //{
+            //    if (User.Claims.ToList()[0].Value.ToString() != message.SenderId)
+            //    {
+            //        return BadRequest();
+            //    }
+            //
+            //}
 
             if (!ModelState.IsValid)
             {

@@ -17,7 +17,7 @@ class UserLayout extends React.Component {
   constructor(props) {
     super(props);
     
-    localStorage.setItem("MYID", "00afa202-5c41-4961-a992-57b3ae467f24")
+    localStorage.setItem("MYID", "b43a0d4b-4f0a-48b7-823e-8edcfde33b72")
     this.props.routes.chats=[ ]
     this.state = {
       backgroundColor: "blue",
@@ -29,27 +29,27 @@ class UserLayout extends React.Component {
         "UserID":localStorage.getItem("MYID")
       })
   }
-  //  componentDidMount() {
+   componentDidMount() {
   
   
-  //    if (navigator.platform.indexOf("Win") > -1) {
-  //      document.documentElement.className += " perfect-scrollbar-on";
-  //      document.documentElement.classList.remove("perfect-scrollbar-off");
-  //      ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
-  //      let tables = document.querySelectorAll(".table-responsive");
-  //      for (let i = 0; i < tables.length; i++) {
-  //        ps = new PerfectScrollbar(tables[i]);
-  //      }
-  //    }
-  //  }
+     if (navigator.platform.indexOf("Win") > -1) {
+       document.documentElement.className += " perfect-scrollbar-on";
+       document.documentElement.classList.remove("perfect-scrollbar-off");
+       ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
+       let tables = document.querySelectorAll(".table-responsive");
+       for (let i = 0; i < tables.length; i++) {
+         ps = new PerfectScrollbar(tables[i]);
+       }
+     }
+   }
   
-  // componentWillUnmount() {
-  //   if (navigator.platform.indexOf("Win") > -1) {
-  //     ps.destroy();
-  //     document.documentElement.className += " perfect-scrollbar-off";
-  //     document.documentElement.classList.remove("perfect-scrollbar-on");
-  //   }
-  // }
+  componentWillUnmount() {
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps.destroy();
+      document.documentElement.className += " perfect-scrollbar-off";
+      document.documentElement.classList.remove("perfect-scrollbar-on");
+    }
+  }
   componentDidUpdate(e) {
     if (e.history.action === "PUSH") {
       if (navigator.platform.indexOf("Win") > -1) {

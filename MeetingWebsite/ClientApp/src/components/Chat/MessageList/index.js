@@ -87,7 +87,13 @@ componentDidMount(){
   console.log('Hate you')
   this.state.FirstScroll=false;
   this.state.tmpMessageCount=20;
-  console.log(this.props.ActiveRecipient)
+  console.log({
+    "From":0,
+    "Count":20,
+      "chat": {
+      "SenderId":this.props.MyID,
+      "RecipientId":this.props.ActiveRecipient
+      }})
   this.props.getMessages({
     "From":0,
     "Count":20,

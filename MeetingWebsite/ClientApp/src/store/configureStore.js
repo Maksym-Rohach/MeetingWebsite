@@ -12,7 +12,7 @@ import { registrySheduleReducer } from "../components/admin/Schedule/RegistryShe
 import { registerReducer } from '../components/pages/register/reducer';
 import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
 import {vipTableReducer} from '../components/admin/Tables/VipTable/reducer';
-import { registerReducer } from '../components/pages/register/reducer'; 
+// import { registerReducer } from '../components/pages/register/reducer'; 
 import { boysReducer } from '../components/boys/reducer';
 import { getChatsReducer, sendMessageReducer, informBackReducer } from '../containers/userLayout/reducer';
 import {getMessagesReducer} from '../components/Chat/chat/reducer'
@@ -35,8 +35,11 @@ export default function configureStore(history, initialState) {
         boys: boysReducer,
         register: registerReducer,
         userProf: userProfileReducer,
-        messageList: MessageListReducer,
-        home: homeReducer
+        messages: getMessagesReducer,
+        home: homeReducer,
+        chats:getChatsReducer,
+        sendMessage:sendMessageReducer,
+        informBack:informBackReducer
     };
 
     const middleware = [
