@@ -17,7 +17,7 @@ class Header extends Component {
       console.log("this.props.login", this.props);
 
       const logoutLink = (
-        <NavItem className="d-flex align-items-center ">
+        <NavItem className="align-items-center p-2 float-right">
           <Link to="#/" onClick={e => this.props.onLogout(e)}
             className="social-link rounded-circle text-white mr-5 ">
             Вихід
@@ -26,7 +26,7 @@ class Header extends Component {
       );
 
       const loginLink = (
-        <NavItem className="d-flex align-items-center ">
+        <NavItem className="align-items-center p-2 float-right">
           <Link to="/login"
             className="social-link rounded-circle text-white mr-5 " >
             Вхід
@@ -34,7 +34,7 @@ class Header extends Component {
         </NavItem>
       );
       const registerLink = (
-        <NavItem className="d-flex align-items-center ">
+        <NavItem className="align-items-center p-2 float-right">
               <Link to="/register" className="social-link rounded-circle text-white mr-5 "> Реєстрація</Link>
             </NavItem>
       );
@@ -43,26 +43,23 @@ class Header extends Component {
         return (
           <React.Fragment>
 
-            <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase">
-              {/* <div className="collapse navbar-collapse "> */}
-              <NavItem >
+            <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase d-flex">
+              <NavItem className="mr-auto float-left">
                 <Link to="/#" className="mr-5 "><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
               </NavItem>
-              <NavItem>
+              <NavItem className="mr-auto float-left">
                 <Link to="/girls" className="social-link rounded-circle text-white mr-5 ">Дівчата</Link>
               </NavItem>
-              <NavItem>
+              <NavItem className="mr-auto float-left">
                 <Link to="/boys" className="social-link rounded-circle text-white mr-5 "> Хлопці</Link>
               </NavItem>
-              {/* </div>
-            <div className="collapse navbar-collapse justify-content-end" id="navigation"> */}
+            
 
 
               {/* {isAuthenticated ? userLink : null} */}
               {isAuthenticated ? logoutLink : loginLink}
               {!isAuthenticated ? registerLink : null}
-              {/* </div> */}
-
+               
             </Nav>
 
 
