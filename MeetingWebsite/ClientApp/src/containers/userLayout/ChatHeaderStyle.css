@@ -2,3 +2,26 @@
     position: fixed !important;
     background: inherit !important;
 }
+.NameStyle{
+    display: inline !important;
+
+}
+.CountUnreadedMessages{
+    display: inline !important;
+    right: 0px !important;
+    position: absolute !important;
+    background: black;
+    border-radius: 20px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+
+}
+.CountUnreadedMessagesDisactive{
+    display: none !important;
+    right: 0px !important;
+    position: absolute !important;
+    background: black;
+    border-radius: 20px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}

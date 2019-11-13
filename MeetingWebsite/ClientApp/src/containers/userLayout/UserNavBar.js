@@ -92,7 +92,7 @@ var NavbarClasses="navbar-absolute ChatHeaderStyle"
 
 
     return (
-      <>
+      <React.Fragment>      
         <Navbar
           className={classNames(NavbarClasses)}
           expand="lg"
@@ -235,7 +235,7 @@ var NavbarClasses="navbar-absolute ChatHeaderStyle"
             </button>
           </div>
         </Modal>
-      </>
+        </React.Fragment>      
     );
   }
 }
