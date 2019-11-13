@@ -1,10 +1,15 @@
 import React from "react";
+import Select from 'react-select';
 import * as getUserActions from './reducer';
-import Cropper from "react-cropper"
-// import { ImagePicker } from 'react-file-picker'
+import * as editUserActions from './reducer';
+//import { ImagePicker } from 'react-file-picker'
 import 'cropperjs/dist/cropper.css';
 import { connect } from 'react-redux';
 import get from "lodash.get";
+import Cropper from "react-cropper";
+import CropperPage from "../../Cropper/CropperPage";
+import { serverUrl } from "../../../config";
+ 
 
 // reactstrap components
 import {
@@ -27,6 +32,7 @@ import {
 import { Z_BLOCK } from "zlib";
 
 const cropper = React.createRef(null);
+const Avatar = "assets/img/emilyz.jpg";
 
 var Zodiacs = {};
 
@@ -60,23 +66,55 @@ class UserProfile extends React.Component {
         this.state =
             {
                 isLoading: true,
+                isLoadedPrevious: false,
                 nickName: "",
                 description: "",
-                age: 0,
+                age: 18,
                 city: "",
                 gender: "",
                 zodiac: "",
-                email: ""
+                email: "",
+                avatar: Avatar,
+                showCropper: false
             };
         this.Click = this.Click.bind(this);
     }
 
-    componentDidMount = () => {
-        this.props.getUserData();
-       console.log("---propsggggggggggggggg--------------------------------", this.props.listUsers);
-        console.log("---stateggggggggggggggg--------------------------------", this.state);
-
+    componentDidUpdate = () => {
+        if (this.props.user.email != null && this.props.user.email != "" && !this.state.isLoadedPrevious) {
+            this.setState({ isLoadedPrevious: true, 
+                nickName: this.props.user.nickName, 
+                description: this.props.user.description, 
+                age: this.props.user.age, 
+                city: this.props.user.city, 
+                gender: this.props.user.gender, 
+                zodiac: this.props.user.zodiac, 
+                email: this.props.user.email,
+                avatar: this.props.user.avatar
+             });
+        }
     }
+
+    
+  
+    componentDidMount = () => {
+        console.log("componentDidMount==========================");
+        this.props.getUserData();
+    }
+
+    // static getDerivedStateFromProps(nextProps, prevState){
+    //     //console.log("ssssssssssssssssssssssssss",nextProps);
+    //     return{
+    //         nickName: this.props.user.nickName, 
+    //         description: this.props.user.description, 
+    //         age: this.props.user.age, 
+    //         city: this.props.user.city, 
+    //         gender: this.props.user.gender, 
+    //         zodiac: this.props.user.zodiac, 
+    //         email: this.props.user.email,
+    //         avatar: this.props.user.avatar
+    //     };
+    // }
 
     PostChanges = (name, source) => {
         this.setState({ [name]: source }); 
@@ -84,13 +122,13 @@ class UserProfile extends React.Component {
 
     Click(e) {
         e.preventDefault();
-        console.log("---state!!!!!!!!!!!!!!!!--------------------------------", this.state);
-        const { nickName, description, age, city, gender, zodiac, email } = this.state;
+        const { nickName, description, age, city, gender, zodiac, email, avatar } = this.state;
         let NickName = nickName;
         let Description = description;
         let City = city;
         let Email = email;
-        this.props.setUserData({ NickName, Description, City, Email });
+        let Avatar = avatar;
+        this.props.setUserData({ NickName, Description, City, Email, Avatar });
     }
 
     _crop() {
@@ -98,15 +136,21 @@ class UserProfile extends React.Component {
         // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
     }
     
-
+    getCroppedImage = img => {
+        this.setState({
+          avatar: img,
+          showCropper: false
+        });
+    }
 
     render() {
-        if (!this.props.listUsers) {
-            return (<div>хрень {this.props.listUsers}</div>)
+        if (!this.props.user) {
+            return (<div>хрень {this.props.user}</div>)
         }
-        const { nickName, description, age, city, gender, zodiac, email } = this.props.listUsers;
-        console.log("---state--------------------------------", this.state);
-        console.log("---props--------------------------------", this.props);
+
+        const { nickName, description, age, gender, zodiac, email, avatar } = this.state;
+        const City = {value: 'w', label: this.state.city};
+        const Cities = this.props.user.cities;
         
     return (
         <>
@@ -134,13 +178,15 @@ class UserProfile extends React.Component {
                                     <Row>
                                         <Col className="pr-md-1" md="4">
                                             <FormGroup>
-                                                <a style={{ paddingLeft: '15%'  }} href="#pablo" onClick={e => e.preventDefault()}>
+                                                <a style={{ paddingLeft: '15%'  }} onClick={() => { this.setState({showCropper: true})}}>
                                                     <img  style={{height: 200, width: 200}}
                                                         alt="..."
                                                         className="avatar"
-                                                        src={require("assets/img/emilyz.jpg")}
-                                                    />
+                                                        src={`${serverUrl}${avatar}?t=${new Date().getTime()}`}/>
+                                                    
+                                                <CropperPage ref="cropperPage" getCroppedImage={this.getCroppedImage} />
                                                 </a>
+                                                
                                             </FormGroup>
                                         </Col>
                                         <Col md="8">
@@ -148,7 +194,7 @@ class UserProfile extends React.Component {
                                                 <label>Про мене</label>
                                                 <Input name="descr" style={{ maxHeight: 160, height: 160 }}
                                                     cols="80"
-                                                    defaultValue={description}
+                                                    value={description}
                                                     onChange={(e) => this.PostChanges('description', e.target.value)}
                                                     placeholder="Тут може бути ваший опис."
                                                     rows="8"
@@ -198,12 +244,11 @@ class UserProfile extends React.Component {
                                         <Col className="pr-md-1" md="6">
                                             <FormGroup>
                                                 <label>Місто</label>
-                                                <Input
+                                                <Select
                                                     name="city"
-                                                   defaultValue={city}
-                                                    placeholder="(Необов'язково)вул. Центральна"
-                                                    type="text"
-                                                    onChange={(e) => this.PostChanges('city', e.target.value)}
+                                                    value={City}
+                                                    onChange={(e) => this.PostChanges('city', e.label)}
+                                                    options={Cities}
                                                 />
                                             </FormGroup>
                                         </Col>
@@ -238,9 +283,9 @@ class UserProfile extends React.Component {
   }
 }
 const mapStateToProps = state => {
-    console.log("State=======", state);
+    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQ", state);
     return {
-        listUsers: get(state, "userProf.list.data"),
+        user: get(state, "userProf.list.data"),
         isListLoading: get(state, "userProf.list.loading"),
     };
 }
@@ -251,7 +296,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(getUserActions.getUserData(filter));
         },
         setUserData: filter => {
-            dispatch(getUserActions.setUserData(filter));
+            dispatch(editUserActions.setUserData(filter));
         }
     }
 }
