@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeetingWebsite.Areas.Account.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace MeetingWebsite.Areas.Account.ViewModels
 {
@@ -28,6 +32,7 @@ namespace MeetingWebsite.Areas.Account.ViewModels
         public string Id { get; set; }
         public string Nickname { get; set; }
         public string Bandate { get; set; }
+        public string Findate { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
     }

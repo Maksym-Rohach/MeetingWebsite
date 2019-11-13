@@ -9,7 +9,7 @@ namespace MeetingWebsite.Areas.User.ViewModels.RostyslavModels
     {
         public string Text { get; set; }
 
-        public DateTime DateCreate { get; set; }
+        public DateTime? DateCreate { get; set; }
         public DateTime? DateRecipientRead { get; set; }
         public string SenderId { get; set; }
         public string RecipientId { get; set; }

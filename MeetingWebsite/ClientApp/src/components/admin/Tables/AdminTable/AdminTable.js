@@ -1,9 +1,14 @@
-
 import React from "react";
-
+import { connect } from 'react-redux';
+import get from "lodash.get";
+import { push } from 'react-router-redux';
+import * as getListActions from './reducer';
+import EclipseWidget from '../../../eclipse';
+import Select from 'react-select';
 // reactstrap components
 import {
   Card,
+  Badge,
   CardHeader,
   CardBody,
   CardTitle,
@@ -14,69 +19,59 @@ import {
 } from "reactstrap";
 
 class Tables extends React.Component {
+
+  state = {isLoading: true,}
+
+  handleChange = (name, selectValue) => {
+    this.setState({ [name]: selectValue }, this.filterSearchData);}
+
+ 
+
+  componentDidMount = () => {
+  this.props.getAdminsData();}
+
   render() {
+    
+    const { listAdmins, isListLoading } = this.props;
+    console.log("---state--------------------------------", this.state);
+    console.log("---props--------------------------------", this.props);
+    let counter = 1;
     return (
-      <>
+      <React.Fragment>      
       <div className="content">
           <Row>
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Адмін таблиця</CardTitle>
+                  <Row>
+                  <Col className="col-md-2">
+                  <CardTitle tag="h4">Таблиця Адмінов</CardTitle>
+                  </Col>
+                  
+                  </Row>                 
                 </CardHeader>
                 <CardBody>
                   <Table className="tablesorter" responsive>
                     <thead className="text-primary">
                       <tr>
-                        <th>Нікнейм</th>
-                        <th>Дата реєстрації</th>
-                        <th>Місто</th>
-                        <th>Статус</th>
+                      <th>#</th>
+                      <th>Нікнейм</th>
+                      {/* <th>Статус</th> */}
+                      {/* <th>ID</th> */}
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>Помідорка</td>
-                        <td>27/10/18</td>
-                        <td>Користувач</td>
-                        <td>Активний</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td>Активний</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td>Активний</td>                     
-                       </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td>Активний</td>                 
-                        </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td>Активний</td> 
-                        </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td>Активний</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td>Активний</td>
-                      </tr>
+                    <tbody className="align-items-center">
+                    {
+                        listAdmins.map(item => {
+                          return (<tr key={item.id}>
+                            <td>{counter++}</td>
+                            <td>{item.nickname}</td>
+                            {/* <td><Badge color="info">Активний</Badge></td> */}
+                            {/* <td>{item.id}</td> */}
+                          </tr>
+                          )
+                        })
+                      }
                     </tbody>
                   </Table>
                 </CardBody>
@@ -84,9 +79,26 @@ class Tables extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }
 
-export default Tables;
+const mapStateToProps = state => {
+  console.log("State=======", state);
+  return {
+    listAdmins: get(state, "adminTable.list.data"),
+    isListLoading: get(state, "adminTable.list.loading"),  
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAdminsData: filter => {
+      dispatch(getListActions.getAdminsData(filter));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tables);
+

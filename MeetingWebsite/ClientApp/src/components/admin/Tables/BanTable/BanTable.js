@@ -173,7 +173,7 @@ toggleDanger() {
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
     return (
-      <>
+      <React.Fragment>      
       {isListLoading && <EclipseWidget />}
       <div className="content">
           <Row>
@@ -259,7 +259,7 @@ toggleDanger() {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }

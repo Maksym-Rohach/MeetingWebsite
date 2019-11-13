@@ -1,8 +1,10 @@
 import axios from "axios";
-import {serverUrl} from '../../../../src/config';
+import {serverUrl} from '../../../config';
 
-export default class MessagesListService {
+export default class GetMessageService {
+
     static getMessages(model) {
         return axios.post(`${serverUrl}api/chat/loadmessages`, model)
     };
+
 }

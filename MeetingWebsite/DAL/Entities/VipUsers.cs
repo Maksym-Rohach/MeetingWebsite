@@ -15,6 +15,6 @@ namespace MeetingWebsite.DAL.Entities
         [Required]
         public DateTime DateForValid { get; set; }
 
-        public virtual DbUser User { get; set; }
+        public virtual UserProfile User { get; set; }
     }
 }

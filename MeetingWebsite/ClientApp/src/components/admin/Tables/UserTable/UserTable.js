@@ -178,8 +178,8 @@ class UserTable extends React.Component {
     const { listUsers, isListLoading } = this.props;
     console.log("---state--------------------------------", this.state);
     console.log("---props--------------------------------", this.props);
-    return ( 
-      <>
+    return (
+      <React.Fragment>      
       {isListLoading && <EclipseWidget />}
       <div className="content">
           <Row>
@@ -269,7 +269,7 @@ class UserTable extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }
