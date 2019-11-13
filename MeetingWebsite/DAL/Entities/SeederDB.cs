@@ -74,9 +74,10 @@ namespace MeetingWebsite.DAL.Entities
 
         public static void SeedProfiles(UserManager<DbUser> userManager, EFDbContext context)
         {
+            context.Users.Remove(context.Users.Select(a => a).Where(a => a.Email == "supernikd@gmail.com").FirstOrDefault());
             for (int i = 0; i < 12; i++)
             {
-                GetRandomUserProfile(i, userManager, context);
+            //    GetRandomUserProfile(i, userManager, context);
             }
 
 
@@ -104,15 +105,15 @@ namespace MeetingWebsite.DAL.Entities
                 result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
             };
             // Адмін-юзер
-            if (userManager.FindByEmailAsync("kaida.nikita@gmail.com").Result == null)
+            if (userManager.FindByEmailAsync("supernikd@gmail.com").Result == null)
             {
-                string email = "kaida.nikita@gmail.com";
+                string email = "supernikd@gmail.com";
                 string roleName = "Admin";
 
                 var adminProfile = new AdminProfile
                 {
-                    Name = "Нікіта",
-                    // DateOfBirth = DateTime.Now,
+                    Name = "Nikd",
+                   // DateOfBirth = DateTime.Now,
 
                     User = new DbUser
                     {
@@ -124,7 +125,7 @@ namespace MeetingWebsite.DAL.Entities
 
                 
 
-                    var result = userManager.CreateAsync(adminProfile.User, "Qwerty1+").Result;
+                    var result = userManager.CreateAsync(adminProfile.User, "KAida0077").Result;
                 context.AdminProfiles.Add(adminProfile);
                 context.SaveChanges();
                 result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;

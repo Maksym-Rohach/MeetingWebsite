@@ -16,9 +16,6 @@ import { boysReducer } from '../components/boys/reducer';
 import {homeReducer} from '../components/pages/Home/reducer';
 import {resetPasswordReducer} from '../components/NewPassword/reducer';
 import {userModalReducer} from '../components/UserProfileModal/reducer';
-
-import { MessageListReducer} from "../components/Chat/MessageList/reduser";
-import { homeReducer } from '../components/pages/Home/reducer';
 import { userProfileReducer } from '../components/Users/UserProfile/reducer';
 import { MessageListReducer } from "../components/Chat/MessageList/reduser";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -39,21 +36,10 @@ export default function configureStore(history, initialState) {
       messageList: MessageListReducer,
       resetPasswordReducer:resetPasswordReducer,
       userModalReducer:userModalReducer,
-      home: homeReducer
-        login: loginReducer,
-        refreshToken: refreshReducer,
-        userTable: userTableReducer,
-        banTable: banTableReducer,
-        registryShedule: registrySheduleReducer,
-        boys: boysReducer,
-        register: registerReducer,
-        userProf: userProfileReducer,
-        messageList: MessageListReducer,
-        home: homeReducer,
-        adminTable: adminTableReducer,
-        vipTable: vipTableReducer,
-      
-     
+      home: homeReducer,
+      userProf: userProfileReducer,
+      adminTable: adminTableReducer,
+      vipTable: vipTableReducer,
     };
 
     const middleware = [
