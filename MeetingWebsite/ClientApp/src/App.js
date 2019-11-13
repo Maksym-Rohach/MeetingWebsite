@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import "assets/scss/black-dashboard-react.scss";
 import "assets/css/black-dashboard-react.css";
 import "assets/demo/demo.css";
@@ -16,18 +16,20 @@ const UserLayout = React.lazy(() => import('./containers/userLayout'));
 const AdminUsers = React.lazy(() => import('./components/admin/Users'));
 const Login = React.lazy(() => import('./components/pages/login'));
 const Home = React.lazy(() => import('./components/pages/Home'));
+const Girls = React.lazy(() => import('./components/Girls'));
 const Boys = React.lazy(() => import('./components/boys'));
 const Register = React.lazy(() => import('./components/pages/register'));
 const NewPassword = React.lazy(() => import('./components/NewPassword'));
 const UserProfileModal = React.lazy(() => import('./components/UserProfileModal'));
 
+const Forgot_Password = React.lazy(() => import('./components/pages/forgot_password'));
 
 
 class App extends Component {
 
     render() {
       return (
-        // <Router>
+        <Router>
             <React.Suspense fallback={loading()}>
                 <Switch>
                     <Route  path="/login" name="Login" render={props => <Login {...props} />} />
@@ -39,9 +41,10 @@ class App extends Component {
                     <Route  path="/reset-password" name="NewPassword" render={props => <NewPassword {...props} />} />
                     <Route  path="/userprofilemodal" name="UserProfileModal" render={props => <UserProfileModal {...props} />} />
                     <Route exact path="/" name="Home" render={props => <Home {...props} />} />
+                    <Route path="/forgot_password" name="Forgot_Password" render={props => <Forgot_Password {...props} />} />
                 </Switch>
                 </React.Suspense>
-      // </Router>
+      </Router>
     );
   }
 }

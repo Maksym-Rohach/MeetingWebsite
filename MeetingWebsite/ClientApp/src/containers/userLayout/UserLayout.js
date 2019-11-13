@@ -88,7 +88,7 @@ class UserLayout extends React.Component {
   };
   render() {
     return (
-      <>
+      <React.Fragment>      
         <div className="wrapper">
           <UserSideBar
             {...this.props}
@@ -117,7 +117,7 @@ class UserLayout extends React.Component {
             <Switch>{this.getRoutes(routes)}</Switch>
           </div>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component ,Redirect} from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row,FormGroup,Label ,FormFeedback} from 'reactstrap';
 import DatePicker from 'react-date-picker';
@@ -9,7 +9,8 @@ import { connect } from "react-redux";
 import * as registerActions from './reducer';
 import get from "lodash.get";
 import { thisExpression } from '@babel/types';
-//import {RadioGroup, RadioButton,Radio,FormControlLabel} from 'react-radio-group'
+import {RadioGroup, RadioButton,Radio,FormControlLabel} from 'react-radio-group'
+import EclipseWidget from '../../eclipse';
 
 const optionsCity = [
   { value: 'Вінниця‎', label: 'Вінниця‎' },
@@ -148,8 +149,8 @@ class Register extends Component {
   }
 
   render() {
-    const{tmp_city,errors,visible,errorsServer}=this.state;
-    return (
+    const{tmp_city,errors,visible,errorsServer,done,isLoading}=this.state;
+    const form = (
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center pt-5 mt-5">
@@ -193,7 +194,7 @@ class Register extends Component {
                         className={classnames("form-control", { "is-invalid": !!errors.email })}
                         id="email"
                         name="email"
-                       // value={this.state.email}
+                        value={this.state.email}
                         onChange={this.handleChange} />
                       {!!errors.email ? <div className="invalid-feedback">{errors.email}</div> : ""}
                       </InputGroup>
@@ -213,17 +214,8 @@ class Register extends Component {
                   onChange={this.handleChange}
                   value={this.dateOfBirth}/>
                   <FormFeedback valid={!errorsServer.dateOfBirth}>{errorsServer.dateOfBirth}</FormFeedback>
-                  <FormFeedback valid={!errors.dateOfBirth}>{errors.dateOfBirth}</FormFeedback>
-
-
-                        {/* <DatePicker
-        value={this.state.date}
-        onChange={this.handleChange2}
-      /> */}
-
-                      
+                  <FormFeedback valid={!errors.dateOfBirth}>{errors.dateOfBirth}</FormFeedback>                   
                       </InputGroup>
-
                       <InputGroup  className="mb-4">
                       <InputGroupAddon addonType="prepend">
                        <i className="ml-4 mt-3 fas fa-venus-mars"></i>
@@ -231,28 +223,21 @@ class Register extends Component {
  
                           <FormGroup   check inline>
                           <p className="text-muted form-check-label ml-1" >Чол </p>
-                          <Input    invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}  className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="gender" value="Man"      />
+                          <Input    invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}  className="text-muted form-check-input ml-1" type="radio" id="inline-radio1" name="gender" value="Чоловік"      />
                           <FormFeedback valid={!errorsServer.gender}>{errorsServer.gender}</FormFeedback>
                           <FormFeedback valid={!errors.gender}>{errors.gender}</FormFeedback>
                           </FormGroup>
                           <FormGroup check inline>
                           <p className="text-muted form-check-label ml-1" > Жін</p>
-                          <Input  invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}   className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="gender" value="Women" />
+                          <Input  invalid={!!errors.gender || !!errorsServer.gender} onChange={this.handleChange}   className="text-muted form-check-input ml-1" type="radio" id="inline-radio2" name="gender" value="Жінка" />
                           <FormFeedback valid={!errorsServer.gender}>{errorsServer.gender}</FormFeedback>
                           <FormFeedback valid={!errors.gender}>{errors.gender}</FormFeedback>
                           </FormGroup>
-                          
-
+                        
                           </InputGroupAddon> 
                        
                           </InputGroup>
  
-
-
-
-
-
-
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -295,7 +280,23 @@ class Register extends Component {
                         <Col xs="6">
                           <Button color="success" className="px-4">Зареєструватись</Button>
                         </Col>
-                       
+                        <Col xs="6" className="text-right">
+                        <Link to="/">
+                          <Button color="success" className="px-3">На головну</Button>
+                          </Link>
+                        </Col>
+                        {/* <Row>
+                        <Col xs="6">
+                          <Button color="success" className="px-4">Вхід</Button>
+                        </Col>
+                        <Col xs="6" className="text-right">
+                        <Link to="/forgot_password">
+                          <Button color="sucess" className="px-0">Забули пароль?</Button>
+                          </Link>
+                        </Col>
+                      </Row> */}
+
+
                       </Row>
                     </Form>
                   </CardBody>
@@ -305,8 +306,10 @@ class Register extends Component {
             </Col>
           </Row>
         </Container>
+        {isLoading && <EclipseWidget />}
       </div>
     );
+    return done ? <Redirect to="/" /> : form;
   }
 }
 
