@@ -30,13 +30,14 @@ namespace MeetingWebsite.Areas.Default.Home.Controllers
                 .AsQueryable()
                 .Select(u => new GetHomeUserModel
                 {
-                    //Avatar = u.Avatar,
+                    Avatar = u.Avatar,
                     Name = u.NickName,
                     City = u.City.Name,
                     Zodiac = u.Zodiac.Name,
                     Age = (D - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000
                 })
-                .OrderBy(u => Guid.NewGuid()).Take(8)
+                .Where(a=>a.Avatar!=null)
+                .OrderBy(u => Guid.NewGuid()).Take(8) 
                 .ToList();
                 result.GetHomeUserModel = users;
 
