@@ -37,6 +37,8 @@ class CropperPage extends Component {
 
   cropImage = e => {
     e.preventDefault();
+   //event.persist();
+    console.log("undefinedundefinedundefined");
     if (typeof this.cropper.getCroppedCanvas() === "undefined") {
       return;
     }
@@ -44,6 +46,7 @@ class CropperPage extends Component {
       src: "",
       modal: false
     });
+    console.log("this.CROPPPPPPPPPER", this.cropper.getCroppedCanvas().toDataURL());
     this.props.getCroppedImage(this.cropper.getCroppedCanvas().toDataURL());
   };
 

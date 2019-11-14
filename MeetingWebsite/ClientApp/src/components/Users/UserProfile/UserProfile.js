@@ -59,8 +59,6 @@ Zodiacs['Риби'] = 'Риби ♓';
 
 class UserProfile extends React.Component {
 
-   
-
     constructor(props) {
         super(props);
         this.state =
@@ -95,8 +93,11 @@ class UserProfile extends React.Component {
         }
     }
 
-    
-  
+    componentWillReceiveProps =(nextProps)=>{
+        console.log("AAAAAAAAAAAAAAAAAA", nextProps);
+this.setState({avatar: nextProps.user.avatar});
+    }
+
     componentDidMount = () => {
         console.log("componentDidMount==========================");
         this.props.getUserData();
@@ -138,9 +139,11 @@ class UserProfile extends React.Component {
     
     getCroppedImage = img => {
         this.setState({
-          avatar: img,
+        //   avatar: img,
           showCropper: false
         });
+        console.log("CROPER ==============", img);
+        this.props.editPhoto(img);
     }
 
     render() {
@@ -178,16 +181,16 @@ class UserProfile extends React.Component {
                                     <Row>
                                         <Col className="pr-md-1" md="4">
                                             <FormGroup>
-                                                <a style={{ paddingLeft: '15%'  }} onClick={() => { this.setState({showCropper: true})}}>
+                                                
                                                     <img  style={{height: 200, width: 200}}
                                                         alt="..."
                                                         className="avatar"
                                                         src={`${serverUrl}${avatar}?t=${new Date().getTime()}`}/>
                                                     
-                                                <CropperPage ref="cropperPage" getCroppedImage={this.getCroppedImage} />
-                                                </a>
+                                                <CropperPage ref="cropperPage" getCroppedImage={this.getCroppedImage} /> 
+
                                                 
-                                            </FormGroup>
+                                            </FormGroup> 
                                         </Col>
                                         <Col md="8">
                                             <FormGroup style={{ maxHeight: 200, height: 200 }}>
@@ -297,6 +300,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setUserData: filter => {
             dispatch(editUserActions.setUserData(filter));
+        },
+        editPhoto: avatar => {
+            dispatch(editUserActions.editPhoto(avatar));
         }
     }
 }
