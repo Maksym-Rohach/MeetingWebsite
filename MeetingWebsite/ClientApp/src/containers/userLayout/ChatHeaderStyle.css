@@ -25,3 +25,8 @@
     padding-left: 10px !important;
     padding-right: 10px !important;
 }
+.chatavatar{
+    margin-right:5px; ;
+    display: inline;
+    width: 40px;
+}

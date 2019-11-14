@@ -30,6 +30,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 // reactstrap components
 import { Nav } from "reactstrap";
 import './ChatHeaderStyle.css';
+import { serverUrl } from "../../config";
 var ps;
 
 class Sidebar extends React.Component {
@@ -106,7 +107,7 @@ class Sidebar extends React.Component {
             target="_blank"
             onClick={this.props.toggleSidebar}
           >
-            {logo.text}
+            Profile
           </a>
         );
       } else {
@@ -127,7 +128,7 @@ class Sidebar extends React.Component {
             className="simple-text logo-normal"
             onClick={this.props.toggleSidebar}
           >
-            {logo.text}
+            Profile
           </Link>
         );
       }
@@ -163,7 +164,10 @@ class Sidebar extends React.Component {
                     className="nav-link"
                     activeClassName="active"
                   >
-                    <i className={prop.icon} />
+                     <img  className="chatavatar"
+                                                        alt="..."                                                  
+                                                        src={`${serverUrl}${prop.icon}?t=${new Date().getTime()}`}/>
+                    <img src="https://game-tournaments.com/media/logo/t13366.png" className="chatavatar"/>
                     {console.log("!!!!!!!!!!!!!!!!!!!!!!!!??????????????")}
                     {console.log(prop.countUnreaded)}
                 <p className="NameStyle">{rtlActive ? prop.rtlName : prop.name}</p>{(prop.countUnreaded!=0)?(<p className="CountUnreadedMessages" id={prop.recipientId+"unreadCounter"}>{prop.countUnreaded}</p>):(<p id={prop.recipientId+"unreadCounter"} className="CountUnreadedMessagesDisactive">{""}</p>)}

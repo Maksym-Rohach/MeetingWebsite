@@ -7,6 +7,7 @@ using MeetingWebsite.DAL.Entities;
 using MeetingWebsite.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
 {
@@ -16,9 +17,12 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
     public class ChatController : ControllerBase
     {
         private readonly EFDbContext _context;
-        public ChatController(EFDbContext context)
+        private readonly IConfiguration _configuration;
+        public ChatController(EFDbContext context, IConfiguration configuration)
         {
             _context = context;
+
+            _configuration = configuration;
         }
         
         [HttpPost("loadmessages")]
@@ -181,9 +185,13 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             interlocutors = interlocutors.GroupBy(x => x.Id).Select(x => x.First()).ToList();
             ListChats chats = new ListChats();
             chats.Chats = new List<Chat>();
-
+            string path = $"{_configuration.GetValue<string>("UserUrlImages")}/300_";
             interlocutors.ForEach(x => chats.Chats.Add(
-                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id, CountUnreaded=GetCountIncomeMessages(x.Id, AllIncomeMessage)}
+                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id, CountUnreaded=GetCountIncomeMessages(x.Id, AllIncomeMessage), icon= x.Avatar != null ?
+                    path + x.Avatar :
+                    _configuration.GetValue<string>("UserUrlImages") +
+                    "/300_" + _configuration.GetValue<string>("DefaultImage")
+                }
                 ));
 
 

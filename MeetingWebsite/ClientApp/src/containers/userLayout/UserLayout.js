@@ -8,7 +8,7 @@ import get from "lodash.get";
 import * as getListActions from './reducer';
 import logo from "assets/img/react-logo.png";
 import ChatLayout from "../../components/Chat/chat/ChatLayout";
-import UserProfile from "../../components/admin/Tables/AdminTable/AdminTable";
+import UserProfile from "../../components/Users/UserProfile/UserProfile";
 import a from "../../components/Users/UserProfile/UserProfile";
 import { logout } from '../../components/pages/login/reducer';
 var ps;
@@ -163,8 +163,8 @@ class UserLayout extends React.Component {
               HeaderPanerStyle="ChatStyle"
             />
             <Switch key="switch">{this.getRoutes(this.props.routes.chats)}<Route
-            path="/profile"
-            component={ChatLayout}
+            path="/user/profile"
+            component={UserProfile}
             key="profile"></Route></Switch>
           </div>
         </div>
