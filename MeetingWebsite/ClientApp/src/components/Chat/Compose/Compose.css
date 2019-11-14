@@ -1,0 +1,75 @@
+.compose {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-top: 1px solid #eeeef1;
+  position: fixed;
+  width: calc(100% - 20px);
+  bottom: 0px;
+  border-top-left-radius: 30px;
+border-bottom-left-radius: 30px;
+}
+
+@supports (backdrop-filter: blur(20px)) {
+  .compose {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.compose-input {
+  outline: none !important;
+  margin: 10px;
+  flex: 1;
+  border: none;
+  font-size: 14px;
+  height: 40px;
+  background: none;
+}
+
+.compose-input::placeholder {
+  opacity: 0.3;
+}
+
+.compose .toolbar-button {
+  color: #bbbbbf;
+  margin-left: 15px;
+}
+
+.compose .toolbar-button:hover {
+  color: #99999c;
+}
+.SendMess{
+  width: 40px;
+border: none;
+background:#eeeef1 ;
+border-top-left-radius: 30px;
+border-bottom-left-radius: 30px;
+height: 60px;
+outline: none !important;
+}
+.StickName{
+  border: none;
+  background:#eeeef1 ;
+
+  height: 60px;
+  outline: none !important;
+
+}
+.Smiles{
+  left: 40px;
+  display: none;
+  bottom: 61px;
+  position: fixed;
+}
+.Smiles:hover{
+  display: flex;
+
+}
+.Display{
+  display: flex !important;
+
+
+}
