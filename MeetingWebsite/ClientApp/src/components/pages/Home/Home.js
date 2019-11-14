@@ -9,7 +9,7 @@ import EclipseWidget from '../../eclipse';
 import Header from './NavBar';
 import Footer from './Footer';
 import { logout } from '../login/reducer';
-import { withRouter } from 'react-router-dom';
+import { serverUrl } from "../../../config";
 
 //import { transform } from '@babel/core';
  const items = [
@@ -120,11 +120,11 @@ return (
                           <Card className="border-primary">
                             <CardBody>
                               <div key={item.id}>
-                                <img alt="photo" className="img-fluid" src="https://i.pinimg.com/originals/1f/dd/28/1fdd287d6cc483f3630ad56e283a32ae.jpg" />
+                                <img alt="photo" className="img-fluid"  src={`${serverUrl}${item.avatar}?t=${new Date().getTime()}`}/> 
                               </div>
                               <Row>
-                                <strong className="ml-3">{item.name}</strong>
-                                <p className="ml-2">   {item.age}</p>
+                                <strong className="ml-3 text-secondary">{item.name}</strong>
+                                <p className="ml-2">   {item.age} років</p>
                               </Row>
                               <Row>
                                 <p className="ml-3">{item.city}, Україна</p>

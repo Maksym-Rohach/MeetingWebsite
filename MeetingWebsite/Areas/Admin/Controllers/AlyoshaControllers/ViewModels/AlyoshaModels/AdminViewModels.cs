@@ -10,20 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
     namespace MeetingWebsite.Areas.Admin.Controllers.AyoshaControllers
 {
-    //public class UserTableModel
-    //{
-    //    public string Id { get; set; }
-    //    public string Nickname { get; set; }
-    //    public DateTime Registrdate { get; set; }
-    //    public string City { get; set; }
-    //    public string Status { get; set; }
-    //}
-
-    //public class UserTableModels
-    //{
-    //    public List<UserTableModel> Users { get; set; }
-    //}
-
+    
 
     public class AdminTableModel
     {
@@ -36,6 +23,28 @@ using Microsoft.AspNetCore.Mvc;
         public List<AdminTableModel> Admins { get; set; }
     }
 
+    public class VipTableModel
+    {
+        public string Id { get; set; }
+        public string Nickname { get; set; }
+        public string DateForValid { get; set; }
+        public string City { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class VipTableModels
+    {
+        public List<VipTableModel> Vips { get; set; }
+        public int TotalCount { get; set; }
+    }
+
+    public class VipTableFilters
+    {
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public string NickName { get; set; }
+        public int CurrentPage { get; set; }
+    }
 
 
 }

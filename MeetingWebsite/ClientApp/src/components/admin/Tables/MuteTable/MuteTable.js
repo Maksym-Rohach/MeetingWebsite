@@ -32,7 +32,7 @@ import {
 class Tables extends React.Component {
   render() {
     return (
-      <>
+      <React.Fragment>      
       <div className="content">
           <Row>
             <Col md="12">
@@ -101,7 +101,7 @@ class Tables extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
+        </React.Fragment>      
     );
   }
 }

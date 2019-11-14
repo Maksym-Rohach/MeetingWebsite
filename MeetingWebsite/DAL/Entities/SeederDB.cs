@@ -32,6 +32,13 @@ namespace MeetingWebsite.DAL.Entities
                 {
                     Name = roleName
                 }).Result;
+
+                roleName = "Vip";
+                result = roleManager.CreateAsync(new DbRole
+                {
+                    Name = roleName
+                }).Result;
+
             }
         }
 
@@ -39,11 +46,11 @@ namespace MeetingWebsite.DAL.Entities
         {
             Random rnd = new Random();
             UserProfile up = new UserProfile();
-            List<string> nicknames = new List<string> {"Машенька","Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс","Микита" };
-            string email = "helloworld"+context.UserProfile.Count()+"@gmail.com";
-            DateTime DateOfBirth = DateTime.Now.AddYears(-num);
+            List<string> nicknames = new List<string> { "Машенька", "Катенька", "Оличка", "Оленка", "Валюша", "Никитка", "Вася", "Петя", "Уругвайская", "Ровенский", "Ровенская", "Любимка", "Карвари", "Мастер", "Господин", "ОРТЕМІЙ", "РОСТИСЛАВ", "Макс" };
+            string email = "helloworld" + context.UserProfile.Count() + "@gmail.com";
+            DateTime DateOfBirth = DateTime.Now.AddMonths(-num);
             int genderid = num % 2 == 0 ? 1 : 2;
-            int cityid = rnd.Next(1,21);
+            int cityid = rnd.Next(1, 21);
             int zodiacid = 5;
             string avatar = "";
             string roleName = "User";
@@ -71,6 +78,59 @@ namespace MeetingWebsite.DAL.Entities
             {
                 GetRandomUserProfile(i, userManager, context);
             }
+
+
+            if (userManager.FindByEmailAsync("kunderenko2@gmail.com").Result == null)
+            {
+                string email = "kunderenko2@gmail.com";
+                string roleName = "Admin";
+
+                var adminProfile = new AdminProfile
+                {
+                    Name = "Альоша",
+                    // DateOfBirth = DateTime.Now,
+
+                    User = new DbUser
+                    {
+                        Email = email,
+                        UserName = email,
+                        PhoneNumber = "+38(099)456-43-34"
+                    }
+                };
+
+                var result = userManager.CreateAsync(adminProfile.User, "Qwerty1-").Result;
+                context.AdminProfiles.Add(adminProfile);
+                context.SaveChanges();
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
+            };
+            // Адмін-юзер
+            if (userManager.FindByEmailAsync("kaida.nikita@gmail.com").Result == null)
+            {
+                string email = "kaida.nikita@gmail.com";
+                string roleName = "Admin";
+
+                var adminProfile = new AdminProfile
+                {
+                    Name = "Нікіта",
+                    // DateOfBirth = DateTime.Now,
+
+                    User = new DbUser
+                    {
+                        Email = email,
+                        UserName = email,
+                        PhoneNumber = "+38(099)888-77-66"
+                    }
+                };
+
+                
+
+                    var result = userManager.CreateAsync(adminProfile.User, "Qwerty1+").Result;
+                context.AdminProfiles.Add(adminProfile);
+                context.SaveChanges();
+                result = userManager.AddToRoleAsync(adminProfile.User, roleName).Result;
+            };   // Адмін-юзер
+
+
 
             if (userManager.FindByEmailAsync("supernikd@gmail.com").Result == null)
             {
@@ -155,7 +215,7 @@ namespace MeetingWebsite.DAL.Entities
 
             var count = context.City.Count();
 
-            if(count==0)
+            if (count == 0)
             {
                 foreach (var item in cities)
                 {
@@ -164,21 +224,21 @@ namespace MeetingWebsite.DAL.Entities
                         Name = item
                     });
                     context.SaveChanges();
-                }             
-            }           
+                }
+            }
         }
 
         public static void SeedGenders(UserManager<DbUser> userManager, EFDbContext context)
         {
             var count = context.Gender.Count();
-            if(count==0)
+            if (count == 0)
             {
                 var gender1 = new Gender()
-                {                 
+                {
                     Type = "Man"
                 };
                 var gender2 = new Gender()
-                {                
+                {
                     Type = "Woman"
                 };
                 context.Gender.AddRange(new List<Gender>
@@ -198,7 +258,7 @@ namespace MeetingWebsite.DAL.Entities
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<EFDbContext>();
                 //var emailSender = scope.ServiceProvider.GetRequiredService<IEmailSender>();
-                SeederDB.SeedRoles(manager, managerRole);                
+                SeederDB.SeedRoles(manager, managerRole);
                 SeederDB.SeedGenders(manager, context);
                 SeederDB.SeedCities(manager, context);
                 SeederDB.SeedZodiacs(manager, context);
@@ -207,3 +267,7 @@ namespace MeetingWebsite.DAL.Entities
         }
     }
 }
+
+
+
+

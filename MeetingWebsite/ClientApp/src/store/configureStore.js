@@ -10,10 +10,15 @@ import createHistory from 'history/createHashHistory';
 import { banTableReducer } from "../components/admin/Tables/BanTable/reducer";
 import { registrySheduleReducer } from "../components/admin/Schedule/RegistryShedule/reducer";
 import { registerReducer } from '../components/pages/register/reducer';
+import {adminTableReducer} from '../components/admin/Tables/AdminTable/reducer';
+import {vipTableReducer} from '../components/admin/Tables/VipTable/reducer';
+// import { registerReducer } from '../components/pages/register/reducer'; 
 import { boysReducer } from '../components/boys/reducer';
+import { getChatsReducer, sendMessageReducer, informBackReducer } from '../containers/userLayout/reducer';
+import {getMessagesReducer} from '../components/Chat/chat/reducer'
 import { homeReducer } from '../components/pages/Home/reducer';
 import { userProfileReducer } from '../components/Users/UserProfile/reducer';
-import { MessageListReducer } from "../components/Chat/MessageList/reduser";
+//import { MessageListReducer } from "../components/Chat/MessageList/reduser";
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 export const history = createHistory({ basename: baseUrl });
 
@@ -30,8 +35,11 @@ export default function configureStore(history, initialState) {
         boys: boysReducer,
         register: registerReducer,
         userProf: userProfileReducer,
-        messageList: MessageListReducer,
-        home: homeReducer
+        messages: getMessagesReducer,
+        home: homeReducer,
+        chats:getChatsReducer,
+        sendMessage:sendMessageReducer,
+        informBack:informBackReducer
     };
 
     const middleware = [

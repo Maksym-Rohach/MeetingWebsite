@@ -79,7 +79,7 @@ class AdminNavbar extends React.Component {
   };
   render() {
     return (
-      <>
+      <React.Fragment>      
         <Navbar
           className={classNames("navbar-absolute", this.state.color)}
           expand="lg"
@@ -222,7 +222,7 @@ class AdminNavbar extends React.Component {
             </button>
           </div>
         </Modal>
-      </>
+        </React.Fragment>      
     );
   }
 }
