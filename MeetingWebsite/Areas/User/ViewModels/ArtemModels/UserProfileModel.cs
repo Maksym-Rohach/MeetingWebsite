@@ -25,4 +25,9 @@ namespace MeetingWebsite.Areas.User.ViewModels
         public string Label { get; set; }
     }
 
+    public class ChangeImageModel
+    {
+        public string Avatar { get; set; }
+    }
+
 }

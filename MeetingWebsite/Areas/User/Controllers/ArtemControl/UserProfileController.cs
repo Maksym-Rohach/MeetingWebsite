@@ -61,7 +61,7 @@ namespace MeetingWebsite.Controllers.ArtemControl
                 Description = user.Description !=null? user.Description : "",
                 Email = _context.Users.SingleOrDefault(a => a.Id == userid).Email,
                 Cities = GetCities,
-                Avatar = user.Avatar != null ?
+                Avatar = user.Avatar != "" ?
                     path + user.Avatar :
                     _configuration.GetValue<string>("UserUrlImages") +
                     "/300_" + _configuration.GetValue<string>("DefaultImage")
@@ -88,8 +88,16 @@ namespace MeetingWebsite.Controllers.ArtemControl
            
                 if (user != null)
                 {
-                    string imageName = user.Avatar ?? Guid.NewGuid().ToString() + ".jpg";
-                    string pathSaveImages = InitStaticFiles
+                string imageName = "";
+                if (user.Avatar == "")
+                {
+                    imageName = Guid.NewGuid().ToString() + ".jpg";
+                }
+                else
+                {
+                    imageName = user.Avatar + ".jpg";
+                }
+                string pathSaveImages = InitStaticFiles
                                .CreateImageByFileName(_env, _configuration,
                                     new string[] { "ImagesPath", "ImagesPathUsers" },
                                     imageName,
@@ -118,6 +126,53 @@ namespace MeetingWebsite.Controllers.ArtemControl
             _context.Users.Where(a => a.Id == user.Id).SingleOrDefault().NormalizedEmail = model.Email.ToUpper();
             _context.SaveChanges();
             return Ok();
+        }
+
+        [HttpPost("change-image")]
+        
+        public IActionResult ChangeImage([FromBody]ChangeImageModel model)
+        {
+            string image = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Claims.ToList()[0].Value.ToString();
+                var user = _context.UserProfile.SingleOrDefault(c => c.Id == userId);
+                if (user != null)
+                {
+                    string imageName = "";
+                    if(user.Avatar == "")
+                    {
+                        imageName = Guid.NewGuid().ToString() + ".jpg";
+                    }
+                    else
+                    {
+                        imageName = user.Avatar  + ".jpg";
+                    }
+                    
+                    string pathSaveImages = InitStaticFiles
+                               .CreateImageByFileName(_env, _configuration,
+                                    new string[] { "ImagesPath", "ImagesPathUsers" },
+                                    imageName,
+                                    model.Avatar);
+                    if (pathSaveImages != null)
+                    {
+                        image = imageName;
+                        user.Avatar = image;
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        image = user.Avatar;
+                    }
+                }
+            }
+
+            string path = $"{_configuration.GetValue<string>("UserUrlImages")}/300_";
+            string imagePath = image != "" ?
+                path + image :
+                _configuration.GetValue<string>("UrlImages") +
+                "300_" + _configuration.GetValue<string>("DefaultImage");
+            return Ok(imagePath);
         }
 
     }

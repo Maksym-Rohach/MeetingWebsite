@@ -82,8 +82,8 @@ return (
           {isListLoading && <EclipseWidget />}
 
           <Header onLogout={e => this.signOut(e)}
-          login={login} />
-
+          // image={`${serverUrl}ClientImages/50_${login.user.image}`}
+          login={login} />                        
           <header id="masthead" className="masthead d-flex pb-5 ">
             <div className="container text-center text-white my-auto">
               <h1 className="mb-1 text-white display-4 animated fadeInUp  delay-1s ">LOVE IS...</h1>
