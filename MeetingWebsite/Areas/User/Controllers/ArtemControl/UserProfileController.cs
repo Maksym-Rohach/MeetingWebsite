@@ -88,8 +88,16 @@ namespace MeetingWebsite.Controllers.ArtemControl
            
                 if (user != null)
                 {
-                    string imageName = user.Avatar ?? Guid.NewGuid().ToString() + ".jpg";
-                    string pathSaveImages = InitStaticFiles
+                string imageName = "";
+                if (user.Avatar == "")
+                {
+                    imageName = Guid.NewGuid().ToString() + ".jpg";
+                }
+                else
+                {
+                    imageName = user.Avatar + ".jpg";
+                }
+                string pathSaveImages = InitStaticFiles
                                .CreateImageByFileName(_env, _configuration,
                                     new string[] { "ImagesPath", "ImagesPathUsers" },
                                     imageName,
