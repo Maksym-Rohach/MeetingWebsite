@@ -179,7 +179,7 @@ class Boys extends Component {
                               <div key={item.id}>
                                 <img alt="photo" className="img-fluid" 
                                 // src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
-                                src={`${serverUrl}${avatar}?t=${new Date().getTime()}`}
+                                src={`${serverUrl}${item.avatar}?t=${new Date().getTime()}`}
                                />
                               </div>
                               <Row>

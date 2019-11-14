@@ -48,7 +48,7 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
                 return BadRequest(errors);
             }
 
-            var GenderId = _context.Gender.Where(x => x.Type == "Man").SingleOrDefault();
+            var GenderId = _context.Gender.Where(x => x.Type == "Чоловік").SingleOrDefault();
             var a = (DateTime.Now.Year * 100 + DateTime.Now.Month) * 100 + DateTime.Now.Day;
             GetListBoysModel result = new GetListBoysModel();
             result.CurrentPage = filter.CurrentPage;
