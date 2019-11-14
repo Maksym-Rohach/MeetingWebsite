@@ -14,6 +14,8 @@ import Header from '../pages/Home/NavBar';
 import Footer from '../pages/Home/Footer';
 import { logout } from '../pages/login/reducer';
 import './Boys.css';
+import { serverUrl } from "../../config";
+
 
   // const optionsCity = [
   //   {value: "", label: ""},
@@ -95,7 +97,7 @@ class Boys extends Component {
       
   render() {
     console.log("Line 50 ===============", this.props);
-    const {tmp_city, tmp_zodiac, tmp_age_from, tmp_age_to} = this.state;
+    const {tmp_city, tmp_zodiac, tmp_age_from, tmp_age_to, avatar} = this.state;
     console.log("Line 52 ===============", this.props);
     const {listCities, listZodiacs, login} = this.props;
     const {listUsers}= this.props;
@@ -176,8 +178,9 @@ class Boys extends Component {
                             <CardBody>
                               <div key={item.id}>
                                 <img alt="photo" className="img-fluid" 
-                                src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
-                                 />
+                                // src="https://scontent.fdnk1-1.fna.fbcdn.net/v/t1.0-9/66881561_357366474909197_3040427990451224576_n.jpg?_nc_cat=109&_nc_oc=AQnb8qdUjE2eSwdRcT5KlqyWc1hdFs9QMNRvFQ1Wlx8Ngaw1NXM6QK7GgQAR-2ALBJE&_nc_ht=scontent.fdnk1-1.fna&oh=4c829acd2cfeeef31dd28a2be8fec660&oe=5E234BEB"
+                                src={`${serverUrl}${avatar}?t=${new Date().getTime()}`}
+                               />
                               </div>
                               <Row>
                                 <strong className="ml-3">{item.name}</strong>

@@ -107,12 +107,13 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
             }
 
             result.TotalCount = query.Count();
+            string path = $"{_configuration.GetValue<string>("UserUrlImages")}/300_";
 
             boys = query
                     .Include(c => c.City)
                     .Where(u => u.GenderId == GenderId.Id && ((a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000)<int.Parse(filter.Age_to)&& ((a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000)>int.Parse(filter.Age_from))
                     .OrderBy(u => Guid.NewGuid())
-                    .Take(10)
+                    .Take(12)
                     .Skip((filter.CurrentPage - 1) * 10)                 
                     .Select(u => new GetBoysModel
                     {
@@ -120,9 +121,12 @@ namespace MeetingWebsite.Areas.Default.Yana.Controllers
                         Status = "status",//u.Description,
                         Age = (a - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000,
                         Name = u.NickName,
-                        Avatar = u.Avatar
-                       
-                        
+                        Avatar = u.Avatar != "" ?
+                    path + u.Avatar :
+                    _configuration.GetValue<string>("UserUrlImages") +
+                    "/300_" + _configuration.GetValue<string>("DefaultImage")
+
+
                     })
                         .ToList();
 
