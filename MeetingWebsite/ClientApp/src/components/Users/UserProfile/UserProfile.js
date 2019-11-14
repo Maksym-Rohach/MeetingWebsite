@@ -59,8 +59,6 @@ Zodiacs['Риби'] = 'Риби ♓';
 
 class UserProfile extends React.Component {
 
-   
-
     constructor(props) {
         super(props);
         this.state =
@@ -95,7 +93,10 @@ class UserProfile extends React.Component {
         }
     }
 
-    
+    componentWillReceiveProps =(nextProps)=>{
+        console.log("AAAAAAAAAAAAAAAAAA", nextProps);
+this.setState({avatar: nextProps.user.avatar});
+    }
 
     componentDidMount = () => {
         console.log("componentDidMount==========================");
