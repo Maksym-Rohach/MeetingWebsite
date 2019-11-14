@@ -11,6 +11,9 @@ export const EDIT_USER_PROFILE_SUCCESS = "EDIT_USER_PROFILE_SUCCESS";
 export const EDIT_USER_PROFILE_FAILED = "EDIT_USER_PROFILE_FAILED";
 
 
+export const EDIT_USER_PHOTO_SUCCESS = "EDIT_USER_PHOTO_SUCCESS";
+
+
 const initialState = {
     list: {
         data: [],
@@ -40,7 +43,16 @@ export const setUserData = (mod) => {
     }
 }
 
-
+export const editPhoto = (image) => {
+    console.log("11111111111111111111+++++++++++Response");
+    return (dispatch) => {
+        UserProfileService.editImage(image)
+            .then((response) => {
+               console.log("+++++++++++Response", response);
+               dispatch(editUserActions.changephoto(response.data));
+            })          
+    }
+}
 
 const fetchData = (dispatch) => {
         dispatch(getUserActions.started());
@@ -80,13 +92,26 @@ export const getUserActions = {
             type: USER_PROFILE_FAILED,
             //errors: response.data
         }
-    }
+    }   
 }
 
 export const userProfileReducer = (state = initialState, action) => {
     let newState = state;
 
     switch (action.type) {
+
+        case EDIT_USER_PHOTO_SUCCESS: {
+            newState = update.set(state, 'list.loading', true);
+            newState = update.set(newState, 'list.success', false);
+            newState = update.set(newState, 'list.failed', false);
+            newState = { ...state ,
+            list: {
+                data:{
+                    avatar:action.data
+                }
+            }}
+            break;
+        }
 
         case USER_PROFILE_STARTED: {
             newState = update.set(state, 'list.loading', true);
@@ -99,7 +124,6 @@ export const userProfileReducer = (state = initialState, action) => {
             newState = update.set(newState, 'list.failed', false);
             newState = update.set(newState, 'list.success', true);
             newState = update.set(newState, 'list.data', action.payload);
-            console.log("USER_PROFILE_SUCCESS)", action.payload);
 
             break;
         }
@@ -154,6 +178,13 @@ export const editUserActions = {
       return {
         type: EDIT_USER_PROFILE_FAILED,
       };
+    },
+    changephoto: (response) => {
+        console.log("+++++++++++changephoto++++++++++", response);
+        return {
+            type: EDIT_USER_PHOTO_SUCCESS,
+            data: response.data
+        }
     }
   };
 
