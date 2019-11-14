@@ -18,7 +18,6 @@ import { Provider } from 'react-redux';
 class ChatLayout extends React.Component {
   constructor(props) {
     super(props);
-    console.log("!!!!!!!!!!!!!!!!!!!!!!I AM CREATED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     this.state={
       myID:localStorage.getItem("MYID"),
       ActiveRecipient:localStorage.getItem("ActiveRecipient")
@@ -27,7 +26,6 @@ class ChatLayout extends React.Component {
   }
 
   render() {
-    console.log("I AM IN RENDER")
     return (
       <>
         <div className="content">

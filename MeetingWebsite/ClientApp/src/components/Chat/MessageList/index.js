@@ -54,7 +54,6 @@ if(this.state.objDiv.scrollTop==0)
 {
   if(this.props.listMessages.messages.length<20&&this.props.Scrolled!=-1)
   {
-    console.log("i am here")
     this.state.IsAllMessagesLoaded=true;
     // console.log("i am here 111")
     // console.log("My messages:")

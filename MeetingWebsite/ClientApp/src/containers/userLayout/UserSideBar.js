@@ -146,7 +146,7 @@ class Sidebar extends React.Component {
           ) : null}
           <Nav >
             {routes.map((prop, key) => {
-              
+                  console.log(prop)
               this[prop.recipientId+"unreadCounter"]=React.createRef();
               if (prop.redirect) return null;
               return (
@@ -167,9 +167,6 @@ class Sidebar extends React.Component {
                      <img  className="chatavatar"
                                                         alt="..."                                                  
                                                         src={`${serverUrl}${prop.icon}?t=${new Date().getTime()}`}/>
-                    <img src="https://game-tournaments.com/media/logo/t13366.png" className="chatavatar"/>
-                    {console.log("!!!!!!!!!!!!!!!!!!!!!!!!??????????????")}
-                    {console.log(prop.countUnreaded)}
                 <p className="NameStyle">{rtlActive ? prop.rtlName : prop.name}</p>{(prop.countUnreaded!=0)?(<p className="CountUnreadedMessages" id={prop.recipientId+"unreadCounter"}>{prop.countUnreaded}</p>):(<p id={prop.recipientId+"unreadCounter"} className="CountUnreadedMessagesDisactive">{""}</p>)}
                   </NavLink>
                 </li>

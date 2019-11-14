@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
-import UserNavBar from "./UserNavBar";
 import UserSideBar from "./UserSideBar";
 import { connect, Provider } from "react-redux";
 import get from "lodash.get";
@@ -10,13 +9,14 @@ import logo from "assets/img/react-logo.png";
 import ChatLayout from "../../components/Chat/chat/ChatLayout";
 import UserProfile from "../../components/Users/UserProfile/UserProfile";
 import a from "../../components/Users/UserProfile/UserProfile";
+import UserNavBar from "../../components/pages/Home/NavBar"
 import { logout } from '../../components/pages/login/reducer';
 var ps;
 
 class UserLayout extends React.Component {
   constructor(props) {
     super(props);
-    
+
     localStorage.setItem("MYID", "b43a0d4b-4f0a-48b7-823e-8edcfde33b72")
     this.props.routes.chats=[ ]
     this.state = {

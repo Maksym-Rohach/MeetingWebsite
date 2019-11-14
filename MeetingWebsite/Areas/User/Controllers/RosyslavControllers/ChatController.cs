@@ -187,7 +187,7 @@ namespace MeetingWebsite.Areas.User.Controllers.RosyslavControllers
             chats.Chats = new List<Chat>();
             string path = $"{_configuration.GetValue<string>("UserUrlImages")}/300_";
             interlocutors.ForEach(x => chats.Chats.Add(
-                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id, CountUnreaded=GetCountIncomeMessages(x.Id, AllIncomeMessage), icon= x.Avatar != null ?
+                new Chat { RecipientId = x.Id, SenderId = UserID.UserID, name=x.NickName, path="/"+x.Id, CountUnreaded=GetCountIncomeMessages(x.Id, AllIncomeMessage), icon= x.Avatar != "" ?
                     path + x.Avatar :
                     _configuration.GetValue<string>("UserUrlImages") +
                     "/300_" + _configuration.GetValue<string>("DefaultImage")
