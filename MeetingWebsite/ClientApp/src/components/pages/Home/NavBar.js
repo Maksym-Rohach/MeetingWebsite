@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, NavItem, NavLink, DropdownToggle } from 'reactstrap';
+import { Nav, NavItem, NavLink, Dropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap';
 import './instruments/css/palette.css';
 import { catchClause } from '@babel/types';
 import logo from './instruments/img/logo.jpg';
@@ -11,6 +11,14 @@ import { serverUrl } from "../../../config";
 
 
 class Header extends Component {
+
+  state = {
+    isOpen: false,
+  };
+
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
     render() {
 
@@ -41,13 +49,17 @@ class Header extends Component {
       );
       const userLink = (
         <NavItem className="align-items-center p-2 float-right">
-         <DropdownToggle to="/user/profile" className="social-link rounded-circle text-white mr-5 ">
-          <img  style={{height: 40, width: 40}}
-                                                        alt="..."
-                                                        className="photo"
-                                                        src={`${serverUrl}ClientImages/50_${this.props.login.user.image}`}/>
-            
-          </DropdownToggle>
+          <Dropdown nav inNavbar isOpen={this.state.isOpen} toggle={this.toggle}>
+            <DropdownToggle nav caret tag={Link} to="/user/profile">
+
+              <img style={{ height: 30, width: 30 }}
+                alt="..."
+                className="photo"
+                src={require("assets/img/anime3.png")}
+                // src={`${serverUrl}ClientImages/50_${this.props.login.user.image}`} 
+                />
+            </DropdownToggle>
+          </Dropdown>
         </NavItem>
       );
 
@@ -56,7 +68,7 @@ class Header extends Component {
 
             <Nav pills className="navbar navbar-expand-lg bg-black shadow fixed-top font-weight-bold text-uppercase d-flex">
               <NavItem className="mr-auto float-left">
-                <Link to="/#" className="mr-5 "><img alt="bobik" className="img-fluid" src={logo} style={{ width: 60, height: 60 }} /> </Link>
+                <Link to="/#" className="mr-5 "><img alt="bobik" className="img-fluid" src={logo} style={{ width: 40, height: 40 }} /> </Link>
               </NavItem>
               <NavItem className="mr-auto float-left">
                 <Link to="/girls" className="social-link rounded-circle text-white mr-5 ">Дівчата</Link>

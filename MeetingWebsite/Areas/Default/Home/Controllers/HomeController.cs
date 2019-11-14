@@ -29,7 +29,6 @@ namespace MeetingWebsite.Areas.Default.Home.Controllers
             users = _context.UserProfile
                 .AsQueryable()
                 .Where(a => a.Avatar != "")
-                .OrderBy(u => Guid.NewGuid()).Take(8)
                 .Select(u => new GetHomeUserModel
                 {
                     Avatar = u.Avatar,
@@ -38,6 +37,7 @@ namespace MeetingWebsite.Areas.Default.Home.Controllers
                     Zodiac = u.Zodiac.Name,
                     Age = (D - (u.DateOfBirth.Year * 100 + u.DateOfBirth.Month) * 100 + u.DateOfBirth.Day) / 10000
                 })
+                .OrderBy(u => Guid.NewGuid()).Take(8)
                 .ToList();
                 result.GetHomeUserModel = users;
 
