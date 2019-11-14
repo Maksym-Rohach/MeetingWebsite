@@ -8,4 +8,9 @@ export default class UserTableService {
     static setProfile(model) {
         return axios.post(`${serverUrl}api/userprofile/setprofile`, model)
     };
+    static editImage(avatar) {
+        // const model= {avatar: avatar};
+        //console.log("editImage ==============", model);
+        return axios.post(`${serverUrl}api/userprofile/change-image`, {avatar})
+    };
 }
